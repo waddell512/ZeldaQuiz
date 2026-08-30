@@ -116,33 +116,35 @@ button{font:inherit;color:inherit;cursor:pointer}
 @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 
 /* ---------- backdrop: the chamber the page is standing in ----------
-   A shaft of light from above, the sealed mark on the floor beneath it,
-   and carved trim along the top and bottom edges. All of it is drawn in
-   --gold, which flips with the theme, so the whole stack follows. */
+   Three windows of the Temple of Time at the top with the light coming
+   through them, the Triforce and the chamber rings engraved on the floor
+   beneath, and a Triforce frieze running along both edges. Every line is
+   drawn in --gold, which flips with the theme, so the whole stack follows. */
 .bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .bg-shaft{
-  position:absolute;left:50%;top:-24vh;width:min(130vw,1200px);height:96vh;
+  position:absolute;left:50%;top:-20vh;width:min(130vw,1200px);height:96vh;
   transform:translateX(-50%);
-  background:radial-gradient(ellipse 46% 58% at 50% 0,
-    color-mix(in srgb,var(--gold) 20%,transparent) 0,
-    color-mix(in srgb,var(--gold) 6%,transparent) 42%,
+  background:radial-gradient(ellipse 40% 56% at 50% 0,
+    color-mix(in srgb,var(--gold) 22%,transparent) 0,
+    color-mix(in srgb,var(--gold) 7%,transparent) 40%,
     transparent 74%);
+}
+.bg-arch{
+  position:absolute;left:50%;top:0;width:min(112vw,940px);height:auto;
+  transform:translateX(-50%);color:var(--gold);opacity:calc(var(--mark-op) * 1.05);
+  -webkit-mask-image:linear-gradient(#000 46%,transparent 88%);
+  mask-image:linear-gradient(#000 46%,transparent 88%);
 }
 .bg-mark{
   position:absolute;left:50%;top:50%;width:min(84vmin,700px);height:auto;
   transform:translate(-50%,-50%);color:var(--gold);opacity:var(--mark-op);
 }
 .bg-mark .turn{transform-origin:200px 200px;animation:spin 420s linear infinite}
-.bg-frieze{
-  position:absolute;left:0;right:0;height:11px;opacity:.42;
-  background:
-    repeating-linear-gradient(45deg,transparent 0 9px,
-      color-mix(in srgb,var(--gold) 42%,transparent) 9px 10px,transparent 10px 19px),
-    repeating-linear-gradient(-45deg,transparent 0 9px,
-      color-mix(in srgb,var(--gold) 42%,transparent) 9px 10px,transparent 10px 19px);
+.bg-trim{
+  position:absolute;left:0;width:100%;height:18px;color:var(--gold);opacity:.5;
 }
-.bg-frieze.top{top:0;border-bottom:1px solid color-mix(in srgb,var(--gold) 30%,transparent)}
-.bg-frieze.bot{bottom:0;border-top:1px solid color-mix(in srgb,var(--gold) 30%,transparent)}
+.bg-trim.top{top:0}
+.bg-trim.bot{bottom:0;transform:scaleY(-1)}
 .bg-vig{
   position:absolute;inset:0;
   background:radial-gradient(ellipse 72% 62% at 50% 44%,transparent 40%,var(--stone-0) 100%);
@@ -287,7 +289,29 @@ button{font:inherit;color:inherit;cursor:pointer}
 
 <div class="bg" aria-hidden="true">
   <div class="bg-shaft"></div>
-  <svg class="bg-mark" viewBox="0 0 400 400">
+
+  <!-- the three windows above the pedestal -->
+  <svg class="bg-arch" viewBox="0 0 600 280" preserveAspectRatio="xMidYMin meet">
+    <g fill="none" stroke="currentColor" stroke-linejoin="round">
+      <path d="M92 280 L92 152 Q92 98 132 76 Q172 98 172 152 L172 280" stroke-width="1.5"/>
+      <path d="M104 280 L104 156 Q104 110 132 92 Q160 110 160 156 L160 280" stroke-width=".6"/>
+      <path d="M132 92 L132 280" stroke-width=".6"/>
+
+      <path d="M252 280 L252 126 Q252 58 300 32 Q348 58 348 126 L348 280" stroke-width="1.7"/>
+      <path d="M266 280 L266 132 Q266 74 300 52 Q334 74 334 132 L334 280" stroke-width=".6"/>
+      <path d="M300 52 L300 280" stroke-width=".6"/>
+      <path d="M282 280 L282 150 M318 280 L318 150" stroke-width=".5"/>
+
+      <path d="M428 280 L428 152 Q428 98 468 76 Q508 98 508 152 L508 280" stroke-width="1.5"/>
+      <path d="M440 280 L440 156 Q440 110 468 92 Q496 110 496 156 L496 280" stroke-width=".6"/>
+      <path d="M468 92 L468 280" stroke-width=".6"/>
+    </g>
+    <path d="M300 8 L288 28 L312 28 Z M286.5 30 L274.5 50 L298.5 50 Z M313.5 30 L301.5 50 L325.5 50 Z"
+          fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+  </svg>
+
+  <!-- the mark on the chamber floor -->
+  <svg class="bg-mark" viewBox="0 0 400 400" aria-hidden="true">
     <g class="turn" fill="none" stroke="currentColor">
       <circle cx="200" cy="200" r="197" stroke-width="1.4"/>
       <circle cx="200" cy="200" r="186" stroke-width=".5"/>
@@ -301,9 +325,29 @@ button{font:inherit;color:inherit;cursor:pointer}
       <path d="M250 180 L204 260 L296 260 Z"/>
     </g>
   </svg>
-  <div class="bg-frieze top"></div>
-  <div class="bg-frieze bot"></div>
+
+  <svg class="bg-trim top" width="100%" height="18" preserveAspectRatio="none" aria-hidden="true">
+  <defs>
+    <pattern id="trim-top" width="34" height="18" patternUnits="userSpaceOnUse">
+      <path d="M17 3 L9.5 15 L24.5 15 Z" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/>
+      <path d="M0 15 L34 15" stroke="currentColor" stroke-width=".7"/>
+      <circle cx="0" cy="8" r="1.1" fill="currentColor"/>
+    </pattern>
+  </defs>
+  <rect width="100%" height="18" fill="url(#trim-top)"/>
+</svg>
+  <svg class="bg-trim bot" width="100%" height="18" preserveAspectRatio="none" aria-hidden="true">
+  <defs>
+    <pattern id="trim-bot" width="34" height="18" patternUnits="userSpaceOnUse">
+      <path d="M17 3 L9.5 15 L24.5 15 Z" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/>
+      <path d="M0 15 L34 15" stroke="currentColor" stroke-width=".7"/>
+      <circle cx="0" cy="8" r="1.1" fill="currentColor"/>
+    </pattern>
+  </defs>
+  <rect width="100%" height="18" fill="url(#trim-bot)"/>
+</svg>
   <div class="bg-vig"></div>
+</div>
 </div>
 <canvas id="ambient" aria-hidden="true"></canvas>
 
@@ -442,7 +486,7 @@ const SAGES = {
     ]
   },
   time:{
-    sage:"Zelda", element:"Time", medallion:"None",
+    sage:"Zelda", element:"Time", medallion:"None", role:"The Seventh Sage",
     temple:"Temple of Time", song:"Song of Time", instrument:"Ocarina",
     line:"You are the one who plays the long game.",
     about:"Time is the seventh element, and the only one with no medallion to hand you. It is not a force you aim at something — it is the distance between a decision and its consequence, and the willingness to spend the first in order to buy the second. Whoever holds it is always some way ahead of the room.",
@@ -451,8 +495,9 @@ const SAGES = {
       "The risk is living in a future nobody else can see yet. Strategy can quietly become distance — and the years you spend arranging things are years you also have to live in."
     ],
     sageBody:[
-      "Zelda is the seventh sage and the only one who never receives a medallion, because she is not a piece on the board — she is the one reading it. She sees the danger years before anyone else, hides in plain sight for seven of them, and at the end gives back the one thing she wanted most.",
-      "She carries no medallion because this element was never a power handed to her. It is what she does with the years: she spends them deliberately, and she is the only sage who pays the price in advance."
+      "Zelda is never called the Sage of Time. Her title in Ocarina of Time is the Seventh Sage - the one who leads the other six, closes the Sacred Realm, and is the only one who receives no medallion. There is no Time Medallion in the game because there was never a seventh temple to take one out of.",
+      "But the element is hers in everything except the name. She is the sage whose entire power is what she does with years: she reads the danger seven years before anyone acts on it, then spends those seven hidden in plain sight, feeding the plan one song at a time. Every other sage holds a place. She holds a schedule.",
+      "And she is the one who ends it by giving the years back - handing back the seven she spent and the childhood they cost. That is what a Sage of Time would be, if the medallion existed. It does not, which is the point: this element was never a power handed to her, and she is the only sage who pays for it in advance."
     ]
   }
 };
@@ -467,29 +512,38 @@ const HEX_IN  = "50,14 81.2,32 81.2,68 50,86 18.8,68 18.8,32";
 const BEVEL_HI = "M9.3 26.5 L50 3 L50 14 L18.8 32 Z M9.3 26.5 L18.8 32 L18.8 68 L9.3 73.5 Z";
 const BEVEL_LO = "M90.7 73.5 L50 97 L50 86 L81.2 68 Z M90.7 26.5 L90.7 73.5 L81.2 68 L81.2 32 Z";
 
-const RAY_PATH = "M79.0 50.0 L63.8 47.6 L63.8 52.4 Z M70.5 29.5 L58.1 38.6 L61.4 41.9 Z M50.0 21.0 L47.6 36.2 L52.4 36.2 Z M29.5 29.5 L38.6 41.9 L41.9 38.6 Z M21.0 50.0 L36.2 52.4 L36.2 47.6 Z M29.5 70.5 L41.9 61.4 L38.6 58.1 Z M50.0 79.0 L52.4 63.8 L47.6 63.8 Z M70.5 70.5 L61.4 58.1 L58.1 61.4 Z";
+const RAY_PATH = "M79.0 50.0 L65.3 47.7 L65.3 52.3 Z M68.6 39.2 L62.1 40.3 L64.4 44.3 Z M64.5 24.9 L55.7 35.6 L59.7 37.9 Z M50.0 28.5 L47.7 34.7 L52.3 34.7 Z M35.5 24.9 L40.3 37.9 L44.3 35.6 Z M31.4 39.2 L35.6 44.3 L37.9 40.3 Z M21.0 50.0 L34.7 52.3 L34.7 47.7 Z M31.4 60.7 L37.9 59.7 L35.6 55.7 Z M35.5 75.1 L44.3 64.4 L40.3 62.1 Z M50.0 71.5 L52.3 65.3 L47.7 65.3 Z M64.5 75.1 L59.7 62.1 L55.7 64.4 Z M68.6 60.8 L64.4 55.7 L62.1 59.7 Z";
 const EMBOSS = "filter:drop-shadow(0 1.1px .8px rgba(0,0,0,.55))";
 
 const GLYPHS = {
-  forest:`<path d="M50 27 C63.5 38 65.5 57 50 73 C34.5 57 36.5 38 50 27 Z" fill="COIN"/>
-          <path d="M50 33 L50 70" stroke="INK" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-          <path d="M50 46 L59.5 39 M50 56 L59.5 49 M50 46 L40.5 39 M50 56 L40.5 49" stroke="INK" stroke-width="1.9" stroke-linecap="round" fill="none"/>`,
-  fire:`<path d="M50 25 C57.5 39 68 46 65 58 A15.5 15.5 0 0 1 35 58 C32 46 42.5 39 50 25 Z" fill="COIN"/>
-        <path d="M50 45 C54.5 51.5 58 55 56 60.5 A6.4 6.4 0 0 1 44 60.5 C42 55 45.5 51.5 50 45 Z" fill="INK"/>`,
-  water:`<path d="M28 39.5 q11 -8.5 22 0 t22 0" stroke="COIN" stroke-width="4.4" stroke-linecap="round" fill="none"/>
-         <path d="M28 51 q11 -8.5 22 0 t22 0" stroke="COIN" stroke-width="4.4" stroke-linecap="round" fill="none"/>
-         <path d="M28 62.5 q11 -8.5 22 0 t22 0" stroke="COIN" stroke-width="4.4" stroke-linecap="round" fill="none"/>`,
-  shadow:`<path d="M25 50 q25 -20 50 0 q-25 20 -50 0 Z" fill="COIN"/>
-          <circle cx="50" cy="50" r="6.6" fill="INK"/>
-          <path d="M50 62 l -4.8 13 h 9.6 Z" fill="COIN"/>
-          <path d="M32.5 34 L36.8 40.5 M50 30 L50 37.5 M67.5 34 L63.2 40.5" stroke="COIN" stroke-width="3" stroke-linecap="round" fill="none"/>`,
-  spirit:`<path d="M59 26 A25 25 0 1 0 59 74 A20 20 0 1 1 59 26 Z" fill="COIN"/>
-          <circle cx="66.5" cy="50" r="5.2" fill="COIN"/>`,
-  light:`<circle cx="50" cy="50" r="11" fill="COIN"/>
+  /* Kokiri Emblem - the swirl the forest people mark their shields with. */
+  forest:`<path d="M50.0 47.5 L50.5 47.3 L51.0 47.2 L51.6 47.2 L52.2 47.3 L52.8 47.5 L53.4 47.9 L53.9 48.4 L54.4 49.0 L54.7 49.8 L55.0 50.6 L55.0 51.5 L54.9 52.4 L54.7 53.4 L54.2 54.3 L53.6 55.1 L52.8 55.9 L51.8 56.5 L50.7 57.0 L49.5 57.2 L48.2 57.3 L47.0 57.1 L45.7 56.7 L44.4 56.1 L43.3 55.2 L42.3 54.1 L41.5 52.8 L40.9 51.4 L40.5 49.9 L40.4 48.2 L40.6 46.5 L41.1 44.9 L41.9 43.3 L43.0 41.9 L44.3 40.6 L45.9 39.5 L47.7 38.7 L49.6 38.3 L51.6 38.1 L53.6 38.3 L55.7 38.9 L57.6 39.8 L59.4 41.0 L61.0 42.6 L62.3 44.4 L63.3 46.5 L63.9 48.8 L64.2 51.2 L64.0 53.6 L63.5 56.0 L62.5 58.3 L61.1 60.5 L59.3 62.4 L57.2 64.0 L54.8 65.3 L52.2 66.1 L49.5 66.5 L46.7 66.4 L43.9 65.9 L41.2 64.8 L38.6 63.3 L36.4 61.4 L34.4 59.0 L32.9 56.4 L31.8 53.5 L31.3 50.4 L31.2 47.2 L31.7 44.0 L32.8 40.9 L34.3 38.0 L36.4 35.3 L38.9 33.0 L41.9 31.2 L45.1 29.8 L48.5 29.1 L52.1 28.9 L55.7 29.3 L59.2 30.3 L62.5 31.9 L65.5 34.1 L68.2 36.8" fill="none" stroke="COIN" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/>`,
+  /* A flame with the ember curled inside it. */
+  fire:`<path d="M50 24 C57.5 38.5 68.5 45.5 65.5 58 A16 16 0 0 1 34.5 58 C31.5 45.5 42.5 38.5 50 24 Z" fill="COIN"/>
+        <path d="M50.0 56.3 L50.1 56.2 L50.2 56.2 L50.4 56.2 L50.5 56.1 L50.7 56.1 L50.8 56.1 L51.0 56.2 L51.1 56.2 L51.3 56.3 L51.5 56.4 L51.6 56.5 L51.7 56.6 L51.9 56.7 L52.0 56.9 L52.1 57.0 L52.2 57.2 L52.3 57.4 L52.4 57.6 L52.4 57.9 L52.4 58.1 L52.4 58.3 L52.4 58.6 L52.4 58.8 L52.3 59.1 L52.2 59.3 L52.1 59.5 L51.9 59.8 L51.7 60.0 L51.5 60.2 L51.3 60.4 L51.1 60.5 L50.8 60.7 L50.5 60.8 L50.2 60.9 L49.9 61.0 L49.6 61.0 L49.3 61.0 L48.9 61.0 L48.6 61.0 L48.3 60.9 L47.9 60.8 L47.6 60.6 L47.3 60.4 L47.0 60.2 L46.7 60.0 L46.4 59.7 L46.2 59.4 L46.0 59.1 L45.8 58.7 L45.6 58.4 L45.5 58.0 L45.4 57.6 L45.4 57.2 L45.4 56.7 L45.4 56.3 L45.4 55.9 L45.6 55.4 L45.7 55.0 L45.9 54.6 L46.1 54.2 L46.4 53.8 L46.7 53.4 L47.0 53.1 L47.4 52.8 L47.8 52.5 L48.3 52.3 L48.7 52.1 L49.2 51.9 L49.7 51.8 L50.2 51.8 L50.8 51.7 L51.3 51.8 L51.8 51.8 L52.3 52.0 L52.9 52.1 L53.4 52.4 L53.9 52.6 L54.3 53.0 L54.8 53.3 L55.2 53.7" fill="none" stroke="INK" stroke-width="2.6" stroke-linecap="round"/>`,
+  /* A drop with the current turning inside it, over one wave. */
+  water:`<path d="M50 22 C59 36 65 43.5 65 51 A15 15 0 0 1 35 51 C35 43.5 41 36 50 22 Z" fill="COIN"/>
+         <path d="M50.0 53.8 L50.1 53.7 L50.2 53.7 L50.4 53.7 L50.5 53.6 L50.6 53.6 L50.8 53.6 L50.9 53.7 L51.1 53.7 L51.2 53.8 L51.4 53.8 L51.5 53.9 L51.7 54.0 L51.8 54.1 L51.9 54.3 L52.0 54.4 L52.1 54.6 L52.2 54.8 L52.3 55.0 L52.3 55.2 L52.4 55.4 L52.4 55.6 L52.4 55.8 L52.4 56.0 L52.3 56.3 L52.2 56.5 L52.2 56.7 L52.0 56.9 L51.9 57.2 L51.7 57.4 L51.6 57.6 L51.4 57.7 L51.1 57.9 L50.9 58.0 L50.7 58.2 L50.4 58.3 L50.1 58.4 L49.8 58.4 L49.5 58.4 L49.2 58.4 L48.9 58.4 L48.6 58.4 L48.3 58.3 L47.9 58.2 L47.6 58.0 L47.4 57.9 L47.1 57.7 L46.8 57.4 L46.6 57.2 L46.3 56.9 L46.1 56.6 L45.9 56.3 L45.8 55.9 L45.7 55.6 L45.6 55.2 L45.5 54.8 L45.5 54.4 L45.5 54.0 L45.5 53.6 L45.6 53.2 L45.7 52.8 L45.9 52.4 L46.1 52.0 L46.3 51.7 L46.5 51.3 L46.8 51.0 L47.2 50.7 L47.5 50.4 L47.9 50.2 L48.3 49.9 L48.7 49.7 L49.2 49.6 L49.7 49.5 L50.1 49.4 L50.6 49.4 L51.1 49.4 L51.6 49.5 L52.1 49.6 L52.6 49.7 L53.1 49.9 L53.5 50.1" fill="none" stroke="INK" stroke-width="2.6" stroke-linecap="round"/>
+         <path d="M29 71 q10.5 -7.5 21 0 t21 0" fill="none" stroke="COIN" stroke-width="3.6" stroke-linecap="round"/>`,
+  /* The Sheikah eye: three lashes, the open eye, one tear. Impa's people
+     carved this over the Shadow Temple door, so it is the sage's mark too. */
+  shadow:`<path d="M23 50 q27 -19.5 54 0 q-27 19.5 -54 0 Z" fill="COIN"/>
+          <circle cx="50" cy="50" r="6.4" fill="INK"/>
+          <path d="M50 61.5 q -5.4 8 -3.4 12.4 a 3.8 3.8 0 0 0 6.8 0 Q 55.4 69.5 50 61.5 Z" fill="COIN"/>
+          <path d="M31 33.5 L36.4 40.6 M50 29.5 L50 37.4 M69 33.5 L63.6 40.6" fill="none" stroke="COIN" stroke-width="3.1" stroke-linecap="round"/>`,
+  /* The Gerudo crescent, with the jewel held in its opening. */
+  spirit:`<path d="M60 25.5 A25.5 25.5 0 1 0 60 74.5 A19.5 19.5 0 1 1 60 25.5 Z" fill="COIN"/>
+          <circle cx="67" cy="50" r="5.4" fill="COIN"/>`,
+  /* Rauru's light: a sun of alternating long and short rays around a ring. */
+  light:`<circle cx="50" cy="50" r="10.5" fill="none" stroke="COIN" stroke-width="4"/>
          <path d="RAYS" fill="COIN"/>`,
-  time:`<path d="M50 28 L38 48 L62 48 Z" fill="COIN"/>
-        <path d="M36.5 50.5 L24.5 70.5 L48.5 70.5 Z" fill="COIN"/>
-        <path d="M63.5 50.5 L51.5 70.5 L75.5 70.5 Z" fill="COIN"/>`
+  /* The Hylian Royal Crest - the Triforce over the wings of the royal
+     family. Zelda is the Seventh Sage; there was never a medallion to
+     stamp, so her own house's mark stands in its place. */
+  time:`<path d="M50 20 L42.8 32 L57.2 32 Z M41.6 34 L34.4 46 L48.8 46 Z M58.4 34 L51.2 46 L65.6 46 Z" fill="COIN"/>
+        <path d="M50 48.5 C41.5 45.5 29.5 46.5 21 54 C26.5 55 30 57 31.5 61.5 C33.7 58.2 36.5 58 38.5 61.5 C40.7 58.2 43.5 57.8 45.5 60.5 C47.2 56.8 48.8 55.5 50 56.5 Z" fill="COIN"/>
+        <path d="M50 48.5 C58.5 45.5 70.5 46.5 79 54 C73.5 55 70 57 68.5 61.5 C66.3 58.2 63.5 58 61.5 61.5 C59.3 58.2 56.5 57.8 54.5 60.5 C52.8 56.8 51.2 55.5 50 56.5 Z" fill="COIN"/>
+        <path d="M50 56 L45 71.5 L50 67.5 L55 71.5 Z" fill="COIN"/>`
 };
 
 let medUID = 0;
@@ -501,7 +555,7 @@ function medallion(key){
     .replace(/COIN/g, `url(#${u}c)`)
     .replace(/INK/g, bare ? "var(--stone-2)" : "currentColor")
     .replace(/RAYS/g, RAY_PATH);
-  return `<svg viewBox="0 0 100 100" role="img" aria-label="${bare ? "An unstruck medallion bearing the Triforce" : s.element + " Medallion"}" style="color:var(--c-${key})">
+  return `<svg viewBox="0 0 100 100" role="img" aria-label="${bare ? "The Seventh Sage's mark: the Hylian Royal Crest, on a medallion never struck" : s.element + " Medallion"}" style="color:var(--c-${key})">
     <defs>
       <linearGradient id="${u}r" x1="0" y1="0" x2=".7" y2="1">
         <stop offset="0" style="stop-color:var(--gold-2)"/>
@@ -802,7 +856,7 @@ function renderResult(){
   $("r-sage").innerHTML =
     `<p class="eyebrow eyebrow-elem">Another sage of your element</p>
      <h3 class="sage-name">${s.sage}</h3>
-     <p class="sage-role">Sage of ${s.element} &middot; ${s.temple}</p>
+     <p class="sage-role">${s.role || "Sage of " + s.element} &middot; ${s.temple}</p>
      <div class="sage-text">${s.sageBody.map(p=>`<p>${p}</p>`).join("")}</div>
      <dl class="facts">${facts}</dl>`;
 
