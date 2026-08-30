@@ -199,6 +199,30 @@ button{font:inherit;color:inherit;cursor:pointer}
 .res-body p{margin:0}
 .res-body strong{color:var(--ink);font-weight:500}
 
+/* element blurb: the lead paragraph, set apart from the personality read */
+.res-about{
+  max-width:36rem;margin:0;text-align:left;color:var(--ink);
+  font-size:1.06em;line-height:1.6;
+  border-left:2px solid var(--elem);padding-left:1.15rem;
+}
+.eyebrow-elem{color:var(--elem)}
+.res-body .eyebrow-elem{margin-bottom:-.2em}
+
+/* the canonical sage, presented as a peer rather than as your result */
+.sage-card{
+  width:100%;max-width:36rem;text-align:left;
+  display:flex;flex-direction:column;align-items:flex-start;gap:.85rem;
+  border-top:1px solid var(--edge);padding-top:1.7rem;
+}
+.sage-name{font-size:clamp(1.6rem,1.3rem + 1.3vw,2.1rem);color:var(--ink);letter-spacing:.02em}
+.sage-role{
+  font-family:"Barlow Semi Condensed",system-ui,sans-serif;
+  font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin:0;
+}
+.sage-text{display:flex;flex-direction:column;gap:1em;color:var(--ink-2)}
+.sage-text p{margin:0}
+.sage-card .facts{margin-top:.4rem}
+
 .facts{
   display:grid;grid-template-columns:repeat(2,1fr);gap:1px;
   width:100%;max-width:36rem;background:var(--edge-2);border-top:1px solid var(--edge-2);border-bottom:1px solid var(--edge-2);
@@ -251,11 +275,12 @@ button{font:inherit;color:inherit;cursor:pointer}
     <!-- result -->
     <section class="view result" id="v-result">
       <div class="res-med" id="r-med" aria-hidden="true"></div>
-      <h2 class="res-name" id="r-name"><span id="r-elem"></span></h2>
+      <h2 class="res-name" id="r-name"></h2>
       <hr class="rule-gold" style="width:6rem">
       <p class="res-line" id="r-line"></p>
+      <p class="res-about" id="r-about"></p>
       <div class="res-body" id="r-body"></div>
-      <dl class="facts" id="r-facts"></dl>
+      <section class="sage-card" id="r-sage"></section>
       <div class="affinity" id="r-aff"></div>
       <div class="res-actions">
         <button class="btn" id="again">Take the trials again</button>
@@ -273,77 +298,104 @@ const ORDER = ["forest","fire","water","shadow","spirit","light","time"];
 
 const SAGES = {
   forest:{
-    sage:"Saria", element:"Forest", medallion:"Forest Medallion",
+    sage:"Saria", element:"Forest", medallion:"Forest",
     temple:"Forest Temple", song:"Saria's Song", instrument:"Ocarina",
     line:"You are the one who stays.",
+    about:"Forest is the element of what takes root and refuses to be moved. It is the slowest of the six and by far the hardest to remove — a thing that grows in place, holds its ground, and is still standing long after the storm that was supposed to end it. Green, patient, and quietly immovable.",
     body:[
-      "Saria never leaves the forest, and that is not a limitation — it is the entire point of her. While everyone around her is being pulled toward destiny, she plants herself beside the people she loves and refuses to be moved. Her power is continuity: she is the thing still standing where you left it.",
       "You measure a decision by who it costs. Grand causes interest you far less than the specific person in front of you, and you will quietly reorganize your own plans around them without ever presenting it as a sacrifice. People come back to you years later because you are still there.",
       "The risk is that staying can become hiding. Roots hold you up right until the day they hold you back — and the hardest thing you will ever do is walk across your own bridge."
+    ],
+    sageBody:[
+      "Saria never leaves the forest, and that is not a limitation — it is the entire point of her. While everyone around her is being pulled toward destiny, she plants herself beside the people she loves and refuses to be moved. She is the friend still standing exactly where you left her.",
+      "She carries the Forest Medallion because she is what the element does: she stays, she holds, and the Lost Woods never swallow the people she has decided to keep."
     ]
   },
   fire:{
-    sage:"Darunia", element:"Fire", medallion:"Fire Medallion",
+    sage:"Darunia", element:"Fire", medallion:"Fire",
     temple:"Fire Temple", song:"Bolero of Fire", instrument:"Drums",
     line:"You are the one who moves first.",
+    about:"Fire is the element of immediate commitment. It does not deliberate, hedge, or hold anything back in reserve — it converts everything it touches all at once, and it either warms a mountain or empties one. The fastest of the six, and the least interested in waiting to be sure.",
     body:[
-      "Darunia calls a stranger his sworn brother roughly ninety seconds after meeting him, and then means it for the rest of his life. He does not hedge, does not wait for more information, and does not perform his feelings at a distance — he dances, he shouts, he throws his whole weight at the problem.",
       "You would rather act and be wrong than deliberate and be late. Warmth is your default setting; you let people in fast and defend them loudly. In a room where everyone is being careful, you are the one who finally says the obvious thing out loud, and the room is usually relieved.",
       "The risk is momentum. Not everything wants to be charged at, and some doors only open to patience — the fire that warms a mountain is the same fire that empties it."
+    ],
+    sageBody:[
+      "Darunia calls a stranger his sworn brother roughly ninety seconds after meeting him, and then means it for the rest of his life. He does not hedge, does not wait for more information, and does not perform his feelings at a distance — he dances, he shouts, and he throws his whole weight at the problem.",
+      "He carries the Fire Medallion because he burns the way the element burns: all at once, in the open, on behalf of whoever is standing nearest to him."
     ]
   },
   water:{
-    sage:"Ruto", element:"Water", medallion:"Water Medallion",
+    sage:"Ruto", element:"Water", medallion:"Water",
     temple:"Water Temple", song:"Serenade of Water", instrument:"Harp",
     line:"You are the one who feels it out loud.",
+    about:"Water is the element of depth and pressure. It takes the shape of whatever holds it and loses nothing at all in the process, and the part of it you can see is never the part that matters. Blue, endlessly adaptive, and a great deal heavier than it looks.",
     body:[
-      "Ruto is imperious, demanding, and completely without a filter — and she is also the only person in the story who says exactly what she wants the moment she wants it. She proposes marriage to a stranger, then gives up that promise herself when the world needs her more. Both acts come from the same place.",
       "You do not do quiet dignity. You will tell someone precisely how they made you feel, at length, and you will still be the first to change shape when the situation demands it. Pride and adaptability sit side by side in you; you bend constantly without ever once conceding.",
-      "The risk is the size of the waves. What feels proportionate from inside can land as a flood on everyone else, and your pride will occasionally defend a position you stopped believing in an hour ago."
+      "The risk is the size of the waves. What feels proportionate from inside can land as a flood on everyone else, and your pride will occasionally defend a position you stopped believing an hour ago."
+    ],
+    sageBody:[
+      "Ruto is imperious, demanding, and entirely without a filter — and she is also the only person in the story who says exactly what she wants the moment she wants it. She proposes marriage to a stranger, then gives that promise up herself when the world needs her more. Both acts come from the same place.",
+      "She carries the Water Medallion because she moves the way the element moves: constantly changing shape, never once conceding, and far deeper than the surface she lets you see."
     ]
   },
   shadow:{
-    sage:"Impa", element:"Shadow", medallion:"Shadow Medallion",
+    sage:"Impa", element:"Shadow", medallion:"Shadow",
     temple:"Shadow Temple", song:"Nocturne of Shadow", instrument:"Bass drums",
     line:"You are the one who carries it silently.",
+    about:"Shadow is the element of what is deliberately not shown. It is not evil and it is not absence — it is concealment in service of something: the information withheld on purpose, the weight carried where nobody has to look at it. The quietest of the six, and the most misread.",
     body:[
-      "Impa raised a princess, hid her for seven years, and told nobody what it cost. The Sheikah do not conceal things out of coldness — they conceal them because someone has to stand between the truth and the people it would break, and Impa volunteered for that post permanently.",
       "You absorb. When something goes wrong you calculate who does not need to know, and then you handle it. You are the person others end up trusting with the thing they cannot say aloud, and you have never once repeated any of it. In a crisis you get quieter, not louder.",
       "The risk is that nobody is standing between you and anything. Carrying it alone is a decision you keep making automatically, and the people who love you would carry some of it if you ever let the silence break."
+    ],
+    sageBody:[
+      "Impa raised a princess, hid her for seven years, and told nobody what it cost. The Sheikah do not conceal things out of coldness — they conceal them because someone has to stand between the truth and the people it would break, and Impa volunteered for that post permanently.",
+      "She carries the Shadow Medallion because she is what the element is for: she is the dark a kingdom gets to hide inside, and she has never once asked to be seen doing it."
     ]
   },
   spirit:{
-    sage:"Nabooru", element:"Spirit", medallion:"Spirit Medallion",
+    sage:"Nabooru", element:"Spirit", medallion:"Spirit",
     temple:"Spirit Temple", song:"Requiem of Spirit", instrument:"Pipes",
     line:"You are the one who refuses.",
+    about:"Spirit is the element of will — the refusal that survives a desert, the self that does not dissolve into whatever it happens to be surrounded by. It is the only one of the six defined by what it declines to do rather than what it does. Orange, dry, and unowned.",
     body:[
-      "Nabooru is a Gerudo thief who robs Ganondorf's own temple, and calls herself the lone wolf thief while doing it. She is surrounded by an entire people who follow the man, and she simply declines. Not out of loyalty to Hyrule — out of loyalty to her own read on what is right.",
       "You do not take an instruction on the strength of who gave it. Authority has to earn the same hearing as anyone else, and if it fails, you go your own way without much drama about it. You are comfortable being the only one, and you are suspicious of any arrangement that requires you to stop asking questions.",
       "The risk is that refusal becomes a reflex. Nabooru gets caught precisely because she went in alone — and the people who would have gone with her never got asked."
+    ],
+    sageBody:[
+      "Nabooru is a Gerudo thief who robs Ganondorf's own temple, and calls herself the lone wolf thief while she does it. She is surrounded by an entire people who follow the man, and she simply declines — not out of loyalty to Hyrule, but out of loyalty to her own read on what is right.",
+      "She carries the Spirit Medallion because she is the element's whole argument: a will that an entire desert, and an entire king, failed to convert."
     ]
   },
   light:{
-    sage:"Rauru", element:"Light", medallion:"Light Medallion",
+    sage:"Rauru", element:"Light", medallion:"Light",
     temple:"Temple of Time", song:"Prelude of Light", instrument:"Harp",
     line:"You are the one who holds the frame.",
+    about:"Light is the element of the frame itself. It does not act so much as make action possible — it reveals what is already there, puts it in order, and holds the structure steady while everything inside it moves. The least dramatic of the six, and the one the other five are standing on.",
     body:[
-      "Rauru waits seven years in a chamber outside of time for a boy to grow up, and greets him with no apology and no urgency. He built the Temple of Time, sealed the Sacred Realm, and then simply held the position — the least glamorous role in the entire story, and the one the whole thing rests on.",
       "You take the long view by temperament, not by effort. Things that panic other people register with you as stages in a process that was always going to have stages. You are the steady one, the one who keeps the structure intact while everyone else is reacting, and you rarely need credit for it.",
       "The risk is acceptance arriving too early. Not everything is a phase to be waited out, and patience that never converts into action is indistinguishable, from the outside, from not caring."
+    ],
+    sageBody:[
+      "Rauru waits seven years in a chamber outside of time for a boy to grow up, and greets him with no apology and no urgency whatsoever. He built the Temple of Time, sealed the Sacred Realm, and then simply held the position — the least glamorous role in the entire story, and the one the whole thing rests on.",
+      "He carries the Light Medallion because he does exactly what the element does: he is not the events, he is the room they are permitted to happen in."
     ]
   },
   time:{
-    sage:"Zelda", element:"Time", medallion:"no medallion",
+    sage:"Zelda", element:"Time", medallion:"None",
     temple:"Temple of Time", song:"Song of Time", instrument:"Ocarina",
     line:"You are the one who plays the long game.",
+    about:"Time is the seventh element, and the only one with no medallion to hand you. It is not a force you aim at something — it is the distance between a decision and its consequence, and the willingness to spend the first in order to buy the second. Whoever holds it is always some way ahead of the room.",
     body:[
-      "Zelda is the seventh sage and the only one who never receives a medallion, because she is not a piece on the board — she is the one reading it. She sees the danger years before anyone else, hides in plain sight for seven of them, and at the end gives back the one thing she wanted most.",
       "You are always some distance ahead of the current conversation. You think in consequences and second moves, you hold information until releasing it will actually do something, and you are willing to lose the present round if it sets up the next one. People often realize much later that you had already accounted for it.",
       "The risk is living in a future nobody else can see yet. Strategy can quietly become distance — and the years you spend arranging things are years you also have to live in."
+    ],
+    sageBody:[
+      "Zelda is the seventh sage and the only one who never receives a medallion, because she is not a piece on the board — she is the one reading it. She sees the danger years before anyone else, hides in plain sight for seven of them, and at the end gives back the one thing she wanted most.",
+      "She carries no medallion because this element was never a power handed to her. It is what she does with the years: she spends them deliberately, and she is the only sage who pays the price in advance."
     ]
   }
 };
-
 /* ======================= MEDALLIONS ======================= */
 const HEX_OUT = "50,4 89.8,27 89.8,73 50,96 10.2,73 10.2,27";
 const HEX_IN  = "50,14 81.2,32 81.2,68 50,86 18.8,68 18.8,32";
@@ -642,17 +694,27 @@ function renderResult(){
   view.style.setProperty("--elem", `var(--c-${key})`);
 
   $("r-med").innerHTML = medallion(key);
-  $("r-name").innerHTML = `<span>Sage of ${s.element}</span>${s.sage}`;
+  $("r-name").innerHTML = `<span>Your element</span>${s.element}`;
   $("r-line").textContent = s.line;
+  $("r-about").textContent = s.about;
 
-  $("r-body").innerHTML = s.body.map(p=>`<p>${p}</p>`).join("");
+  $("r-body").innerHTML =
+    `<p class="eyebrow eyebrow-elem">What that makes you</p>` +
+    s.body.map(p=>`<p>${p}</p>`).join("");
 
-  $("r-facts").innerHTML = [
-    ["Element", s.element],
+  const facts = [
+    ["Medallion", s.medallion],
     ["Temple", s.temple],
     ["Song", s.song],
     ["Instrument", s.instrument]
   ].map(([k,v])=>`<div class="fact"><dt>${k}</dt><dd>${v}</dd></div>`).join("");
+
+  $("r-sage").innerHTML =
+    `<p class="eyebrow eyebrow-elem">Another sage of your element</p>
+     <h3 class="sage-name">${s.sage}</h3>
+     <p class="sage-role">Sage of ${s.element} &middot; ${s.temple}</p>
+     <div class="sage-text">${s.sageBody.map(p=>`<p>${p}</p>`).join("")}</div>
+     <dl class="facts">${facts}</dl>`;
 
   const rows = ORDER.slice().sort((a,b)=>counts[b]-counts[a]);
   $("r-aff").innerHTML = rows.map(k=>`
@@ -684,7 +746,7 @@ $("again").addEventListener("click", ()=>{
 $("copy").addEventListener("click", async ()=>{
   const counts = tally();
   const s = SAGES[winner(counts)];
-  const text = `The Sage Trials — I am ${s.sage}, Sage of ${s.element}. ${s.line} (${s.temple} · ${s.song})`;
+  const text = `The Sage Trials — my element is ${s.element}. ${s.line} Another Sage of ${s.element}: ${s.sage} (${s.temple} · ${s.song}).`;
   try{
     await navigator.clipboard.writeText(text);
     $("copy").textContent = "Copied";
