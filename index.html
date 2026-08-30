@@ -1,0 +1,760 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Sage Trials</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;500;600&family=Cinzel:wght@400;500;600;700&family=Spectral:ital,wght@0,300;0,400;0,500;1,400&display=swap">
+
+<style>
+/* ---------- tokens: light = Temple of Time stone ---------- */
+:root{
+  --stone-0:#E8E7EC;
+  --stone-1:#F2F1F6;
+  --stone-2:#DAD8E1;
+  --ink:#1A1826;
+  --ink-2:#56546B;
+  --ink-3:#7D7B90;
+  --gold:#8A6D1F;
+  --gold-2:#B99542;
+  --edge:rgba(26,24,38,.16);
+  --edge-2:rgba(26,24,38,.08);
+  --shade:rgba(26,24,38,.05);
+  --mote:rgba(138,109,31,.55);
+
+  --c-forest:#3F7C43;
+  --c-fire:#B32E22;
+  --c-water:#2A6BA8;
+  --c-shadow:#65459B;
+  --c-spirit:#B25A1E;
+  --c-light:#96801F;
+  --c-time:#5E6E8E;
+
+  --ring:340px;
+  --step:clamp(.6rem,2vw,.9rem);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --stone-0:#0C0D18;
+    --stone-1:#15172A;
+    --stone-2:#1E2038;
+    --ink:#E9E8F2;
+    --ink-2:#9A98B2;
+    --ink-3:#78768F;
+    --gold:#D9B85F;
+    --gold-2:#B99542;
+    --edge:rgba(233,232,242,.18);
+    --edge-2:rgba(233,232,242,.09);
+    --shade:rgba(233,232,242,.045);
+    --mote:rgba(217,184,95,.5);
+
+    --c-forest:#6FBF63;
+    --c-fire:#F0563C;
+    --c-water:#4FA3D9;
+    --c-shadow:#A184DA;
+    --c-spirit:#E8823F;
+    --c-light:#F0D678;
+    --c-time:#C3CEE0;
+  }
+}
+:root[data-theme="dark"]{
+  --stone-0:#0C0D18;
+  --stone-1:#15172A;
+  --stone-2:#1E2038;
+  --ink:#E9E8F2;
+  --ink-2:#9A98B2;
+  --ink-3:#78768F;
+  --gold:#D9B85F;
+  --gold-2:#B99542;
+  --edge:rgba(233,232,242,.18);
+  --edge-2:rgba(233,232,242,.09);
+  --shade:rgba(233,232,242,.045);
+  --mote:rgba(217,184,95,.5);
+
+  --c-forest:#6FBF63;
+  --c-fire:#F0563C;
+  --c-water:#4FA3D9;
+  --c-shadow:#A184DA;
+  --c-spirit:#E8823F;
+  --c-light:#F0D678;
+  --c-time:#C3CEE0;
+}
+
+/* ---------- base ---------- */
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--stone-0);
+  color:var(--ink);
+  font-family:Spectral,Georgia,"Times New Roman",serif;
+  font-weight:300;
+  font-size:clamp(1rem,.96rem + .2vw,1.075rem);
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+}
+#ambient{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.85}
+.wrap{position:relative;z-index:1;max-width:44rem;margin:0 auto;padding:clamp(1.6rem,5vw,3.5rem) clamp(1.1rem,4vw,2rem) 4rem}
+
+h1,h2,h3{font-family:Cinzel,"Times New Roman",serif;font-weight:600;text-wrap:balance;margin:0;line-height:1.18}
+.eyebrow{
+  font-family:"Barlow Semi Condensed",system-ui,sans-serif;
+  font-weight:600;font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold);margin:0;
+}
+.rule{height:1px;background:var(--edge);border:0;margin:0}
+.rule-gold{height:1px;border:0;margin:0;background:linear-gradient(90deg,transparent,var(--gold-2),transparent);opacity:.7}
+
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px}
+
+.view{display:none}
+.view.on{display:block;animation:rise .5s cubic-bezier(.2,.7,.3,1) both}
+.view.on.intro,
+.view.on.result{display:flex}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* ---------- intro ---------- */
+.intro{flex-direction:column;align-items:center;gap:clamp(1.4rem,4vw,2.2rem);text-align:center}
+.ring{
+  position:relative;width:min(var(--ring),78vw);aspect-ratio:1;flex:none;
+  animation:spin 150s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ring-med{
+  position:absolute;top:50%;left:50%;width:clamp(44px,13%,60px);
+  margin:calc(clamp(44px,13%,60px) / -2) 0 0 calc(clamp(44px,13%,60px) / -2);
+  animation:spin 150s linear infinite reverse;
+}
+.ring-med svg{width:100%;height:auto;display:block;opacity:.92}
+.ring::after{
+  content:"";position:absolute;inset:22%;border-radius:50%;
+  background:radial-gradient(circle,var(--shade),transparent 70%);
+}
+.title{font-size:clamp(2.3rem,9vw,3.9rem);letter-spacing:.02em}
+.title span{display:block;font-size:.38em;letter-spacing:.34em;color:var(--gold);font-weight:500;margin-bottom:.7em}
+.lede{max-width:34rem;color:var(--ink-2);margin:0}
+.lede em{font-style:italic;color:var(--ink)}
+
+.btn{
+  font-family:Cinzel,serif;font-weight:600;font-size:.95rem;letter-spacing:.14em;text-transform:uppercase;
+  background:var(--stone-1);border:1px solid var(--edge);
+  padding:.85em 2em;color:var(--ink);
+  transition:background .22s,border-color .22s,transform .22s,color .22s;
+}
+.btn:hover{background:var(--gold);border-color:var(--gold);color:var(--stone-0);transform:translateY(-1px)}
+.btn-quiet{
+  font-family:"Barlow Semi Condensed",system-ui,sans-serif;letter-spacing:.1em;font-size:.85rem;font-weight:500;
+  text-transform:uppercase;background:none;border:0;border-bottom:1px solid var(--edge);
+  padding:.3em 0;color:var(--ink-3);transition:color .2s,border-color .2s;
+}
+.btn-quiet:hover{color:var(--gold);border-color:var(--gold)}
+
+/* ---------- question ---------- */
+.qhead{
+  position:sticky;top:0;z-index:3;
+  background:var(--stone-0);
+  padding:clamp(1rem,3vw,1.6rem) 0 clamp(.9rem,3vw,1.3rem);
+  margin-bottom:.4rem;
+}
+/* fade sits below the header, so scrolling answers never show through the prompt */
+.qhead::after{
+  content:"";position:absolute;left:0;right:0;top:100%;height:1.1rem;
+  background:linear-gradient(var(--stone-0),transparent);pointer-events:none;
+}
+.qmeta{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-bottom:.75rem}
+.qcount{
+  font-family:"Barlow Semi Condensed",system-ui,sans-serif;font-size:.8rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink-3);font-variant-numeric:tabular-nums;
+}
+.marks{display:flex;gap:5px;margin:.85rem 0 0}
+.mark{flex:1;height:2px;background:var(--edge-2);transition:background .35s}
+.mark.done{background:var(--gold-2)}
+.mark.now{background:var(--gold)}
+.qtext{font-family:Spectral,serif;font-weight:400;font-size:clamp(1.2rem,1.02rem + 1.05vw,1.65rem);line-height:1.42;text-wrap:balance;margin:0}
+
+.answers{display:flex;flex-direction:column;gap:2px;margin:0;padding:0;list-style:none}
+.ans{
+  display:block;width:100%;text-align:left;
+  background:var(--stone-1);border:0;border-left:2px solid var(--edge-2);
+  padding:.9em 1.15em;color:var(--ink);
+  font-family:Spectral,serif;font-weight:300;font-size:1rem;line-height:1.5;
+  transition:border-color .18s,background .18s,padding-left .18s,color .18s;
+}
+.ans:hover{border-left-color:var(--gold);background:var(--stone-2);padding-left:1.5em}
+.ans:focus-visible{outline-offset:-2px}
+.qfoot{display:flex;justify-content:flex-start;margin-top:1.6rem}
+
+/* ---------- result ---------- */
+.result{text-align:center;flex-direction:column;align-items:center;gap:1.5rem}
+.res-med{width:clamp(130px,34vw,180px);color:var(--elem);animation:awaken 1.5s cubic-bezier(.2,.7,.3,1) both}
+.res-med svg{width:100%;height:auto;display:block;filter:drop-shadow(0 0 24px color-mix(in srgb,var(--elem) 40%,transparent))}
+@keyframes awaken{
+  0%{opacity:0;transform:scale(.86)}
+  60%{opacity:1}
+  100%{opacity:1;transform:none}
+}
+.res-name{font-size:clamp(2rem,7.5vw,3.1rem);color:var(--elem);letter-spacing:.02em}
+.res-name span{display:block;font-family:"Barlow Semi Condensed",system-ui,sans-serif;font-size:.3em;font-weight:500;letter-spacing:.32em;text-transform:uppercase;color:var(--ink-3);margin-bottom:.9em}
+.res-line{font-family:Spectral,serif;font-style:italic;font-size:clamp(1.1rem,1rem + .6vw,1.35rem);color:var(--ink);max-width:30rem;margin:0;text-wrap:balance}
+.res-body{text-align:left;max-width:36rem;color:var(--ink-2);display:flex;flex-direction:column;gap:1em}
+.res-body p{margin:0}
+.res-body strong{color:var(--ink);font-weight:500}
+
+.facts{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:1px;
+  width:100%;max-width:36rem;background:var(--edge-2);border-top:1px solid var(--edge-2);border-bottom:1px solid var(--edge-2);
+}
+.fact{background:var(--stone-0);padding:.95rem 1rem;text-align:left}
+.fact dt{font-family:"Barlow Semi Condensed",system-ui,sans-serif;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin-bottom:.25rem}
+.fact dd{margin:0;font-family:Cinzel,serif;font-size:.98rem;font-weight:500;color:var(--ink)}
+@media (min-width:40rem){ .facts{grid-template-columns:repeat(4,1fr)} }
+
+.affinity{width:100%;max-width:36rem;text-align:left;display:flex;flex-direction:column;gap:.6rem}
+.aff-row{display:grid;grid-template-columns:5.2rem 1fr 1.6rem;align-items:center;gap:.75rem}
+.aff-label{font-family:"Barlow Semi Condensed",system-ui,sans-serif;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+.aff-track{height:6px;background:var(--shade);overflow:hidden}
+.aff-fill{height:100%;background:var(--bar);width:0;transition:width .9s cubic-bezier(.2,.7,.3,1)}
+.aff-num{font-family:"Barlow Semi Condensed",system-ui,sans-serif;font-size:.85rem;color:var(--ink-3);font-variant-numeric:tabular-nums;text-align:right}
+.res-actions{display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center;justify-content:center}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+}
+</style>
+
+<canvas id="ambient" aria-hidden="true"></canvas>
+
+<div class="wrap">
+  <main id="app">
+    <!-- intro -->
+    <section class="view on intro" id="v-intro">
+      <div class="ring" id="ring" aria-hidden="true"></div>
+      <h1 class="title"><span>Ocarina of Time</span>The Sage Trials</h1>
+      <hr class="rule-gold" style="width:6rem">
+      <p class="lede">Six medallions were carried out of six temples, and a seventh sage never took one. Twelve moments from Hyrule are put to you below — <em>not</em> to test what you remember, but to find out which of them you would have been.</p>
+      <button class="btn" id="begin">Enter the Chamber</button>
+    </section>
+
+    <!-- question -->
+    <section class="view" id="v-quiz">
+      <div class="qhead">
+        <div class="qmeta">
+          <p class="eyebrow" id="q-place">Kokiri Forest</p>
+          <p class="qcount" id="q-count">Trial 1 of 12</p>
+        </div>
+        <h2 class="qtext" id="q-text"></h2>
+        <div class="marks" id="q-marks" aria-hidden="true"></div>
+      </div>
+      <ul class="answers" id="q-answers"></ul>
+      <div class="qfoot"><button class="btn-quiet" id="back">&larr; Previous trial</button></div>
+    </section>
+
+    <!-- result -->
+    <section class="view result" id="v-result">
+      <div class="res-med" id="r-med" aria-hidden="true"></div>
+      <h2 class="res-name" id="r-name"><span id="r-elem"></span></h2>
+      <hr class="rule-gold" style="width:6rem">
+      <p class="res-line" id="r-line"></p>
+      <div class="res-body" id="r-body"></div>
+      <dl class="facts" id="r-facts"></dl>
+      <div class="affinity" id="r-aff"></div>
+      <div class="res-actions">
+        <button class="btn" id="again">Take the trials again</button>
+        <button class="btn-quiet" id="copy">Copy result</button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+"use strict";
+
+/* ======================= SAGES ======================= */
+const ORDER = ["forest","fire","water","shadow","spirit","light","time"];
+
+const SAGES = {
+  forest:{
+    sage:"Saria", element:"Forest", medallion:"Forest Medallion",
+    temple:"Forest Temple", song:"Saria's Song", instrument:"Ocarina",
+    line:"You are the one who stays.",
+    body:[
+      "Saria never leaves the forest, and that is not a limitation — it is the entire point of her. While everyone around her is being pulled toward destiny, she plants herself beside the people she loves and refuses to be moved. Her power is continuity: she is the thing still standing where you left it.",
+      "You measure a decision by who it costs. Grand causes interest you far less than the specific person in front of you, and you will quietly reorganize your own plans around them without ever presenting it as a sacrifice. People come back to you years later because you are still there.",
+      "The risk is that staying can become hiding. Roots hold you up right until the day they hold you back — and the hardest thing you will ever do is walk across your own bridge."
+    ]
+  },
+  fire:{
+    sage:"Darunia", element:"Fire", medallion:"Fire Medallion",
+    temple:"Fire Temple", song:"Bolero of Fire", instrument:"Drums",
+    line:"You are the one who moves first.",
+    body:[
+      "Darunia calls a stranger his sworn brother roughly ninety seconds after meeting him, and then means it for the rest of his life. He does not hedge, does not wait for more information, and does not perform his feelings at a distance — he dances, he shouts, he throws his whole weight at the problem.",
+      "You would rather act and be wrong than deliberate and be late. Warmth is your default setting; you let people in fast and defend them loudly. In a room where everyone is being careful, you are the one who finally says the obvious thing out loud, and the room is usually relieved.",
+      "The risk is momentum. Not everything wants to be charged at, and some doors only open to patience — the fire that warms a mountain is the same fire that empties it."
+    ]
+  },
+  water:{
+    sage:"Ruto", element:"Water", medallion:"Water Medallion",
+    temple:"Water Temple", song:"Serenade of Water", instrument:"Harp",
+    line:"You are the one who feels it out loud.",
+    body:[
+      "Ruto is imperious, demanding, and completely without a filter — and she is also the only person in the story who says exactly what she wants the moment she wants it. She proposes marriage to a stranger, then gives up that promise herself when the world needs her more. Both acts come from the same place.",
+      "You do not do quiet dignity. You will tell someone precisely how they made you feel, at length, and you will still be the first to change shape when the situation demands it. Pride and adaptability sit side by side in you; you bend constantly without ever once conceding.",
+      "The risk is the size of the waves. What feels proportionate from inside can land as a flood on everyone else, and your pride will occasionally defend a position you stopped believing in an hour ago."
+    ]
+  },
+  shadow:{
+    sage:"Impa", element:"Shadow", medallion:"Shadow Medallion",
+    temple:"Shadow Temple", song:"Nocturne of Shadow", instrument:"Bass drums",
+    line:"You are the one who carries it silently.",
+    body:[
+      "Impa raised a princess, hid her for seven years, and told nobody what it cost. The Sheikah do not conceal things out of coldness — they conceal them because someone has to stand between the truth and the people it would break, and Impa volunteered for that post permanently.",
+      "You absorb. When something goes wrong you calculate who does not need to know, and then you handle it. You are the person others end up trusting with the thing they cannot say aloud, and you have never once repeated any of it. In a crisis you get quieter, not louder.",
+      "The risk is that nobody is standing between you and anything. Carrying it alone is a decision you keep making automatically, and the people who love you would carry some of it if you ever let the silence break."
+    ]
+  },
+  spirit:{
+    sage:"Nabooru", element:"Spirit", medallion:"Spirit Medallion",
+    temple:"Spirit Temple", song:"Requiem of Spirit", instrument:"Pipes",
+    line:"You are the one who refuses.",
+    body:[
+      "Nabooru is a Gerudo thief who robs Ganondorf's own temple, and calls herself the lone wolf thief while doing it. She is surrounded by an entire people who follow the man, and she simply declines. Not out of loyalty to Hyrule — out of loyalty to her own read on what is right.",
+      "You do not take an instruction on the strength of who gave it. Authority has to earn the same hearing as anyone else, and if it fails, you go your own way without much drama about it. You are comfortable being the only one, and you are suspicious of any arrangement that requires you to stop asking questions.",
+      "The risk is that refusal becomes a reflex. Nabooru gets caught precisely because she went in alone — and the people who would have gone with her never got asked."
+    ]
+  },
+  light:{
+    sage:"Rauru", element:"Light", medallion:"Light Medallion",
+    temple:"Temple of Time", song:"Prelude of Light", instrument:"Harp",
+    line:"You are the one who holds the frame.",
+    body:[
+      "Rauru waits seven years in a chamber outside of time for a boy to grow up, and greets him with no apology and no urgency. He built the Temple of Time, sealed the Sacred Realm, and then simply held the position — the least glamorous role in the entire story, and the one the whole thing rests on.",
+      "You take the long view by temperament, not by effort. Things that panic other people register with you as stages in a process that was always going to have stages. You are the steady one, the one who keeps the structure intact while everyone else is reacting, and you rarely need credit for it.",
+      "The risk is acceptance arriving too early. Not everything is a phase to be waited out, and patience that never converts into action is indistinguishable, from the outside, from not caring."
+    ]
+  },
+  time:{
+    sage:"Zelda", element:"Time", medallion:"no medallion",
+    temple:"Temple of Time", song:"Song of Time", instrument:"Ocarina",
+    line:"You are the one who plays the long game.",
+    body:[
+      "Zelda is the seventh sage and the only one who never receives a medallion, because she is not a piece on the board — she is the one reading it. She sees the danger years before anyone else, hides in plain sight for seven of them, and at the end gives back the one thing she wanted most.",
+      "You are always some distance ahead of the current conversation. You think in consequences and second moves, you hold information until releasing it will actually do something, and you are willing to lose the present round if it sets up the next one. People often realize much later that you had already accounted for it.",
+      "The risk is living in a future nobody else can see yet. Strategy can quietly become distance — and the years you spend arranging things are years you also have to live in."
+    ]
+  }
+};
+
+/* ======================= MEDALLIONS ======================= */
+const HEX_OUT = "50,4 89.8,27 89.8,73 50,96 10.2,73 10.2,27";
+const HEX_IN  = "50,14 81.2,32 81.2,68 50,86 18.8,68 18.8,32";
+
+function lightRays(){
+  let d = "";
+  for(let i=0;i<8;i++){
+    const a = i * Math.PI/4;
+    const x1 = 50 + 19*Math.cos(a), y1 = 50 - 19*Math.sin(a);
+    const x2 = 50 + 31*Math.cos(a), y2 = 50 - 31*Math.sin(a);
+    d += `M${x1.toFixed(1)} ${y1.toFixed(1)} L${x2.toFixed(1)} ${y2.toFixed(1)} `;
+  }
+  return d.trim();
+}
+
+const GLYPHS = {
+  forest:`<path d="M50 29 C 65 40, 66 60, 50 73 C 34 60, 35 40, 50 29 Z" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="round"/>
+          <path d="M50 34 L50 71" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M50 48 L59 41 M50 57 L59 50 M50 48 L41 41 M50 57 L41 50" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>`,
+  fire:`<path d="M50 26 C 58 40, 68 47, 65 59 A 15.5 15.5 0 0 1 35 59 C 32 47, 42 40, 50 26 Z" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="round"/>
+        <path d="M50 47 C 54 53, 57 56, 55.5 61 A 5.8 5.8 0 0 1 44.5 61 C 43 56, 46 53, 50 47 Z" fill="currentColor"/>`,
+  water:`<path d="M27 44 q 11.5 -9 23 0 t 23 0" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
+         <path d="M27 55 q 11.5 -9 23 0 t 23 0" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
+         <path d="M27 66 q 11.5 -9 23 0 t 23 0" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>`,
+  shadow:`<path d="M25 50 q 25 -21 50 0 q -25 21 -50 0 Z" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="round"/>
+          <circle cx="50" cy="50" r="7.5" fill="currentColor"/>
+          <path d="M50 61 l -4.5 13 h 9 Z" fill="currentColor"/>
+          <path d="M33 35 L37 41 M50 31 L50 38 M67 35 L63 41" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>`,
+  spirit:`<path d="M59 26 A 25 25 0 1 0 59 74 A 20 20 0 1 1 59 26 Z" fill="currentColor"/>
+          <circle cx="66" cy="50" r="5" fill="currentColor"/>`,
+  light:`<circle cx="50" cy="50" r="12" fill="currentColor"/>
+         <path d="${lightRays()}" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>`,
+  time:`<path d="M50 25 L37.5 47 L62.5 47 Z" fill="currentColor"/>
+        <path d="M36 49 L23.5 71 L48.5 71 Z" fill="currentColor"/>
+        <path d="M64 49 L51.5 71 L76.5 71 Z" fill="currentColor"/>`
+};
+
+function medallion(key){
+  return `<svg viewBox="0 0 100 100" role="img" aria-label="${SAGES[key].element} medallion" style="color:var(--c-${key})">
+    <polygon points="${HEX_OUT}" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" opacity=".9"/>
+    <polygon points="${HEX_IN}" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" opacity=".45"/>
+    ${GLYPHS[key]}
+  </svg>`;
+}
+
+/* ======================= QUESTIONS ======================= */
+/* Each question offers all seven sages exactly once. Answer order is
+   hand-varied per question so position never reveals the mapping. */
+const QUESTIONS = [
+  { place:"Kokiri Forest",
+    text:"The Great Deku Tree finishes his story, tells you the curse was set in motion long before you were born, and dies.",
+    answers:[
+      {s:"spirit",t:"Walk out of the forest that same night, without asking anyone's leave."},
+      {s:"shadow",t:"Tell the other Kokiri he is only sleeping. They do not need to carry this yet."},
+      {s:"time",  t:"Ask what comes next, and start preparing before the grief has landed."},
+      {s:"forest",t:"Stay in the meadow where he stood. Someone should keep the place from going quiet."},
+      {s:"light", t:"Accept it. He knew what he was choosing, and he chose it a long time ago."},
+      {s:"water", t:"Fall apart about it, out loud, in front of everyone, right now."},
+      {s:"fire",  t:"Find whoever did this. Everything else waits until that part is settled."}
+    ]},
+
+  { place:"Hyrule Field",
+    text:"Navi has been shouting the same warning at you for a solid minute. You spotted the problem before she did.",
+    answers:[
+      {s:"forest",t:"Let her finish. She is only shouting because she is worried about you."},
+      {s:"light", t:"She will stop when she is ready. There is no harm in the noise."},
+      {s:"fire",  t:"Tell her flatly to stop, then get on with it."},
+      {s:"spirit",t:"Ignore her completely and do it your own way, right or wrong."},
+      {s:"time",  t:"Ask what else she has noticed. She may be early on something larger."},
+      {s:"shadow",t:"Say nothing. Deal with it while she is still talking."},
+      {s:"water", t:"Point out — at some length — that you saw it first."}
+    ]},
+
+  { place:"Temple of Time",
+    text:"You pull the Master Sword. When you open your eyes, seven years are gone and Hyrule has already fallen.",
+    answers:[
+      {s:"time",  t:"Work out exactly what changed while you slept, then build a plan around it."},
+      {s:"forest",t:"Go home first. You need to know whether the forest survived it."},
+      {s:"light", t:"Those years bought the strength to hold that sword. It is a fair trade."},
+      {s:"spirit",t:"Refuse the terms. Nobody asked whether you would give those years."},
+      {s:"water", t:"Grieve the seven years properly before you try to do anything with them."},
+      {s:"fire",  t:"Find the nearest thing that needs hitting and start there."},
+      {s:"shadow",t:"Say nothing about what you lost. It is not useful information to anyone."}
+    ]},
+
+  { place:"The Forest Bridge",
+    text:"Saria is waiting at the bridge as you leave the forest for the first time. She gives you something, and does not ask you to stay.",
+    answers:[
+      {s:"water", t:"Tell her exactly how much this hurts. She deserves to know."},
+      {s:"fire",  t:"Hug her hard enough to lift her off the ground, then go without looking back."},
+      {s:"time",  t:"Ask her to keep something of yours, so there is a reason to return."},
+      {s:"shadow",t:"Leave quickly. Drawing it out only makes it worse for her."},
+      {s:"forest",t:"Promise to come back, and mean it enough that it costs you later."},
+      {s:"light", t:"Accept that this is simply where the two paths divide, and part gently."},
+      {s:"spirit",t:"Refuse the gift. You would rather owe nobody anything on the road."}
+    ]},
+
+  { place:"Gerudo Fortress",
+    text:"The Gerudo catch you halfway across the fortress and drop you in a cell.",
+    answers:[
+      {s:"fire",  t:"Test the bars. Then the door. Then the guard."},
+      {s:"time",  t:"Ask to speak to whoever is in charge. This is a chance to make an ally."},
+      {s:"spirit",t:"Break out immediately, on principle, before you strictly need to."},
+      {s:"forest",t:"Talk to the guard until she stops seeing a prisoner and starts seeing you."},
+      {s:"shadow",t:"Sit still, learn the patrol pattern, leave on the third rotation."},
+      {s:"water", t:"Be loudly and magnificently insulted about the entire situation."},
+      {s:"light", t:"Wait. Cells are temporary, and impatience is what got you in here."}
+    ]},
+
+  { place:"Lon Lon Ranch",
+    text:"Malon offers you a bed for the night. Hyrule is burning tomorrow whether you sleep or not.",
+    answers:[
+      {s:"forest",t:"Stay. The people in front of you are the reason for all the rest of it."},
+      {s:"spirit",t:"Decline. You sleep where you decide to, not where you are invited."},
+      {s:"water", t:"Stay, and tell her far more about the burning than she asked to hear."},
+      {s:"fire",  t:"Stay, eat everything, sleep four hours, leave at first light."},
+      {s:"shadow",t:"Decline. If you are not here, nothing follows you to her door."},
+      {s:"time",  t:"Stay, and spend the evening working out tomorrow's route."},
+      {s:"light", t:"Stay. Rest is not stolen from the work; it is part of the work."}
+    ]},
+
+  { place:"Goron City",
+    text:"Darunia's people are starving. You bring him the report and he answers by turning the music up and dancing.",
+    answers:[
+      {s:"time",  t:"Use the dance. He will agree to almost anything while he is happy."},
+      {s:"spirit",t:"Leave. You do not need a king's permission to go feed anybody."},
+      {s:"water", t:"Tell him precisely how inappropriate this is."},
+      {s:"shadow",t:"Let him have the dance, and go handle the problem yourself."},
+      {s:"light", t:"Let him. A people who can still dance have not lost yet."},
+      {s:"forest",t:"Sit down with him. He is not avoiding it — he is surviving it."},
+      {s:"fire",  t:"Dance. Then eat. Then fix it together, in that order."}
+    ]},
+
+  { place:"Bottom of the Well",
+    text:"You are at the bottom of the well, and whatever is down here in the dark has already turned toward you.",
+    answers:[
+      {s:"light", t:"Name it. Most things in the dark get smaller once they are named."},
+      {s:"fire",  t:"Charge it. Anything that wants you frightened deserves the opposite."},
+      {s:"shadow",t:"Stand perfectly still and let it come to you."},
+      {s:"time",  t:"Retreat, and come back with the one thing that makes it visible."},
+      {s:"water", t:"Scream, genuinely and audibly, and keep walking anyway."},
+      {s:"forest",t:"Back toward the light and the way you came. Some places are not yours."},
+      {s:"spirit",t:"Go deeper. Whatever it is guarding is the actual point."}
+    ]},
+
+  { place:"Zora's Domain",
+    text:"Ruto informs you that the promise you made her as a child still stands. You had genuinely forgotten about it.",
+    answers:[
+      {s:"shadow",t:"Say nothing that would let her find out you forgot."},
+      {s:"water", t:"Match her, feeling for feeling, until you have both said all of it."},
+      {s:"fire",  t:"Tell her the truth — you forgot — and let her be as angry as she likes."},
+      {s:"time",  t:"Ask her to hold you to it afterwards. There is a war on."},
+      {s:"spirit",t:"A promise made by a child does not bind the person you are now."},
+      {s:"light", t:"Honor the spirit of it. What she needs now is not what the words said."},
+      {s:"forest",t:"Keep it. A promise does not expire just because you did."}
+    ]},
+
+  { place:"Kakariko Village",
+    text:"Sheik keeps appearing at the precise moment you need a song, and never explains a single thing.",
+    answers:[
+      {s:"fire",  t:"Demand the truth, once, loudly — then drop it for good."},
+      {s:"light", t:"They will say it when it is time to say it."},
+      {s:"spirit",t:"Follow them. Nobody gets to keep a secret you never agreed to."},
+      {s:"water", t:"Be visibly hurt that you are not trusted with it."},
+      {s:"forest",t:"Be glad of the company. You do not need the explanation."},
+      {s:"shadow",t:"Recognize someone protecting something, and leave the seal alone."},
+      {s:"time",  t:"You already worked it out. You have known since the second time."}
+    ]},
+
+  { place:"Ganon's Tower",
+    text:"Ganondorf makes the offer: no dying tree, no seven lost years, no war. The version of the world where none of it happened.",
+    answers:[
+      {s:"spirit",t:"Refuse, not for Hyrule, but because he does not get to decide your life."},
+      {s:"forest",t:"Take it, if it means everyone you left behind is still where you left them."},
+      {s:"shadow",t:"Refuse without letting him see for one second that it landed."},
+      {s:"light", t:"Refuse. A world he hands you is a world he owns."},
+      {s:"fire",  t:"Refuse it to his face, and swing."},
+      {s:"time",  t:"Refuse, and note that he is bargaining because he is already losing."},
+      {s:"water", t:"Refuse — but admit out loud how badly you wanted to say yes."}
+    ]},
+
+  { place:"The Sacred Realm",
+    text:"It is over. Zelda can send you back — you would get the childhood you never had, and remember none of this.",
+    answers:[
+      {s:"water", t:"Go back, but grieve everything you are leaving on the way through."},
+      {s:"shadow",t:"Go back, so that at least one person who lived it gets to not remember."},
+      {s:"forest",t:"Go back. The forest and the friend are still there, and that is enough."},
+      {s:"light", t:"Accept whatever she believes is right. She has carried more of this than you."},
+      {s:"spirit",t:"Refuse the offer outright. You decide where your own life goes."},
+      {s:"fire",  t:"Stay. You would miss every single person you fought beside."},
+      {s:"time",  t:"Go back — and spend the years making sure it never starts."}
+    ]}
+];
+
+/* integrity check: 7 answers per question, each sage exactly once */
+(function verify(){
+  QUESTIONS.forEach((q,i)=>{
+    const seen = q.answers.map(a=>a.s).sort().join(",");
+    const want = ORDER.slice().sort().join(",");
+    if(q.answers.length!==7 || seen!==want){
+      console.error(`Question ${i+1} is malformed:`, seen);
+    }
+  });
+})();
+
+/* ======================= STATE ======================= */
+const $ = id => document.getElementById(id);
+let idx = 0;
+let picks = [];
+
+function show(name){
+  document.querySelectorAll(".view").forEach(v=>v.classList.remove("on"));
+  $("v-"+name).classList.add("on");
+}
+
+/* ---------- intro ring ---------- */
+(function buildRing(){
+  const ring = $("ring");
+  ORDER.forEach((key,i)=>{
+    const angle = (i / ORDER.length) * Math.PI*2 - Math.PI/2;
+    const el = document.createElement("div");
+    el.className = "ring-med";
+    el.style.left = (50 + 39*Math.cos(angle)) + "%";
+    el.style.top  = (50 + 39*Math.sin(angle)) + "%";
+    el.style.animationDelay = (-i * 150/7) + "s";
+    el.innerHTML = medallion(key);
+    ring.appendChild(el);
+  });
+})();
+
+/* ---------- question view ---------- */
+function renderQuestion(){
+  const q = QUESTIONS[idx];
+  $("q-place").textContent = q.place;
+  $("q-count").textContent = `Trial ${idx+1} of ${QUESTIONS.length}`;
+  $("q-text").textContent = q.text;
+
+  const marks = $("q-marks");
+  marks.innerHTML = "";
+  QUESTIONS.forEach((_,i)=>{
+    const m = document.createElement("div");
+    m.className = "mark" + (i < idx ? " done" : i === idx ? " now" : "");
+    marks.appendChild(m);
+  });
+
+  const list = $("q-answers");
+  list.innerHTML = "";
+  q.answers.forEach(a=>{
+    const li = document.createElement("li");
+    const b = document.createElement("button");
+    b.className = "ans";
+    b.type = "button";
+    b.textContent = a.t;
+    b.addEventListener("click", ()=>choose(a.s));
+    li.appendChild(b);
+    list.appendChild(li);
+  });
+
+  $("back").style.visibility = idx === 0 ? "hidden" : "visible";
+  window.scrollTo({top:0, behavior:"instant"});
+  const first = list.querySelector(".ans");
+  if(first) first.focus({preventScroll:true});
+}
+
+function choose(sage){
+  picks[idx] = sage;
+  idx++;
+  if(idx >= QUESTIONS.length){ renderResult(); }
+  else { $("v-quiz").classList.remove("on"); void $("v-quiz").offsetWidth; show("quiz"); renderQuestion(); }
+}
+
+/* ---------- scoring ---------- */
+function tally(){
+  const counts = {};
+  ORDER.forEach(k => counts[k] = 0);
+  picks.forEach(s => counts[s]++);
+  return counts;
+}
+
+function winner(counts){
+  const max = Math.max(...ORDER.map(k=>counts[k]));
+  const tied = ORDER.filter(k => counts[k] === max);
+  if(tied.length === 1) return tied[0];
+  // tie-break: whichever tied sage the player chose earliest
+  for(const s of picks){ if(tied.includes(s)) return s; }
+  return tied[0];
+}
+
+/* ---------- result view ---------- */
+function renderResult(){
+  const counts = tally();
+  const key = winner(counts);
+  const s = SAGES[key];
+
+  const view = $("v-result");
+  view.style.setProperty("--elem", `var(--c-${key})`);
+
+  $("r-med").innerHTML = medallion(key);
+  $("r-name").innerHTML = `<span>Sage of ${s.element}</span>${s.sage}`;
+  $("r-line").textContent = s.line;
+
+  $("r-body").innerHTML = s.body.map(p=>`<p>${p}</p>`).join("");
+
+  $("r-facts").innerHTML = [
+    ["Element", s.element],
+    ["Temple", s.temple],
+    ["Song", s.song],
+    ["Instrument", s.instrument]
+  ].map(([k,v])=>`<div class="fact"><dt>${k}</dt><dd>${v}</dd></div>`).join("");
+
+  const rows = ORDER.slice().sort((a,b)=>counts[b]-counts[a]);
+  $("r-aff").innerHTML = rows.map(k=>`
+    <div class="aff-row">
+      <div class="aff-label">${SAGES[k].element}</div>
+      <div class="aff-track"><div class="aff-fill" data-pct="${(counts[k]/QUESTIONS.length*100).toFixed(1)}" style="--bar:var(--c-${k})"></div></div>
+      <div class="aff-num">${counts[k]}</div>
+    </div>`).join("");
+
+  show("result");
+  window.scrollTo({top:0, behavior:"instant"});
+  requestAnimationFrame(()=>{
+    document.querySelectorAll(".aff-fill").forEach(f=>{ f.style.width = f.dataset.pct + "%"; });
+  });
+
+  ambient.setAccent(getComputedStyle(view).getPropertyValue(`--c-${key}`).trim());
+  $("copy").textContent = "Copy result";
+}
+
+/* ---------- controls ---------- */
+$("begin").addEventListener("click", ()=>{ idx=0; picks=[]; show("quiz"); renderQuestion(); });
+$("back").addEventListener("click", ()=>{ if(idx>0){ idx--; renderQuestion(); } });
+$("again").addEventListener("click", ()=>{
+  idx=0; picks=[];
+  ambient.setAccent(null);
+  show("intro");
+  window.scrollTo({top:0, behavior:"instant"});
+});
+$("copy").addEventListener("click", async ()=>{
+  const counts = tally();
+  const s = SAGES[winner(counts)];
+  const text = `The Sage Trials — I am ${s.sage}, Sage of ${s.element}. ${s.line} (${s.temple} · ${s.song})`;
+  try{
+    await navigator.clipboard.writeText(text);
+    $("copy").textContent = "Copied";
+  }catch(e){
+    $("copy").textContent = "Copy blocked";
+  }
+});
+
+/* ======================= AMBIENT MOTES ======================= */
+const ambient = (function(){
+  const cv = $("ambient");
+  const ctx = cv.getContext("2d");
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let w=0, h=0, dpr=1, motes=[], accent=null, raf=null;
+
+  function resize(){
+    dpr = Math.min(devicePixelRatio||1, 2);
+    w = innerWidth; h = innerHeight;
+    cv.width = w*dpr; cv.height = h*dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  function seed(){
+    const n = Math.round(Math.min(70, w*h/22000));
+    motes = Array.from({length:n}, ()=>({
+      x: Math.random()*w,
+      y: Math.random()*h,
+      r: Math.random()*1.5 + .5,
+      v: Math.random()*.18 + .05,
+      d: Math.random()*.14 - .07,
+      a: Math.random()*.5 + .15,
+      p: Math.random()*Math.PI*2
+    }));
+  }
+  function color(){
+    return accent || getComputedStyle(document.documentElement).getPropertyValue("--mote").trim();
+  }
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    const c = color();
+    motes.forEach(m=>{
+      ctx.globalAlpha = m.a * (accent ? .38 : 1);
+      ctx.fillStyle = c;
+      ctx.beginPath();
+      ctx.arc(m.x, m.y, m.r, 0, Math.PI*2);
+      ctx.fill();
+    });
+    ctx.globalAlpha = 1;
+  }
+  function step(){
+    motes.forEach(m=>{
+      m.y -= m.v;
+      m.p += .01;
+      m.x += m.d + Math.sin(m.p)*.12;
+      if(m.y < -4){ m.y = h+4; m.x = Math.random()*w; }
+      if(m.x < -4) m.x = w+4;
+      if(m.x > w+4) m.x = -4;
+    });
+    draw();
+    raf = requestAnimationFrame(step);
+  }
+  function start(){
+    resize(); seed(); draw();
+    if(!reduce && raf === null) raf = requestAnimationFrame(step);
+  }
+  addEventListener("resize", ()=>{ resize(); seed(); if(reduce) draw(); });
+  document.addEventListener("visibilitychange", ()=>{
+    if(document.hidden && raf !== null){ cancelAnimationFrame(raf); raf = null; }
+    else if(!document.hidden && !reduce && raf === null){ raf = requestAnimationFrame(step); }
+  });
+  start();
+  return { setAccent(c){ accent = c || null; } };
+})();
+</script>
