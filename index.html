@@ -19,6 +19,7 @@
   --edge-2:rgba(26,24,38,.08);
   --shade:rgba(26,24,38,.05);
   --mote:rgba(138,109,31,.55);
+  --mark-op:.12;
 
   --c-forest:#3F7C43;
   --c-fire:#B32E22;
@@ -45,6 +46,7 @@
     --edge-2:rgba(233,232,242,.09);
     --shade:rgba(233,232,242,.045);
     --mote:rgba(217,184,95,.5);
+    --mark-op:.2;
 
     --c-forest:#6FBF63;
     --c-fire:#F0563C;
@@ -68,6 +70,7 @@
   --edge-2:rgba(233,232,242,.09);
   --shade:rgba(233,232,242,.045);
   --mote:rgba(217,184,95,.5);
+  --mark-op:.2;
 
   --c-forest:#6FBF63;
   --c-fire:#F0563C;
@@ -91,8 +94,8 @@ body{
   -webkit-font-smoothing:antialiased;
   min-height:100vh;
 }
-#ambient{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.85}
-.wrap{position:relative;z-index:1;max-width:44rem;margin:0 auto;padding:clamp(1.6rem,5vw,3.5rem) clamp(1.1rem,4vw,2rem) 4rem}
+#ambient{position:fixed;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;opacity:.85}
+.wrap{position:relative;z-index:2;max-width:44rem;margin:0 auto;padding:clamp(1.6rem,5vw,3.5rem) clamp(1.1rem,4vw,2rem) 4rem}
 
 h1,h2,h3{font-family:Cinzel,"Times New Roman",serif;font-weight:600;text-wrap:balance;margin:0;line-height:1.18}
 .eyebrow{
@@ -111,6 +114,43 @@ button{font:inherit;color:inherit;cursor:pointer}
 .view.on.intro,
 .view.on.result{display:flex}
 @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* ---------- backdrop: the chamber the page is standing in ----------
+   A shaft of light from above, the sealed mark on the floor beneath it,
+   and carved trim along the top and bottom edges. All of it is drawn in
+   --gold, which flips with the theme, so the whole stack follows. */
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.bg-shaft{
+  position:absolute;left:50%;top:-24vh;width:min(130vw,1200px);height:96vh;
+  transform:translateX(-50%);
+  background:radial-gradient(ellipse 46% 58% at 50% 0,
+    color-mix(in srgb,var(--gold) 20%,transparent) 0,
+    color-mix(in srgb,var(--gold) 6%,transparent) 42%,
+    transparent 74%);
+}
+.bg-mark{
+  position:absolute;left:50%;top:50%;width:min(84vmin,700px);height:auto;
+  transform:translate(-50%,-50%);color:var(--gold);opacity:var(--mark-op);
+}
+.bg-mark .turn{transform-origin:200px 200px;animation:spin 420s linear infinite}
+.bg-frieze{
+  position:absolute;left:0;right:0;height:11px;opacity:.42;
+  background:
+    repeating-linear-gradient(45deg,transparent 0 9px,
+      color-mix(in srgb,var(--gold) 42%,transparent) 9px 10px,transparent 10px 19px),
+    repeating-linear-gradient(-45deg,transparent 0 9px,
+      color-mix(in srgb,var(--gold) 42%,transparent) 9px 10px,transparent 10px 19px);
+}
+.bg-frieze.top{top:0;border-bottom:1px solid color-mix(in srgb,var(--gold) 30%,transparent)}
+.bg-frieze.bot{bottom:0;border-top:1px solid color-mix(in srgb,var(--gold) 30%,transparent)}
+.bg-vig{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 72% 62% at 50% 44%,transparent 40%,var(--stone-0) 100%);
+  opacity:.72;
+}
+@media (prefers-reduced-motion: reduce){
+  .bg-mark .turn{animation:none}
+}
 
 /* ---------- intro ---------- */
 .intro{flex-direction:column;align-items:center;gap:clamp(1.4rem,4vw,2.2rem);text-align:center}
@@ -245,6 +285,26 @@ button{font:inherit;color:inherit;cursor:pointer}
 }
 </style>
 
+<div class="bg" aria-hidden="true">
+  <div class="bg-shaft"></div>
+  <svg class="bg-mark" viewBox="0 0 400 400">
+    <g class="turn" fill="none" stroke="currentColor">
+      <circle cx="200" cy="200" r="197" stroke-width="1.4"/>
+      <circle cx="200" cy="200" r="186" stroke-width=".5"/>
+      <circle cx="200" cy="200" r="146" stroke-width=".5"/>
+      <polygon points="200,22 354.2,111 354.2,289 200,378 45.8,289 45.8,111" stroke-width=".9"/>
+      <polygon points="200,54 327.7,127 327.7,273 200,346 72.3,273 72.3,127" stroke-width=".5"/>
+    </g>
+    <g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round">
+      <path d="M200 92 L154 172 L246 172 Z"/>
+      <path d="M150 180 L104 260 L196 260 Z"/>
+      <path d="M250 180 L204 260 L296 260 Z"/>
+    </g>
+  </svg>
+  <div class="bg-frieze top"></div>
+  <div class="bg-frieze bot"></div>
+  <div class="bg-vig"></div>
+</div>
 <canvas id="ambient" aria-hidden="true"></canvas>
 
 <div class="wrap">
@@ -254,7 +314,7 @@ button{font:inherit;color:inherit;cursor:pointer}
       <div class="ring" id="ring" aria-hidden="true"></div>
       <h1 class="title"><span>Ocarina of Time</span>The Sage Trials</h1>
       <hr class="rule-gold" style="width:6rem">
-      <p class="lede">Six medallions were carried out of six temples, and a seventh sage never took one. Twelve moments from Hyrule are put to you below — <em>not</em> to test what you remember, but to find out which of them you would have been.</p>
+      <p class="lede">Six medallions were carried out of six temples, and a seventh sage never took one. Twelve moments from Hyrule are put to you below &mdash; <em>not</em> as the boy with the sword, but as whoever else was standing there. Answer as yourself; the element you carry will be plain by the end.</p>
       <button class="btn" id="begin">Enter the Chamber</button>
     </section>
 
@@ -396,200 +456,230 @@ const SAGES = {
     ]
   }
 };
-/* ======================= MEDALLIONS ======================= */
-const HEX_OUT = "50,4 89.8,27 89.8,73 50,96 10.2,73 10.2,27";
+/* ======================= MEDALLIONS =======================
+   Struck the way the game strikes them: a pointed-top hexagonal
+   medal, heavy gold rim, the element's enamel sunk into the middle,
+   the emblem raised in gold on top. Time keeps the same frame with
+   a bare field - Zelda's medallion was never struck. */
+const HEX_OUT = "50,3 90.7,26.5 90.7,73.5 50,97 9.3,73.5 9.3,26.5";
 const HEX_IN  = "50,14 81.2,32 81.2,68 50,86 18.8,68 18.8,32";
+/* Bevel: the upper-left rim faces catch the light, the lower-right fall away. */
+const BEVEL_HI = "M9.3 26.5 L50 3 L50 14 L18.8 32 Z M9.3 26.5 L18.8 32 L18.8 68 L9.3 73.5 Z";
+const BEVEL_LO = "M90.7 73.5 L50 97 L50 86 L81.2 68 Z M90.7 26.5 L90.7 73.5 L81.2 68 L81.2 32 Z";
 
-function lightRays(){
-  let d = "";
-  for(let i=0;i<8;i++){
-    const a = i * Math.PI/4;
-    const x1 = 50 + 19*Math.cos(a), y1 = 50 - 19*Math.sin(a);
-    const x2 = 50 + 31*Math.cos(a), y2 = 50 - 31*Math.sin(a);
-    d += `M${x1.toFixed(1)} ${y1.toFixed(1)} L${x2.toFixed(1)} ${y2.toFixed(1)} `;
-  }
-  return d.trim();
-}
+const RAY_PATH = "M79.0 50.0 L63.8 47.6 L63.8 52.4 Z M70.5 29.5 L58.1 38.6 L61.4 41.9 Z M50.0 21.0 L47.6 36.2 L52.4 36.2 Z M29.5 29.5 L38.6 41.9 L41.9 38.6 Z M21.0 50.0 L36.2 52.4 L36.2 47.6 Z M29.5 70.5 L41.9 61.4 L38.6 58.1 Z M50.0 79.0 L52.4 63.8 L47.6 63.8 Z M70.5 70.5 L61.4 58.1 L58.1 61.4 Z";
+const EMBOSS = "filter:drop-shadow(0 1.1px .8px rgba(0,0,0,.55))";
 
 const GLYPHS = {
-  forest:`<path d="M50 29 C 65 40, 66 60, 50 73 C 34 60, 35 40, 50 29 Z" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="round"/>
-          <path d="M50 34 L50 71" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-          <path d="M50 48 L59 41 M50 57 L59 50 M50 48 L41 41 M50 57 L41 50" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>`,
-  fire:`<path d="M50 26 C 58 40, 68 47, 65 59 A 15.5 15.5 0 0 1 35 59 C 32 47, 42 40, 50 26 Z" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="round"/>
-        <path d="M50 47 C 54 53, 57 56, 55.5 61 A 5.8 5.8 0 0 1 44.5 61 C 43 56, 46 53, 50 47 Z" fill="currentColor"/>`,
-  water:`<path d="M27 44 q 11.5 -9 23 0 t 23 0" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
-         <path d="M27 55 q 11.5 -9 23 0 t 23 0" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
-         <path d="M27 66 q 11.5 -9 23 0 t 23 0" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>`,
-  shadow:`<path d="M25 50 q 25 -21 50 0 q -25 21 -50 0 Z" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="round"/>
-          <circle cx="50" cy="50" r="7.5" fill="currentColor"/>
-          <path d="M50 61 l -4.5 13 h 9 Z" fill="currentColor"/>
-          <path d="M33 35 L37 41 M50 31 L50 38 M67 35 L63 41" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>`,
-  spirit:`<path d="M59 26 A 25 25 0 1 0 59 74 A 20 20 0 1 1 59 26 Z" fill="currentColor"/>
-          <circle cx="66" cy="50" r="5" fill="currentColor"/>`,
-  light:`<circle cx="50" cy="50" r="12" fill="currentColor"/>
-         <path d="${lightRays()}" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>`,
-  time:`<path d="M50 25 L37.5 47 L62.5 47 Z" fill="currentColor"/>
-        <path d="M36 49 L23.5 71 L48.5 71 Z" fill="currentColor"/>
-        <path d="M64 49 L51.5 71 L76.5 71 Z" fill="currentColor"/>`
+  forest:`<path d="M50 27 C63.5 38 65.5 57 50 73 C34.5 57 36.5 38 50 27 Z" fill="COIN"/>
+          <path d="M50 33 L50 70" stroke="INK" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+          <path d="M50 46 L59.5 39 M50 56 L59.5 49 M50 46 L40.5 39 M50 56 L40.5 49" stroke="INK" stroke-width="1.9" stroke-linecap="round" fill="none"/>`,
+  fire:`<path d="M50 25 C57.5 39 68 46 65 58 A15.5 15.5 0 0 1 35 58 C32 46 42.5 39 50 25 Z" fill="COIN"/>
+        <path d="M50 45 C54.5 51.5 58 55 56 60.5 A6.4 6.4 0 0 1 44 60.5 C42 55 45.5 51.5 50 45 Z" fill="INK"/>`,
+  water:`<path d="M28 39.5 q11 -8.5 22 0 t22 0" stroke="COIN" stroke-width="4.4" stroke-linecap="round" fill="none"/>
+         <path d="M28 51 q11 -8.5 22 0 t22 0" stroke="COIN" stroke-width="4.4" stroke-linecap="round" fill="none"/>
+         <path d="M28 62.5 q11 -8.5 22 0 t22 0" stroke="COIN" stroke-width="4.4" stroke-linecap="round" fill="none"/>`,
+  shadow:`<path d="M25 50 q25 -20 50 0 q-25 20 -50 0 Z" fill="COIN"/>
+          <circle cx="50" cy="50" r="6.6" fill="INK"/>
+          <path d="M50 62 l -4.8 13 h 9.6 Z" fill="COIN"/>
+          <path d="M32.5 34 L36.8 40.5 M50 30 L50 37.5 M67.5 34 L63.2 40.5" stroke="COIN" stroke-width="3" stroke-linecap="round" fill="none"/>`,
+  spirit:`<path d="M59 26 A25 25 0 1 0 59 74 A20 20 0 1 1 59 26 Z" fill="COIN"/>
+          <circle cx="66.5" cy="50" r="5.2" fill="COIN"/>`,
+  light:`<circle cx="50" cy="50" r="11" fill="COIN"/>
+         <path d="RAYS" fill="COIN"/>`,
+  time:`<path d="M50 28 L38 48 L62 48 Z" fill="COIN"/>
+        <path d="M36.5 50.5 L24.5 70.5 L48.5 70.5 Z" fill="COIN"/>
+        <path d="M63.5 50.5 L51.5 70.5 L75.5 70.5 Z" fill="COIN"/>`
 };
 
+let medUID = 0;
 function medallion(key){
-  return `<svg viewBox="0 0 100 100" role="img" aria-label="${SAGES[key].element} medallion" style="color:var(--c-${key})">
-    <polygon points="${HEX_OUT}" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" opacity=".9"/>
-    <polygon points="${HEX_IN}" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" opacity=".45"/>
-    ${GLYPHS[key]}
+  const s = SAGES[key];
+  const bare = key === "time";           /* the seventh sage carries no medallion */
+  const u = "md" + (++medUID);
+  const glyph = GLYPHS[key]
+    .replace(/COIN/g, `url(#${u}c)`)
+    .replace(/INK/g, bare ? "var(--stone-2)" : "currentColor")
+    .replace(/RAYS/g, RAY_PATH);
+  return `<svg viewBox="0 0 100 100" role="img" aria-label="${bare ? "An unstruck medallion bearing the Triforce" : s.element + " Medallion"}" style="color:var(--c-${key})">
+    <defs>
+      <linearGradient id="${u}r" x1="0" y1="0" x2=".7" y2="1">
+        <stop offset="0" style="stop-color:var(--gold-2)"/>
+        <stop offset=".45" style="stop-color:var(--gold)"/>
+        <stop offset="1" style="stop-color:var(--gold-2)"/>
+      </linearGradient>
+      <linearGradient id="${u}c" x1=".15" y1="0" x2=".85" y2="1">
+        <stop offset="0" style="stop-color:var(--gold-2)"/>
+        <stop offset="1" style="stop-color:var(--gold)"/>
+      </linearGradient>
+      <radialGradient id="${u}f" cx=".34" cy=".26" r=".95">
+        <stop offset="0" style="stop-color:#fff;stop-opacity:.26"/>
+        <stop offset=".5" style="stop-color:#000;stop-opacity:0"/>
+        <stop offset="1" style="stop-color:#000;stop-opacity:.4"/>
+      </radialGradient>
+    </defs>
+    <polygon points="${HEX_OUT}" fill="url(#${u}r)"/>
+    <path d="${BEVEL_HI}" fill="#fff" opacity=".22"/>
+    <path d="${BEVEL_LO}" fill="#000" opacity=".22"/>
+    <polygon points="${HEX_IN}" fill="${bare ? "var(--stone-1)" : "currentColor"}"/>
+    <polygon points="${HEX_IN}" fill="url(#${u}f)"/>
+    <g style="${EMBOSS}">${glyph}</g>
+    <polygon points="${HEX_IN}" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" opacity=".28"/>
+    <polygon points="${HEX_OUT}" fill="none" stroke="var(--gold)" stroke-width="1.1" stroke-linejoin="round" opacity=".55"/>
   </svg>`;
 }
 
 /* ======================= QUESTIONS ======================= */
-/* Each question offers all seven sages exactly once. Answer order is
-   hand-varied per question so position never reveals the mapping. */
+/* Twelve moments from Hyrule, none of them Link's. You are whoever
+   actually lives there: a Kokiri, a stallholder, a Goron, a ranch hand,
+   a guard on the wall. Each question offers all seven sages exactly once,
+   and answer order is varied per question so position never reveals
+   the mapping - no sage sits in the same slot more than twice. */
 const QUESTIONS = [
   { place:"Kokiri Forest",
-    text:"The Great Deku Tree finishes his story, tells you the curse was set in motion long before you were born, and dies.",
+    text:"The Great Deku Tree is dead. You are a Kokiri, the clearing has gone quiet, and nobody has said the word out loud yet.",
     answers:[
-      {s:"spirit",t:"Walk out of the forest that same night, without asking anyone's leave."},
-      {s:"shadow",t:"Tell the other Kokiri he is only sleeping. They do not need to carry this yet."},
-      {s:"time",  t:"Ask what comes next, and start preparing before the grief has landed."},
-      {s:"forest",t:"Stay in the meadow where he stood. Someone should keep the place from going quiet."},
-      {s:"light", t:"Accept it. He knew what he was choosing, and he chose it a long time ago."},
-      {s:"water", t:"Fall apart about it, out loud, in front of everyone, right now."},
-      {s:"fire",  t:"Find whoever did this. Everything else waits until that part is settled."}
+      {s:"spirit", t:"Refuse the version of it the elders are telling and go find your own answer."},
+      {s:"shadow", t:"Say nothing to the younger ones. They will learn it when they have to."},
+      {s:"time",   t:"Start thinking about what this forest looks like in ten years without him."},
+      {s:"forest", t:"Stay in the meadow where he stood. Whatever is left of him is still here."},
+      {s:"light",  t:"Keep the clearing exactly as he kept it. Something has to stay the same."},
+      {s:"water",  t:"Grieve out loud, in front of everyone, and refuse to be embarrassed by it."},
+      {s:"fire",   t:"Say his name loudly and often, so nobody gets to quietly move on."}
     ]},
 
-  { place:"Hyrule Field",
-    text:"Navi has been shouting the same warning at you for a solid minute. You spotted the problem before she did.",
+  { place:"Hyrule Castle Town",
+    text:"You keep a stall in the market. A white horse comes through the crowd at a gallop, and a black one comes through after it.",
     answers:[
-      {s:"forest",t:"Let her finish. She is only shouting because she is worried about you."},
-      {s:"light", t:"She will stop when she is ready. There is no harm in the noise."},
-      {s:"fire",  t:"Tell her flatly to stop, then get on with it."},
-      {s:"spirit",t:"Ignore her completely and do it your own way, right or wrong."},
-      {s:"time",  t:"Ask what else she has noticed. She may be early on something larger."},
-      {s:"shadow",t:"Say nothing. Deal with it while she is still talking."},
-      {s:"water", t:"Point out — at some length — that you saw it first."}
-    ]},
-
-  { place:"Temple of Time",
-    text:"You pull the Master Sword. When you open your eyes, seven years are gone and Hyrule has already fallen.",
-    answers:[
-      {s:"time",  t:"Work out exactly what changed while you slept, then build a plan around it."},
-      {s:"forest",t:"Go home first. You need to know whether the forest survived it."},
-      {s:"light", t:"Those years bought the strength to hold that sword. It is a fair trade."},
-      {s:"spirit",t:"Refuse the terms. Nobody asked whether you would give those years."},
-      {s:"water", t:"Grieve the seven years properly before you try to do anything with them."},
-      {s:"fire",  t:"Find the nearest thing that needs hitting and start there."},
-      {s:"shadow",t:"Say nothing about what you lost. It is not useful information to anyone."}
-    ]},
-
-  { place:"The Forest Bridge",
-    text:"Saria is waiting at the bridge as you leave the forest for the first time. She gives you something, and does not ask you to stay.",
-    answers:[
-      {s:"water", t:"Tell her exactly how much this hurts. She deserves to know."},
-      {s:"fire",  t:"Hug her hard enough to lift her off the ground, then go without looking back."},
-      {s:"time",  t:"Ask her to keep something of yours, so there is a reason to return."},
-      {s:"shadow",t:"Leave quickly. Drawing it out only makes it worse for her."},
-      {s:"forest",t:"Promise to come back, and mean it enough that it costs you later."},
-      {s:"light", t:"Accept that this is simply where the two paths divide, and part gently."},
-      {s:"spirit",t:"Refuse the gift. You would rather owe nobody anything on the road."}
-    ]},
-
-  { place:"Gerudo Fortress",
-    text:"The Gerudo catch you halfway across the fortress and drop you in a cell.",
-    answers:[
-      {s:"fire",  t:"Test the bars. Then the door. Then the guard."},
-      {s:"time",  t:"Ask to speak to whoever is in charge. This is a chance to make an ally."},
-      {s:"spirit",t:"Break out immediately, on principle, before you strictly need to."},
-      {s:"forest",t:"Talk to the guard until she stops seeing a prisoner and starts seeing you."},
-      {s:"shadow",t:"Sit still, learn the patrol pattern, leave on the third rotation."},
-      {s:"water", t:"Be loudly and magnificently insulted about the entire situation."},
-      {s:"light", t:"Wait. Cells are temporary, and impatience is what got you in here."}
-    ]},
-
-  { place:"Lon Lon Ranch",
-    text:"Malon offers you a bed for the night. Hyrule is burning tomorrow whether you sleep or not.",
-    answers:[
-      {s:"forest",t:"Stay. The people in front of you are the reason for all the rest of it."},
-      {s:"spirit",t:"Decline. You sleep where you decide to, not where you are invited."},
-      {s:"water", t:"Stay, and tell her far more about the burning than she asked to hear."},
-      {s:"fire",  t:"Stay, eat everything, sleep four hours, leave at first light."},
-      {s:"shadow",t:"Decline. If you are not here, nothing follows you to her door."},
-      {s:"time",  t:"Stay, and spend the evening working out tomorrow's route."},
-      {s:"light", t:"Stay. Rest is not stolen from the work; it is part of the work."}
+      {s:"forest", t:"Pull the nearest children in behind your stall and stand in front of them."},
+      {s:"light",  t:"Right the stalls that went over. The market has to open again tomorrow."},
+      {s:"fire",   t:"Step into the road and shout at the second rider to slow down."},
+      {s:"spirit", t:"Note which way the white horse went, and tell the black one the opposite."},
+      {s:"time",   t:"Say nothing now, and remember every detail for whoever comes asking later."},
+      {s:"shadow", t:"Get the old woman next door indoors, and do not tell her why."},
+      {s:"water",  t:"Tell everyone in earshot exactly what you saw and exactly how it felt."}
     ]},
 
   { place:"Goron City",
-    text:"Darunia's people are starving. You bring him the report and he answers by turning the music up and dancing.",
+    text:"The cavern is sealed and the food is gone. Your Big Brother is playing his drums instead of speaking to anyone.",
     answers:[
-      {s:"time",  t:"Use the dance. He will agree to almost anything while he is happy."},
-      {s:"spirit",t:"Leave. You do not need a king's permission to go feed anybody."},
-      {s:"water", t:"Tell him precisely how inappropriate this is."},
-      {s:"shadow",t:"Let him have the dance, and go handle the problem yourself."},
-      {s:"light", t:"Let him. A people who can still dance have not lost yet."},
-      {s:"forest",t:"Sit down with him. He is not avoiding it — he is surviving it."},
-      {s:"fire",  t:"Dance. Then eat. Then fix it together, in that order."}
-    ]},
-
-  { place:"Bottom of the Well",
-    text:"You are at the bottom of the well, and whatever is down here in the dark has already turned toward you.",
-    answers:[
-      {s:"light", t:"Name it. Most things in the dark get smaller once they are named."},
-      {s:"fire",  t:"Charge it. Anything that wants you frightened deserves the opposite."},
-      {s:"shadow",t:"Stand perfectly still and let it come to you."},
-      {s:"time",  t:"Retreat, and come back with the one thing that makes it visible."},
-      {s:"water", t:"Scream, genuinely and audibly, and keep walking anyway."},
-      {s:"forest",t:"Back toward the light and the way you came. Some places are not yours."},
-      {s:"spirit",t:"Go deeper. Whatever it is guarding is the actual point."}
+      {s:"time",   t:"Count what is left, work out the day it runs out, and plan backward from there."},
+      {s:"forest", t:"Stay with the ones too weak to climb. Somebody should be down there with them."},
+      {s:"light",  t:"Keep the city running. Doors open, fires lit, nothing allowed to slide."},
+      {s:"spirit", t:"Ignore the drumming and go and open the cavern yourself."},
+      {s:"water",  t:"Tell him to his face that his people are frightened and the music is not helping."},
+      {s:"fire",   t:"Dance with him. He is holding them together the only way he knows how."},
+      {s:"shadow", t:"Give your ration away and let them believe you already ate."}
     ]},
 
   { place:"Zora's Domain",
-    text:"Ruto informs you that the promise you made her as a child still stands. You had genuinely forgotten about it.",
+    text:"The water has stopped moving. The elders say the domain will be ice by morning, and they are saying it very calmly.",
     answers:[
-      {s:"shadow",t:"Say nothing that would let her find out you forgot."},
-      {s:"water", t:"Match her, feeling for feeling, until you have both said all of it."},
-      {s:"fire",  t:"Tell her the truth — you forgot — and let her be as angry as she likes."},
-      {s:"time",  t:"Ask her to hold you to it afterwards. There is a war on."},
-      {s:"spirit",t:"A promise made by a child does not bind the person you are now."},
-      {s:"light", t:"Honor the spirit of it. What she needs now is not what the words said."},
-      {s:"forest",t:"Keep it. A promise does not expire just because you did."}
+      {s:"water",  t:"Say plainly that you are afraid, and then keep working anyway."},
+      {s:"fire",   t:"Get everyone moving. Loud, fast, no arguing, out before dark."},
+      {s:"time",   t:"Pick out the few things that cannot be replaced and move those first."},
+      {s:"shadow", t:"Take the coldest post at the outer edge and mention it to nobody."},
+      {s:"forest", t:"Refuse to leave the domain. This is home, frozen or not."},
+      {s:"light",  t:"Keep the old rites running on schedule. People need one thing unchanged."},
+      {s:"spirit", t:"Stop waiting on the elders and take a party upriver to find the cause."}
+    ]},
+
+  { place:"Lon Lon Ranch",
+    text:"The new foreman has locked the gate and put the old man out. The horses have known something was wrong for a week.",
+    answers:[
+      {s:"fire",   t:"Go down to the gate and tell him exactly what you think of him."},
+      {s:"time",   t:"Work quietly under him and learn every lock and every key on the property."},
+      {s:"spirit", t:"Take the fastest horse out the back way and never ask his permission."},
+      {s:"forest", t:"Stay for the animals. They did nothing to deserve whatever he is."},
+      {s:"shadow", t:"Take the shifts he hands out as punishment so the younger hands do not have to."},
+      {s:"water",  t:"Let him see how much this hurts. He should have to look at it."},
+      {s:"light",  t:"Do the work properly regardless. The ranch outlasts the man running it."}
+    ]},
+
+  { place:"Gerudo Fortress",
+    text:"You are on watch. A stranger was caught inside the walls, and the order is to put them in the cell and forget about them.",
+    answers:[
+      {s:"forest", t:"Stand guard on the cell yourself, so nobody in your own ranks gets ideas."},
+      {s:"spirit", t:"Let them out. The order is a stupid one and you are not in the habit of stupid."},
+      {s:"water",  t:"Argue their case in front of everyone until somebody gives you a real answer."},
+      {s:"fire",   t:"Say straight out that you would rather fight them fairly than keep them caged."},
+      {s:"shadow", t:"Bring them water after dark, and make certain you are not seen doing it."},
+      {s:"time",   t:"Leave them in. In a week they will be far more useful owing you a favour."},
+      {s:"light",  t:"Follow the order and log it exactly. The rule exists for a reason."}
     ]},
 
   { place:"Kakariko Village",
-    text:"Sheik keeps appearing at the precise moment you need a song, and never explains a single thing.",
+    text:"They have drained the well at the centre of the village, and whatever the village put down there is no longer down there.",
     answers:[
-      {s:"fire",  t:"Demand the truth, once, loudly — then drop it for good."},
-      {s:"light", t:"They will say it when it is time to say it."},
-      {s:"spirit",t:"Follow them. Nobody gets to keep a secret you never agreed to."},
-      {s:"water", t:"Be visibly hurt that you are not trusted with it."},
-      {s:"forest",t:"Be glad of the company. You do not need the explanation."},
-      {s:"shadow",t:"Recognize someone protecting something, and leave the seal alone."},
-      {s:"time",  t:"You already worked it out. You have known since the second time."}
+      {s:"time",   t:"Ask what else this village buried, and what that is going to cost in ten years."},
+      {s:"spirit", t:"Go down the well yourself rather than take the elder's word for any of it."},
+      {s:"water",  t:"Say out loud that this place has been lying to itself for generations."},
+      {s:"shadow", t:"Go down first, alone, and come back up saying it was nothing."},
+      {s:"light",  t:"Seal it, mark it, and keep the record straight for whoever comes after you."},
+      {s:"forest", t:"Stay above with the families and do not leave the doorway all night."},
+      {s:"fire",   t:"Take a torch down there shouting, before it decides to come up on its own."}
     ]},
 
-  { place:"Ganon's Tower",
-    text:"Ganondorf makes the offer: no dying tree, no seven lost years, no war. The version of the world where none of it happened.",
+  { place:"Temple of Time",
+    text:"You keep the temple. Someone drew the sword from the pedestal this morning, and the inner door has not opened since.",
     answers:[
-      {s:"spirit",t:"Refuse, not for Hyrule, but because he does not get to decide your life."},
-      {s:"forest",t:"Take it, if it means everyone you left behind is still where you left them."},
-      {s:"shadow",t:"Refuse without letting him see for one second that it landed."},
-      {s:"light", t:"Refuse. A world he hands you is a world he owns."},
-      {s:"fire",  t:"Refuse it to his face, and swing."},
-      {s:"time",  t:"Refuse, and note that he is bargaining because he is already losing."},
-      {s:"water", t:"Refuse — but admit out loud how badly you wanted to say yes."}
+      {s:"light",  t:"Keep sweeping. The temple stood before this happened and will stand after."},
+      {s:"fire",   t:"Put your shoulder to that door until something in it gives."},
+      {s:"shadow", t:"Stand at the pedestal and turn away anyone who comes asking about it."},
+      {s:"time",   t:"Start a record. The date, the hour, who was here. Someone will need it."},
+      {s:"water",  t:"Admit to the others that you are frightened, and that it is alright to be."},
+      {s:"forest", t:"Wait by the door for them to come back, however long that turns out to be."},
+      {s:"spirit", t:"Decide the sword was never the temple's to keep, and stop guarding the room."}
     ]},
 
-  { place:"The Sacred Realm",
-    text:"It is over. Zelda can send you back — you would get the childhood you never had, and remember none of this.",
+  { place:"Lake Hylia",
+    text:"You have fished this lake all your life. It has dropped a foot a week for a month, and the Zora are not answering.",
     answers:[
-      {s:"water", t:"Go back, but grieve everything you are leaving on the way through."},
-      {s:"shadow",t:"Go back, so that at least one person who lived it gets to not remember."},
-      {s:"forest",t:"Go back. The forest and the friend are still there, and that is enough."},
-      {s:"light", t:"Accept whatever she believes is right. She has carried more of this than you."},
-      {s:"spirit",t:"Refuse the offer outright. You decide where your own life goes."},
-      {s:"fire",  t:"Stay. You would miss every single person you fought beside."},
-      {s:"time",  t:"Go back — and spend the years making sure it never starts."}
+      {s:"shadow", t:"Keep it to yourself until you know. Fear does more damage here than drought."},
+      {s:"water",  t:"Go to the Zora and refuse to leave until somebody gives you an answer."},
+      {s:"fire",   t:"Get every boat on this shore out looking today, while there is still water."},
+      {s:"time",   t:"Measure the drop each morning. In a month you will know exactly what this is."},
+      {s:"spirit", t:"Fish it anyway. Nobody has ever told you where you may put a boat."},
+      {s:"light",  t:"Mend the nets and keep the shore in order. Lakes have come back before."},
+      {s:"forest", t:"Stay out on the water. It has been your lake your whole life."}
+    ]},
+
+  { place:"Gerudo Valley",
+    text:"You came here to rebuild the bridge with four apprentices. Two have run off to join the thieves, and the bridge is still out.",
+    answers:[
+      {s:"fire",   t:"Go up to the fortress and demand them back at the top of your voice."},
+      {s:"light",  t:"Rebuild the bridge. That is the job, with them or without them."},
+      {s:"spirit", t:"Admit they made a choice of their own, and let them keep it."},
+      {s:"water",  t:"Tell them, when you find them, exactly how much it hurt to be left."},
+      {s:"forest", t:"Do not leave this valley without them. You arrived with four."},
+      {s:"shadow", t:"Take on their share of the work and never once bring it up."},
+      {s:"time",   t:"Wait. They will come back on their own the week the novelty wears through."}
+    ]},
+
+  { place:"Kakariko, seven years on",
+    text:"There has been a ring of fire around the mountain for years now. Everyone in the village still says that it is fine.",
+    answers:[
+      {s:"spirit", t:"Say the thing nobody in this village will say, and then keep saying it."},
+      {s:"forest", t:"Stay put. If it comes down, you would rather be here than somewhere safe."},
+      {s:"shadow", t:"Quietly move the children's beds to the far side of the house."},
+      {s:"light",  t:"Keep the village running exactly as it ran. That is what holds the panic off."},
+      {s:"fire",   t:"Climb up and look at it yourself, then come back down loud about it."},
+      {s:"time",   t:"Start putting supplies aside now, for a winter nobody here has planned for."},
+      {s:"water",  t:"Tell them it is not fine, and that the pretending is costing them something."}
+    ]},
+
+  { place:"Chamber of Sages",
+    text:"It is over. You are standing in the light, and a medallion is being held out to you.",
+    answers:[
+      {s:"water",  t:"Take it, and let them all see that it means something to you."},
+      {s:"shadow", t:"Take it on the condition that nobody is ever told you have it."},
+      {s:"forest", t:"Take it, if holding it means staying near the people you started with."},
+      {s:"light",  t:"Take it. Someone has to hold the thing steady, and you are not tired yet."},
+      {s:"spirit", t:"Take it on your own terms, and hand it back the day they stop making sense."},
+      {s:"fire",   t:"Take it with both hands and ask what needs doing first."},
+      {s:"time",   t:"Take it knowing exactly what it will cost, and pay that part up front."}
     ]}
 ];
-
 /* integrity check: 7 answers per question, each sage exactly once */
 (function verify(){
   QUESTIONS.forEach((q,i)=>{
@@ -777,8 +867,15 @@ const ambient = (function(){
       v: Math.random()*.18 + .05,
       d: Math.random()*.14 - .07,
       a: Math.random()*.5 + .15,
-      p: Math.random()*Math.PI*2
+      p: Math.random()*Math.PI*2,
+      big: false
     }));
+    /* a handful of larger, glowing motes - the fairy lights in the field */
+    for(let i=0; i<Math.min(7, motes.length); i++){
+      const m = motes[i];
+      m.big = true; m.r = Math.random()*1.6 + 2.1; m.v = Math.random()*.1 + .04;
+      m.a = Math.random()*.28 + .3;
+    }
   }
   function color(){
     return accent || getComputedStyle(document.documentElement).getPropertyValue("--mote").trim();
@@ -789,9 +886,14 @@ const ambient = (function(){
     motes.forEach(m=>{
       ctx.globalAlpha = m.a * (accent ? .38 : 1);
       ctx.fillStyle = c;
+      if(m.big){
+        ctx.shadowColor = c;
+        ctx.shadowBlur = m.r * 5;
+      }
       ctx.beginPath();
       ctx.arc(m.x, m.y, m.r, 0, Math.PI*2);
       ctx.fill();
+      ctx.shadowBlur = 0;
     });
     ctx.globalAlpha = 1;
   }
