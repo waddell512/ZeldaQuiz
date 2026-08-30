@@ -487,9 +487,12 @@ const SAGES = {
   },
   time:{
     sage:"Zelda", element:"Time", medallion:"None", role:"The Seventh Sage",
+    /* the seventh outcome is titled, not elemental - see renderResult */
+    heading:"The Seventh", headEyebrow:"You are", label:"Seventh",
+    sageEyebrow:"The sage who holds it",
     temple:"Temple of Time", song:"Song of Time", instrument:"Ocarina",
     line:"You are the one who plays the long game.",
-    about:"Time is the seventh element, and the only one with no medallion to hand you. It is not a force you aim at something — it is the distance between a decision and its consequence, and the willingness to spend the first in order to buy the second. Whoever holds it is always some way ahead of the room.",
+    about:"The seventh place among the sages is the only one with no element attached to it and no medallion to hand you. What it actually is: the distance between a decision and its consequence, and the willingness to spend the first in order to buy the second. Whoever holds it is always some way ahead of the room.",
     body:[
       "You are always some distance ahead of the current conversation. You think in consequences and second moves, you hold information until releasing it will actually do something, and you are willing to lose the present round if it sets up the next one. People often realize much later that you had already accounted for it.",
       "The risk is living in a future nobody else can see yet. Strategy can quietly become distance — and the years you spend arranging things are years you also have to live in."
@@ -838,7 +841,7 @@ function renderResult(){
   view.style.setProperty("--elem", `var(--c-${key})`);
 
   $("r-med").innerHTML = medallion(key);
-  $("r-name").innerHTML = `<span>Your element</span>${s.element}`;
+  $("r-name").innerHTML = `<span>${s.headEyebrow || "Your element"}</span>${s.heading || s.element}`;
   $("r-line").textContent = s.line;
   $("r-about").textContent = s.about;
 
@@ -854,7 +857,7 @@ function renderResult(){
   ].map(([k,v])=>`<div class="fact"><dt>${k}</dt><dd>${v}</dd></div>`).join("");
 
   $("r-sage").innerHTML =
-    `<p class="eyebrow eyebrow-elem">Another sage of your element</p>
+    `<p class="eyebrow eyebrow-elem">${s.sageEyebrow || "Another sage of your element"}</p>
      <h3 class="sage-name">${s.sage}</h3>
      <p class="sage-role">${s.role || "Sage of " + s.element} &middot; ${s.temple}</p>
      <div class="sage-text">${s.sageBody.map(p=>`<p>${p}</p>`).join("")}</div>
@@ -863,7 +866,7 @@ function renderResult(){
   const rows = ORDER.slice().sort((a,b)=>counts[b]-counts[a]);
   $("r-aff").innerHTML = rows.map(k=>`
     <div class="aff-row">
-      <div class="aff-label">${SAGES[k].element}</div>
+      <div class="aff-label">${SAGES[k].label || SAGES[k].element}</div>
       <div class="aff-track"><div class="aff-fill" data-pct="${(counts[k]/QUESTIONS.length*100).toFixed(1)}" style="--bar:var(--c-${k})"></div></div>
       <div class="aff-num">${counts[k]}</div>
     </div>`).join("");
@@ -890,7 +893,9 @@ $("again").addEventListener("click", ()=>{
 $("copy").addEventListener("click", async ()=>{
   const counts = tally();
   const s = SAGES[winner(counts)];
-  const text = `The Sage Trials — my element is ${s.element}. ${s.line} Another Sage of ${s.element}: ${s.sage} (${s.temple} · ${s.song}).`;
+  const text = s.heading
+    ? `The Sage Trials \u2014 I came out as ${s.heading}. ${s.line} The sage who holds it: ${s.sage} (${s.temple} \u00b7 ${s.song}).`
+    : `The Sage Trials \u2014 my element is ${s.element}. ${s.line} Another Sage of ${s.element}: ${s.sage} (${s.temple} \u00b7 ${s.song}).`;
   try{
     await navigator.clipboard.writeText(text);
     $("copy").textContent = "Copied";
