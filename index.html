@@ -206,6 +206,24 @@ button{font:inherit;color:inherit;cursor:pointer}
 }
 .btn-quiet:hover{color:var(--gold);border-color:var(--gold)}
 
+/* ---------- ocarina toggle ---------- */
+.sound{
+  position:fixed;right:clamp(.9rem,3vw,1.6rem);bottom:clamp(.9rem,3vw,1.6rem);z-index:9;
+  display:flex;align-items:center;gap:.5em;
+  font-family:"Barlow Semi Condensed",system-ui,sans-serif;
+  font-size:.78rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  background:var(--stone-1);border:1px solid var(--edge);
+  padding:.5em .9em;color:var(--ink-3);cursor:pointer;
+  transition:color .2s,border-color .2s,opacity .2s;
+}
+.sound:hover{color:var(--gold);border-color:var(--gold)}
+.sound svg{width:.95em;height:.95em;overflow:visible;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round}
+.sound .wave{transition:opacity .2s}
+.sound[aria-pressed="false"]{opacity:.6}
+.sound[aria-pressed="false"] .wave{opacity:.15}
+.sound[aria-pressed="false"] .slash{opacity:1}
+.sound .slash{opacity:0;transition:opacity .2s}
+
 /* ---------- question ---------- */
 .qhead{
   position:sticky;top:0;z-index:3;
@@ -404,7 +422,7 @@ button{font:inherit;color:inherit;cursor:pointer}
       <div class="ring" id="ring" aria-hidden="true"></div>
       <h1 class="title"><span>Ocarina of Time</span>The Sage Trials</h1>
       <hr class="rule-gold" style="width:6rem">
-      <p class="lede">Six medallions were carried out of six temples, and a seventh sage never took one. Twelve moments from Hyrule are put to you below &mdash; <em>not</em> as the boy with the sword, but as whoever else was standing there. Answer as yourself; the element you carry will be plain by the end.</p>
+      <p class="lede">Six medallions were carried out of six temples, and a seventh sage never took one. Twelve moments from one journey across Hyrule are put to you below &mdash; <em>not</em> the boy with the sword’s road, but your own. Answer as yourself; the element you carry will be plain by the end.</p>
       <button class="btn" id="begin">Enter the Chamber</button>
     </section>
 
@@ -439,6 +457,15 @@ button{font:inherit;color:inherit;cursor:pointer}
     </section>
   </main>
 </div>
+
+<button class="sound" id="sound" type="button" aria-pressed="true" aria-label="Ocarina sound">
+  <svg viewBox="0 0 16 16" aria-hidden="true">
+    <path d="M2.5 6h2.2L8 3.2v9.6L4.7 10H2.5z" stroke-linejoin="round"/>
+    <path class="wave" d="M10.6 5.9a3 3 0 0 1 0 4.2M12.6 4.2a5.6 5.6 0 0 1 0 7.6"/>
+    <path class="slash" d="M11 5.4l4 5.2"/>
+  </svg>
+  <span id="sound-label">Ocarina</span>
+</button>
 
 <script>
 "use strict";
@@ -652,154 +679,154 @@ function medallion(key){
 }
 
 /* ======================= QUESTIONS ======================= */
-/* Twelve moments from Hyrule, none of them Link's. You are whoever
-   actually lives there: a Kokiri, a stallholder, a Goron, a ranch hand,
-   a guard on the wall. Each question offers all seven sages exactly once,
-   and answer order is varied per question so position never reveals
-   the mapping - no sage sits in the same slot more than twice. */
+/* Twelve moments from one journey across Hyrule. You are a hero on the
+   road with a quest of your own - not the boy with the sword, and not a
+   bystander either. Each question offers all seven sages exactly once,
+   and answer order is varied per question so position never reveals the
+   mapping - no sage sits in the same slot more than twice. */
 const QUESTIONS = [
   { place:"Kokiri Forest",
-    text:"The Great Deku Tree is dead. You are a Kokiri, the clearing has gone quiet, and nobody has said the word out loud yet.",
+    text:"The quest you have taken up begins somewhere in these woods. The Kokiri tell you, without drama, that outsiders who walk into the Lost Woods come out as something else.",
     answers:[
-      {s:"spirit", t:"Refuse the version of it the elders are telling and go find your own answer."},
-      {s:"shadow", t:"Say nothing to the younger ones. They will learn it when they have to."},
-      {s:"time",   t:"Start thinking about what this forest looks like in ten years without him."},
-      {s:"forest", t:"Stay in the meadow where he stood. Whatever is left of him is still here."},
-      {s:"light",  t:"Keep the clearing exactly as he kept it. Something has to stay the same."},
-      {s:"water",  t:"Grieve out loud, in front of everyone, and refuse to be embarrassed by it."},
-      {s:"fire",   t:"Say his name loudly and often, so nobody gets to quietly move on."}
+      {s:"spirit", t:"Go in anyway. A story told to keep people out usually means something is in there."},
+      {s:"shadow", t:"Go in without telling them, so nobody here has to carry it if you do not come back."},
+      {s:"time",   t:"Camp at the treeline and watch for three days. The way in will show itself."},
+      {s:"forest", t:"Ask one of them to walk you to the edge, and mean it when you say you will be back."},
+      {s:"light",  t:"Wait at the entrance until they choose to let you through. That door stays open."},
+      {s:"water",  t:"Tell them plainly what this quest has already cost you. Then ask a second time."},
+      {s:"fire",   t:"Walk in while they are still explaining why you should not."}
     ]},
 
   { place:"Hyrule Castle Town",
-    text:"You keep a stall in the market. A white horse comes through the crowd at a gallop, and a black one comes through after it.",
+    text:"You reach the market carrying proof that something is badly wrong in Hyrule. The square is at its busiest, the guards are bored, and not one person will look at what you are holding.",
     answers:[
-      {s:"forest", t:"Pull the nearest children in behind your stall and stand in front of them."},
-      {s:"light",  t:"Right the stalls that went over. The market has to open again tomorrow."},
-      {s:"fire",   t:"Step into the road and shout at the second rider to slow down."},
-      {s:"spirit", t:"Note which way the white horse went, and tell the black one the opposite."},
-      {s:"time",   t:"Say nothing now, and remember every detail for whoever comes asking later."},
-      {s:"shadow", t:"Get the old woman next door indoors, and do not tell her why."},
-      {s:"water",  t:"Tell everyone in earshot exactly what you saw and exactly how it felt."}
+      {s:"forest", t:"Find the one stallholder who did listen. One is enough to begin with."},
+      {s:"light",  t:"Say it once, clearly, then stop pushing. It will land when the town is ready for it."},
+      {s:"fire",   t:"Say it again, louder, in the middle of the square, until somebody has to answer you."},
+      {s:"spirit", t:"Stop asking a town that will not give it, and go and deal with the thing yourself."},
+      {s:"time",   t:"Say nothing more today. Spend the week finding out who here will matter in a year."},
+      {s:"shadow", t:"Let them keep their ordinary afternoon. Carry the knowing alone and act on it."},
+      {s:"water",  t:"Tell them what it costs to be the only one who knows, and do not apologise for it."}
     ]},
 
   { place:"Goron City",
-    text:"The cavern is sealed and the food is gone. Your Big Brother is playing his drums instead of speaking to anyone.",
+    text:"Goron City is starving. The cavern that feeds it has been sealed by something living inside, and no part of your own quest requires you to open it. Every day here is a day lost.",
     answers:[
-      {s:"time",   t:"Count what is left, work out the day it runs out, and plan backward from there."},
-      {s:"forest", t:"Stay with the ones too weak to climb. Somebody should be down there with them."},
-      {s:"light",  t:"Keep the city running. Doors open, fires lit, nothing allowed to slide."},
-      {s:"spirit", t:"Ignore the drumming and go and open the cavern yourself."},
-      {s:"water",  t:"Tell him to his face that his people are frightened and the music is not helping."},
-      {s:"fire",   t:"Dance with him. He is holding them together the only way he knows how."},
-      {s:"shadow", t:"Give your ration away and let them believe you already ate."}
+      {s:"time",   t:"Open it, but learn what is in there first, even if that costs three more days."},
+      {s:"forest", t:"Stay until they eat. The quest will still be there. These people are here now."},
+      {s:"light",  t:"Do the work without hurrying. Sieges end sooner with someone steady in them."},
+      {s:"spirit", t:"Ignore the elder's plan entirely. His way is the reason they are still hungry."},
+      {s:"water",  t:"Tell them out loud that you are frightened of what is down there, and then go down."},
+      {s:"fire",   t:"Straight down the tunnel at it. Talking has had its turn."},
+      {s:"shadow", t:"Go down alone, at night, and let them wake to it already being finished."}
     ]},
 
   { place:"Zora's Domain",
-    text:"The water has stopped moving. The elders say the domain will be ice by morning, and they are saying it very calmly.",
+    text:"The Zora hold the one thing your quest cannot continue without. Their king will part with it, but only for a promise that binds you to this domain long after you meant to be gone.",
     answers:[
-      {s:"water",  t:"Say plainly that you are afraid, and then keep working anyway."},
-      {s:"fire",   t:"Get everyone moving. Loud, fast, no arguing, out before dark."},
-      {s:"time",   t:"Pick out the few things that cannot be replaced and move those first."},
-      {s:"shadow", t:"Take the coldest post at the outer edge and mention it to nobody."},
-      {s:"forest", t:"Refuse to leave the domain. This is home, frozen or not."},
-      {s:"light",  t:"Keep the old rites running on schedule. People need one thing unchanged."},
-      {s:"spirit", t:"Stop waiting on the elders and take a party upriver to find the cause."}
+      {s:"water",  t:"Make the promise, and tell him honestly that you will resent it. Both are true."},
+      {s:"fire",   t:"Tell him exactly what you think of a king who bargains while his own river fails."},
+      {s:"time",   t:"Take the terms. A debt you pay in ten years is cheaper than a delay you pay for now."},
+      {s:"shadow", t:"Agree, say nothing about what it costs you, and carry the terms without complaint."},
+      {s:"forest", t:"Refuse the bargain and help them anyway. Ask again later, as someone they know."},
+      {s:"light",  t:"Accept it as it stands. Some doors have a toll, and paying one is not a defeat."},
+      {s:"spirit", t:"Refuse. Nothing is worth signing yourself over to someone else's keeping for."}
     ]},
 
   { place:"Lon Lon Ranch",
-    text:"The new foreman has locked the gate and put the old man out. The horses have known something was wrong for a week.",
+    text:"You have been on the road long enough to stop noticing. The ranch offers a bed, a meal, and a horse that will genuinely carry you - if you stay long enough for it to trust you.",
     answers:[
-      {s:"fire",   t:"Go down to the gate and tell him exactly what you think of him."},
-      {s:"time",   t:"Work quietly under him and learn every lock and every key on the property."},
-      {s:"spirit", t:"Take the fastest horse out the back way and never ask his permission."},
-      {s:"forest", t:"Stay for the animals. They did nothing to deserve whatever he is."},
-      {s:"shadow", t:"Take the shifts he hands out as punishment so the younger hands do not have to."},
-      {s:"water",  t:"Let him see how much this hurts. He should have to look at it."},
-      {s:"light",  t:"Do the work properly regardless. The ranch outlasts the man running it."}
+      {s:"fire",   t:"One night, eat everything they put in front of you, and be gone before the light."},
+      {s:"time",   t:"Stay the week. A horse that trusts you is worth more later than seven days is now."},
+      {s:"spirit", t:"Take the horse tonight and leave payment. You will not be broken to a schedule."},
+      {s:"forest", t:"Stay because they asked you to. The horse is not the reason and never was."},
+      {s:"shadow", t:"Stay, and walk the fence line at night, because something has been at the stock."},
+      {s:"water",  t:"Tell them how badly you needed to be asked. Stay, because leaving would hurt them."},
+      {s:"light",  t:"Stay as long as it takes. Nothing worth riding was ever rushed into the saddle."}
     ]},
 
   { place:"Gerudo Fortress",
-    text:"You are on watch. A stranger was caught inside the walls, and the order is to put them in the cell and forget about them.",
+    text:"The Gerudo caught you crossing their fortress and put you in a cell. Your gear is on a table you can see through the bars, and the guard watching it is bored.",
     answers:[
-      {s:"forest", t:"Stand guard on the cell yourself, so nobody in your own ranks gets ideas."},
-      {s:"spirit", t:"Let them out. The order is a stupid one and you are not in the habit of stupid."},
-      {s:"water",  t:"Argue their case in front of everyone until somebody gives you a real answer."},
-      {s:"fire",   t:"Say straight out that you would rather fight them fairly than keep them caged."},
-      {s:"shadow", t:"Bring them water after dark, and make certain you are not seen doing it."},
-      {s:"time",   t:"Leave them in. In a week they will be far more useful owing you a favour."},
-      {s:"light",  t:"Follow the order and log it exactly. The rule exists for a reason."}
+      {s:"forest", t:"Get the person you came in with out first. You can be second."},
+      {s:"spirit", t:"Pick the lock. You do not recognise the authority that put you in here."},
+      {s:"water",  t:"Tell the guard precisely what you think of this, at length, and see what noise buys."},
+      {s:"fire",   t:"Wait for that door to open and go through whoever is standing in it."},
+      {s:"shadow", t:"Sit still, learn the rotation, and take the one gap that nobody is watching."},
+      {s:"time",   t:"Let them keep you a week. You are learning this fortress from inside, for free."},
+      {s:"light",  t:"Wait. They will decide what you are for, and you would rather they chose it."}
     ]},
 
   { place:"Kakariko Village",
-    text:"They have drained the well at the centre of the village, and whatever the village put down there is no longer down there.",
+    text:"The one person who has been guiding you hands you a sealed thing, says not to open it until you are past the desert, and will not say another word about it.",
     answers:[
-      {s:"time",   t:"Ask what else this village buried, and what that is going to cost in ten years."},
-      {s:"spirit", t:"Go down the well yourself rather than take the elder's word for any of it."},
-      {s:"water",  t:"Say out loud that this place has been lying to itself for generations."},
-      {s:"shadow", t:"Go down first, alone, and come back up saying it was nothing."},
-      {s:"light",  t:"Seal it, mark it, and keep the record straight for whoever comes after you."},
-      {s:"forest", t:"Stay above with the families and do not leave the doorway all night."},
-      {s:"fire",   t:"Take a torch down there shouting, before it decides to come up on its own."}
+      {s:"time",   t:"Leave it sealed. The reason will be about later, and later is where you are going."},
+      {s:"spirit", t:"Open it the moment they are out of sight. Nobody hands you an order and walks off."},
+      {s:"water",  t:"Tell them that being kept in the dark by someone you trust is worse than the danger."},
+      {s:"shadow", t:"Take it, ask nothing, and carry it exactly as told. They will have had a reason."},
+      {s:"light",  t:"Take it and stop turning it over. It gets explained when the explanation is useful."},
+      {s:"forest", t:"Ask them to come with you instead. You would rather have the person than the parcel."},
+      {s:"fire",   t:"Ask them straight out, now, in front of everyone, and keep asking until they answer."}
     ]},
 
   { place:"Temple of Time",
-    text:"You keep the temple. Someone drew the sword from the pedestal this morning, and the inner door has not opened since.",
+    text:"The door at the end of the hall will not open for you. Everything you have done so far was to reach it, and it is telling you plainly that you are not yet what it is waiting for.",
     answers:[
-      {s:"light",  t:"Keep sweeping. The temple stood before this happened and will stand after."},
-      {s:"fire",   t:"Put your shoulder to that door until something in it gives."},
-      {s:"shadow", t:"Stand at the pedestal and turn away anyone who comes asking about it."},
-      {s:"time",   t:"Start a record. The date, the hour, who was here. Someone will need it."},
-      {s:"water",  t:"Admit to the others that you are frightened, and that it is alright to be."},
-      {s:"forest", t:"Wait by the door for them to come back, however long that turns out to be."},
-      {s:"spirit", t:"Decide the sword was never the temple's to keep, and stop guarding the room."}
+      {s:"light",  t:"Accept it. Doors like this open when they open, and the wait is part of the road."},
+      {s:"fire",   t:"Put your shoulder into it. It has not yet met anyone who was going to keep going."},
+      {s:"shadow", t:"Go and find the other way in. There is always a lower one, and it is always worse."},
+      {s:"time",   t:"Leave, and come back as the thing it waits for. A project, not a defeat."},
+      {s:"water",  t:"Stand there and say how unfair it is. You have earned the right to be angry."},
+      {s:"forest", t:"Go back for the people who got you this far. Perhaps it was never meant for one."},
+      {s:"spirit", t:"Decide the door is wrong about you, and start looking for the seam in it."}
     ]},
 
   { place:"Lake Hylia",
-    text:"You have fished this lake all your life. It has dropped a foot a week for a month, and the Zora are not answering.",
+    text:"The lake is a foot lower every week and whatever is doing it is somewhere underneath. This is nobody's quest, least of all yours, and there is no one else on the shore.",
     answers:[
-      {s:"shadow", t:"Keep it to yourself until you know. Fear does more damage here than drought."},
-      {s:"water",  t:"Go to the Zora and refuse to leave until somebody gives you an answer."},
-      {s:"fire",   t:"Get every boat on this shore out looking today, while there is still water."},
-      {s:"time",   t:"Measure the drop each morning. In a month you will know exactly what this is."},
-      {s:"spirit", t:"Fish it anyway. Nobody has ever told you where you may put a boat."},
-      {s:"light",  t:"Mend the nets and keep the shore in order. Lakes have come back before."},
-      {s:"forest", t:"Stay out on the water. It has been your lake your whole life."}
+      {s:"shadow", t:"Go down. Say nothing to anyone afterwards about how deep it went."},
+      {s:"water",  t:"Go down, and let the fear of it show on the way. That has never stopped you yet."},
+      {s:"fire",   t:"Go down tonight, before you have had time to talk yourself out of it."},
+      {s:"time",   t:"Map the shoreline first. Whatever is doing this will be doing it elsewhere next."},
+      {s:"spirit", t:"Go, precisely because nobody asked you to. That is why it would not get done."},
+      {s:"light",  t:"Go down at the pace it takes. Water has been leaving and returning for a long time."},
+      {s:"forest", t:"Find whoever fishes this lake and go down together, so that it is theirs as well."}
     ]},
 
   { place:"Gerudo Valley",
-    text:"You came here to rebuild the bridge with four apprentices. Two have run off to join the thieves, and the bridge is still out.",
+    text:"The rope bridge is cut, and the person travelling with you cannot make the climb. Ahead is the desert and the thing you came for. Behind is a week of walking.",
     answers:[
-      {s:"fire",   t:"Go up to the fortress and demand them back at the top of your voice."},
-      {s:"light",  t:"Rebuild the bridge. That is the job, with them or without them."},
-      {s:"spirit", t:"Admit they made a choice of their own, and let them keep it."},
-      {s:"water",  t:"Tell them, when you find them, exactly how much it hurt to be left."},
-      {s:"forest", t:"Do not leave this valley without them. You arrived with four."},
-      {s:"shadow", t:"Take on their share of the work and never once bring it up."},
-      {s:"time",   t:"Wait. They will come back on their own the week the novelty wears through."}
+      {s:"fire",   t:"Carry them. Start now and argue about it on the way."},
+      {s:"light",  t:"Make camp. The valley is not going anywhere, and neither is what lies past it."},
+      {s:"spirit", t:"Go on alone. They knew what this was when they asked to come."},
+      {s:"water",  t:"Tell them you are furious with them for slowing you down. Then do not leave."},
+      {s:"forest", t:"Take the week. You did not come this far in order to arrive without them."},
+      {s:"shadow", t:"Send them back with the supplies, say you are fine, and never mention the climb."},
+      {s:"time",   t:"Get them to shelter and go on. One of you finishing beats both of you turning back."}
     ]},
 
   { place:"Kakariko, seven years on",
-    text:"There has been a ring of fire around the mountain for years now. Everyone in the village still says that it is fine.",
+    text:"You come back over the ridge after seven years to find the village burning and something moving in the smoke. Everyone you left here is either already out or they are not.",
     answers:[
-      {s:"spirit", t:"Say the thing nobody in this village will say, and then keep saying it."},
-      {s:"forest", t:"Stay put. If it comes down, you would rather be here than somewhere safe."},
-      {s:"shadow", t:"Quietly move the children's beds to the far side of the house."},
-      {s:"light",  t:"Keep the village running exactly as it ran. That is what holds the panic off."},
-      {s:"fire",   t:"Climb up and look at it yourself, then come back down loud about it."},
-      {s:"time",   t:"Start putting supplies aside now, for a winter nobody here has planned for."},
-      {s:"water",  t:"Tell them it is not fine, and that the pretending is costing them something."}
+      {s:"spirit", t:"Go in against every rule you were ever given about fires like this one."},
+      {s:"forest", t:"Straight to the one house that matters to you. The rest of it can come after."},
+      {s:"shadow", t:"Take them out by the back lanes and let them think the fire simply missed them."},
+      {s:"light",  t:"Work the line steadily. Panic moves faster through a village than fire does."},
+      {s:"fire",   t:"In at the front of it, shouting, so anyone still inside knows where the way out is."},
+      {s:"time",   t:"Cut the row ahead of it so the village does not go. Lose those houses on purpose."},
+      {s:"water",  t:"Get them out, then let them see you break. You will not pretend this was nothing."}
     ]},
 
   { place:"Chamber of Sages",
-    text:"It is over. You are standing in the light, and a medallion is being held out to you.",
+    text:"It is finished. You are standing in the light with the thing you crossed Hyrule for, and you are being asked what should be done with it.",
     answers:[
-      {s:"water",  t:"Take it, and let them all see that it means something to you."},
-      {s:"shadow", t:"Take it on the condition that nobody is ever told you have it."},
-      {s:"forest", t:"Take it, if holding it means staying near the people you started with."},
-      {s:"light",  t:"Take it. Someone has to hold the thing steady, and you are not tired yet."},
-      {s:"spirit", t:"Take it on your own terms, and hand it back the day they stop making sense."},
-      {s:"fire",   t:"Take it with both hands and ask what needs doing first."},
-      {s:"time",   t:"Take it knowing exactly what it will cost, and pay that part up front."}
+      {s:"water",  t:"Say what the journey took out of you, in full, before you answer anything at all."},
+      {s:"shadow", t:"Ask that it be hidden, and that your name be left out of the telling entirely."},
+      {s:"forest", t:"Ask to be sent back to the people you left behind. That is the whole of it."},
+      {s:"light",  t:"Leave it here. It was never going to belong to whoever happened to be holding it."},
+      {s:"spirit", t:"Keep it. You are the one who went and got it, and you will decide what it is for."},
+      {s:"fire",   t:"Ask for the road home and a very long meal, and refuse to be solemn about any of it."},
+      {s:"time",   t:"Ask what it will be needed for in a hundred years, and answer on that basis."}
     ]}
 ];
 /* integrity check: 7 answers per question, each sage exactly once */
@@ -937,6 +964,7 @@ function renderResult(){
     </div>`).join("");
 
   show("result");
+  ocarina.play(MOTIF, 0.45);
   window.scrollTo({top:0, behavior:"instant"});
   requestAnimationFrame(()=>{
     document.querySelectorAll(".aff-fill").forEach(f=>{ f.style.width = f.dataset.pct + "%"; });
@@ -947,9 +975,10 @@ function renderResult(){
 }
 
 /* ---------- controls ---------- */
-$("begin").addEventListener("click", ()=>{ idx=0; picks=[]; show("quiz"); renderQuestion(); });
+$("begin").addEventListener("click", ()=>{ ocarina.unlock(); idx=0; picks=[]; show("quiz"); renderQuestion(); });
 $("back").addEventListener("click", ()=>{ if(idx>0){ idx--; renderQuestion(); } });
 $("again").addEventListener("click", ()=>{
+  ocarina.stop();
   idx=0; picks=[];
   ambient.setAccent(null);
   show("intro");
@@ -968,6 +997,177 @@ $("copy").addEventListener("click", async ()=>{
     $("copy").textContent = "Copy blocked";
   }
 });
+
+/* ======================= OCARINA ======================= */
+/* A small breath-instrument voice: near-pure sine with a weak second
+   partial, a puff of breath noise on the attack, delayed vibrato, and a
+   short delay line standing in for the stone of the chamber. */
+
+/* Melodies are [note, beats] pairs. A null note is a rest. Note names run
+   C..B with # or b, plus an octave: "F#4", "Bb3", "A5". BEAT is seconds per
+   beat, so lower is faster. Swap MOTIF for any sequence you like. */
+const BEAT = 0.32;
+const MOTIF = [
+  ["D4",1],["F4",1],["A4",2],
+  ["C5",1],["A4",1],["G4",1],["F4",1],
+  ["D4",3.5]
+];
+
+const ocarina = (function(){
+  const SEMI = {c:0,d:2,e:4,f:5,g:7,a:9,b:11};
+  function freq(name){
+    const m = /^([A-Ga-g])([#b]?)(-?\d)$/.exec(name);
+    if(!m) return 0;
+    const n = SEMI[m[1].toLowerCase()] + (m[2] === "#" ? 1 : m[2] === "b" ? -1 : 0);
+    return 440 * Math.pow(2, (n + (+m[3] - 4) * 12 - 9) / 12);
+  }
+
+  let ctx = null, master = null, noise = null;
+  let voices = [];
+  let muted = false;
+  try{ muted = localStorage.getItem("sageTrials.muted") === "1"; }catch(e){}
+
+  function build(){
+    if(ctx) return ctx;
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if(!AC) return null;
+    ctx = new AC();
+
+    master = ctx.createGain();
+    master.gain.value = 0.8;
+
+    /* the chamber: a little air, no reverb impulse to ship */
+    const air = ctx.createBiquadFilter();
+    air.type = "lowpass";
+    air.frequency.value = 3400;
+
+    const delay = ctx.createDelay(1);
+    delay.delayTime.value = 0.19;
+    const fb = ctx.createGain();
+    fb.gain.value = 0.3;
+    const wet = ctx.createGain();
+    wet.gain.value = 0.24;
+    delay.connect(fb); fb.connect(delay);
+    delay.connect(wet); wet.connect(air);
+
+    master.connect(delay);
+    master.connect(air);
+    air.connect(ctx.destination);
+
+    /* one shared buffer of noise for every breath */
+    noise = ctx.createBuffer(1, ctx.sampleRate * 0.4, ctx.sampleRate);
+    const d = noise.getChannelData(0);
+    for(let i=0;i<d.length;i++) d[i] = Math.random()*2 - 1;
+
+    return ctx;
+  }
+
+  function voice(f, at, dur, vel){
+    const g = ctx.createGain();
+    g.connect(master);
+
+    const atk = 0.05;
+    const rel = Math.min(0.3, dur * 0.55);
+    const hold = Math.max(at + atk + 0.02, at + dur - rel);
+    g.gain.setValueAtTime(0.0001, at);
+    g.gain.exponentialRampToValueAtTime(vel, at + atk);
+    g.gain.setValueAtTime(vel, hold);
+    g.gain.exponentialRampToValueAtTime(0.0001, hold + rel);
+
+    const o1 = ctx.createOscillator();
+    o1.type = "sine";
+    o1.frequency.value = f;
+    o1.connect(g);
+
+    const o2 = ctx.createOscillator();
+    o2.type = "triangle";
+    o2.frequency.value = f * 2;
+    const g2 = ctx.createGain();
+    g2.gain.value = 0.055;
+    o2.connect(g2); g2.connect(g);
+
+    /* vibrato leans in only once the note is established */
+    const lfo = ctx.createOscillator();
+    lfo.frequency.value = 5.2;
+    const dep = ctx.createGain();
+    dep.gain.setValueAtTime(0.0001, at);
+    dep.gain.setValueAtTime(0.0001, at + Math.min(0.14, dur*0.4));
+    dep.gain.linearRampToValueAtTime(f * 0.008, at + Math.min(0.42, dur*0.8));
+    lfo.connect(dep); dep.connect(o1.frequency); dep.connect(o2.frequency);
+
+    /* the breath that starts the note */
+    const br = ctx.createBufferSource();
+    br.buffer = noise;
+    const bp = ctx.createBiquadFilter();
+    bp.type = "bandpass";
+    bp.frequency.value = f * 2.2;
+    bp.Q.value = 1.4;
+    const bg = ctx.createGain();
+    bg.gain.setValueAtTime(0.0001, at);
+    bg.gain.exponentialRampToValueAtTime(vel * 0.28, at + 0.022);
+    bg.gain.exponentialRampToValueAtTime(0.0001, at + 0.14);
+    br.connect(bp); bp.connect(bg); bg.connect(master);
+
+    const end = hold + rel + 0.05;
+    [o1,o2,lfo,br].forEach(n=>{ n.start(at); n.stop(end); });
+    voices.push(o1,o2,lfo,br);
+    o1.onended = ()=>{ voices = voices.filter(v => v !== o1 && v !== o2 && v !== lfo && v !== br); };
+  }
+
+  function play(seq, delay){
+    if(muted) return;
+    if(!build()) return;
+    if(ctx.state === "suspended") ctx.resume();
+    stop();
+    let t = ctx.currentTime + (delay || 0.06);
+    seq.forEach(([name, beats])=>{
+      const dur = beats * BEAT;
+      if(name){
+        const f = freq(name);
+        /* the phrase breathes: leading notes a touch softer than the fall */
+        if(f) voice(f, t, dur * 0.96, 0.16 + Math.min(0.06, beats * 0.02));
+      }
+      t += dur;
+    });
+  }
+
+  function stop(){
+    if(!ctx) return;
+    voices.forEach(v=>{ try{ v.stop(); }catch(e){} });
+    voices = [];
+  }
+
+  return {
+    play, stop,
+    get muted(){ return muted; },
+    set muted(v){
+      muted = !!v;
+      if(muted) stop();
+      try{ localStorage.setItem("sageTrials.muted", muted ? "1" : "0"); }catch(e){}
+    },
+    /* browsers want a gesture before any of this is allowed to sound */
+    unlock(){
+      if(muted) return;
+      if(!build()) return;
+      if(ctx.state === "suspended") ctx.resume();
+    }
+  };
+})();
+
+(function soundToggle(){
+  const btn = $("sound");
+  const label = $("sound-label");
+  function paint(){
+    btn.setAttribute("aria-pressed", ocarina.muted ? "false" : "true");
+    label.textContent = ocarina.muted ? "Muted" : "Ocarina";
+  }
+  btn.addEventListener("click", ()=>{
+    ocarina.muted = !ocarina.muted;
+    paint();
+    if(!ocarina.muted) ocarina.play(MOTIF);
+  });
+  paint();
+})();
 
 /* ======================= AMBIENT MOTES ======================= */
 const ambient = (function(){
