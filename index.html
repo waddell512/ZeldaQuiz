@@ -21,7 +21,7 @@
   --edge-2:rgba(26,24,38,.08);
   --shade:rgba(26,24,38,.05);
   --mote:rgba(138,109,31,.55);
-  --mark-op:.12;
+  --mark-op:.16;
 
   --c-forest:#3F7C43;
   --c-fire:#B32E22;
@@ -119,29 +119,41 @@ button{font:inherit;color:inherit;cursor:pointer}
 .view.on.result{display:flex}
 @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 
-/* ---------- backdrop: the chamber the page is standing in ----------
-   Three windows of the Temple of Time at the top with the light coming
-   through them, the Triforce and the chamber rings engraved on the floor
-   beneath, and a Triforce frieze running along both edges. Every line is
-   drawn in --gold, which flips with the theme, so the whole stack follows. */
+/* ---------- backdrop: the Chamber of Sages ----------
+   A void with light falling into it from above and the sages' platform
+   laid out below in perspective: six stations on a hexagon, each lit in
+   its own element, the Triforce cut into the middle of the floor, and
+   the engraved ring turning overhead. Structural lines are drawn in
+   --gold, which flips with the theme, so the whole stack follows. */
 .bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-.bg-shaft{
-  position:absolute;left:50%;top:-20vh;width:min(130vw,1200px);height:96vh;
-  transform:translateX(-50%);
-  background:radial-gradient(ellipse 40% 56% at 50% 0,
-    color-mix(in srgb,var(--gold) 22%,transparent) 0,
-    color-mix(in srgb,var(--gold) 7%,transparent) 40%,
-    transparent 74%);
+.bg-void{
+  position:absolute;inset:0;opacity:calc(var(--mark-op) * 3.4);
+  background:
+    radial-gradient(ellipse 62% 44% at 16% 20%,color-mix(in srgb,var(--c-water) 34%,transparent),transparent 70%),
+    radial-gradient(ellipse 56% 40% at 86% 26%,color-mix(in srgb,var(--c-shadow) 30%,transparent),transparent 70%),
+    radial-gradient(ellipse 80% 46% at 50% 102%,color-mix(in srgb,var(--c-light) 22%,transparent),transparent 72%);
 }
-.bg-arch{
-  position:absolute;left:50%;top:0;width:min(112vw,940px);height:auto;
-  transform:translateX(-50%);color:var(--gold);opacity:calc(var(--mark-op) * 1.05);
-  -webkit-mask-image:linear-gradient(#000 46%,transparent 88%);
-  mask-image:linear-gradient(#000 46%,transparent 88%);
+.bg-shaft{
+  position:absolute;left:50%;top:-22vh;width:min(120vw,1080px);height:104vh;
+  transform:translateX(-50%);
+  background:radial-gradient(ellipse 34% 58% at 50% 0,
+    color-mix(in srgb,var(--gold) 26%,transparent) 0,
+    color-mix(in srgb,var(--gold) 8%,transparent) 42%,
+    transparent 76%);
+}
+/* The floor is a flat drawing tipped away from the reader, so it reads as
+   something you are standing on rather than a badge behind the text. */
+.bg-dais{
+  position:absolute;left:50%;bottom:-13vh;width:min(150vw,1300px);height:auto;
+  transform:translateX(-50%) perspective(1500px) rotateX(58deg);
+  transform-origin:50% 100%;
+  color:var(--gold);opacity:calc(var(--mark-op) * 2.4);
+  -webkit-mask-image:linear-gradient(transparent 16%,#000 60%);
+  mask-image:linear-gradient(transparent 16%,#000 60%);
 }
 .bg-mark{
-  position:absolute;left:50%;top:50%;width:min(84vmin,700px);height:auto;
-  transform:translate(-50%,-50%);color:var(--gold);opacity:var(--mark-op);
+  position:absolute;left:50%;top:42%;width:min(76vmin,640px);height:auto;
+  transform:translate(-50%,-50%);color:var(--gold);opacity:calc(var(--mark-op) * .82);
 }
 .bg-mark .turn{transform-origin:200px 200px;animation:spin 420s linear infinite}
 .bg-trim{
@@ -292,26 +304,56 @@ button{font:inherit;color:inherit;cursor:pointer}
 </style>
 
 <div class="bg" aria-hidden="true">
+  <div class="bg-void"></div>
   <div class="bg-shaft"></div>
 
-  <!-- the three windows above the pedestal -->
-  <svg class="bg-arch" viewBox="0 0 600 280" preserveAspectRatio="xMidYMin meet">
+  <!-- the sages' platform, lying below in the void -->
+  <svg class="bg-dais" viewBox="0 0 900 900" aria-hidden="true">
     <g fill="none" stroke="currentColor" stroke-linejoin="round">
-      <path d="M92 280 L92 152 Q92 98 132 76 Q172 98 172 152 L172 280" stroke-width="1.5"/>
-      <path d="M104 280 L104 156 Q104 110 132 92 Q160 110 160 156 L160 280" stroke-width=".6"/>
-      <path d="M132 92 L132 280" stroke-width=".6"/>
-
-      <path d="M252 280 L252 126 Q252 58 300 32 Q348 58 348 126 L348 280" stroke-width="1.7"/>
-      <path d="M266 280 L266 132 Q266 74 300 52 Q334 74 334 132 L334 280" stroke-width=".6"/>
-      <path d="M300 52 L300 280" stroke-width=".6"/>
-      <path d="M282 280 L282 150 M318 280 L318 150" stroke-width=".5"/>
-
-      <path d="M428 280 L428 152 Q428 98 468 76 Q508 98 508 152 L508 280" stroke-width="1.5"/>
-      <path d="M440 280 L440 156 Q440 110 468 92 Q496 110 496 156 L496 280" stroke-width=".6"/>
-      <path d="M468 92 L468 280" stroke-width=".6"/>
+      <circle cx="450" cy="450" r="438" stroke-width="3"/>
+      <circle cx="450" cy="450" r="416" stroke-width="1.2"/>
+      <circle cx="450" cy="450" r="300" stroke-width="1.2"/>
+      <circle cx="450" cy="450" r="150" stroke-width="1.2"/>
+      <polygon points="280,155.6 620,155.6 790,450 620,744.4 280,744.4 110,450" stroke-width="1.7"/>
     </g>
-    <path d="M300 8 L288 28 L312 28 Z M286.5 30 L274.5 50 L298.5 50 Z M313.5 30 L301.5 50 L325.5 50 Z"
-          fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <g style="color:var(--c-forest)">
+      <path d="M390 346.1 L307 202.3" stroke="currentColor" stroke-width="4" opacity=".5"/>
+      <circle cx="280" cy="155.6" r="54" fill="currentColor" opacity=".16"/>
+      <circle cx="280" cy="155.6" r="54" fill="none" stroke="currentColor" stroke-width="4.5" opacity=".75"/>
+      <circle cx="280" cy="155.6" r="40" fill="none" stroke="currentColor" stroke-width="1.6" opacity=".5"/>
+    </g>
+    <g style="color:var(--c-fire)">
+      <path d="M510 346.1 L593 202.3" stroke="currentColor" stroke-width="4" opacity=".5"/>
+      <circle cx="620" cy="155.6" r="54" fill="currentColor" opacity=".16"/>
+      <circle cx="620" cy="155.6" r="54" fill="none" stroke="currentColor" stroke-width="4.5" opacity=".75"/>
+      <circle cx="620" cy="155.6" r="40" fill="none" stroke="currentColor" stroke-width="1.6" opacity=".5"/>
+    </g>
+    <g style="color:var(--c-spirit)">
+      <path d="M570 450 L736 450" stroke="currentColor" stroke-width="4" opacity=".5"/>
+      <circle cx="790" cy="450" r="54" fill="currentColor" opacity=".16"/>
+      <circle cx="790" cy="450" r="54" fill="none" stroke="currentColor" stroke-width="4.5" opacity=".75"/>
+      <circle cx="790" cy="450" r="40" fill="none" stroke="currentColor" stroke-width="1.6" opacity=".5"/>
+    </g>
+    <g style="color:var(--c-shadow)">
+      <path d="M510 553.9 L593 697.7" stroke="currentColor" stroke-width="4" opacity=".5"/>
+      <circle cx="620" cy="744.4" r="54" fill="currentColor" opacity=".16"/>
+      <circle cx="620" cy="744.4" r="54" fill="none" stroke="currentColor" stroke-width="4.5" opacity=".75"/>
+      <circle cx="620" cy="744.4" r="40" fill="none" stroke="currentColor" stroke-width="1.6" opacity=".5"/>
+    </g>
+    <g style="color:var(--c-water)">
+      <path d="M390 553.9 L307 697.7" stroke="currentColor" stroke-width="4" opacity=".5"/>
+      <circle cx="280" cy="744.4" r="54" fill="currentColor" opacity=".16"/>
+      <circle cx="280" cy="744.4" r="54" fill="none" stroke="currentColor" stroke-width="4.5" opacity=".75"/>
+      <circle cx="280" cy="744.4" r="40" fill="none" stroke="currentColor" stroke-width="1.6" opacity=".5"/>
+    </g>
+    <g style="color:var(--c-light)">
+      <path d="M330 450 L164 450" stroke="currentColor" stroke-width="4" opacity=".5"/>
+      <circle cx="110" cy="450" r="54" fill="currentColor" opacity=".16"/>
+      <circle cx="110" cy="450" r="54" fill="none" stroke="currentColor" stroke-width="4.5" opacity=".75"/>
+      <circle cx="110" cy="450" r="40" fill="none" stroke="currentColor" stroke-width="1.6" opacity=".5"/>
+    </g>
+    <path d="M450 368 L403 450 L497 450 Z M403 450 L356 532 L450 532 Z M497 450 L450 532 L544 532 Z"
+          fill="none" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round"/>
   </svg>
 
   <!-- the mark on the chamber floor -->
