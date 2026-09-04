@@ -436,7 +436,7 @@ button{font:inherit;color:inherit;cursor:pointer}
         <p class="byline">by the Skyward Prince</p>
       </div>
       <hr class="rule-gold" style="width:6rem">
-      <p class="lede">Six medallions were carried out of six temples, and a seventh sage never took one. Below are twelve small moments from one journey across Hyrule, on a road that is yours &mdash; <em>not</em> the boy with the sword&rsquo;s. Answer as yourself; the element you carry will be plain by the end.</p>
+      <p class="lede">Six medallions were carried out of six temples, and a seventh sage never took one. Below are twelve moments from one hero's journey across Hyrule, on a road that is yours &mdash; <em>not</em> the boy with the sword&rsquo;s. None of the seven answers is the safe one. Answer as yourself; the element you carry will be plain by the end.</p>
       <button class="btn" id="begin">Enter the Chamber</button>
     </section>
 
@@ -646,10 +646,13 @@ const GLYPHS = {
          <circle cx="70.8" cy="38" r="6" fill="EMB"/>
          <circle cx="50" cy="74" r="6" fill="EMB"/>
          <circle cx="29.2" cy="38" r="6" fill="EMB"/>`,
-  /* The Hylian Royal Crest - the Triforce over the wings of the royal
-     family. Zelda is the Seventh Sage; there was never a medallion to
-     stamp, so her own house's mark stands on the blank. */
-  time:`<path d="M50 20 L42.8 32 L57.2 32 Z M41.6 34 L34.4 46 L48.8 46 Z M58.4 34 L51.2 46 L65.6 46 Z" fill="EMB"/>
+  /* The royal crest, re-struck: a six-bladed star stands where the
+     Triforce stands, traced blade for blade off the drawn original -
+     six wedges of unequal reach, three of them meeting at the hub and
+     three left short of it. Below it, the wings of the royal family.
+     Zelda is the Seventh Sage; there was never a medallion to stamp,
+     so this mark stands on the blank. */
+  time:`<path d="M50 30.4 L50 19.8 L60.7 24.9 Z M54.3 30.3 L66.3 30.4 L66.8 34.4 Z M50 30.4 L61.3 35.7 L50.7 44.3 Z M48.3 33.5 L46 45.5 L36.1 42.1 Z M50 30.4 L37.6 38.1 L37.9 25 Z M46.9 27.3 L35.3 19.6 L41 18 Z" fill="EMB"/>
         <path d="M50 48.5 C41.5 45.5 29.5 46.5 21 54 C26.5 55 30 57 31.5 61.5 C33.7 58.2 36.5 58 38.5 61.5 C40.7 58.2 43.5 57.8 45.5 60.5 C47.2 56.8 48.8 55.5 50 56.5 Z" fill="EMB"/>
         <path d="M50 48.5 C58.5 45.5 70.5 46.5 79 54 C73.5 55 70 57 68.5 61.5 C66.3 58.2 63.5 58 61.5 61.5 C59.3 58.2 56.5 57.8 54.5 60.5 C52.8 56.8 51.2 55.5 50 56.5 Z" fill="EMB"/>
         <path d="M50 56 L45 71.5 L50 67.5 L55 71.5 Z" fill="EMB"/>`
@@ -666,7 +669,7 @@ function medallion(key){
   const glyph = GLYPHS[key]
     .replace(/EMB/g, raised)
     .replace(/COIN/g, bare ? "var(--stone-1)" : "currentColor");
-  return `<svg viewBox="0 0 100 100" role="img" aria-label="${bare ? "The Seventh Sage's mark: the Hylian Royal Crest, on a medallion never struck" : s.element + " Medallion"}" style="color:var(--c-${key})">
+  return `<svg viewBox="0 0 100 100" role="img" aria-label="${bare ? "The Seventh Sage's mark: a six-bladed star over the wings of the Hylian Royal Crest, on a medallion never struck" : s.element + " Medallion"}" style="color:var(--c-${key})">
     <defs>
       <linearGradient id="${u}b" x1="0" y1="0" x2=".8" y2="1">
         <stop offset="0" style="stop-color:#fff;stop-opacity:.22"/>
@@ -693,157 +696,157 @@ function medallion(key){
 }
 
 /* ======================= QUESTIONS ======================= */
-/* Twelve small moments from one journey across Hyrule - nothing from the
-   game's story, and nothing that needs explaining. One short line of
-   setup, seven short answers, and no right one among them. You are a
-   hero on that road; the character read is in what you reach for when
-   the situation is ordinary. Each question offers all seven sages
-   exactly once, and answer order is varied per question so position
-   never reveals the mapping - no sage sits in the same slot more than
-   twice. */
+/* Twelve moments from one hero's journey across Hyrule - nothing out of
+   the game's story, and nothing that needs a plot kept in mind. Each is
+   a real one: lives on it, a cost either way, and no safe answer among
+   the seven. Pitched between the trivial and the tangled, so it reads
+   in one go and still asks something of you. Each question offers all
+   seven sages exactly once, and answer order is varied per question so
+   position never reveals the mapping - no sage sits in the same slot
+   more than twice. */
 const QUESTIONS = [
   { place:"Kokiri Forest",
-    text:"A Kokiri child asks you to stay and play. You are already late.",
+    text:"Something has been taking Kokiri out of the wood at night. They have asked you to stop it.",
     answers:[
-      {s:"spirit", t:"Play, and be late. I decide what I am late for."},
-      {s:"shadow", t:"Play, and never mention what it cost me."},
-      {s:"time",   t:"Promise a whole day next week, and keep it."},
-      {s:"forest", t:"Stay. Being late is not the worst thing here."},
-      {s:"light",  t:"Explain properly why I cannot, and then go."},
-      {s:"water",  t:"Say that I want to, and that I am sorry I cannot."},
-      {s:"fire",   t:"One game, right now, then run the whole way."}
+      {s:"spirit", t:"Hunt it my own way, and ignore every rule they give me about the wood."},
+      {s:"shadow", t:"Go out alone after dark and let them sleep through whatever happens."},
+      {s:"time",   t:"Lose three nights learning its habits, then take it in one."},
+      {s:"forest", t:"Sleep out in the wood beside them until it comes to me."},
+      {s:"light",  t:"Get every Kokiri into one clearing first, then go and find it."},
+      {s:"water",  t:"Tell them I am frightened of it too, and that I am going anyway."},
+      {s:"fire",   t:"Go in tonight, loudly, and let it come to the noise."}
     ]},
 
   { place:"Hyrule Field",
-    text:"Night falls on the field and you are not where you meant to be.",
+    text:"You are racing something to a village. A wagon has gone over ahead of you, with a man pinned under it.",
     answers:[
-      {s:"forest", t:"Make for the nearest light with people in it."},
-      {s:"light",  t:"Stop here. Moving in the dark only makes it worse."},
-      {s:"fire",   t:"Keep walking. Somewhere is closer than nowhere."},
-      {s:"spirit", t:"Get off the road. The road is what got me here."},
-      {s:"time",   t:"Camp now, and start again at first light."},
-      {s:"shadow", t:"No fire, so nothing out there knows I am here."},
-      {s:"water",  t:"Say out loud that I am scared, then carry on."}
+      {s:"forest", t:"Stop. The village is a day off and this man is here now."},
+      {s:"light",  t:"Stop, get him out, and send word ahead with the fastest rider."},
+      {s:"fire",   t:"Off the horse and under the wagon before I have thought about it."},
+      {s:"spirit", t:"Stop, and refuse to feel guilty about the village for it."},
+      {s:"time",   t:"Cut him free fast and badly. Slow help costs the village hours."},
+      {s:"shadow", t:"Get him out, say nothing about where I was going, and ride on."},
+      {s:"water",  t:"Tell him out loud how afraid I am of being late, and lift anyway."}
     ]},
 
   { place:"Hyrule Castle Town",
-    text:"A stallholder short-changes you, and you are fairly sure it was on purpose.",
+    text:"The castle will not act on what you brought them. The captain says going alone is how people get killed.",
     answers:[
-      {s:"time",   t:"Nothing today. Come back and see if he does it again."},
-      {s:"forest", t:"Let it go. I will be buying from him for years."},
-      {s:"light",  t:"Say it plainly, at the stall, and let him answer."},
-      {s:"spirit", t:"Take the difference off the next thing I buy here."},
-      {s:"water",  t:"Tell him it is the cheating, not the rupees."},
-      {s:"fire",   t:"Say it now, out loud, while the queue is listening."},
-      {s:"shadow", t:"Say nothing, and never buy from him again."}
+      {s:"time",   t:"Take the month. Come back with what the castle cannot ignore."},
+      {s:"forest", t:"Do not go alone, then. Go and find the people who believe me."},
+      {s:"light",  t:"Put it in writing, name the captain in it, and go anyway."},
+      {s:"spirit", t:"He is right that it gets people killed. Go alone regardless."},
+      {s:"water",  t:"Tell him I am afraid that he is right, and walk out of the room."},
+      {s:"fire",   t:"Say it to the whole hall, then leave by the front gate."},
+      {s:"shadow", t:"Agree with him, thank him, and be out of the city by dark."}
     ]},
 
   { place:"Goron City",
-    text:"A Goron wants to arm-wrestle you. You are going to lose.",
+    text:"The mine is burning and there are Gorons still inside. The elders say the roof will not hold long enough.",
     answers:[
-      {s:"water",  t:"Say I am going to lose, then put my arm up anyway."},
-      {s:"fire",   t:"Go first, go hard, and lose at full speed."},
-      {s:"time",   t:"Lose today, and come back every week until I do not."},
-      {s:"shadow", t:"Lose quickly, and let him think it was close."},
-      {s:"forest", t:"Lose, and then stay for the rest of the evening."},
-      {s:"light",  t:"Lose properly. Losing well is a thing worth doing."},
-      {s:"spirit", t:"Offer him something I might actually win instead."}
+      {s:"water",  t:"Say out loud that I do not expect to come back, and go in."},
+      {s:"fire",   t:"In. Now. The roof can have its opinion afterwards."},
+      {s:"time",   t:"Two minutes working out where they are. Then one trip, not four."},
+      {s:"shadow", t:"Go in without telling anybody, so that nobody follows me down."},
+      {s:"forest", t:"Go in with the Gorons who want to come. Not on my own."},
+      {s:"light",  t:"Set the elders organising the outside while I take the inside."},
+      {s:"spirit", t:"The elders have been wrong about that roof before. Go in."}
     ]},
 
   { place:"Zora's Domain",
-    text:"The Zora ask you to sing something. You cannot sing.",
+    text:"Something under the water has taken a Zora child, and the Zora will not let an outsider dive for her.",
     answers:[
-      {s:"fire",   t:"Sing anyway, loudly, and get it over with."},
-      {s:"time",   t:"Ask to go last, and use the wait to learn one."},
-      {s:"spirit", t:"Tell a story instead. Nobody said it had to be a song."},
-      {s:"forest", t:"Ask whoever I came with to sing it with me."},
-      {s:"shadow", t:"Say I do not know any, which is nearly true."},
-      {s:"water",  t:"Say that this embarrasses me, and then sing."},
-      {s:"light",  t:"Sing badly, in front of everyone, without excuses."}
+      {s:"fire",   t:"Into the water. They can be angry once she is on the bank."},
+      {s:"time",   t:"Spend the hour teaching them what I know, and let them dive."},
+      {s:"spirit", t:"Dive. Their rule is not worth a child, and I will say so after."},
+      {s:"forest", t:"Go down beside a Zora rather than instead of one. Ask for that."},
+      {s:"shadow", t:"Dive from the far side, where nobody is watching the water."},
+      {s:"water",  t:"Tell them plainly that she is dying while we stand here talking."},
+      {s:"light",  t:"Abide by it, and be useful at every other thing at once."}
     ]},
 
   { place:"Lon Lon Ranch",
-    text:"A horse at the ranch has decided that it does not like you.",
+    text:"The thing you have been tracking is in the barn. So are the horses, and so is the family who own them.",
     answers:[
-      {s:"forest", t:"Stay near it all day and ask it for nothing."},
-      {s:"spirit", t:"Leave it alone. It is allowed to not like me."},
-      {s:"water",  t:"Talk to it, out loud, about how that landed."},
-      {s:"fire",   t:"Get on. It can make its mind up afterwards."},
-      {s:"shadow", t:"Do its feed and water and let it think it won."},
-      {s:"time",   t:"Come back tomorrow. And the day after that."},
-      {s:"light",  t:"Watch it with the others and work out why."}
+      {s:"forest", t:"Get the family out of the house first. The barn can wait a minute."},
+      {s:"spirit", t:"Go in alone. Nobody else here signed up for this one."},
+      {s:"water",  t:"Tell them what is in their barn, in plain words, and then go in."},
+      {s:"fire",   t:"Both doors open, and straight down the middle of it."},
+      {s:"shadow", t:"Move the family without telling them why, then go back for it."},
+      {s:"time",   t:"Hold off until first light. It will not leave, and I will see."},
+      {s:"light",  t:"Wake the house, say exactly what is in there, and let them choose."}
     ]},
 
   { place:"Kakariko Village",
-    text:"Somebody in the village is telling a story about you that is not true.",
+    text:"You wake the village to move them out and they will not go. They were told for years the danger was a story.",
     answers:[
-      {s:"time",   t:"Nothing. A year of being reliable will bury it."},
-      {s:"spirit", t:"Let them. Their version of me is not my business."},
-      {s:"water",  t:"Find them and tell them what it did to me."},
-      {s:"shadow", t:"Say nothing, and keep it away from my own people."},
-      {s:"light",  t:"Say the true version once, to anyone who will hear."},
-      {s:"forest", t:"Go and sit with the people who already know me."},
-      {s:"fire",   t:"Ask them to say it again, in front of the village."}
+      {s:"time",   t:"Start moving the children. The rest will follow the children."},
+      {s:"spirit", t:"Say my piece once. They are grown, and it is their village."},
+      {s:"water",  t:"Tell them I have seen it, and let them hear what that did to me."},
+      {s:"shadow", t:"Stop arguing and go out to meet it before it reaches the houses."},
+      {s:"light",  t:"Walk the street door to door and give the same account at each."},
+      {s:"forest", t:"Stay whatever they choose. If they will not go, then I do not."},
+      {s:"fire",   t:"Ring the bell until the whole village is standing in the road."}
     ]},
 
   { place:"Death Mountain Trail",
-    text:"The trail is shut. There is a way round it that nobody uses.",
+    text:"The pass is coming down. You can hold it open long enough for the column to get through, or be in the column.",
     answers:[
-      {s:"light",  t:"Find out why it is shut before deciding anything."},
-      {s:"fire",   t:"Take the shut trail. Shut is not the same as gone."},
-      {s:"shadow", t:"Take the way nobody uses, and tell nobody I did."},
-      {s:"time",   t:"Wait for it to open. There is other work meanwhile."},
-      {s:"water",  t:"Admit that the other way frightens me, then take it."},
-      {s:"forest", t:"Only go with somebody. Not this one on my own."},
-      {s:"spirit", t:"Take the way nobody uses. That is usually the point."}
+      {s:"light",  t:"Hold it, and call the count aloud so they know what time is left."},
+      {s:"fire",   t:"Hold it. Somebody has to, and I am already standing here."},
+      {s:"shadow", t:"Hold it, and let them believe I was behind them all along."},
+      {s:"time",   t:"Get in the column. I am worth more to them alive next year."},
+      {s:"water",  t:"Hold it, and say a proper goodbye to the last one through."},
+      {s:"forest", t:"Hold it. Everybody I came here with is in that column."},
+      {s:"spirit", t:"Send them through and find my own way down. I do not die to order."}
     ]},
 
   { place:"Lake Hylia",
-    text:"An afternoon at the lake, and nothing that has to be done.",
+    text:"The creature you swore to kill is cornered at the water's edge, wounded, and it has stopped fighting.",
     answers:[
-      {s:"shadow", t:"Quietly do the jobs nobody has noticed need doing."},
-      {s:"water",  t:"Swim, and be loud about how good it is."},
-      {s:"fire",   t:"In the water inside a minute of getting there."},
-      {s:"time",   t:"Mend my gear now so tomorrow costs me nothing."},
-      {s:"spirit", t:"Go to the part of the lake nobody else goes to."},
-      {s:"light",  t:"Sit still and watch it. That is the whole afternoon."},
-      {s:"forest", t:"Find whoever I travel with and waste it together."}
+      {s:"shadow", t:"End it out of sight of the people who came down to watch."},
+      {s:"water",  t:"Say out loud that I do not want to do this, and then do it."},
+      {s:"fire",   t:"End it now. Drawing it out is the cruelty, not the killing."},
+      {s:"time",   t:"Take it alive. What it knows is worth more than what it is."},
+      {s:"spirit", t:"Let it go. I swore that oath before I had seen it up close."},
+      {s:"light",  t:"Say what it did and why it ends here, aloud, before I do it."},
+      {s:"forest", t:"Ask the family it took from what they want done, and do that."}
     ]},
 
   { place:"Gerudo Valley",
-    text:"The bridge is out. The long way round is four days.",
+    text:"Cut the bridge and the riders behind you cannot follow. Your companion is not across yet.",
     answers:[
-      {s:"fire",   t:"Cross what is left of the bridge."},
-      {s:"light",  t:"Take the four days. That is what it costs now."},
-      {s:"spirit", t:"There is a third way down there. Go and find it."},
-      {s:"water",  t:"Say how much I hate this, and then start walking."},
-      {s:"forest", t:"Take the long way with whoever else is going."},
-      {s:"shadow", t:"Take the four days and never say it was hard."},
-      {s:"time",   t:"Spend a day mending it, for everyone after me."}
+      {s:"fire",   t:"Hold the bridge myself and let them come at me on it."},
+      {s:"light",  t:"Tell my companion exactly how long they have, and then cut."},
+      {s:"spirit", t:"Do not cut it. I will not buy a road with somebody's life."},
+      {s:"water",  t:"Scream at them to run, and not touch the rope until they are over."},
+      {s:"forest", t:"Go back out onto the bridge for them. Both of us or neither."},
+      {s:"shadow", t:"Go back for them, and never mention afterwards what it cost."},
+      {s:"time",   t:"Cut it. One of us has to get this as far as the capital."}
     ]},
 
   { place:"Gerudo Desert",
-    text:"You have been lost long enough to be certain that you are lost.",
+    text:"You find the man you have hunted across three regions half dead in the sand, asking you for water.",
     answers:[
-      {s:"spirit", t:"Trust my own read of it over the map I was given."},
-      {s:"forest", t:"Go back to the last place I knew, and to people."},
-      {s:"shadow", t:"Keep it to myself. The others do not need this yet."},
-      {s:"light",  t:"Stop. Sit down. Work out exactly where I went wrong."},
-      {s:"fire",   t:"Pick a direction and commit to it, hard."},
-      {s:"time",   t:"Ration everything now, before I have to."},
-      {s:"water",  t:"Say it out loud: I am lost. Then ask for help."}
+      {s:"spirit", t:"Give him water. What I came here to do is a separate question."},
+      {s:"forest", t:"Get him to the nearest people who can keep him alive."},
+      {s:"shadow", t:"Give him the water, and never tell the ones who sent me."},
+      {s:"light",  t:"Water first, then tell him exactly what happens to him after."},
+      {s:"fire",   t:"Say to his face what he did, and then hand him the skin."},
+      {s:"time",   t:"Keep him alive. Dead men answer nobody for anything."},
+      {s:"water",  t:"Let him see how much I hate helping him, and help him."}
     ]},
 
   { place:"The Road Home",
-    text:"It is over. Somebody at home asks how it went.",
+    text:"It is done. The song they are already singing about it is not what happened, but it does make you the hero.",
     answers:[
-      {s:"water",  t:"Tell them all of it, including the parts that hurt."},
-      {s:"shadow", t:"Tell them the short version and keep the rest."},
-      {s:"forest", t:"Tell them I am glad to be back, and mean it."},
-      {s:"light",  t:"Tell it straight through, in order, leaving nothing out."},
-      {s:"spirit", t:"Tell them the part that everybody else got wrong."},
-      {s:"fire",   t:"Tell them everything at once, before I sit down."},
-      {s:"time",   t:"Say little now. It will make more sense in a year."}
+      {s:"water",  t:"Tell them the true version, and what the true version cost."},
+      {s:"shadow", t:"Let the song stand. It is doing less harm than the truth would."},
+      {s:"forest", t:"Correct the part that leaves out the people who were with me."},
+      {s:"light",  t:"Correct it, verse by verse, to anyone who will sit and listen."},
+      {s:"spirit", t:"Refuse the song. I will not be a thing other people sing about."},
+      {s:"fire",   t:"Stand up in the inn on the first night and say it is wrong."},
+      {s:"time",   t:"Say nothing. Write the true account and leave it to be found."}
     ]},
 ];
 /* integrity check: 7 answers per question, each sage exactly once */
