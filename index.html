@@ -189,6 +189,13 @@ button{font:inherit;color:inherit;cursor:pointer}
 }
 .title{font-size:clamp(2.3rem,9vw,3.9rem);letter-spacing:.02em}
 .title span{display:block;font-size:.38em;letter-spacing:.34em;color:var(--gold);font-weight:500;margin-bottom:.7em}
+/* The title and its byline sit closer together than the intro's own gap. */
+.titleblock{display:flex;flex-direction:column;align-items:center;gap:.65rem}
+.byline{
+  font-family:Spectral,Georgia,serif;font-style:italic;font-weight:300;
+  font-size:clamp(1rem,.94rem + .3vw,1.18rem);letter-spacing:.03em;
+  color:var(--ink-2);margin:0;
+}
 .lede{max-width:34rem;color:var(--ink-2);margin:0}
 .lede em{font-style:italic;color:var(--ink)}
 
@@ -420,9 +427,12 @@ button{font:inherit;color:inherit;cursor:pointer}
     <!-- intro -->
     <section class="view on intro" id="v-intro">
       <div class="ring" id="ring" aria-hidden="true"></div>
-      <h1 class="title"><span>Ocarina of Time</span>The Sage Trials</h1>
+      <div class="titleblock">
+        <h1 class="title"><span>Ocarina of Time</span>The Sage Trials</h1>
+        <p class="byline">by the Skyward Prince</p>
+      </div>
       <hr class="rule-gold" style="width:6rem">
-      <p class="lede">Six medallions were carried out of six temples, and a seventh sage never took one. Twelve moments from one journey across Hyrule are put to you below &mdash; <em>not</em> the boy with the sword’s road, but your own. Answer as yourself; the element you carry will be plain by the end.</p>
+      <p class="lede">Six medallions were carried out of six temples, and a seventh sage never took one. Twelve moments from one journey across Hyrule are put to you below &mdash; <em>not</em> the boy with the sword&rsquo;s road, but your own. Answer as yourself; the element you carry will be plain by the end.</p>
       <button class="btn" id="begin">Enter the Chamber</button>
     </section>
 
@@ -478,13 +488,13 @@ const SAGES = {
     sage:"Saria", element:"Forest", medallion:"Forest",
     temple:"Forest Temple", song:"Saria's Song", instrument:"Ocarina",
     line:"You are the one who stays.",
-    about:"Forest is the element of what takes root and refuses to be moved. It is the slowest of the six and by far the hardest to remove — a thing that grows in place, holds its ground, and is still standing long after the storm that was supposed to end it. Green, patient, and quietly immovable.",
+    about:"Forest is the element of what takes root and refuses to be moved. It is the slowest of the six and by far the hardest to remove \u2014 a thing that grows in place, holds its ground, and is still standing long after the storm that was supposed to end it. Green, patient, and quietly immovable.",
     body:[
       "You measure a decision by who it costs. Grand causes interest you far less than the specific person in front of you, and you will quietly reorganize your own plans around them without ever presenting it as a sacrifice. People come back to you years later because you are still there.",
-      "The risk is that staying can become hiding. Roots hold you up right until the day they hold you back — and the hardest thing you will ever do is walk across your own bridge."
+      "The risk is that staying can become hiding. Roots hold you up right until the day they hold you back \u2014 and the hardest thing you will ever do is walk across your own bridge."
     ],
     sageBody:[
-      "Saria never leaves the forest, and that is not a limitation — it is the entire point of her. While everyone around her is being pulled toward destiny, she plants herself beside the people she loves and refuses to be moved. She is the friend still standing exactly where you left her.",
+      "Saria never leaves the forest, and that is not a limitation \u2014 it is the entire point of her. While everyone around her is being pulled toward destiny, she plants herself beside the people she loves and refuses to be moved. She is the friend still standing exactly where you left her.",
       "She carries the Forest Medallion because she is what the element does: she stays, she holds, and the Lost Woods never swallow the people she has decided to keep."
     ]
   },
@@ -492,13 +502,13 @@ const SAGES = {
     sage:"Darunia", element:"Fire", medallion:"Fire",
     temple:"Fire Temple", song:"Bolero of Fire", instrument:"Drums",
     line:"You are the one who moves first.",
-    about:"Fire is the element of immediate commitment. It does not deliberate, hedge, or hold anything back in reserve — it converts everything it touches all at once, and it either warms a mountain or empties one. The fastest of the six, and the least interested in waiting to be sure.",
+    about:"Fire is the element of immediate commitment. It does not deliberate, hedge, or hold anything back in reserve \u2014 it converts everything it touches all at once, and it either warms a mountain or empties one. The fastest of the six, and the least interested in waiting to be sure.",
     body:[
       "You would rather act and be wrong than deliberate and be late. Warmth is your default setting; you let people in fast and defend them loudly. In a room where everyone is being careful, you are the one who finally says the obvious thing out loud, and the room is usually relieved.",
-      "The risk is momentum. Not everything wants to be charged at, and some doors only open to patience — the fire that warms a mountain is the same fire that empties it."
+      "The risk is momentum. Not everything wants to be charged at, and some doors only open to patience \u2014 the fire that warms a mountain is the same fire that empties it."
     ],
     sageBody:[
-      "Darunia calls a stranger his sworn brother roughly ninety seconds after meeting him, and then means it for the rest of his life. He does not hedge, does not wait for more information, and does not perform his feelings at a distance — he dances, he shouts, and he throws his whole weight at the problem.",
+      "Darunia calls a stranger his sworn brother roughly ninety seconds after meeting him, and then means it for the rest of his life. He does not hedge, does not wait for more information, and does not perform his feelings at a distance \u2014 he dances, he shouts, and he throws his whole weight at the problem.",
       "He carries the Fire Medallion because he burns the way the element burns: all at once, in the open, on behalf of whoever is standing nearest to him."
     ]
   },
@@ -512,7 +522,7 @@ const SAGES = {
       "The risk is the size of the waves. What feels proportionate from inside can land as a flood on everyone else, and your pride will occasionally defend a position you stopped believing an hour ago."
     ],
     sageBody:[
-      "Ruto is imperious, demanding, and entirely without a filter — and she is also the only person in the story who says exactly what she wants the moment she wants it. She proposes marriage to a stranger, then gives that promise up herself when the world needs her more. Both acts come from the same place.",
+      "Ruto is imperious, demanding, and entirely without a filter \u2014 and she is also the only person in the story who says exactly what she wants the moment she wants it. She proposes marriage to a stranger, then gives that promise up herself when the world needs her more. Both acts come from the same place.",
       "She carries the Water Medallion because she moves the way the element moves: constantly changing shape, never once conceding, and far deeper than the surface she lets you see."
     ]
   },
@@ -520,13 +530,13 @@ const SAGES = {
     sage:"Impa", element:"Shadow", medallion:"Shadow",
     temple:"Shadow Temple", song:"Nocturne of Shadow", instrument:"Bass drums",
     line:"You are the one who carries it silently.",
-    about:"Shadow is the element of what is deliberately not shown. It is not evil and it is not absence — it is concealment in service of something: the information withheld on purpose, the weight carried where nobody has to look at it. The quietest of the six, and the most misread.",
+    about:"Shadow is the element of what is deliberately not shown. It is not evil and it is not absence \u2014 it is concealment in service of something: the information withheld on purpose, the weight carried where nobody has to look at it. The quietest of the six, and the most misread.",
     body:[
       "You absorb. When something goes wrong you calculate who does not need to know, and then you handle it. You are the person others end up trusting with the thing they cannot say aloud, and you have never once repeated any of it. In a crisis you get quieter, not louder.",
       "The risk is that nobody is standing between you and anything. Carrying it alone is a decision you keep making automatically, and the people who love you would carry some of it if you ever let the silence break."
     ],
     sageBody:[
-      "Impa raised a princess, hid her for seven years, and told nobody what it cost. The Sheikah do not conceal things out of coldness — they conceal them because someone has to stand between the truth and the people it would break, and Impa volunteered for that post permanently.",
+      "Impa raised a princess, hid her for seven years, and told nobody what it cost. The Sheikah do not conceal things out of coldness \u2014 they conceal them because someone has to stand between the truth and the people it would break, and Impa volunteered for that post permanently.",
       "She carries the Shadow Medallion because she is what the element is for: she is the dark a kingdom gets to hide inside, and she has never once asked to be seen doing it."
     ]
   },
@@ -534,13 +544,13 @@ const SAGES = {
     sage:"Nabooru", element:"Spirit", medallion:"Spirit",
     temple:"Spirit Temple", song:"Requiem of Spirit", instrument:"Pipes",
     line:"You are the one who refuses.",
-    about:"Spirit is the element of will — the refusal that survives a desert, the self that does not dissolve into whatever it happens to be surrounded by. It is the only one of the six defined by what it declines to do rather than what it does. Orange, dry, and unowned.",
+    about:"Spirit is the element of will \u2014 the refusal that survives a desert, the self that does not dissolve into whatever it happens to be surrounded by. It is the only one of the six defined by what it declines to do rather than what it does. Orange, dry, and unowned.",
     body:[
       "You do not take an instruction on the strength of who gave it. Authority has to earn the same hearing as anyone else, and if it fails, you go your own way without much drama about it. You are comfortable being the only one, and you are suspicious of any arrangement that requires you to stop asking questions.",
-      "The risk is that refusal becomes a reflex. Nabooru gets caught precisely because she went in alone — and the people who would have gone with her never got asked."
+      "The risk is that refusal becomes a reflex. Nabooru gets caught precisely because she went in alone \u2014 and the people who would have gone with her never got asked."
     ],
     sageBody:[
-      "Nabooru is a Gerudo thief who robs Ganondorf's own temple, and calls herself the lone wolf thief while she does it. She is surrounded by an entire people who follow the man, and she simply declines — not out of loyalty to Hyrule, but out of loyalty to her own read on what is right.",
+      "Nabooru is a Gerudo thief who robs Ganondorf's own temple, and calls herself the lone wolf thief while she does it. She is surrounded by an entire people who follow the man, and she simply declines \u2014 not out of loyalty to Hyrule, but out of loyalty to her own read on what is right.",
       "She carries the Spirit Medallion because she is the element's whole argument: a will that an entire desert, and an entire king, failed to convert."
     ]
   },
@@ -548,13 +558,13 @@ const SAGES = {
     sage:"Rauru", element:"Light", medallion:"Light",
     temple:"Temple of Time", song:"Prelude of Light", instrument:"Harp",
     line:"You are the one who holds the frame.",
-    about:"Light is the element of the frame itself. It does not act so much as make action possible — it reveals what is already there, puts it in order, and holds the structure steady while everything inside it moves. The least dramatic of the six, and the one the other five are standing on.",
+    about:"Light is the element of the frame itself. It does not act so much as make action possible \u2014 it reveals what is already there, puts it in order, and holds the structure steady while everything inside it moves. The least dramatic of the six, and the one the other five are standing on.",
     body:[
       "You take the long view by temperament, not by effort. Things that panic other people register with you as stages in a process that was always going to have stages. You are the steady one, the one who keeps the structure intact while everyone else is reacting, and you rarely need credit for it.",
       "The risk is acceptance arriving too early. Not everything is a phase to be waited out, and patience that never converts into action is indistinguishable, from the outside, from not caring."
     ],
     sageBody:[
-      "Rauru waits seven years in a chamber outside of time for a boy to grow up, and greets him with no apology and no urgency whatsoever. He built the Temple of Time, sealed the Sacred Realm, and then simply held the position — the least glamorous role in the entire story, and the one the whole thing rests on.",
+      "Rauru waits seven years in a chamber outside of time for a boy to grow up, and greets him with no apology and no urgency whatsoever. He built the Temple of Time, sealed the Sacred Realm, and then simply held the position \u2014 the least glamorous role in the entire story, and the one the whole thing rests on.",
       "He carries the Light Medallion because he does exactly what the element does: he is not the events, he is the room they are permitted to happen in."
     ]
   },
@@ -568,7 +578,7 @@ const SAGES = {
     about:"The seventh place among the sages is the only one with no element attached to it and no medallion to hand you. What it actually is: the distance between a decision and its consequence, and the willingness to spend the first in order to buy the second. Whoever holds it is always some way ahead of the room.",
     body:[
       "You are always some distance ahead of the current conversation. You think in consequences and second moves, you hold information until releasing it will actually do something, and you are willing to lose the present round if it sets up the next one. People often realize much later that you had already accounted for it.",
-      "The risk is living in a future nobody else can see yet. Strategy can quietly become distance — and the years you spend arranging things are years you also have to live in."
+      "The risk is living in a future nobody else can see yet. Strategy can quietly become distance \u2014 and the years you spend arranging things are years you also have to live in."
     ],
     sageBody:[
       "Zelda is never called the Sage of Time. Her title in Ocarina of Time is the Seventh Sage - the one who leads the other six, closes the Sacred Realm, and is the only one who receives no medallion. There is no Time Medallion in the game because there was never a seventh temple to take one out of.",
