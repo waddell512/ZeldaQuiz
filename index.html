@@ -255,6 +255,10 @@ button{font:inherit;color:inherit;cursor:pointer}
 .qtext{font-family:Spectral,serif;font-weight:400;font-size:clamp(1.2rem,1.02rem + 1.05vw,1.65rem);line-height:1.42;text-wrap:balance;margin:0}
 
 .answers{display:flex;flex-direction:column;gap:2px;margin:0;padding:0;list-style:none}
+/* The ocarina toggle floats over the bottom-right corner. Above ~60rem the
+   centred column ends well clear of it; below that they overlap, so the last
+   answer gets room rather than being read through the button. */
+@media (max-width:60rem){ .answers{padding-bottom:clamp(3.4rem,11vw,4.4rem)} }
 .ans{
   display:block;width:100%;text-align:left;
   background:var(--stone-1);border:0;border-left:2px solid var(--edge-2);
@@ -432,7 +436,7 @@ button{font:inherit;color:inherit;cursor:pointer}
         <p class="byline">by the Skyward Prince</p>
       </div>
       <hr class="rule-gold" style="width:6rem">
-      <p class="lede">Six medallions were carried out of six temples, and a seventh sage never took one. Twelve moments from one journey across Hyrule are put to you below &mdash; <em>not</em> the boy with the sword&rsquo;s road, but your own. Answer as yourself; the element you carry will be plain by the end.</p>
+      <p class="lede">Six medallions were carried out of six temples, and a seventh sage never took one. Below are twelve moments from one journey across Hyrule &mdash; a country quietly losing its songs, and a road that is yours, <em>not</em> the boy with the sword&rsquo;s. Answer as yourself; the element you carry will be plain by the end.</p>
       <button class="btn" id="begin">Enter the Chamber</button>
     </section>
 
@@ -689,155 +693,157 @@ function medallion(key){
 }
 
 /* ======================= QUESTIONS ======================= */
-/* Twelve moments from one journey across Hyrule. You are a hero on the
-   road with a quest of your own - not the boy with the sword, and not a
-   bystander either. Each question offers all seven sages exactly once,
-   and answer order is varied per question so position never reveals the
-   mapping - no sage sits in the same slot more than twice. */
+/* One original quest, twelve moments long, set in Hyrule but nowhere in
+   its story: across the country the songs are going out of people's
+   heads, and you have taken up the work of finding out why. You are a
+   hero on that road - not the boy with the sword, and not a bystander
+   either. Each question offers all seven sages exactly once, and answer
+   order is varied per question so position never reveals the mapping -
+   no sage sits in the same slot more than twice. */
 const QUESTIONS = [
   { place:"Kokiri Forest",
-    text:"The quest you have taken up begins somewhere in these woods. The Kokiri tell you, without drama, that outsiders who walk into the Lost Woods come out as something else.",
+    text:"The song the Kokiri sing has three verses. They can only remember two, and it does not trouble a single one of them.",
     answers:[
-      {s:"spirit", t:"Go in anyway. A story told to keep people out usually means something is in there."},
-      {s:"shadow", t:"Go in without telling them, so nobody here has to carry it if you do not come back."},
-      {s:"time",   t:"Camp at the treeline and watch for three days. The way in will show itself."},
-      {s:"forest", t:"Ask one of them to walk you to the edge, and mean it when you say you will be back."},
-      {s:"light",  t:"Wait at the entrance until they choose to let you through. That door stays open."},
-      {s:"water",  t:"Tell them plainly what this quest has already cost you. Then ask a second time."},
-      {s:"fire",   t:"Walk in while they are still explaining why you should not."}
+      {s:"spirit", t:"Keep asking after the third verse after every one of them has told you to stop."},
+      {s:"shadow", t:"Find out it is gone for good, and let them go on thinking it was only ever two."},
+      {s:"time",   t:"Write down the two they still have, tonight, before this takes a third off them."},
+      {s:"forest", t:"Sit in and sing the two with them. What is left is still worth singing."},
+      {s:"light",  t:"Take it as it stands. A song with a verse missing is a record of what happened."},
+      {s:"water",  t:"Tell them plainly that this frightens you, even though it does not frighten them."},
+      {s:"fire",   t:"Sing the third verse at them, badly, until somebody's mouth remembers it."}
+    ]},
+
+  { place:"The Field Road",
+    text:"The minstrel at the waystation can still play a full set, and the innkeeper has quietly stopped letting him leave.",
+    answers:[
+      {s:"forest", t:"Stay the week. Whatever happens to him, he should not be on his own for it."},
+      {s:"light",  t:"Ask the man to play in the yard, where the whole road can hear what is at stake."},
+      {s:"fire",   t:"Tell the innkeeper to his face that he is keeping a man, and walk the minstrel out."},
+      {s:"spirit", t:"Nobody here decides for him. Ask him what he wants and do that, not what is right."},
+      {s:"time",   t:"Say nothing, and learn the whole set yourself over four nights, so it survives him."},
+      {s:"shadow", t:"Pay off the man's debt out of your own purse and never tell him it was you."},
+      {s:"water",  t:"Say out loud in the common room that this is disgusting. Let it be awkward."}
     ]},
 
   { place:"Hyrule Castle Town",
-    text:"You reach the market carrying proof that something is badly wrong in Hyrule. The square is at its busiest, the guards are bored, and not one person will look at what you are holding.",
+    text:"A scribe in the market is selling recovered songs by the sheet. About half of what he is selling, he wrote himself.",
     answers:[
-      {s:"forest", t:"Find the one stallholder who did listen. One is enough to begin with."},
-      {s:"light",  t:"Say it once, clearly, then stop pushing. It will land when the town is ready for it."},
-      {s:"fire",   t:"Say it again, louder, in the middle of the square, until somebody has to answer you."},
-      {s:"spirit", t:"Stop asking a town that will not give it, and go and deal with the thing yourself."},
-      {s:"time",   t:"Say nothing more today. Spend the week finding out who here will matter in a year."},
-      {s:"shadow", t:"Let them keep their ordinary afternoon. Carry the knowing alone and act on it."},
-      {s:"water",  t:"Tell them what it costs to be the only one who knows, and do not apologise for it."}
-    ]},
-
-  { place:"Goron City",
-    text:"Goron City is starving. The cavern that feeds it has been sealed by something living inside, and no part of your own quest requires you to open it. Every day here is a day lost.",
-    answers:[
-      {s:"time",   t:"Open it, but learn what is in there first, even if that costs three more days."},
-      {s:"forest", t:"Stay until they eat. The quest will still be there. These people are here now."},
-      {s:"light",  t:"Do the work without hurrying. Sieges end sooner with someone steady in them."},
-      {s:"spirit", t:"Ignore the elder's plan entirely. His way is the reason they are still hungry."},
-      {s:"water",  t:"Tell them out loud that you are frightened of what is down there, and then go down."},
-      {s:"fire",   t:"Straight down the tunnel at it. Talking has had its turn."},
-      {s:"shadow", t:"Go down alone, at night, and let them wake to it already being finished."}
+      {s:"time",   t:"Buy the lot and sort true from invented later. The paper will outlast the scribe."},
+      {s:"forest", t:"Track down the singers he took them from and put the money in their hands."},
+      {s:"light",  t:"Stand at his table and say which are real and which are not, sheet by sheet."},
+      {s:"spirit", t:"Undercut him. Give the true ones away free on the next street over."},
+      {s:"water",  t:"Tell him, at volume, what he is doing to people who have already lost something."},
+      {s:"fire",   t:"Turn the table over. He can set it up again somewhere I am not standing."},
+      {s:"shadow", t:"Say nothing, and quietly buy up the false ones so nobody else learns them."}
     ]},
 
   { place:"Zora's Domain",
-    text:"The Zora hold the one thing your quest cannot continue without. Their king will part with it, but only for a promise that binds you to this domain long after you meant to be gone.",
+    text:"One Zora family holds a song nobody else has. The last of them will not teach an outsider, and there is no one after her.",
     answers:[
-      {s:"water",  t:"Make the promise, and tell him honestly that you will resent it. Both are true."},
-      {s:"fire",   t:"Tell him exactly what you think of a king who bargains while his own river fails."},
-      {s:"time",   t:"Take the terms. A debt you pay in ten years is cheaper than a delay you pay for now."},
-      {s:"shadow", t:"Agree, say nothing about what it costs you, and carry the terms without complaint."},
-      {s:"forest", t:"Refuse the bargain and help them anyway. Ask again later, as someone they know."},
-      {s:"light",  t:"Accept it as it stands. Some doors have a toll, and paying one is not a defeat."},
-      {s:"spirit", t:"Refuse. Nothing is worth signing yourself over to someone else's keeping for."}
+      {s:"water",  t:"Tell her what it will feel like to be the last person alive who knows it."},
+      {s:"fire",   t:"Ask her outright, once, in front of everyone, so the refusal is public too."},
+      {s:"time",   t:"Ask her to teach a young Zora instead of you, and come back for it in forty years."},
+      {s:"shadow", t:"Sit outside her door each evening until you have it by ear, and never say so."},
+      {s:"forest", t:"Stop asking. Stay, be useful, and let her make up her mind about you slowly."},
+      {s:"light",  t:"Accept that it is hers to end. Some things are allowed to close."},
+      {s:"spirit", t:"Her people made that rule, not her. Tell her she is free to break it."}
     ]},
 
   { place:"Lon Lon Ranch",
-    text:"You have been on the road long enough to stop noticing. The ranch offers a bed, a meal, and a horse that will genuinely carry you - if you stay long enough for it to trust you.",
+    text:"A woman here hums something in her sleep that she cannot recall awake. Catching it means waking her, night after night.",
     answers:[
-      {s:"fire",   t:"One night, eat everything they put in front of you, and be gone before the light."},
-      {s:"time",   t:"Stay the week. A horse that trusts you is worth more later than seven days is now."},
-      {s:"spirit", t:"Take the horse tonight and leave payment. You will not be broken to a schedule."},
-      {s:"forest", t:"Stay because they asked you to. The horse is not the reason and never was."},
-      {s:"shadow", t:"Stay, and walk the fence line at night, because something has been at the stock."},
-      {s:"water",  t:"Tell them how badly you needed to be asked. Stay, because leaving would hurt them."},
-      {s:"light",  t:"Stay as long as it takes. Nothing worth riding was ever rushed into the saddle."}
-    ]},
-
-  { place:"Gerudo Fortress",
-    text:"The Gerudo caught you crossing their fortress and put you in a cell. Your gear is on a table you can see through the bars, and the guard watching it is bored.",
-    answers:[
-      {s:"forest", t:"Get the person you came in with out first. You can be second."},
-      {s:"spirit", t:"Pick the lock. You do not recognise the authority that put you in here."},
-      {s:"water",  t:"Tell the guard precisely what you think of this, at length, and see what noise buys."},
-      {s:"fire",   t:"Wait for that door to open and go through whoever is standing in it."},
-      {s:"shadow", t:"Sit still, learn the rotation, and take the one gap that nobody is watching."},
-      {s:"time",   t:"Let them keep you a week. You are learning this fortress from inside, for free."},
-      {s:"light",  t:"Wait. They will decide what you are for, and you would rather they chose it."}
+      {s:"fire",   t:"Wake her. She can be tired. The song cannot be got back any other way."},
+      {s:"time",   t:"Sleep in the loft a month and take one bar a night. Slow is still forward."},
+      {s:"spirit", t:"Ask her first, and if she says leave it alone, leave it alone. It is her head."},
+      {s:"forest", t:"Stay the season and just be there at night. It will come out on its own."},
+      {s:"shadow", t:"Learn it without telling her, so she never finds out what she was losing."},
+      {s:"water",  t:"Tell her what she does at night. She has a right to be moved by that."},
+      {s:"light",  t:"Write down what you hear and leave it where she will find it. Then let her choose."}
     ]},
 
   { place:"Kakariko Village",
-    text:"The one person who has been guiding you hands you a sealed thing, says not to open it until you are past the desert, and will not say another word about it.",
+    text:"The Sheikah kept a written record of the old songs. Its keeper says that opening it would be worse than losing them.",
     answers:[
-      {s:"time",   t:"Leave it sealed. The reason will be about later, and later is where you are going."},
-      {s:"spirit", t:"Open it the moment they are out of sight. Nobody hands you an order and walks off."},
-      {s:"water",  t:"Tell them that being kept in the dark by someone you trust is worse than the danger."},
-      {s:"shadow", t:"Take it, ask nothing, and carry it exactly as told. They will have had a reason."},
-      {s:"light",  t:"Take it and stop turning it over. It gets explained when the explanation is useful."},
-      {s:"forest", t:"Ask them to come with you instead. You would rather have the person than the parcel."},
-      {s:"fire",   t:"Ask them straight out, now, in front of everyone, and keep asking until they answer."}
+      {s:"forest", t:"Take her word for it. She has held this village longer than you have been alive."},
+      {s:"spirit", t:"Open it. A record nobody is allowed to read has already failed at being one."},
+      {s:"water",  t:"Tell her the losing is not an idea to you, and let her watch that land."},
+      {s:"fire",   t:"Ask for the key, and when she refuses, ask what she is actually afraid of."},
+      {s:"shadow", t:"Read it alone, tell nobody it exists, and carry whatever is in it yourself."},
+      {s:"time",   t:"Leave it sealed and start a second record from living mouths, beginning today."},
+      {s:"light",  t:"Ask her to read it aloud to the village, and abide by whatever they decide."}
     ]},
 
-  { place:"Temple of Time",
-    text:"The door at the end of the hall will not open for you. Everything you have done so far was to reach it, and it is telling you plainly that you are not yet what it is waiting for.",
+  { place:"Goron City",
+    text:"The Goron drum cycle wants a hundred voices. They are down to sixty, and would rather not perform it at all than perform it wrong.",
     answers:[
-      {s:"light",  t:"Accept it. Doors like this open when they open, and the wait is part of the road."},
-      {s:"fire",   t:"Put your shoulder into it. It has not yet met anyone who was going to keep going."},
-      {s:"shadow", t:"Go and find the other way in. There is always a lower one, and it is always worse."},
-      {s:"time",   t:"Leave, and come back as the thing it waits for. A project, not a defeat."},
-      {s:"water",  t:"Stand there and say how unfair it is. You have earned the right to be angry."},
-      {s:"forest", t:"Go back for the people who got you this far. Perhaps it was never meant for one."},
-      {s:"spirit", t:"Decide the door is wrong about you, and start looking for the seam in it."}
+      {s:"time",   t:"Teach it to the young ones now, badly, so it can be right again in twenty years."},
+      {s:"spirit", t:"Perform it with sixty. The number was never the part that mattered."},
+      {s:"water",  t:"Tell them that hearing it wrong would still undo you, and ask them to try."},
+      {s:"shadow", t:"Say nothing about the missing forty. Stand in the line and make it sixty-one."},
+      {s:"light",  t:"Record what sixty sounds like. That is the true state of this mountain this year."},
+      {s:"forest", t:"Go door to door for the missing forty. Most of them are still in this mountain."},
+      {s:"fire",   t:"Start it. Somebody always joins in once the drums are already going."}
+    ]},
+
+  { place:"Gerudo Fortress",
+    text:"The Gerudo song you came for is a war song. Teaching it to an outsider is not a gift; it is arming one.",
+    answers:[
+      {s:"light",  t:"Say plainly what you would do with it, and let them weigh that against the risk."},
+      {s:"fire",   t:"Tell them you want it, all of it, and that you are not going to pretend otherwise."},
+      {s:"shadow", t:"Take only the half that is not a weapon, and let them believe you took nothing."},
+      {s:"time",   t:"Swear terms for it: not sung outside this desert for a hundred years."},
+      {s:"water",  t:"Admit out loud that you may be the wrong person to hold it. Ask anyway."},
+      {s:"forest", t:"Do not carry it out. Learn it here, sing it here, and leave it in the desert."},
+      {s:"spirit", t:"A song is not a sword. Learn it, and answer for what I do with it afterwards."}
     ]},
 
   { place:"Lake Hylia",
-    text:"The lake is a foot lower every week and whatever is doing it is somewhere underneath. This is nobody's quest, least of all yours, and there is no one else on the shore.",
+    text:"Somebody chased this before you and drowned doing it. What he worked out is still down there with him.",
     answers:[
-      {s:"shadow", t:"Go down. Say nothing to anyone afterwards about how deep it went."},
-      {s:"water",  t:"Go down, and let the fear of it show on the way. That has never stopped you yet."},
-      {s:"fire",   t:"Go down tonight, before you have had time to talk yourself out of it."},
-      {s:"time",   t:"Map the shoreline first. Whatever is doing this will be doing it elsewhere next."},
-      {s:"spirit", t:"Go, precisely because nobody asked you to. That is why it would not get done."},
-      {s:"light",  t:"Go down at the pace it takes. Water has been leaving and returning for a long time."},
-      {s:"forest", t:"Find whoever fishes this lake and go down together, so that it is theirs as well."}
+      {s:"shadow", t:"Go down for the papers, and let his family keep the version where he just left."},
+      {s:"water",  t:"Bring them up and read them out to whoever loved him. Out loud, all of it."},
+      {s:"fire",   t:"Go down now, before the light goes. Waiting has not helped anybody yet."},
+      {s:"time",   t:"Learn to dive properly first. His mistake is on the record; do not repeat it."},
+      {s:"spirit", t:"He went down alone and it killed him. Do the opposite of everything he did."},
+      {s:"light",  t:"Mark where he lies and tell the village, so he is buried before I take his work."},
+      {s:"forest", t:"Sit with the people he left behind before you take anything off him."}
     ]},
 
   { place:"Gerudo Valley",
-    text:"The rope bridge is cut, and the person travelling with you cannot make the climb. Ahead is the desert and the thing you came for. Behind is a week of walking.",
+    text:"Halfway across the bridge you catch yourself unable to finish a song you have known your entire life.",
     answers:[
-      {s:"fire",   t:"Carry them. Start now and argue about it on the way."},
-      {s:"light",  t:"Make camp. The valley is not going anywhere, and neither is what lies past it."},
-      {s:"spirit", t:"Go on alone. They knew what this was when they asked to come."},
-      {s:"water",  t:"Tell them you are furious with them for slowing you down. Then do not leave."},
-      {s:"forest", t:"Take the week. You did not come this far in order to arrive without them."},
-      {s:"shadow", t:"Send them back with the supplies, say you are fine, and never mention the climb."},
-      {s:"time",   t:"Get them to shelter and go on. One of you finishing beats both of you turning back."}
+      {s:"fire",   t:"Sing it from the top, out loud, again and again, until the ending gives itself up."},
+      {s:"light",  t:"Note the exact bar it stops at. That is evidence now, and it is about me."},
+      {s:"spirit", t:"Refuse the panic. Whatever this is, it does not get to decide who I am."},
+      {s:"water",  t:"Say it to my companion at once. Carrying this quietly would be the worse thing."},
+      {s:"forest", t:"Go home for it. The people who taught it to me still have the end of it."},
+      {s:"shadow", t:"Tell nobody. They are frightened enough, and this would finish them off."},
+      {s:"time",   t:"Write down everything I still have tonight, while I am still the one who has it."}
     ]},
 
-  { place:"Kakariko, seven years on",
-    text:"You come back over the ridge after seven years to find the village burning and something moving in the smoke. Everyone you left here is either already out or they are not.",
+  { place:"The Hollow",
+    text:"You find what has been doing it. It is old, it was left down here alone, and it takes songs because they are the only company it can hold.",
     answers:[
-      {s:"spirit", t:"Go in against every rule you were ever given about fires like this one."},
-      {s:"forest", t:"Straight to the one house that matters to you. The rest of it can come after."},
-      {s:"shadow", t:"Take them out by the back lanes and let them think the fire simply missed them."},
-      {s:"light",  t:"Work the line steadily. Panic moves faster through a village than fire does."},
-      {s:"fire",   t:"In at the front of it, shouting, so anyone still inside knows where the way out is."},
-      {s:"time",   t:"Cut the row ahead of it so the village does not go. Lose those houses on purpose."},
-      {s:"water",  t:"Get them out, then let them see you break. You will not pretend this was nothing."}
+      {s:"spirit", t:"It does not get pitied out of this. Take them back."},
+      {s:"forest", t:"Stay down here with it. It has been taking company; give it some and watch."},
+      {s:"shadow", t:"Bind it and let Hyrule go on never knowing there was anything under here."},
+      {s:"light",  t:"Name it. Write what it is and what it did, and put that where people can read it."},
+      {s:"fire",   t:"Tell it to its face what it has taken. Nobody has ever once spoken to it."},
+      {s:"time",   t:"Nothing yet. Learn how it feeds, then end it in a way that stays ended."},
+      {s:"water",  t:"Tell it that I am sorry for it, and that it still has to stop."}
     ]},
 
-  { place:"Chamber of Sages",
-    text:"It is finished. You are standing in the light with the thing you crossed Hyrule for, and you are being asked what should be done with it.",
+  { place:"The Hollow, at the end",
+    text:"You can end it, and every song it has swallowed goes wherever it goes. Or you leave it, and Hyrule loses a little more each year.",
     answers:[
-      {s:"water",  t:"Say what the journey took out of you, in full, before you answer anything at all."},
-      {s:"shadow", t:"Ask that it be hidden, and that your name be left out of the telling entirely."},
-      {s:"forest", t:"Ask to be sent back to the people you left behind. That is the whole of it."},
-      {s:"light",  t:"Leave it here. It was never going to belong to whoever happened to be holding it."},
-      {s:"spirit", t:"Keep it. You are the one who went and got it, and you will decide what it is for."},
-      {s:"fire",   t:"Ask for the road home and a very long meal, and refuse to be solemn about any of it."},
-      {s:"time",   t:"Ask what it will be needed for in a hundred years, and answer on that basis."}
-    ]}
+      {s:"water",  t:"End it, and grieve them properly. Out loud, in front of people, as they deserve."},
+      {s:"shadow", t:"End it, and let the country never learn what it lost down here tonight."},
+      {s:"forest", t:"End it, then go home and spend what is left of my life teaching what I still have."},
+      {s:"light",  t:"End it, and write out the list of what went with it, so the loss is on record."},
+      {s:"spirit", t:"Neither. There is a third way, I have not found it, and I am not stopping yet."},
+      {s:"fire",   t:"End it now, tonight, before I talk myself into some cleverer answer."},
+      {s:"time",   t:"Leave it bound and starving. In a hundred years somebody will know how to free them."}
+    ]},
 ];
 /* integrity check: 7 answers per question, each sage exactly once */
 (function verify(){
