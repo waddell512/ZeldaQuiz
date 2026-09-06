@@ -812,7 +812,10 @@ function medallion(key){
    follow the twelve without putting any sage in the same slot a third
    time, so no sage sits in one slot more than twice across all
    thirteen. {C} in a trial's text is the companion chosen before the
-   first one; the choice scores nothing. */
+   first one; the choice scores nothing. The companions are creatures of
+   Hyrule rather than its peoples - a fairy, a dragon, a horse, an owl,
+   a wolfos and a cucco - so that choosing one is choosing a travelling
+   animal and not a member of somebody's tribe. */
 const QUESTIONS = [
   { place:"The Threshold",
     text:"The first is set at the treeline of the Kokiri wood. You may go in when the wood lets you, and nobody will say when. {C} settles down at the treeline to wait it out with you.",
@@ -987,17 +990,17 @@ const QUESTIONS = [
    Only the first and the thirteenth name the companion, through {C}. */
 const COMPANIONS = [
   { id:"tabe",   name:"Tab\u00e8", kind:"a fairy",
-    note:"Never stops talking, and will not hear of being left behind." },
-  { id:"tmber",  name:"Ember", kind:"a dragon",
+    note:"Bosses you the whole way, sulks when ignored, and then blurts the one true thing at the worst possible moment." },
+  { id:"ember",  name:"Ember", kind:"a dragon",
     note:"Young, about the size of a horse, and slow to trust anybody." },
-  { id:"oyu",    name:"Oyu", kind:"a Zora",
-    note:"Always some way ahead, and does not wait to be told twice." },
-  { id:"kessin", name:"Kessin", kind:"a Goron",
-    note:"Carries everything, argues with nothing, sleeps through weather." },
-  { id:"wren",   name:"Wren", kind:"a Sheikah",
-    note:"Explains nothing, and is never quite where you left them." },
-  { id:"hob",    name:"Hob", kind:"a horse",
-    note:"Says nothing at all, and has walked this road once before." }
+  { id:"blaze",  name:"Blaze", kind:"a horse",
+    note:"Will not be ridden by anyone who has not earned it, and will jump anything at all once you have." },
+  { id:"vesper", name:"Vesper", kind:"an owl",
+    note:"Explains things at enormous length, and is usually right." },
+  { id:"fen",    name:"Fen", kind:"a wolfos",
+    note:"Half tame at best. Goes ahead into the dark without being asked." },
+  { id:"pim",    name:"Pim", kind:"a cucco",
+    note:"Placid, ridiculous, and not to be struck under any circumstances." }
 ];
 let companion = COMPANIONS[0];
 
