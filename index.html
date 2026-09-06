@@ -755,74 +755,77 @@ function medallion(key){
 
 /* ======================= QUESTIONS ======================= */
 /* The twelve questions are the twelve trials themselves - no quest to
-   follow, no creature to hunt, and nobody in them with a name. The
-   chamber sets them one after another and they run across Hyrule, from
-   the treeline of the Kokiri wood to the account you give at the end of
-   it. They connect as a sequence rather than a plot: each is named for
-   what it puts to you, the naming runs first to twelfth in the setup
-   text, and the last one asks what you made of the other eleven. Each
-   question offers all seven sages exactly once, and answer order is
-   varied per question so position never reveals the mapping - no sage
-   sits in the same slot more than twice. */
+   follow, no creature to hunt, nobody in them with a name. They are all
+   built in the register of the sixth: a standing condition rather than
+   an emergency, set over a season or a year rather than a moment, and
+   oblique about what it is actually testing. Nothing here is a rescue.
+   A fire to keep alight for a reason nobody gives, a year in which you
+   may not explain yourself, a watch where nothing ever comes, a rope
+   you may cross once in your life. Each is named for what it puts to
+   you, the naming runs first to twelfth through the setup text, and the
+   last asks what you made of the other eleven. Each question offers all
+   seven sages exactly once, and answer order is varied per question so
+   position never reveals the mapping - no sage sits in the same slot
+   more than twice. */
 const QUESTIONS = [
   { place:"The Threshold",
-    text:"The first trial is set at the treeline of the Kokiri wood. You are to leave everything you carry on the moss, and go in having kept back one thing.",
+    text:"The first is set at the treeline of the Kokiri wood. You may go in when the wood lets you, and nobody will say when that is or what it is waiting to see.",
     answers:[
-      {s:"spirit", t:"Keep the one thing they would least like me to have kept."},
-      {s:"shadow", t:"Keep something small enough that nobody at the treeline sees it."},
-      {s:"time",   t:"Keep what I will want on the way out, not what I want going in."},
-      {s:"forest", t:"Keep the thing somebody gave me. The rest was only ever gear."},
-      {s:"light",  t:"Keep nothing, and go in with my hands where they can be seen."},
-      {s:"water",  t:"Keep the one thing I would grieve, and say out loud which it is."},
-      {s:"fire",   t:"Put the lot down and go in before I start weighing any of it."}
+      {s:"spirit", t:"Go in on the first morning I feel like it, and let the wood object."},
+      {s:"shadow", t:"Wait out of its sight, so that whatever it wants is not performed."},
+      {s:"time",   t:"Wait, and use the waiting. There is a year of things I have not learned."},
+      {s:"forest", t:"Wait at the treeline and be good company to whoever waits with me."},
+      {s:"light",  t:"Wait in the open where it can see me, and do nothing worth watching."},
+      {s:"water",  t:"Say out loud, most days, that the waiting is hard. Because it is."},
+      {s:"fire",   t:"Wait a week. Then walk in, because a week is a fair offer."}
     ]},
 
-  { place:"The Road",
-    text:"The second is set on the field. Two roads run to the same place, one long and safe and one short and not, and whoever is behind me takes the road they see me take.",
+  { place:"The Way",
+    text:"The second gives you a place on the far side of the field to reach, and forbids you to ask anybody the way to it. There is no limit at all on how long you take.",
     answers:[
-      {s:"forest", t:"The long one. I am not choosing only for myself out here."},
-      {s:"light",  t:"Stop at the fork and mark the short road, then take whichever I like."},
-      {s:"fire",   t:"The short one, fast, and off it again before anyone is close behind."},
-      {s:"spirit", t:"The short one. Grown people can look at two roads and choose."},
-      {s:"time",   t:"The long one today. The short one is worth learning before using."},
-      {s:"shadow", t:"The short one, out of sight, so there is no road seen to follow."},
-      {s:"water",  t:"Say at the fork that the short road frightens me, and take it."}
+      {s:"forest", t:"Travel with people going roughly that way, and never ask the question."},
+      {s:"light",  t:"Learn to read the country properly. That comes to the same as asking."},
+      {s:"fire",   t:"Set out at once in the likeliest direction and correct as I go."},
+      {s:"spirit", t:"Arrive wrong my own way rather than right by somebody else's."},
+      {s:"time",   t:"Spend a month on the map before I spend a single day on the road."},
+      {s:"shadow", t:"Listen hard to people who are not talking to me, and ask no one."},
+      {s:"water",  t:"Admit to whoever I travel with that I am lost, and still not ask."}
     ]},
 
-  { place:"The Word",
-    text:"The third is set in the town. You are handed something true about a person that would cost them everything, and one day in which to decide who hears it.",
+  { place:"The Silence",
+    text:"The third is a year in the town in which you may not explain yourself to anybody, about anything, however badly you come to be misunderstood.",
     answers:[
-      {s:"time",   t:"Hold it a year. It will still be true then and better understood."},
-      {s:"forest", t:"Take it to them first. Whatever follows, they hear it from me."},
-      {s:"light",  t:"Say it once, in the open, to the people it actually concerns."},
-      {s:"spirit", t:"Judge by my own read of who it helps, not by who handed it to me."},
-      {s:"water",  t:"Tell them what carrying it has been like, and then hand it over."},
-      {s:"fire",   t:"Say it today. A day of holding it is a day of lying by omission."},
-      {s:"shadow", t:"Tell nobody, and hold it until it can no longer hurt them."}
+      {s:"time",   t:"Do the year. Being understood was always going to take longer."},
+      {s:"forest", t:"Stay near the few people who never needed it explained to them."},
+      {s:"light",  t:"Live so plainly that the year does the explaining on my behalf."},
+      {s:"spirit", t:"Do the year, and let them make of me exactly whatever they like."},
+      {s:"water",  t:"Let them see what it costs me, since I am not allowed to say it."},
+      {s:"fire",   t:"Do the year loudly. Silence about myself is not silence about all."},
+      {s:"shadow", t:"Do the year, and afterwards still not explain. It was easier so."}
     ]},
 
   { place:"The Fire",
-    text:"The fourth is set in the mountain. A seam is burning, the elders give the roof an hour at the outside, and two did not come up with the rest of the shift.",
+    text:"The fourth gives you a fire on the mountain to keep alight for a season. Nobody comes to that place, and nobody will tell you what the fire is for.",
     answers:[
-      {s:"water",  t:"Say out loud that I do not expect to come back up, and go down."},
-      {s:"fire",   t:"Down. Now. The roof can have its opinion about it afterwards."},
-      {s:"time",   t:"Two minutes finding out where they are. Then one trip, not four."},
-      {s:"shadow", t:"Go down without telling anybody, so that nobody comes in after me."},
-      {s:"forest", t:"Go down with the Gorons who want to come. Not alone, not into that."},
-      {s:"light",  t:"Put the elders in charge of the outside and take the inside myself."},
-      {s:"spirit", t:"The elders have been wrong about that roof before. Down."}
+      {s:"water",  t:"Keep it, and admit out loud how strange it is to mind about a fire."},
+      {s:"fire",   t:"Keep it high. If it is worth keeping it is worth seeing from below."},
+      {s:"time",   t:"Cut a whole season of wood in the first fortnight, then stop fretting."},
+      {s:"shadow", t:"Keep it, and let nobody down the mountain know that I am up here."},
+      {s:"forest", t:"Keep it, and keep a second one lit for anybody who comes up cold."},
+      {s:"light",  t:"Keep it exactly as instructed, and write down what the weather did."},
+      {s:"spirit", t:"Keep it my own way, and let it go out one night to see what happens."}
     ]},
 
   { place:"The Deep",
-    text:"The fifth is set in the Domain. You are asked to go down to the bottom of the lake and you are not told what for, and the Zora will not answer when you ask.",
+    text:"The fifth hands you a sealed box and asks you to sink it in the deepest water of the Domain. You are not told what is in it, and you are not to open it.",
     answers:[
-      {s:"fire",   t:"In, straight away, and find out down there what it was for."},
-      {s:"time",   t:"Ask three more times, three different ways, and go down at dusk."},
-      {s:"spirit", t:"Go down, but on my own terms, and surface when I decide to."},
-      {s:"forest", t:"Ask a Zora to come down with me, and go when one of them says yes."},
-      {s:"shadow", t:"Go down alone, at night, and never say what was at the bottom."},
-      {s:"water",  t:"Say out loud that being told nothing frightens me, and go down."},
-      {s:"light",  t:"Refuse until somebody says what it is for. A trial can be asked about."}
+      {s:"fire",   t:"Take it out and drop it before the question has time to start."},
+      {s:"time",   t:"Sink it, and mark the place, in case anybody ever needs it back."},
+      {s:"spirit", t:"Open it. I am not sinking a thing I have not looked inside."},
+      {s:"forest", t:"Ask a Zora to take me out, and let one of them watch me drop it."},
+      {s:"shadow", t:"Sink it at night, alone, and never tell a soul where the place is."},
+      {s:"water",  t:"Say out loud that the not knowing is going to bother me for years."},
+      {s:"light",  t:"Sink it unopened, and say publicly that I never once looked."}
     ]},
 
   { place:"The Season",
@@ -830,7 +833,7 @@ const QUESTIONS = [
     answers:[
       {s:"forest", t:"Do the work and get close to the people. That is a year well spent."},
       {s:"spirit", t:"Do the work and stop looking for it. A watched year is a wasted one."},
-      {s:"water",  t:"Say at the outset that this frightens me more than the fire did."},
+      {s:"water",  t:"Say at the outset that this frightens me more than any of the rest."},
       {s:"fire",   t:"Work flat out and treat every single day as though it is the one."},
       {s:"shadow", t:"Keep a private account of the year and let nobody ever read it."},
       {s:"time",   t:"Assume it is the last day, and spend the year being worth that day."},
@@ -838,67 +841,67 @@ const QUESTIONS = [
     ]},
 
   { place:"The Watch",
-    text:"The seventh is a single night's watch over Kakariko, alone. Something is moving out beyond the fence, and waking the village may turn out to be the wrong thing.",
+    text:"The seventh is a watch kept over Kakariko, every night, for a year. In the whole of that year nothing comes, and nothing is ever going to come.",
     answers:[
-      {s:"time",   t:"Wake nobody. Learn what it is tonight and tell them at first light."},
-      {s:"spirit", t:"Judge it on what I can see, not on what the watch was set for."},
-      {s:"water",  t:"Wake one person and tell them honestly that I cannot judge this."},
-      {s:"shadow", t:"Go out beyond the fence to it, and let the village sleep through."},
-      {s:"light",  t:"Ring once and say exactly what I saw, no more and no less."},
-      {s:"forest", t:"Wake the houses nearest the fence. They are what it reaches first."},
-      {s:"fire",   t:"Ring the bell. Being wrong loudly beats being right too late."}
+      {s:"time",   t:"Stand it anyway. The year a watch lapses is the year something comes."},
+      {s:"spirit", t:"Stand it because I said I would, not because anything is out there."},
+      {s:"water",  t:"Say out loud, some nights, that this is lonely, and stand it anyway."},
+      {s:"shadow", t:"Stand it, and let the village go on not knowing anyone is out there."},
+      {s:"light",  t:"Stand it, and keep a record every night, the empty ones included."},
+      {s:"forest", t:"Stand it, and get to know the houses I am standing in front of."},
+      {s:"fire",   t:"Stand it wide awake all year, as though tonight is finally the night."}
     ]},
 
   { place:"The Pass",
-    text:"The eighth is set on the trail, on a shelf one cart wide. You can hold the gap open long enough for the column behind you to get through, or you can be in the column.",
+    text:"The eighth sets you at the pass to turn back anybody who cannot say why they are going up. You are not told what is up there, or why any of it matters.",
     answers:[
-      {s:"light",  t:"Hold it, and call the count aloud so they know what time they have."},
-      {s:"fire",   t:"Hold it. Somebody has to, and I am already standing in the place."},
-      {s:"shadow", t:"Hold it, and let the column believe I was behind them all along."},
-      {s:"time",   t:"Get in the column. I am worth more past this than I am under it."},
-      {s:"water",  t:"Hold it, and say a proper goodbye to the last one through the gap."},
-      {s:"forest", t:"Hold it. Everyone who has fed me this month is out on that shelf."},
-      {s:"spirit", t:"Send them through and find my own way up. I do not die on cue."}
+      {s:"light",  t:"Ask everyone the same question and give everyone the same answer."},
+      {s:"fire",   t:"Ask it straight, take the first answer given, and decide on that."},
+      {s:"shadow", t:"Turn them back without ever letting on that there is a reason."},
+      {s:"time",   t:"Write down every reason I am given. In a year that is a picture."},
+      {s:"water",  t:"Tell them I do not know why either, and turn them back regardless."},
+      {s:"forest", t:"Let the ones I know go up. I can vouch for them, and that is a reason."},
+      {s:"spirit", t:"Go up myself first. I am not guarding a thing I have not seen."}
     ]},
 
-  { place:"Mercy",
-    text:"The ninth is set at the lake. The thing you were sent to end is cornered at the water, wounded, and it has stopped fighting and is watching you decide.",
+  { place:"The Keeping",
+    text:"The ninth gives you something wounded to keep through the winter. It will not become tame, it will not thank you, and it may very well die regardless.",
     answers:[
-      {s:"shadow", t:"End it out of sight of the people who walked down here to watch."},
-      {s:"water",  t:"Say out loud that I do not want to do this, and then do it properly."},
-      {s:"fire",   t:"End it now. Drawing it out is the cruelty, not the killing."},
-      {s:"time",   t:"Take it alive. What it knows will outlast what it has done."},
-      {s:"spirit", t:"Let it go. I agreed to end a danger, not to finish something beaten."},
-      {s:"light",  t:"Say what it did and why it ends here, aloud, before I do anything."},
-      {s:"forest", t:"Ask the people it hurt what they want done, and do exactly that."}
+      {s:"shadow", t:"Keep it out of sight, so that nobody has to watch if it goes badly."},
+      {s:"water",  t:"Keep it, and grieve it in advance, out loud, the whole winter."},
+      {s:"fire",   t:"Keep it hard. Warm, fed and handled every day, and no half measures."},
+      {s:"time",   t:"Keep it for the spring, not the winter. Feed it for what it will be."},
+      {s:"spirit", t:"Keep it, and let it stay wild. It owes me nothing at the end of this."},
+      {s:"light",  t:"Keep it, and write down honestly whether I am helping or prolonging."},
+      {s:"forest", t:"Keep it where I sleep. Nothing should do a winter like that alone."}
     ]},
 
   { place:"The Rope",
-    text:"The tenth is set at the valley. One rope across, and it will bear one of you. The far side needs somebody, and there is no way to know which of you it needs.",
+    text:"The tenth is a rope across the valley which you may cross once, in either direction, in your life. When you use it is yours, and so is which way.",
     answers:[
-      {s:"fire",   t:"Go, before the arguing starts. Somebody has to be over there."},
-      {s:"light",  t:"Say out loud what each of us is good for, and let that settle it."},
-      {s:"spirit", t:"Refuse to be the one who decides. Let them choose and abide by it."},
-      {s:"water",  t:"Say plainly that I want to go, and then say that they should."},
-      {s:"forest", t:"Send them. I am not crossing a rope away from who I came with."},
-      {s:"shadow", t:"Send them, and never once let on that I wanted the far side."},
-      {s:"time",   t:"Whichever of us the far side still needs in a year. Probably not me."}
+      {s:"fire",   t:"Cross it today. A thing saved for the right moment is a thing wasted."},
+      {s:"light",  t:"Cross when I can say plainly why. Until then it stays a rope."},
+      {s:"spirit", t:"Cross it for nothing at all, on a day I pick, and owe nobody a reason."},
+      {s:"water",  t:"Cross when it matters enough that I would be in tears about it."},
+      {s:"forest", t:"Cross when somebody on the far side needs me there. Not before that."},
+      {s:"shadow", t:"Cross when nobody is watching, and never mention that I used it."},
+      {s:"time",   t:"Keep it. There is a day coming, decades off, that will want a rope."}
     ]},
 
   { place:"The Cup",
-    text:"The eleventh is set in the desert. You have water for one more day, and the person asking you for it is the one who refused you theirs a week ago.",
+    text:"The eleventh gives you a cup that fills once a day and puts you in a camp where more than one person is thirsty. Nobody there is told that the cup is yours.",
     answers:[
-      {s:"spirit", t:"Give it. What they did a week ago is their account, not mine."},
-      {s:"forest", t:"Give it, and walk them out. Water alone gets nobody anywhere."},
-      {s:"shadow", t:"Give it, and let them think they found it, so nothing is owed."},
-      {s:"light",  t:"Give it, and say plainly that I remember the week before this one."},
-      {s:"fire",   t:"Say to their face what they did, and hand it over while saying it."},
-      {s:"time",   t:"Give it. Out here a refusal today is a body on the road tomorrow."},
-      {s:"water",  t:"Let them see exactly how much I resent this, and give it to them."}
+      {s:"spirit", t:"Decide it fresh each day, and refuse to make a rule out of it."},
+      {s:"forest", t:"Give it to the same person every day until they are on their feet."},
+      {s:"shadow", t:"Leave it filled where it will be found, and never say whose it was."},
+      {s:"light",  t:"Say whose it is on the first morning, and share it in the open."},
+      {s:"fire",   t:"Give it away the moment it fills, every day, without thinking."},
+      {s:"time",   t:"Give it to whoever has the most days of walking still ahead of them."},
+      {s:"water",  t:"Say out loud how badly I want it, and then hand it over anyway."}
     ]},
 
   { place:"The Account",
-    text:"The twelfth is the last. Eleven trials are behind you, and you are asked, without any one of them being named, to say what it was that you did.",
+    text:"The twelfth is the last. Eleven trials are behind you, none of them named, and you are asked what it was that you did.",
     answers:[
       {s:"water",  t:"Tell all of it, and let them see which of the eleven still costs me."},
       {s:"shadow", t:"Give the short account and carry the rest of it out of here myself."},
