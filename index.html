@@ -695,11 +695,12 @@ function medallion(key){
 /* One quest, told in order, and nowhere in the game's own story:
    Sennoch has got out of a seal in the Kokiri wood and is moving across
    Hyrule, and you are the one tracking it. The name is the Kokiri's
-   word for the thing that took four of them; the ninth trial is where
+   word for the thing that has been taking them; the ninth trial is where
    you learn who carved its mask and what it was set there to guard, and
    the name stops meaning what it meant. What Sennoch looks like comes
    out a piece at a time as you hunt it rather than all at once - the
-   mask and the gait in the first trial, that fire does not touch it in
+   mask and the gait in the first trial, where you meet it face on with a
+   child on its shoulder; that fire does not touch it in
    the fourth, that it does not surface in the fifth, whose carving the
    mask is in the sixth. The trials connect -
    Bren, the carter pulled out from under his wagon in the second, is
@@ -711,15 +712,15 @@ function medallion(key){
    mapping - no sage sits in the same slot more than twice. */
 const QUESTIONS = [
   { place:"Kokiri Forest",
-    text:"Four Kokiri have gone from the wood since the new moon. The thing that takes them runs on all fours, stands up like a man, and wears a carved wooden mask. The Kokiri call it Sennoch.",
+    text:"It comes out of the trees on all fours and then stands up like a man: a carved wooden mask where a face should be, and a Kokiri child on its shoulder. Sennoch has seen you.",
     answers:[
-      {s:"spirit", t:"Say yes, and tell them straight that I do this my way, not the wood's."},
-      {s:"shadow", t:"Say yes, and hunt it after dark, so none of them ever has to see it."},
-      {s:"time",   t:"Say yes, then spend three nights learning its habits before I move."},
-      {s:"forest", t:"Say yes, and sleep out among them, so nobody is on their own for it."},
-      {s:"light",  t:"Say yes, and get every Kokiri into one clearing before I go looking."},
-      {s:"water",  t:"Say yes, and tell them honestly that this frightens me as well."},
-      {s:"fire",   t:"Out in the wood tonight, making noise enough that it comes to me."}
+      {s:"spirit", t:"Get between it and the way out. It goes through me or it puts her down."},
+      {s:"shadow", t:"Let it walk, and follow it, and let it think it was never seen at all."},
+      {s:"time",   t:"Let it take her tonight. Follow the trail and get all of them back."},
+      {s:"forest", t:"Go for the child and nothing else. It can keep the wood if it lets her go."},
+      {s:"light",  t:"Stand still with my hands open and let it decide what I am first."},
+      {s:"water",  t:"Tell it out loud that it frightens me, and walk towards it anyway."},
+      {s:"fire",   t:"Straight at it, before it has finished working out what I am."}
     ]},
 
   { place:"Hyrule Field",
@@ -843,7 +844,7 @@ const QUESTIONS = [
     ]},
 
   { place:"Kokiri Forest, after",
-    text:"You come back to the wood. The Kokiri want to know what happened to the four, and there is already a song going round Hyrule that has Sennoch wrong and has you wrong too.",
+    text:"You come back to the wood. The Kokiri want to know what happened to the ones it took, and there is already a song going round Hyrule that has Sennoch wrong and has you wrong too.",
     answers:[
       {s:"water",  t:"Tell them all of it, including the cost, and let them see it cost me."},
       {s:"shadow", t:"Tell them the four are not coming back, and carry the rest myself."},
