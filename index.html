@@ -693,8 +693,15 @@ function medallion(key){
 
 /* ======================= QUESTIONS ======================= */
 /* One quest, told in order, and nowhere in the game's own story:
-   something has got out of a seal in the Kokiri wood and is moving
-   across Hyrule, and you are the one tracking it. The trials connect -
+   Sennoch has got out of a seal in the Kokiri wood and is moving across
+   Hyrule, and you are the one tracking it. The name is the Kokiri's
+   word for the thing that took four of them; the ninth trial is where
+   you learn who carved its mask and what it was set there to guard, and
+   the name stops meaning what it meant. What Sennoch looks like comes
+   out a piece at a time as you hunt it rather than all at once - the
+   mask and the gait in the first trial, that fire does not touch it in
+   the fourth, that it does not surface in the fifth, whose carving the
+   mask is in the sixth. The trials connect -
    Bren, the carter pulled out from under his wagon in the second, is
    still with you at the bridge in the tenth; Ambry, the scholar who
    broke the seal, is named in the third and found in the sand in the
@@ -704,7 +711,7 @@ function medallion(key){
    mapping - no sage sits in the same slot more than twice. */
 const QUESTIONS = [
   { place:"Kokiri Forest",
-    text:"Four Kokiri have gone from the wood since the new moon. The Kokiri have never once asked an outsider for anything, and they are asking you.",
+    text:"Four Kokiri have gone from the wood since the new moon. The thing that takes them runs on all fours, stands up like a man, and wears a carved wooden mask. The Kokiri call it Sennoch.",
     answers:[
       {s:"spirit", t:"Say yes, and tell them straight that I do this my way, not the wood's."},
       {s:"shadow", t:"Say yes, and hunt it after dark, so none of them ever has to see it."},
@@ -716,7 +723,7 @@ const QUESTIONS = [
     ]},
 
   { place:"Hyrule Field",
-    text:"It has crossed the field ahead of you and there is a village in its way. Half a mile on, a carter's wagon has gone over, and the carter is pinned under the axle.",
+    text:"Sennoch has crossed the field ahead of you and there is a village in its way. Half a mile on, a carter's wagon has gone over, and the carter is pinned under the axle.",
     answers:[
       {s:"forest", t:"Stop. The village is hours off. This man is under a wagon right now."},
       {s:"light",  t:"Get him out, then send the fastest thing on this road on to warn them."},
@@ -728,7 +735,7 @@ const QUESTIONS = [
     ]},
 
   { place:"Hyrule Castle Town",
-    text:"The castle will not move. The seal was broken by Ambry, a scholar of theirs, and the guard captain would rather bury that than admit it. Bren the carter has followed you here.",
+    text:"The castle will not move. Ambry, a scholar of theirs, broke the seal that held Sennoch, and the guard captain would rather bury that than admit it. Bren the carter has followed you here.",
     answers:[
       {s:"time",   t:"Nothing today. Come back in a month with what the captain cannot bury."},
       {s:"forest", t:"Stop asking the castle. Go back to the people who already believe me."},
@@ -740,7 +747,7 @@ const QUESTIONS = [
     ]},
 
   { place:"Goron City",
-    text:"It has gone up the mountain and into the mine, and the mine is burning. Two Gorons are still down there. The elders say the roof has an hour left in it at most.",
+    text:"Sennoch went up the mountain into the mine and the fire does not appear to trouble it. Two Gorons are still down there, and the elders give the burning roof an hour at the outside.",
     answers:[
       {s:"water",  t:"Say out loud that I do not expect to come back up, and go down."},
       {s:"fire",   t:"Down. Now. The roof can have its opinion about it afterwards."},
@@ -752,7 +759,7 @@ const QUESTIONS = [
     ]},
 
   { place:"Zora's Domain",
-    text:"It went into the water and a Zora child went with it. The Zora will not let an outsider dive, and half of them are saying it only came here because you drove it here.",
+    text:"Sennoch went into the water and has not come up; it does not seem to need to. A Zora child went with it, and half the Domain says it only came here because you drove it here.",
     answers:[
       {s:"fire",   t:"Into the water. They can be angry with me once she is on the bank."},
       {s:"time",   t:"Give them the hour. Teach them what I know of it and let them dive."},
@@ -764,7 +771,7 @@ const QUESTIONS = [
     ]},
 
   { place:"Lon Lon Ranch",
-    text:"You have it cornered at last, in the ranch barn, with the horses and the family who own them still inside. Bren is beside you, and he has never done anything like this.",
+    text:"You have Sennoch cornered in the ranch barn, with the horses and the family who own them still inside. Close to, the mask is Kokiri carving, and it is very old. Bren is beside you.",
     answers:[
       {s:"forest", t:"Get the family clear of the house first. The barn holds a minute more."},
       {s:"spirit", t:"Send Bren away and go in alone. He never signed on for this part."},
@@ -776,7 +783,7 @@ const QUESTIONS = [
     ]},
 
   { place:"Kakariko Village",
-    text:"You have got ahead of it, and Kakariko will not move. They were told for years the seal was a story. Bren is hurt from the barn and will not hear of being left behind.",
+    text:"You have got ahead of Sennoch, and Kakariko will not move. They were told for years the seal was a story. Bren is hurt from the barn and will not hear of being left behind.",
     answers:[
       {s:"time",   t:"Move the children out first. A village follows its children."},
       {s:"spirit", t:"Say my piece once, then let them choose. It is their village."},
@@ -800,7 +807,7 @@ const QUESTIONS = [
     ]},
 
   { place:"Lake Hylia",
-    text:"It is cornered at the water's edge, wounded, and it has stopped fighting. Ambry's papers, which you took out of the castle, say it was put in that wood to guard something.",
+    text:"Sennoch is cornered at the water's edge, wounded, and it has stopped fighting. Ambry's papers say the Kokiri carved that mask themselves, and set the thing under it to guard something.",
     answers:[
       {s:"shadow", t:"End it out of sight of the people who walked down here to watch."},
       {s:"water",  t:"Say out loud that I do not want to do this, and then do it properly."},
@@ -836,7 +843,7 @@ const QUESTIONS = [
     ]},
 
   { place:"Kokiri Forest, after",
-    text:"You come back to the wood. The Kokiri want to know what happened to the four, and there is already a song going round Hyrule that has almost none of it right.",
+    text:"You come back to the wood. The Kokiri want to know what happened to the four, and there is already a song going round Hyrule that has Sennoch wrong and has you wrong too.",
     answers:[
       {s:"water",  t:"Tell them all of it, including the cost, and let them see it cost me."},
       {s:"shadow", t:"Tell them the four are not coming back, and carry the rest myself."},
