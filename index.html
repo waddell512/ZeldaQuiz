@@ -124,18 +124,44 @@ button{font:inherit;color:inherit;cursor:pointer}
 @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 
 /* ---------- backdrop: the Chamber of Sages ----------
-   A void with light falling into it from above and the sages' platform
-   laid out below in perspective: six stations on a hexagon, each lit in
-   its own element, the Triforce cut into the middle of the floor, and
-   the engraved ring turning overhead. Structural lines are drawn in
-   --gold, which flips with the theme, so the whole stack follows. */
+   The chamber has no masonry - its walls are the luminous cloud the
+   platform floats inside. So the surround is built as weather, not
+   stone: a turbulence-generated cloud bank carrying the six element
+   hues, banked around the edges of the frame and cleared out of the
+   middle where the text sits, with light falling in from above, the
+   sages' platform laid out below in perspective, and the engraved ring
+   turning overhead. Structural lines are drawn in --gold, which flips
+   with the theme, so the whole stack follows. */
 .bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+/* The six stations throwing their colour onto the cloud around them. */
 .bg-void{
-  position:absolute;inset:0;opacity:calc(var(--mark-op) * 3.4);
+  position:absolute;inset:0;opacity:calc(var(--mark-op) * 3.2);
   background:
-    radial-gradient(ellipse 62% 44% at 16% 20%,color-mix(in srgb,var(--c-water) 34%,transparent),transparent 70%),
-    radial-gradient(ellipse 56% 40% at 86% 26%,color-mix(in srgb,var(--c-shadow) 30%,transparent),transparent 70%),
-    radial-gradient(ellipse 80% 46% at 50% 102%,color-mix(in srgb,var(--c-light) 22%,transparent),transparent 72%);
+    radial-gradient(ellipse 46% 38% at 6% 16%,color-mix(in srgb,var(--c-water) 40%,transparent),transparent 72%),
+    radial-gradient(ellipse 44% 36% at 94% 20%,color-mix(in srgb,var(--c-shadow) 38%,transparent),transparent 72%),
+    radial-gradient(ellipse 40% 34% at 2% 62%,color-mix(in srgb,var(--c-forest) 30%,transparent),transparent 72%),
+    radial-gradient(ellipse 40% 34% at 98% 66%,color-mix(in srgb,var(--c-spirit) 30%,transparent),transparent 72%),
+    radial-gradient(ellipse 52% 30% at 26% 100%,color-mix(in srgb,var(--c-fire) 22%,transparent),transparent 74%),
+    radial-gradient(ellipse 62% 36% at 62% 102%,color-mix(in srgb,var(--c-light) 26%,transparent),transparent 74%);
+}
+/* The wall itself: cloud, cut out of noise so it has grain rather than
+   the smooth falloff of another gradient. Drawn small and stretched, so
+   the filter runs over a few hundred user units, not the whole screen. */
+.bg-walls{
+  position:absolute;left:-6%;top:-6%;width:112%;height:112%;
+  opacity:calc(var(--mark-op) * 4.6);
+  animation:drift 190s ease-in-out infinite alternate;
+}
+@keyframes drift{
+  from{transform:translate3d(0,0,0) scale(1)}
+  to{transform:translate3d(-2.2%,1.4%,0) scale(1.07)}
+}
+/* Where the cloud wall meets the platform. */
+.bg-horizon{
+  position:absolute;left:0;right:0;bottom:0;height:46vh;
+  background:linear-gradient(to top,
+    color-mix(in srgb,var(--stone-0) 78%,transparent),
+    transparent 74%);
 }
 .bg-shaft{
   position:absolute;left:50%;top:-22vh;width:min(120vw,1080px);height:104vh;
@@ -167,11 +193,12 @@ button{font:inherit;color:inherit;cursor:pointer}
 .bg-trim.bot{bottom:0;transform:scaleY(-1)}
 .bg-vig{
   position:absolute;inset:0;
-  background:radial-gradient(ellipse 72% 62% at 50% 44%,transparent 40%,var(--stone-0) 100%);
-  opacity:.72;
+  background:radial-gradient(ellipse 78% 68% at 50% 44%,transparent 54%,var(--stone-0) 100%);
+  opacity:.58;
 }
 @media (prefers-reduced-motion: reduce){
   .bg-mark .turn{animation:none}
+  .bg-walls{animation:none}
 }
 
 /* ---------- intro ---------- */
@@ -338,7 +365,38 @@ button{font:inherit;color:inherit;cursor:pointer}
 
 <div class="bg" aria-hidden="true">
   <div class="bg-void"></div>
+
+  <!-- the chamber wall: cloud, not stone -->
+  <svg class="bg-walls" viewBox="0 0 600 400" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <filter id="chCloud" x="-4%" y="-4%" width="108%" height="108%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.014 0.024" numOctaves="5" seed="11" result="n"/>
+        <feColorMatrix in="n" type="matrix" result="a"
+          values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  2.3 1.1 0.3 0 -0.72"/>
+        <feComposite in="SourceGraphic" in2="a" operator="in"/>
+        <feGaussianBlur stdDeviation="0.45"/>
+      </filter>
+      <linearGradient id="chWallHue" x1="0" y1="1" x2="1" y2="0">
+        <stop offset="0"   style="stop-color:var(--c-water)"/>
+        <stop offset=".24" style="stop-color:var(--c-shadow)"/>
+        <stop offset=".48" style="stop-color:var(--c-time)"/>
+        <stop offset=".72" style="stop-color:var(--c-water)"/>
+        <stop offset="1"   style="stop-color:var(--c-light)"/>
+      </linearGradient>
+      <radialGradient id="chWallFade" cx=".5" cy=".46" r=".66">
+        <stop offset="0" stop-color="#000"/>
+        <stop offset=".46" stop-color="#000" stop-opacity=".28"/>
+        <stop offset="1" stop-color="#fff"/>
+      </radialGradient>
+      <mask id="chWallMask"><rect width="600" height="400" fill="url(#chWallFade)"/></mask>
+    </defs>
+    <g mask="url(#chWallMask)">
+      <rect width="600" height="400" fill="url(#chWallHue)" filter="url(#chCloud)"/>
+    </g>
+  </svg>
+
   <div class="bg-shaft"></div>
+  <div class="bg-horizon"></div>
 
   <!-- the sages' platform, lying below in the void -->
   <svg class="bg-dais" viewBox="0 0 900 900" aria-hidden="true">
