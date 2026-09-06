@@ -17,6 +17,10 @@
   --gold-2:#B99542;
   /* Raised metal on a medallion: the coin's own colour, lifted. */
   --emb:rgba(255,255,255,.52);
+  /* The seventh coin is white in both themes: it is a blank, not a surface.
+     Its own ink carries the crest, the rune band and the rim. */
+  --seventh:#F1EEE4;
+  --seventh-ink:#8A6D1F;
   --edge:rgba(26,24,38,.16);
   --edge-2:rgba(26,24,38,.08);
   --shade:rgba(26,24,38,.05);
@@ -595,8 +599,8 @@ const SAGES = {
    Struck the way the game strikes them: a ten-sided coin in the
    element's own colour, a band of Hylian script cut into the rim, and
    the emblem raised out of the sunken field inside it. One hue per
-   medallion and nothing behind it. Time keeps the coin on a bare stone
-   field - Zelda's medallion was never struck. */
+   medallion and nothing behind it. The seventh keeps a white coin with
+   nothing struck into it - Zelda's medallion was never made. */
 const DEC = "64.8,4.3 88.8,21.8 98,50 88.8,78.2 64.8,95.7 35.2,95.7 11.2,78.2 2,50 11.2,21.8 35.2,4.3";
 /* Twenty marks around the rim, cycling seven blocky forms. They are
    texture at this size, not language - the game's are no different. */
@@ -660,11 +664,11 @@ function medallion(key){
   const bare = key === "time";           /* the seventh sage carries no medallion */
   const u = "md" + (++medUID);
   /* Raised metal is the coin's own colour lifted toward the light, except
-     on the blank, where the crest is gold because there is no enamel. */
-  const raised = bare ? "var(--gold)" : "var(--emb)";
+     on the white blank, which carries its crest in its own gold ink. */
+  const raised = bare ? "var(--seventh-ink)" : "var(--emb)";
   const glyph = GLYPHS[key]
     .replace(/EMB/g, raised)
-    .replace(/COIN/g, bare ? "var(--stone-1)" : "currentColor");
+    .replace(/COIN/g, bare ? "var(--seventh)" : "currentColor");
   return `<svg viewBox="0 0 100 100" role="img" aria-label="${bare ? "The Seventh Sage's mark: a six-bladed star, on a medallion never struck" : s.element + " Medallion"}" style="color:var(--c-${key})">
     <defs>
       <linearGradient id="${u}b" x1="0" y1="0" x2=".8" y2="1">
@@ -678,16 +682,16 @@ function medallion(key){
         <stop offset="1" style="stop-color:#000;stop-opacity:.38"/>
       </radialGradient>
     </defs>
-    <polygon points="${DEC}" fill="${bare ? "var(--stone-1)" : "currentColor"}"/>
+    <polygon points="${DEC}" fill="${bare ? "var(--seventh)" : "currentColor"}"/>
     <polygon points="${DEC}" fill="url(#${u}b)"/>
-    <g fill="none" stroke="${bare ? "var(--gold)" : "rgba(0,0,0,.34)"}" stroke-width="1.3"
+    <g fill="none" stroke="${bare ? "var(--seventh-ink)" : "rgba(0,0,0,.34)"}" stroke-width="1.3"
        stroke-linecap="round" stroke-linejoin="round" opacity="${bare ? ".5" : "1"}">${RUNES}</g>
     <circle cx="50" cy="50" r="35.5" fill="#000" opacity=".17"/>
     <circle cx="50" cy="50" r="35.5" fill="none" stroke="${raised}" stroke-width="1.6" opacity=".8"/>
     <g style="${EMBOSS}" transform="translate(50 50) scale(.88) translate(-50 -50)">${glyph}</g>
     <polygon points="${DEC}" fill="url(#${u}f)"/>
     <polygon points="${DEC}" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" opacity=".32"/>
-    ${bare ? `<polygon points="${DEC}" fill="none" stroke="var(--gold)" stroke-width="1.2" stroke-linejoin="round" opacity=".6"/>` : ``}
+    ${bare ? `<polygon points="${DEC}" fill="none" stroke="var(--seventh-ink)" stroke-width="1.2" stroke-linejoin="round" opacity=".6"/>` : ``}
   </svg>`;
 }
 
