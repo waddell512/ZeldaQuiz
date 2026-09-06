@@ -754,167 +754,165 @@ function medallion(key){
 }
 
 /* ======================= QUESTIONS ======================= */
-/* One quest, told in order, and nowhere in the game's own story:
-   Sennoch has got out of a seal in the Kokiri wood and is moving across
-   Hyrule, and you are the one tracking it. The name is the Kokiri's
-   word for the thing that has been taking them; the ninth trial is where
-   you learn who carved its mask and what it was set there to guard, and
-   the name stops meaning what it meant. What Sennoch looks like comes
-   out a piece at a time as you hunt it rather than all at once - the
-   mask and the gait in the first trial, where you meet it face on with a
-   child on its shoulder; that fire does not touch it in
-   the fourth, that it does not surface in the fifth, whose carving the
-   mask is in the sixth. The trials connect -
-   Bren, the carter pulled out from under his wagon in the second, is
-   still with you at the bridge in the tenth; Ambry, the scholar who
-   broke the seal, is named in the third and found in the sand in the
-   eleventh - so a later question reads differently for having answered
-   the earlier one. Each question offers all seven sages exactly once,
-   and answer order is varied per question so position never reveals the
-   mapping - no sage sits in the same slot more than twice. */
+/* One quest, told in order, and Sennoch is the only thing in it with a
+   name. It comes up out of the Gerudo desert and walks a dead straight
+   line northeast: it does not hunt, does not turn, does not stop, and
+   whatever is on the line it goes through. You are the one who worked
+   the line out, so you travel ahead of it, and every trial is a place on
+   that line with a number of days left on it. What Sennoch is comes out
+   a piece at a time along the way - the mask and the gait in the first,
+   that a cliff does not stop it in the second, that it walks under a
+   lake without surfacing in the fourth, that the carving on its mask is
+   cut into other people's sealing stones in the seventh, that fire does
+   not touch it in the ninth, and in the tenth that it has never once
+   harmed anything that got out of its way. The line ends where it was
+   always going, and the last trial is what that costs. Each question
+   offers all seven sages exactly once, and answer order is varied per
+   question so position never reveals the mapping - no sage sits in the
+   same slot more than twice. */
 const QUESTIONS = [
-  { place:"Kokiri Forest",
-    text:"It comes out of the trees on all fours and then stands up like a man: a carved wooden mask where a face should be, and a Kokiri child on its shoulder. Sennoch has seen you.",
+  { place:"Gerudo Desert",
+    text:"It comes up out of the sand a mile from the camp: four legs, then two, and a carved wooden mask where a face should be. It fixes on a line northeast and starts walking.",
     answers:[
-      {s:"spirit", t:"Get between it and the way out. It goes through me or it puts her down."},
-      {s:"shadow", t:"Let it walk, and follow it, and let it think it was never seen at all."},
-      {s:"time",   t:"Let it take her tonight. Follow the trail and get all of them back."},
-      {s:"forest", t:"Go for the child and nothing else. It can keep the wood if it lets her go."},
-      {s:"light",  t:"Stand still with my hands open and let it decide what I am first."},
-      {s:"water",  t:"Tell it out loud that it frightens me, and walk towards it anyway."},
-      {s:"fire",   t:"Straight at it, before it has finished working out what I am."}
-    ]},
-
-  { place:"Hyrule Field",
-    text:"Sennoch has crossed the field ahead of you and there is a village in its way. Half a mile on, a carter's wagon has gone over, and the carter is pinned under the axle.",
-    answers:[
-      {s:"forest", t:"Stop. The village is hours off. This man is under a wagon right now."},
-      {s:"light",  t:"Get him out, then send the fastest thing on this road on to warn them."},
-      {s:"fire",   t:"Off the horse and under the axle before I have finished thinking."},
-      {s:"spirit", t:"Stop for him, and refuse to feel guilty about the village for it."},
-      {s:"time",   t:"Cut him free fast and roughly. Slow kindness costs the village hours."},
-      {s:"shadow", t:"Get him out, tell him nothing about what is ahead of us, and ride on."},
-      {s:"water",  t:"Tell him out loud that I am terrified of being late, and lift anyway."}
-    ]},
-
-  { place:"Hyrule Castle Town",
-    text:"The castle will not move. Ambry, a scholar of theirs, broke the seal that held Sennoch, and the guard captain would rather bury that than admit it. Bren the carter has followed you here.",
-    answers:[
-      {s:"time",   t:"Nothing today. Come back in a month with what the captain cannot bury."},
-      {s:"forest", t:"Stop asking the castle. Go back to the people who already believe me."},
-      {s:"light",  t:"Put the whole account in writing, name Ambry and the captain, file it."},
-      {s:"spirit", t:"The castle is not the only door. Go around it and tell them after."},
-      {s:"water",  t:"Tell the captain what his caution is going to cost, and then leave."},
-      {s:"fire",   t:"Say Ambry's name in the middle of the hall, loudly, and let it land."},
-      {s:"shadow", t:"Agree with him, thank him, and be out of the city before dark."}
-    ]},
-
-  { place:"Goron City",
-    text:"Sennoch went up the mountain into the mine and the fire does not appear to trouble it. Two Gorons are still down there, and the elders give the burning roof an hour at the outside.",
-    answers:[
-      {s:"water",  t:"Say out loud that I do not expect to come back up, and go down."},
-      {s:"fire",   t:"Down. Now. The roof can have its opinion about it afterwards."},
-      {s:"time",   t:"Two minutes finding out exactly where they are. Then one trip, not four."},
-      {s:"shadow", t:"Go down without telling anybody, so that nobody follows me in after."},
-      {s:"forest", t:"Go down with the Gorons who want to come. Not alone, not for this."},
-      {s:"light",  t:"Put the elders in charge of the outside and take the inside myself."},
-      {s:"spirit", t:"The elders have been wrong about that roof before. Down."}
-    ]},
-
-  { place:"Zora's Domain",
-    text:"Sennoch went into the water and has not come up; it does not seem to need to. A Zora child went with it, and half the Domain says it only came here because you drove it here.",
-    answers:[
-      {s:"fire",   t:"Into the water. They can be angry with me once she is on the bank."},
-      {s:"time",   t:"Give them the hour. Teach them what I know of it and let them dive."},
-      {s:"spirit", t:"Dive. Their rule is not worth a child, and I will answer for it after."},
-      {s:"forest", t:"Ask to go down beside a Zora rather than instead of one, and mean it."},
-      {s:"shadow", t:"Dive from the far side, where nobody is watching, and say nothing."},
-      {s:"water",  t:"Say out loud that they are right about me, and that she is drowning."},
-      {s:"light",  t:"Abide by the rule, and make myself useful at everything else at once."}
-    ]},
-
-  { place:"Lon Lon Ranch",
-    text:"You have Sennoch cornered in the ranch barn, with the horses and the family who own them still inside. Close to, the mask is Kokiri carving, and it is very old. Bren is beside you.",
-    answers:[
-      {s:"forest", t:"Get the family clear of the house first. The barn holds a minute more."},
-      {s:"spirit", t:"Send Bren away and go in alone. He never signed on for this part."},
-      {s:"water",  t:"Tell the family exactly what is in their barn, plainly, and then go in."},
-      {s:"fire",   t:"Both doors open and straight down the middle before it settles."},
-      {s:"shadow", t:"Move the family out without telling them why, then go back for it."},
-      {s:"time",   t:"Wait for first light. It is not leaving, and I would rather see it."},
-      {s:"light",  t:"Wake the house, say exactly what is in there, and let them decide."}
-    ]},
-
-  { place:"Kakariko Village",
-    text:"You have got ahead of Sennoch, and Kakariko will not move. They were told for years the seal was a story. Bren is hurt from the barn and will not hear of being left behind.",
-    answers:[
-      {s:"time",   t:"Move the children out first. A village follows its children."},
-      {s:"spirit", t:"Say my piece once, then let them choose. It is their village."},
-      {s:"water",  t:"Tell them what I have seen it do, and let them hear what it did to me."},
-      {s:"shadow", t:"Stop arguing and go out to meet it before it reaches the houses."},
-      {s:"light",  t:"Door to door down the street, giving the same account at every one."},
-      {s:"forest", t:"Stay whatever they decide. If Kakariko will not go, then neither do I."},
-      {s:"fire",   t:"Ring the bell until every last one of them is standing in the road."}
-    ]},
-
-  { place:"Death Mountain Trail",
-    text:"The pass is coming down and the whole of Kakariko is strung out along it. You can hold the gap open long enough for the column to get through, or you can be in the column.",
-    answers:[
-      {s:"light",  t:"Hold it, and call the count out loud so they know what time they have."},
-      {s:"fire",   t:"Hold it. Somebody has to, and I am already standing in the place."},
-      {s:"shadow", t:"Hold it, and let the column believe I was behind them the whole way."},
-      {s:"time",   t:"Get in the column. I am worth more to these people alive next winter."},
-      {s:"water",  t:"Hold it, and say a proper goodbye to the last one through the gap."},
-      {s:"forest", t:"Hold it. Bren is in that column, and so is everyone who took me in."},
-      {s:"spirit", t:"Send them through, then find my own way down. I do not die on cue."}
-    ]},
-
-  { place:"Lake Hylia",
-    text:"Sennoch is cornered at the water's edge, wounded, and it has stopped fighting. Ambry's papers say the Kokiri carved that mask themselves, and set the thing under it to guard something.",
-    answers:[
-      {s:"shadow", t:"End it out of sight of the people who walked down here to watch."},
-      {s:"water",  t:"Say out loud that I do not want to do this, and then do it properly."},
-      {s:"fire",   t:"End it now. Drawing this out is the cruelty, not the killing."},
-      {s:"time",   t:"Take it alive. What it was guarding matters more than what it has done."},
-      {s:"spirit", t:"Let it go. I swore that oath before I had read a word of those papers."},
-      {s:"light",  t:"Say what it did and why it ends here, aloud, before I do anything."},
-      {s:"forest", t:"Ask the Kokiri what they want done with it, and do exactly that."}
+      {s:"spirit", t:"Walk with it and see where it is going. Nobody has told me not to."},
+      {s:"shadow", t:"Walk behind it, and let the desert camps sleep through it entirely."},
+      {s:"time",   t:"Sit down and take its bearing properly before I go anywhere at all."},
+      {s:"forest", t:"Go back and get the camp on its feet before I do anything else."},
+      {s:"light",  t:"Mark the place it came out of the sand. Somebody will need that."},
+      {s:"water",  t:"Say out loud, to nobody at all, that this is the worst thing I have seen."},
+      {s:"fire",   t:"Get in front of it now, while it is still slow and still alone."}
     ]},
 
   { place:"Gerudo Valley",
-    text:"The castle's riders are behind you now, sent to bury all of it, and the valley bridge is the only crossing. Cut it and they cannot follow. Bren is not across yet.",
+    text:"The line runs off the valley cliff. Sennoch walks off it, falls the whole way, gets up and carries on walking. The bridge is out, and it is gaining on you by the hour.",
     answers:[
-      {s:"fire",   t:"Cut nothing. Stand on the bridge and let them come at me on it."},
-      {s:"light",  t:"Tell Bren exactly how many seconds he has, and then cut on the count."},
-      {s:"spirit", t:"I will not buy a road with somebody's life. The bridge stays up."},
-      {s:"water",  t:"Scream at him to run, and keep my hands off the rope until he is over."},
-      {s:"forest", t:"Go back out onto the bridge for him. Both of us or neither of us."},
-      {s:"shadow", t:"Go back for him, and never once mention afterwards what it cost."},
-      {s:"time",   t:"Cut it. One of us has to get those papers as far as the capital."}
+      {s:"forest", t:"Go the long way with the traders who know it. Alone I lose four days."},
+      {s:"light",  t:"Take the long road, and send word ahead to everything on that line."},
+      {s:"fire",   t:"Down the cliff after it. It survived the drop and I have rope."},
+      {s:"spirit", t:"Find my own way down. That road was not built with this in mind."},
+      {s:"time",   t:"Lose the day. Work out where the line ends before I chase any more."},
+      {s:"shadow", t:"Go down at night, quietly, and let nobody talk me out of it."},
+      {s:"water",  t:"Say plainly that the cliff frightens me, and go down it anyway."}
     ]},
 
-  { place:"Gerudo Desert",
-    text:"Ambry ran, and you have found him: face down in the sand two days out of the valley, alive, out of water, and asking you for yours.",
+  { place:"Hyrule Field",
+    text:"You get in front of it at last, on open ground, with nothing on the line for a mile either way. It does not slow, and it does not appear to have noticed you at all.",
     answers:[
-      {s:"spirit", t:"Give him water. What I came out here to do is a separate question."},
-      {s:"forest", t:"Get him to the nearest people who can keep him alive, and hand him on."},
-      {s:"shadow", t:"Give him the water, and never tell the castle I found him at all."},
-      {s:"light",  t:"Water first, then tell him exactly what is going to happen to him."},
-      {s:"fire",   t:"Say to his face what he did to the Kokiri, and then hand him the skin."},
-      {s:"time",   t:"Keep him alive. Dead, he answers to nobody for any of it, ever."},
-      {s:"water",  t:"Let him see how much I hate having to help him, and then help him."}
+      {s:"time",   t:"Step aside and count its pace. I will need the number more than a fight."},
+      {s:"forest", t:"Stand aside. There is nobody behind me here worth dying in front of."},
+      {s:"light",  t:"Stand in the line and speak to it, so that it has at least been asked."},
+      {s:"spirit", t:"Stand in the line. It can be the one that turns aside for once."},
+      {s:"water",  t:"Tell it out loud what it is walking towards, and hear how that sounds."},
+      {s:"fire",   t:"Go at it here, where there is nobody else to be hurt by it."},
+      {s:"shadow", t:"Let it pass, and walk its line ahead of it from now on."}
     ]},
 
-  { place:"Kokiri Forest, after",
-    text:"You come back to the wood. The Kokiri want to know what happened to the ones it took, and there is already a song going round Hyrule that has Sennoch wrong and has you wrong too.",
+  { place:"Lake Hylia",
+    text:"The line crosses the lake, so it walks in and does not come out and does not come up. There are three boats on the water and an afternoon before it reaches them.",
     answers:[
-      {s:"water",  t:"Tell them all of it, including the cost, and let them see it cost me."},
-      {s:"shadow", t:"Tell them the four are not coming back, and carry the rest myself."},
-      {s:"forest", t:"Tell them, then stay in the wood a while. They should not hear it alone."},
-      {s:"light",  t:"Give them the whole account in order, and correct the song verse by verse."},
-      {s:"spirit", t:"Tell the Kokiri the truth and let Hyrule sing whatever it likes."},
-      {s:"fire",   t:"Tell them straight out, the first hour I am back, before I sit down."},
-      {s:"time",   t:"Tell them plainly, then write the true account and leave it to be found."}
+      {s:"water",  t:"Row out and tell them myself. Shouting from the shore is not enough."},
+      {s:"fire",   t:"Straight out to the nearest boat and start rowing them back in."},
+      {s:"time",   t:"Mark where it went in and where the line leaves. Warn the far shore."},
+      {s:"shadow", t:"Get them off the water with whatever lie moves the boats fastest."},
+      {s:"forest", t:"Take the boat I can reach and stay out there with them until it passes."},
+      {s:"light",  t:"Ring the shore bell and give the boats the plain reason for it."},
+      {s:"spirit", t:"Go in after it. Nobody has been under there with it yet."}
+    ]},
+
+  { place:"Lon Lon Ranch",
+    text:"The line runs through the long barn. Two days. The family will go, and will not leave forty horses standing in the path of a thing that none of them has seen.",
+    answers:[
+      {s:"fire",   t:"Open every gate on the place tonight and drive the whole lot out."},
+      {s:"time",   t:"Two days is enough to move them properly. Start with the ones in foal."},
+      {s:"spirit", t:"It is their ranch. Tell them the truth and abide by what they answer."},
+      {s:"forest", t:"Stay and work. Forty horses move faster with one more pair of hands."},
+      {s:"shadow", t:"Move the horses out myself, at night, and let them find empty stalls."},
+      {s:"water",  t:"Tell them what I watched it do to the lake, and let them see it land."},
+      {s:"light",  t:"Walk the line through the barn with them, post to post, and show them."}
+    ]},
+
+  { place:"Hyrule Castle Town",
+    text:"The line clips the outer town. You have a bearing, a description and no proof, and the captain will shut his gates for a thing he has seen and for nothing else.",
+    answers:[
+      {s:"forest", t:"Go to the outer streets. Those are the houses actually on the line."},
+      {s:"spirit", t:"He can keep his gate. Go and clear the outer streets without him."},
+      {s:"water",  t:"Tell him what it did out on the lake, and let him hear me say it."},
+      {s:"fire",   t:"Say it at the gate, at volume, until the queue starts clearing itself."},
+      {s:"shadow", t:"Agree that I have nothing, and start knocking on doors after dark."},
+      {s:"time",   t:"Take the night. Draw the mask from memory and put it in his hand."},
+      {s:"light",  t:"Give him the bearing and the whole account, and let him refuse it."}
+    ]},
+
+  { place:"Kakariko Village",
+    text:"The line runs through Kakariko, where the sealing stone in the graveyard is cut with the same carving as the mask. The village will not move and will not discuss the stone.",
+    answers:[
+      {s:"time",   t:"Leave the stone. Move the children out; a village follows its children."},
+      {s:"spirit", t:"Read the stone myself. They can be angry about that while they pack."},
+      {s:"water",  t:"Tell them what I have watched that carving do, and let it land."},
+      {s:"shadow", t:"Stop asking, and go out along the line to meet it before it arrives."},
+      {s:"light",  t:"Stand in the street and give the same account at every door in turn."},
+      {s:"forest", t:"Stay whatever they choose. If Kakariko will not go, then I do not go."},
+      {s:"fire",   t:"Ring the bell, and keep ringing it until somebody explains the stone."}
+    ]},
+
+  { place:"Death Mountain Trail",
+    text:"The line goes up the trail, and the trail is a shelf one cart wide with half of Kakariko strung out along it. Behind them the shelf is already coming down.",
+    answers:[
+      {s:"light",  t:"Hold the gap, and call the count aloud so they know what time they have."},
+      {s:"fire",   t:"Hold it. Somebody has to, and I am already standing in the place."},
+      {s:"shadow", t:"Hold it, and let them believe I was behind them the whole way up."},
+      {s:"time",   t:"Get in the column. I am worth more past this than I am under it."},
+      {s:"water",  t:"Hold it, and say a proper goodbye to the last one through the gap."},
+      {s:"forest", t:"Hold it. Everyone who took me in this month is out on that shelf."},
+      {s:"spirit", t:"Send them through and find my own way up. I do not die on cue."}
+    ]},
+
+  { place:"Goron City",
+    text:"The line goes through the mine, so it walks into the fire, and the fire does not touch it. Two Gorons are cut off behind the fall it brought down on its way in.",
+    answers:[
+      {s:"shadow", t:"The Gorons, and never tell anybody that I let it walk away down here."},
+      {s:"water",  t:"Say out loud that I am going in for the Gorons and not for it."},
+      {s:"fire",   t:"In at a run, and refuse to choose between them until I am made to."},
+      {s:"time",   t:"The Gorons. It leaves a line I can follow; a fallen mine leaves nothing."},
+      {s:"spirit", t:"Follow it in. Nobody else in Hyrule is going down there after it."},
+      {s:"light",  t:"The Gorons, and say plainly afterwards why I let the other one go."},
+      {s:"forest", t:"The Gorons. They are the people in front of me and they are alive now."}
+    ]},
+
+  { place:"Zora's Domain",
+    text:"It has crossed the Domain without turning aside once, and without touching a single thing that got out of its way. The Zora want it stopped in their water and will not let you dive.",
+    answers:[
+      {s:"fire",   t:"Into the water regardless. They can be angry once I am out of it."},
+      {s:"light",  t:"Tell them plainly that it has hurt nobody yet, and let them decide."},
+      {s:"spirit", t:"That rule was not written for this. Dive, and answer for it after."},
+      {s:"water",  t:"Say out loud that I no longer think it is hunting, and ask to go in."},
+      {s:"forest", t:"Ask to go down beside a Zora rather than instead of one, and mean it."},
+      {s:"shadow", t:"Go in from the far side, where nobody is watching the water."},
+      {s:"time",   t:"Give them the hour. Tell them everything I have and let them dive."}
+    ]},
+
+  { place:"The Lost Woods",
+    text:"The line ends somewhere in these trees, and this is the last ground where you could stop it short. It has walked eleven days now and has not once turned aside.",
+    answers:[
+      {s:"spirit", t:"Let it finish. I have followed it this far without being told to."},
+      {s:"forest", t:"Get the Kokiri out of the wood first. Then it can walk where it likes."},
+      {s:"shadow", t:"Follow it in, and let nobody else in Hyrule know the wood is in this."},
+      {s:"light",  t:"Walk in beside it, in the open, so that whatever happens is witnessed."},
+      {s:"fire",   t:"Stop it here. Eleven days is long enough to have earned the attempt."},
+      {s:"time",   t:"Nothing yet. Whatever is at the end of that line, I want to see it."},
+      {s:"water",  t:"Say out loud that I do not want to stop it, and walk in alongside."}
+    ]},
+
+  { place:"Kokiri Forest",
+    text:"The line ends at a stone under the oldest tree in the wood, cut with the carving from the mask. Sennoch lies down on it and waits. Putting it back means somebody stays to hold the stone.",
+    answers:[
+      {s:"water",  t:"Say out loud what this is going to cost, and then go and do it."},
+      {s:"shadow", t:"Do it, and let the Kokiri go on thinking the thing simply walked away."},
+      {s:"forest", t:"Ask the Kokiri. It is their tree, their stone and their wood."},
+      {s:"light",  t:"Say aloud exactly what holding the stone means, and then hold it."},
+      {s:"spirit", t:"Refuse. It walked eleven days to choose this, and I get to choose too."},
+      {s:"fire",   t:"Hold it. Now, before I talk myself into some cleverer answer."},
+      {s:"time",   t:"Hold it, and spend the years there working out how to be let go."}
     ]},
 ];
 /* integrity check: 7 answers per question, each sage exactly once */
