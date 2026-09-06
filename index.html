@@ -201,6 +201,32 @@ button{font:inherit;color:inherit;cursor:pointer}
   .bg-walls{animation:none}
 }
 
+/* ---------- choosing a companion ---------- */
+.choose{flex-direction:column;align-items:center;gap:clamp(1rem,3vw,1.5rem);text-align:center}
+.view.on.choose{display:flex}
+.ctitle{font-size:clamp(1.7rem,5vw,2.4rem)}
+.clede{max-width:32rem;color:var(--ink-2);margin:0}
+.companions{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));
+  gap:8px;margin:.4rem 0 0;padding:0;list-style:none;width:100%;
+}
+.comp{
+  display:block;width:100%;height:100%;text-align:left;
+  background:var(--stone-1);border:0;border-left:2px solid var(--edge-2);
+  padding:.95em 1.15em;color:var(--ink);
+  transition:border-color .18s,background .18s,padding-left .18s;
+}
+.comp:hover,.comp:focus-visible{background:var(--stone-2);border-left-color:var(--gold);padding-left:1.45em}
+.comp b{
+  display:block;font-family:Cinzel,serif;font-weight:600;font-size:1.05rem;
+  letter-spacing:.02em;margin-bottom:.15rem;
+}
+.comp b em{font-style:normal;font-weight:400;color:var(--ink-3);font-size:.78em}
+.comp span{
+  display:block;font-family:Spectral,serif;font-weight:300;font-size:.95rem;
+  line-height:1.45;color:var(--ink-2);
+}
+
 /* ---------- intro ---------- */
 .intro{flex-direction:column;align-items:center;gap:clamp(1.4rem,4vw,2.2rem);text-align:center}
 .ring{
@@ -356,6 +382,11 @@ button{font:inherit;color:inherit;cursor:pointer}
 .aff-track{height:6px;background:var(--shade);overflow:hidden}
 .aff-fill{height:100%;background:var(--bar);width:0;transition:width .9s cubic-bezier(.2,.7,.3,1)}
 .aff-num{font-family:"Barlow Semi Condensed",system-ui,sans-serif;font-size:.85rem;color:var(--ink-3);font-variant-numeric:tabular-nums;text-align:right}
+.res-comp{
+  font-family:Spectral,serif;font-style:italic;font-weight:300;
+  font-size:.98rem;color:var(--ink-3);margin:0;text-wrap:balance;
+}
+.res-comp b{font-style:normal;font-weight:500;color:var(--ink-2)}
 .res-actions{display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center;justify-content:center}
 
 @media (prefers-reduced-motion:reduce){
@@ -498,8 +529,16 @@ button{font:inherit;color:inherit;cursor:pointer}
         <p class="byline">by the Skyward Prince</p>
       </div>
       <hr class="rule-gold" style="width:6rem">
-      <p class="lede">Six medallions were carried out of six temples, and a seventh sage never took one. Below are the twelve trials, set one after another across Hyrule, from the treeline of the Kokiri wood to the account you give at the end of them. Answer as yourself; the element you carry will be plain by the end.</p>
+      <p class="lede">The Triforce speaks to you once, and what it says is that <em>Vaskaal</em> is coming: grey, faceless, twice the height of a man, and where it walks the colour goes out of the ground and nothing grows for a season. It says you are not ready. Twelve trials stand between you and the thirteenth, and the thirteenth is Vaskaal itself. Choose who walks them with you, and answer as yourself; the element you carry will be plain long before the end.</p>
       <button class="btn" id="begin">Enter the Chamber</button>
+    </section>
+
+    <!-- choosing a companion -->
+    <section class="view choose" id="v-companion">
+      <p class="eyebrow">Before the first trial</p>
+      <h2 class="ctitle">Who goes with you?</h2>
+      <p class="clede">One of them walks all thirteen at your shoulder. Nothing about this choice is scored &mdash; it only decides who is standing there when the wood makes you wait.</p>
+      <ul class="companions" id="c-list"></ul>
     </section>
 
     <!-- question -->
@@ -526,6 +565,7 @@ button{font:inherit;color:inherit;cursor:pointer}
       <div class="res-body" id="r-body"></div>
       <section class="sage-card" id="r-sage"></section>
       <div class="affinity" id="r-aff"></div>
+      <p class="res-comp" id="r-comp"></p>
       <div class="res-actions">
         <button class="btn" id="again">Take the trials again</button>
         <button class="btn-quiet" id="copy">Copy result</button>
@@ -754,22 +794,28 @@ function medallion(key){
 }
 
 /* ======================= QUESTIONS ======================= */
-/* The twelve questions are the twelve trials themselves - no quest to
-   follow, no creature to hunt, nobody in them with a name. They are all
-   built in the register of the sixth: a standing condition rather than
-   an emergency, set over a season or a year rather than a moment, and
-   oblique about what it is actually testing. Nothing here is a rescue.
-   A fire to keep alight for a reason nobody gives, a year in which you
-   may not explain yourself, a watch where nothing ever comes, a rope
-   you may cross once in your life. Each is named for what it puts to
-   you, the naming runs first to twelfth through the setup text, and the
-   last asks what you made of the other eleven. Each question offers all
-   seven sages exactly once, and answer order is varied per question so
-   position never reveals the mapping - no sage sits in the same slot
-   more than twice. */
+/* Thirteen trials. The Triforce tells you that Vaskaal is coming and
+   that you are not ready for it; the first twelve are what make you
+   ready, and the thirteenth is Vaskaal itself, waiting at the treeline
+   where the first one began.
+
+   The twelve are all built in the register of the sixth: a standing
+   condition rather than an emergency, run over a season or a year
+   rather than a moment, and oblique about what is actually being
+   tested. Nothing among them is a rescue. Vaskaal does not fight
+   either - it explains that it can wait - so the last trial stays in
+   the same register as the twelve that earn it.
+
+   Each question offers all seven sages exactly once, and answer order
+   is varied per question so position never reveals the mapping. The
+   thirteenth slot order is one of exactly four permutations that can
+   follow the twelve without putting any sage in the same slot a third
+   time, so no sage sits in one slot more than twice across all
+   thirteen. {C} in a trial's text is the companion chosen before the
+   first one; the choice scores nothing. */
 const QUESTIONS = [
   { place:"The Threshold",
-    text:"The first is set at the treeline of the Kokiri wood. You may go in when the wood lets you, and nobody will say when that is or what it is waiting to see.",
+    text:"The first is set at the treeline of the Kokiri wood. You may go in when the wood lets you, and nobody will say when. {C} settles down at the treeline to wait it out with you.",
     answers:[
       {s:"spirit", t:"Go in on the first morning I feel like it, and let the wood object."},
       {s:"shadow", t:"Wait out of its sight, so that whatever it wants is not performed."},
@@ -911,6 +957,17 @@ const QUESTIONS = [
       {s:"fire",   t:"Say all of it at once, before I have worked out how it sounds."},
       {s:"time",   t:"Say little. What the eleven were for is not clear to me yet."}
     ]},
+  { place:"Vaskaal",
+    text:"The thirteenth was set by nobody. Vaskaal is at the treeline where the first trial began: grey, twice your height, no weapon and no face. It says that you are early, and that it can wait.",
+    answers:[
+      {s:"shadow", t:"Meet it here, out of sight of the wood, so that nobody watches this."},
+      {s:"water",  t:"Say out loud that it frightens me, and do not take a step back."},
+      {s:"light",  t:"Say plainly what it is and what it does, so it cannot be mistaken."},
+      {s:"fire",   t:"Go at it now, while it is still explaining how well it can wait."},
+      {s:"time",   t:"Agree that I am early. Then make it wait until I am not."},
+      {s:"spirit", t:"Refuse its terms. It does not get to choose when this happens."},
+      {s:"forest", t:"Stand between it and the wood, and do not move off that line."}
+    ]},
 ];
 /* integrity check: 7 answers per question, each sage exactly once */
 (function verify(){
@@ -922,6 +979,27 @@ const QUESTIONS = [
     }
   });
 })();
+
+/* ======================= COMPANIONS =======================
+   Chosen once, before the first trial, and standing beside you for all
+   thirteen. The choice is pure flavour - it scores nothing and touches no
+   tally - so that the seven-way balance of the trials is untouched by it.
+   Only the first and the thirteenth name the companion, through {C}. */
+const COMPANIONS = [
+  { id:"tabe",   name:"Tab\u00e8", kind:"a fairy",
+    note:"Never stops talking, and will not hear of being left behind." },
+  { id:"tmber",  name:"Ember", kind:"a dragon",
+    note:"Young, about the size of a horse, and slow to trust anybody." },
+  { id:"oyu",    name:"Oyu", kind:"a Zora",
+    note:"Always some way ahead, and does not wait to be told twice." },
+  { id:"kessin", name:"Kessin", kind:"a Goron",
+    note:"Carries everything, argues with nothing, sleeps through weather." },
+  { id:"wren",   name:"Wren", kind:"a Sheikah",
+    note:"Explains nothing, and is never quite where you left them." },
+  { id:"hob",    name:"Hob", kind:"a horse",
+    note:"Says nothing at all, and has walked this road once before." }
+];
+let companion = COMPANIONS[0];
 
 /* ======================= STATE ======================= */
 const $ = id => document.getElementById(id);
@@ -948,12 +1026,32 @@ function show(name){
   });
 })();
 
+/* ---------- choosing a companion ---------- */
+(function buildCompanions(){
+  const list = $("c-list");
+  COMPANIONS.forEach(c=>{
+    const li = document.createElement("li");
+    const b = document.createElement("button");
+    b.className = "comp";
+    b.type = "button";
+    b.innerHTML = `<b>${c.name} <em>&middot; ${c.kind}</em></b><span>${c.note}</span>`;
+    b.addEventListener("click", ()=>{
+      companion = c;
+      idx = 0; picks = [];
+      show("quiz");
+      renderQuestion();
+    });
+    li.appendChild(b);
+    list.appendChild(li);
+  });
+})();
+
 /* ---------- question view ---------- */
 function renderQuestion(){
   const q = QUESTIONS[idx];
   $("q-place").textContent = q.place;
   $("q-count").textContent = `Trial ${idx+1} of ${QUESTIONS.length}`;
-  $("q-text").textContent = q.text;
+  $("q-text").textContent = q.text.replace(/\{C\}/g, companion.name);
 
   const marks = $("q-marks");
   marks.innerHTML = "";
@@ -976,7 +1074,8 @@ function renderQuestion(){
     list.appendChild(li);
   });
 
-  $("back").style.visibility = idx === 0 ? "hidden" : "visible";
+  $("back").style.visibility = "visible";
+  $("back").innerHTML = idx === 0 ? "&larr; Choose again" : "&larr; Previous trial";
   window.scrollTo({top:0, behavior:"instant"});
   const first = list.querySelector(".ans");
   if(first) first.focus({preventScroll:true});
@@ -1046,6 +1145,10 @@ function renderResult(){
       <div class="aff-num">${counts[k]}</div>
     </div>`).join("");
 
+  $("r-comp").innerHTML =
+    `Thirteen trials, the last of them Vaskaal, walked at the shoulder of ` +
+    `<b>${companion.name}</b>, ${companion.kind}.`;
+
   show("result");
   ocarina.play(MOTIF, 0.45);
   window.scrollTo({top:0, behavior:"instant"});
@@ -1058,8 +1161,8 @@ function renderResult(){
 }
 
 /* ---------- controls ---------- */
-$("begin").addEventListener("click", ()=>{ ocarina.unlock(); idx=0; picks=[]; show("quiz"); renderQuestion(); });
-$("back").addEventListener("click", ()=>{ if(idx>0){ idx--; renderQuestion(); } });
+$("begin").addEventListener("click", ()=>{ ocarina.unlock(); idx=0; picks=[]; show("companion"); window.scrollTo({top:0, behavior:"instant"}); });
+$("back").addEventListener("click", ()=>{ if(idx>0){ idx--; renderQuestion(); } else { show("companion"); } });
 $("again").addEventListener("click", ()=>{
   ocarina.stop();
   idx=0; picks=[];
@@ -1070,9 +1173,10 @@ $("again").addEventListener("click", ()=>{
 $("copy").addEventListener("click", async ()=>{
   const counts = tally();
   const s = SAGES[winner(counts)];
-  const text = s.heading
+  const text = (s.heading
     ? `The Sage Trials \u2014 I came out as ${s.heading}. ${s.line} The sage who holds it: ${s.sage} (${s.temple} \u00b7 ${s.song}).`
-    : `The Sage Trials \u2014 my element is ${s.element}. ${s.line} Another Sage of ${s.element}: ${s.sage} (${s.temple} \u00b7 ${s.song}).`;
+    : `The Sage Trials \u2014 my element is ${s.element}. ${s.line} Another Sage of ${s.element}: ${s.sage} (${s.temple} \u00b7 ${s.song}).`)
+    + ` Thirteen trials, the last of them Vaskaal, with ${companion.name}.`;
   try{
     await navigator.clipboard.writeText(text);
     $("copy").textContent = "Copied";
