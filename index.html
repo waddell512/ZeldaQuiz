@@ -1083,23 +1083,32 @@ const FIGURES = {
     <circle cx="40" cy="28" r="4.6" fill="url(#figTabe)"/>
     <circle cx="38.4" cy="26.4" r="1.5" fill="#FFFDF0"/>`,
 
-  /* Volvagia in miniature: the horns and the mane, on a body that has not
-     grown into them. */
-  ember:`<ellipse cx="40" cy="57" rx="20" ry="2" fill="#000" opacity=".14"/>
-    <path d="M12 40 q-6 -6 -1 -12 q5 -6 12 -3 q-6 3 -6 8 q0 5 5 7 z" fill="#C4441F" stroke="#8E2E11" stroke-width="1.2"/>
-    <ellipse cx="34" cy="38" rx="18" ry="13" fill="#DD5620" stroke="#8E2E11" stroke-width="1.4"/>
-    <path d="M24 44 q10 5 22 1 q-6 6 -12 6 q-7 0 -10 -7 z" fill="#F0A05A" opacity=".55"/>
-    <path d="M34 27 q6 -9 14 -4 q-5 2 -6 7 z" fill="#F0892A" stroke="#B85E11" stroke-width="1"/>
+  /* Volvagia in miniature. The wings, the spined neck and the spade tail are
+     what make it read as a dragon rather than a horned animal at this size;
+     the bone horns and the orange mane are what make it read as Volvagia's. */
+  ember:`<ellipse cx="40" cy="57" rx="21" ry="2" fill="#000" opacity=".14"/>
+    <path d="M24 44 Q12 47 7 41 Q3 35 8 30 Q8 37 14 40 Q19 42 24 39 Z" fill="#C4441F" stroke="#8E2E11" stroke-width="1.2"/>
+    <path d="M9 31 L1 27 L8 24 L6 17 L14 25 Z" fill="#F0892A" stroke="#B85E11" stroke-width="1" stroke-linejoin="round"/>
+    <path d="M33 33 Q27 17 13 11 Q21 22 21 31 Q25 27 30 32 Z" fill="#B23C18" stroke="#8E2E11" stroke-width="1.1"/>
+    <ellipse cx="34" cy="40" rx="15" ry="11" fill="#DD5620" stroke="#8E2E11" stroke-width="1.4"/>
+    <path d="M24 45 q10 5 20 1 q-6 6 -11 6 q-6 0 -9 -7 z" fill="#F0A05A" opacity=".55"/>
+    <path d="M38 34 Q34 13 19 7 Q29 20 28 31 Q33 27 38 34 Z" fill="#E86A2E" stroke="#8E2E11" stroke-width="1.2"/>
+    <path d="M23 11 Q28 21 28 31 M31 17 Q32 25 31 32" fill="none" stroke="#A8380F" stroke-width=".9"/>
     <g stroke="#B23C18" stroke-width="5" stroke-linecap="round" fill="none">
-      <path d="M28 48 L26 55"/><path d="M36 49 L37 55"/><path d="M46 47 L48 55"/>
+      <path d="M28 49 L26 54"/><path d="M43 49 L45 54"/>
     </g>
-    <ellipse cx="57" cy="27" rx="13" ry="11" fill="#E05A22" stroke="#8E2E11" stroke-width="1.4"/>
-    <path d="M50 18 Q44 10 46 3 Q53 8 56 16 Z" fill="#F5E7CC" stroke="#C4A874" stroke-width="1"/>
-    <path d="M62 18 Q68 10 66 3 Q59 8 56 16 Z" fill="#F5E7CC" stroke="#C4A874" stroke-width="1"/>
-    <ellipse cx="69" cy="30" rx="7" ry="5.5" fill="#EE7238" stroke="#8E2E11" stroke-width="1.2"/>
-    <circle cx="72" cy="29" r="1.1" fill="#5A1B08"/>
-    <circle cx="59" cy="24" r="2.6" fill="#FFF6DC"/><circle cx="59.6" cy="24" r="1.4" fill="#8A2708"/>`,
-
+    <g stroke="#B23C18" stroke-width="3.2" stroke-linecap="round" fill="none">
+      <path d="M23 55 L30 55"/><path d="M42 55 L49 55"/>
+    </g>
+    <path d="M44 37 Q50 28 57 24 L62 31 Q54 35 48 43 Z" fill="#DD5620" stroke="#8E2E11" stroke-width="1.3"/>
+    <path d="M46 34 l-2 -5 5 2 z M51 29 l-2 -5 5 2 z" fill="#F0892A" stroke="#B85E11" stroke-width=".7"/>
+    <path d="M55 23 Q64 16 72 21 Q78 25 74 31 L64 34 Q54 32 55 23 Z" fill="#E05A22" stroke="#8E2E11" stroke-width="1.3"/>
+    <path d="M70 21 Q78 24 75 31 L69 32 Z" fill="#EE7238"/>
+    <circle cx="75" cy="27" r="1.1" fill="#5A1B08"/>
+    <path d="M59 21 Q49 17 43 9 Q54 12 63 19 Z" fill="#F5E7CC" stroke="#C4A874" stroke-width="1"/>
+    <path d="M63 19 Q55 12 52 3 Q62 8 67 17 Z" fill="#F5E7CC" stroke="#C4A874" stroke-width="1"/>
+    <path d="M56 23 Q48 19 45 24 Q52 23 54 28 Z" fill="#F0892A" stroke="#B85E11" stroke-width=".9"/>
+    <circle cx="63" cy="25" r="2.5" fill="#FFF6DC"/><circle cx="63.7" cy="25" r="1.3" fill="#8A2708"/>`,
   /* Twilight Princess Epona's build, in blue, with the pale mane and tail and
      the white face stripe. */
   blaze:`<ellipse cx="40" cy="57" rx="24" ry="2" fill="#000" opacity=".14"/>
