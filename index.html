@@ -849,13 +849,17 @@ function medallion(key){
    Because that companion may be a fairy, a dragon, a horse, an owl, a
    wolf or a cucco, nothing in the thirteen gives it speech, hands or
    two legs: it waits, follows, watches, gets cold and can be sent
-   away, and is never a character with lines. Each trial also carries
+   away, and is never a character with lines. Each of the six descends
+   from a named creature of the game - Navi, Volvagia, Epona, Kaepora
+   Gaebora, the Wolfos of the Forest Temple, Cojiro - which is carried
+   in the kind so that the note stays about temperament. Bram descends
+   from a Wolfos but is an ordinary wolf himself, so none of the six is
+   a thing you fight. Each trial also carries
    a `where` - the place in Hyrule it is set - shown under its name. The companions are creatures of
    Hyrule rather than its peoples - a fairy, a dragon, a horse, an owl,
    a wolf and a cucco - so that choosing one is choosing a travelling
    animal and not a member of somebody's tribe. None of them is a thing
-   you would fight in the game - Bram is an ordinary wolf, not a
-   wolfos. */
+   you would fight in the game. */
 const QUESTIONS = [
   { place:"The Threshold", where:"Kokiri Forest",
     text:"The first is set at the treeline of the Kokiri wood. You may go in when the wood lets you, and nobody will say when. It is plain enough that it has no intention of letting {C} in at all.",
@@ -1032,15 +1036,15 @@ const QUESTIONS = [
 const COMPANIONS = [
   { id:"tabe",   name:"Tab\u00e8", kind:"a fairy, of Navi's line",
     note:"Mischief, sarcasm and a great deal of fun; bossy when it suits him; certain to say the one thing that matters at the worst possible moment. Works hard at hiding how much he cares, and only lets it show once he knows you." },
-  { id:"ember",  name:"Ember", kind:"a dragon",
+  { id:"ember",  name:"Ember", kind:"a dragon, of Volvagia's line",
     note:"Young enough to still be the size of a large puppy, and slow to trust anybody." },
-  { id:"blaze",  name:"Blaze", kind:"a horse",
+  { id:"blaze",  name:"Blaze", kind:"a horse, of Epona's line",
     note:"Will not be ridden by anyone who has not earned it, and will jump anything at all once you have." },
-  { id:"vesper", name:"Vesper", kind:"an owl",
+  { id:"vesper", name:"Vesper", kind:"an owl, of Kaepora Gaebora's line",
     note:"Explains things at enormous length, and is usually right." },
-  { id:"bram",   name:"Bram", kind:"a wolf",
+  { id:"bram",   name:"Bram", kind:"a wolf, of the Forest Temple Wolfos",
     note:"Started following three days out of the wood, and has never once come when called." },
-  { id:"pim",    name:"Pim", kind:"a cucco",
+  { id:"pim",    name:"Pim", kind:"a cucco, of Cojiro's line",
     note:"Placid, ridiculous, and not to be struck under any circumstances." }
 ];
 let companion = COMPANIONS[0];
