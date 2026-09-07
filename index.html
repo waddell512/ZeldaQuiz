@@ -309,6 +309,13 @@ button{font:inherit;color:inherit;cursor:pointer}
 .mark{flex:1;height:2px;background:var(--edge-2);transition:background .35s}
 .mark.done{background:var(--gold-2)}
 .mark.now{background:var(--gold)}
+/* The trial's name, and under it where in Hyrule it is set. */
+.qwho{display:flex;flex-direction:column;gap:.15rem}
+.qwhere{
+  font-family:"Barlow Semi Condensed",system-ui,sans-serif;
+  font-weight:500;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);margin:0;
+}
 .qtext{font-family:Spectral,serif;font-weight:400;font-size:clamp(1.2rem,1.02rem + 1.05vw,1.65rem);line-height:1.42;text-wrap:balance;margin:0}
 
 .answers{display:flex;flex-direction:column;gap:2px;margin:0;padding:0;list-style:none}
@@ -545,8 +552,11 @@ button{font:inherit;color:inherit;cursor:pointer}
     <section class="view" id="v-quiz">
       <div class="qhead">
         <div class="qmeta">
-          <p class="eyebrow" id="q-place">Kokiri Forest</p>
-          <p class="qcount" id="q-count">Trial 1 of 12</p>
+          <div class="qwho">
+            <p class="eyebrow" id="q-place">The Threshold</p>
+            <p class="qwhere" id="q-where">Kokiri Forest</p>
+          </div>
+          <p class="qcount" id="q-count">Trial 1 of 13</p>
         </div>
         <h2 class="qtext" id="q-text"></h2>
         <div class="marks" id="q-marks" aria-hidden="true"></div>
@@ -811,167 +821,173 @@ function medallion(key){
    thirteenth slot order is one of exactly four permutations that can
    follow the twelve without putting any sage in the same slot a third
    time, so no sage sits in one slot more than twice across all
-   thirteen. {C} in a trial's text is the companion chosen before the
-   first one; the choice scores nothing. The companions are creatures of
+   thirteen. {C} in a trial's setup or in any of its answers is the
+   companion chosen before the first one; the choice scores nothing.
+   Because that companion may be a fairy, a dragon, a horse, an owl, a
+   wolf or a cucco, nothing in the thirteen gives it speech, hands or
+   two legs: it waits, follows, watches, gets cold and can be sent
+   away, and is never a character with lines. Each trial also carries
+   a `where` - the place in Hyrule it is set - shown under its name. The companions are creatures of
    Hyrule rather than its peoples - a fairy, a dragon, a horse, an owl,
    a wolf and a cucco - so that choosing one is choosing a travelling
    animal and not a member of somebody's tribe. None of them is a thing
    you would fight in the game - Bram is an ordinary wolf, not a
    wolfos. */
 const QUESTIONS = [
-  { place:"The Threshold",
-    text:"The first is set at the treeline of the Kokiri wood. You may go in when the wood lets you, and nobody will say when. {C} settles down at the treeline to wait it out with you.",
+  { place:"The Threshold", where:"Kokiri Forest",
+    text:"The first is set at the treeline of the Kokiri wood. You may go in when the wood lets you, and nobody will say when. It is plain enough that it has no intention of letting {C} in at all.",
     answers:[
-      {s:"spirit", t:"Go in on the first morning I feel like it, and let the wood object."},
-      {s:"shadow", t:"Wait out of its sight, so that whatever it wants is not performed."},
-      {s:"time",   t:"Wait, and use the waiting. There is a year of things I have not learned."},
-      {s:"forest", t:"Wait at the treeline and be good company to whoever waits with me."},
-      {s:"light",  t:"Wait in the open where it can see me, and do nothing worth watching."},
-      {s:"water",  t:"Say out loud, most days, that the waiting is hard. Because it is."},
-      {s:"fire",   t:"Wait a week. Then walk in, because a week is a fair offer."}
+      {s:"spirit", t:"Go in the first morning I feel like it, and let the wood keep its rule."},
+      {s:"shadow", t:"Go in alone without making anything of it, so {C} is not left feeling left."},
+      {s:"time",   t:"Wait. If the wood has a reason for that, waiting is how I find it out."},
+      {s:"forest", t:"Not without {C}. If the wood wants me it can take the pair of us."},
+      {s:"light",  t:"Wait in the open, where the wood can see exactly who I came here with."},
+      {s:"water",  t:"Say out loud that leaving {C} out here is the part I actually mind."},
+      {s:"fire",   t:"Wait a week. Then walk in with {C} and see who stops us."}
     ]},
 
-  { place:"The Way",
-    text:"The second gives you a place on the far side of the field to reach, and forbids you to ask anybody the way to it. There is no limit at all on how long you take.",
+  { place:"The Way", where:"Hyrule Field",
+    text:"The second gives you a place beyond the field to reach and forbids you to ask anybody the way to it. {C} sets off confidently in a direction you are fairly sure is the wrong one.",
     answers:[
-      {s:"forest", t:"Travel with people going roughly that way, and never ask the question."},
-      {s:"light",  t:"Learn to read the country properly. That comes to the same as asking."},
-      {s:"fire",   t:"Set out at once in the likeliest direction and correct as I go."},
-      {s:"spirit", t:"Arrive wrong my own way rather than right by somebody else's."},
-      {s:"time",   t:"Spend a month on the map before I spend a single day on the road."},
-      {s:"shadow", t:"Listen hard to people who are not talking to me, and ask no one."},
-      {s:"water",  t:"Admit to whoever I travel with that I am lost, and still not ask."}
+      {s:"forest", t:"Follow {C}. Wrong together is better than right on my own."},
+      {s:"light",  t:"Go my own way, and mark every turning so {C} can find me if I am wrong."},
+      {s:"fire",   t:"My direction, at speed. {C} can catch up when it tires of being right."},
+      {s:"spirit", t:"Mine. I would rather be lost by my own reckoning than by anyone else's."},
+      {s:"time",   t:"Neither today. Watch which way {C} goes for a week and learn from it."},
+      {s:"shadow", t:"Follow {C} quietly, and never mention that I thought it was wrong."},
+      {s:"water",  t:"Say out loud that I have no idea, and go the way {C} went anyway."}
     ]},
 
-  { place:"The Silence",
-    text:"The third is a year in the town in which you may not explain yourself to anybody, about anything, however badly you come to be misunderstood.",
+  { place:"The Silence", where:"Hyrule Castle Town",
+    text:"The third is a year in the town in which you may not explain yourself to anybody, about anything. By the second month {C} is the only one still sitting with you, and never asked in the first place.",
     answers:[
-      {s:"time",   t:"Do the year. Being understood was always going to take longer."},
-      {s:"forest", t:"Stay near the few people who never needed it explained to them."},
-      {s:"light",  t:"Live so plainly that the year does the explaining on my behalf."},
+      {s:"time",   t:"Do the year. Being understood was always going to take longer than one."},
+      {s:"forest", t:"Stay where {C} is. One is enough to get a year like this one done."},
+      {s:"light",  t:"Live so plainly that the year explains me, and let the town watch it."},
       {s:"spirit", t:"Do the year, and let them make of me exactly whatever they like."},
-      {s:"water",  t:"Let them see what it costs me, since I am not allowed to say it."},
+      {s:"water",  t:"Say nothing to them and everything to {C}, out loud, every night."},
       {s:"fire",   t:"Do the year loudly. Silence about myself is not silence about all."},
       {s:"shadow", t:"Do the year, and afterwards still not explain. It was easier so."}
     ]},
 
-  { place:"The Fire",
-    text:"The fourth gives you a fire on the mountain to keep alight for a season. Nobody comes to that place, and nobody will tell you what the fire is for.",
+  { place:"The Fire", where:"Death Mountain",
+    text:"The fourth gives you a fire on the mountain to keep alight for a season. Nobody comes up, and nobody says what it is for. {C} could go down to the warm valley any day it liked, and does not.",
     answers:[
-      {s:"water",  t:"Keep it, and admit out loud how strange it is to mind about a fire."},
-      {s:"fire",   t:"Keep it high. If it is worth keeping it is worth seeing from below."},
+      {s:"water",  t:"Say out loud that I would not have lasted a week up here on my own."},
+      {s:"fire",   t:"Keep it high enough that {C} and I can be seen from the valley floor."},
       {s:"time",   t:"Cut a whole season of wood in the first fortnight, then stop fretting."},
-      {s:"shadow", t:"Keep it, and let nobody down the mountain know that I am up here."},
-      {s:"forest", t:"Keep it, and keep a second one lit for anybody who comes up cold."},
-      {s:"light",  t:"Keep it exactly as instructed, and write down what the weather did."},
+      {s:"shadow", t:"Send {C} down for the worst of the winter and never explain why."},
+      {s:"forest", t:"Keep a second fire going for {C}, and count that as part of the work."},
+      {s:"light",  t:"Keep it exactly as instructed, and write down what the season did."},
       {s:"spirit", t:"Keep it my own way, and let it go out one night to see what happens."}
     ]},
 
-  { place:"The Deep",
-    text:"The fifth hands you a sealed box and asks you to sink it in the deepest water of the Domain. You are not told what is in it, and you are not to open it.",
+  { place:"The Deep", where:"Zora's Domain",
+    text:"The fifth hands you a sealed box to sink in the deepest water of the Domain, unopened, and will not say what is in it. Whatever else is true, {C} cannot come down there with you.",
     answers:[
-      {s:"fire",   t:"Take it out and drop it before the question has time to start."},
-      {s:"time",   t:"Sink it, and mark the place, in case anybody ever needs it back."},
-      {s:"spirit", t:"Open it. I am not sinking a thing I have not looked inside."},
-      {s:"forest", t:"Ask a Zora to take me out, and let one of them watch me drop it."},
-      {s:"shadow", t:"Sink it at night, alone, and never tell a soul where the place is."},
-      {s:"water",  t:"Say out loud that the not knowing is going to bother me for years."},
-      {s:"light",  t:"Sink it unopened, and say publicly that I never once looked."}
+      {s:"fire",   t:"Out and down before I have time to mind about going alone."},
+      {s:"time",   t:"Teach {C} where to wait and how long, then take my time down there."},
+      {s:"spirit", t:"Open it in the boat. I am not sinking a thing I have not looked at."},
+      {s:"forest", t:"Ask a Zora to sit with {C} on the bank for as long as I am under."},
+      {s:"shadow", t:"Go at night, so {C} sleeps through the part where I do not surface."},
+      {s:"water",  t:"Say out loud, to {C}, that I am frightened of this, and then go in."},
+      {s:"light",  t:"Sink it unopened, and say publicly afterwards that I never looked."}
     ]},
 
-  { place:"The Season",
-    text:"The sixth is a year of ordinary work at the ranch. You are told only that the trial is somewhere inside the year, and that nobody will tell you when it has happened.",
+  { place:"The Season", where:"Lon Lon Ranch",
+    text:"The sixth is a year of ordinary work at the ranch. You are told only that the trial is somewhere inside the year, and that nobody will say when it has been. {C} is there for the whole of it.",
     answers:[
       {s:"forest", t:"Do the work and get close to the people. That is a year well spent."},
       {s:"spirit", t:"Do the work and stop looking for it. A watched year is a wasted one."},
       {s:"water",  t:"Say at the outset that this frightens me more than any of the rest."},
       {s:"fire",   t:"Work flat out and treat every single day as though it is the one."},
-      {s:"shadow", t:"Keep a private account of the year and let nobody ever read it."},
+      {s:"shadow", t:"Keep a private account of the year and show it to nobody, {C} included."},
       {s:"time",   t:"Assume it is the last day, and spend the year being worth that day."},
       {s:"light",  t:"Write down what happens, plainly, so the year can be read after."}
     ]},
 
-  { place:"The Watch",
-    text:"The seventh is a watch kept over Kakariko, every night, for a year. In the whole of that year nothing comes, and nothing is ever going to come.",
+  { place:"The Watch", where:"Kakariko Village",
+    text:"The seventh is a watch kept over Kakariko, every night, for a year. Nothing comes in the whole of it and nothing was ever going to. {C} sits the year out beside you regardless.",
     answers:[
       {s:"time",   t:"Stand it anyway. The year a watch lapses is the year something comes."},
       {s:"spirit", t:"Stand it because I said I would, not because anything is out there."},
-      {s:"water",  t:"Say out loud, some nights, that this is lonely, and stand it anyway."},
-      {s:"shadow", t:"Stand it, and let the village go on not knowing anyone is out there."},
-      {s:"light",  t:"Stand it, and keep a record every night, the empty ones included."},
+      {s:"water",  t:"Say out loud, some nights, that this is lonely even with {C} here."},
+      {s:"shadow", t:"Stand it, and let the village sleep on not knowing anyone is out here."},
+      {s:"light",  t:"Keep a record every night, the empty ones included, and sign each one."},
       {s:"forest", t:"Stand it, and get to know the houses I am standing in front of."},
       {s:"fire",   t:"Stand it wide awake all year, as though tonight is finally the night."}
     ]},
 
-  { place:"The Pass",
-    text:"The eighth sets you at the pass to turn back anybody who cannot say why they are going up. You are not told what is up there, or why any of it matters.",
+  { place:"The Pass", where:"Death Mountain Trail",
+    text:"The eighth sets you at the pass to turn back anybody who cannot say why they are going up, and nobody will say what is up there. {C} lets people through whenever your back is turned.",
     answers:[
       {s:"light",  t:"Ask everyone the same question and give everyone the same answer."},
-      {s:"fire",   t:"Ask it straight, take the first answer given, and decide on that."},
-      {s:"shadow", t:"Turn them back without ever letting on that there is a reason."},
-      {s:"time",   t:"Write down every reason I am given. In a year that is a picture."},
+      {s:"fire",   t:"Ask it straight, take the first answer, and watch {C} like a hawk."},
+      {s:"shadow", t:"Turn them back myself, quietly, and never let on that {C} did that."},
+      {s:"time",   t:"Write down every reason I am given. In a year that makes a picture."},
       {s:"water",  t:"Tell them I do not know why either, and turn them back regardless."},
-      {s:"forest", t:"Let the ones I know go up. I can vouch for them, and that is a reason."},
+      {s:"forest", t:"Trust {C} over the rule. It has been right about people before now."},
       {s:"spirit", t:"Go up myself first. I am not guarding a thing I have not seen."}
     ]},
 
-  { place:"The Keeping",
-    text:"The ninth gives you something wounded to keep through the winter. It will not become tame, it will not thank you, and it may very well die regardless.",
+  { place:"The Keeping", where:"Lake Hylia",
+    text:"The ninth gives you something wounded to keep through the winter. It will not tame, it will not thank you, it may well die regardless, and {C} will not go anywhere near it.",
     answers:[
-      {s:"shadow", t:"Keep it out of sight, so that nobody has to watch if it goes badly."},
-      {s:"water",  t:"Keep it, and grieve it in advance, out loud, the whole winter."},
-      {s:"fire",   t:"Keep it hard. Warm, fed and handled every day, and no half measures."},
+      {s:"shadow", t:"Keep it out of sight of both of them, so nobody watches it go badly."},
+      {s:"water",  t:"Keep it, and say out loud all winter that I expect to lose it."},
+      {s:"fire",   t:"Keep it hard. Warm, fed and handled daily, and {C} can get used to it."},
       {s:"time",   t:"Keep it for the spring, not the winter. Feed it for what it will be."},
       {s:"spirit", t:"Keep it, and let it stay wild. It owes me nothing at the end of this."},
       {s:"light",  t:"Keep it, and write down honestly whether I am helping or prolonging."},
-      {s:"forest", t:"Keep it where I sleep. Nothing should do a winter like that alone."}
+      {s:"forest", t:"Keep it where we all sleep, and let {C} come round to it in its own time."}
     ]},
 
-  { place:"The Rope",
-    text:"The tenth is a rope across the valley which you may cross once, in either direction, in your life. When you use it is yours, and so is which way.",
+  { place:"The Rope", where:"Gerudo Valley",
+    text:"The tenth is a rope over the valley that may be crossed once, in either direction, in your life. It will take one of you, once. It will not take you and {C} both.",
     answers:[
-      {s:"fire",   t:"Cross it today. A thing saved for the right moment is a thing wasted."},
-      {s:"light",  t:"Cross when I can say plainly why. Until then it stays a rope."},
-      {s:"spirit", t:"Cross it for nothing at all, on a day I pick, and owe nobody a reason."},
-      {s:"water",  t:"Cross when it matters enough that I would be in tears about it."},
-      {s:"forest", t:"Cross when somebody on the far side needs me there. Not before that."},
-      {s:"shadow", t:"Cross when nobody is watching, and never mention that I used it."},
-      {s:"time",   t:"Keep it. There is a day coming, decades off, that will want a rope."}
+      {s:"fire",   t:"Go now. A crossing saved for the right moment is a crossing wasted."},
+      {s:"light",  t:"Say plainly which of us the far side needs more, and abide by that."},
+      {s:"spirit", t:"Neither of us. I did not come this far to be sorted out by a rope."},
+      {s:"water",  t:"Say out loud that I do not want to be apart, and send {C} over."},
+      {s:"forest", t:"Send {C}. I am not the one who has to get to the other side."},
+      {s:"shadow", t:"Send {C} across, and never once let on that I wanted to go."},
+      {s:"time",   t:"Keep it. There is a day coming, years off, that will want a crossing."}
     ]},
 
-  { place:"The Cup",
-    text:"The eleventh gives you a cup that fills once a day and puts you in a camp where more than one person is thirsty. Nobody there is told that the cup is yours.",
+  { place:"The Cup", where:"Gerudo Desert",
+    text:"The eleventh gives you a cup that fills once a day and puts you in a camp where more than one is thirsty. Nobody there knows the cup is yours, and {C} is thirsty as well.",
     answers:[
-      {s:"spirit", t:"Decide it fresh each day, and refuse to make a rule out of it."},
-      {s:"forest", t:"Give it to the same person every day until they are on their feet."},
-      {s:"shadow", t:"Leave it filled where it will be found, and never say whose it was."},
-      {s:"light",  t:"Say whose it is on the first morning, and share it in the open."},
+      {s:"spirit", t:"Decide it fresh every day, and refuse to make a rule out of it."},
+      {s:"forest", t:"{C} drinks first. That is not a hard question for me to answer."},
+      {s:"shadow", t:"Leave it filled where it will be found, and let nobody know whose."},
+      {s:"light",  t:"Say on the first morning whose cup it is, and share it in the open."},
       {s:"fire",   t:"Give it away the moment it fills, every day, without thinking."},
       {s:"time",   t:"Give it to whoever has the most days of walking still ahead of them."},
-      {s:"water",  t:"Say out loud how badly I want it, and then hand it over anyway."}
+      {s:"water",  t:"Say out loud how badly we both want it, and hand it to somebody else."}
     ]},
 
-  { place:"The Account",
-    text:"The twelfth is the last. Eleven trials are behind you, none of them named, and you are asked what it was that you did.",
+  { place:"The Account", where:"The Chamber of Sages",
+    text:"The twelfth is the last of the set. Eleven trials are behind you, none of them named, and you are asked what it was that you did. {C} is the only one who saw any of it.",
     answers:[
       {s:"water",  t:"Tell all of it, and let them see which of the eleven still costs me."},
-      {s:"shadow", t:"Give the short account and carry the rest of it out of here myself."},
-      {s:"forest", t:"Say what I did for the people in them. That is what I remember."},
+      {s:"shadow", t:"Give the short account, and carry the rest of it out of here myself."},
+      {s:"forest", t:"Say what I did for the people in them, and for {C}. That is what I have."},
       {s:"light",  t:"Give it in order, plainly, including the two I would rather not."},
       {s:"spirit", t:"Say what I would do again, whatever the eleven were meant to teach."},
       {s:"fire",   t:"Say all of it at once, before I have worked out how it sounds."},
       {s:"time",   t:"Say little. What the eleven were for is not clear to me yet."}
     ]},
-  { place:"Vaskaal",
-    text:"The thirteenth was set by nobody. Vaskaal is at the treeline where the first trial began: grey, twice your height, no weapon and no face. It says that you are early, and that it can wait.",
+
+  { place:"Vaskaal", where:"Kokiri Forest",
+    text:"The thirteenth was set by nobody. Vaskaal is at the treeline where the first trial began: grey, twice your height, no weapon and no face. It says you are early. {C} is already standing in front of you.",
     answers:[
-      {s:"shadow", t:"Meet it here, out of sight of the wood, so that nobody watches this."},
+      {s:"shadow", t:"Put {C} behind me, and meet it out of sight of the wood."},
       {s:"water",  t:"Say out loud that it frightens me, and do not take a step back."},
       {s:"light",  t:"Say plainly what it is and what it does, so it cannot be mistaken."},
       {s:"fire",   t:"Go at it now, while it is still explaining how well it can wait."},
       {s:"time",   t:"Agree that I am early. Then make it wait until I am not."},
       {s:"spirit", t:"Refuse its terms. It does not get to choose when this happens."},
-      {s:"forest", t:"Stand between it and the wood, and do not move off that line."}
+      {s:"forest", t:"Stand where {C} is standing, and do not move off that line."}
     ]},
 ];
 /* integrity check: 7 answers per question, each sage exactly once */
@@ -1054,9 +1070,12 @@ function show(name){
 /* ---------- question view ---------- */
 function renderQuestion(){
   const q = QUESTIONS[idx];
+  /* {C} is the chosen companion, and it appears in answers as well as setups. */
+  const named = t => t.replace(/\{C\}/g, companion.name);
   $("q-place").textContent = q.place;
+  $("q-where").textContent = q.where;
   $("q-count").textContent = `Trial ${idx+1} of ${QUESTIONS.length}`;
-  $("q-text").textContent = q.text.replace(/\{C\}/g, companion.name);
+  $("q-text").textContent = named(q.text);
 
   const marks = $("q-marks");
   marks.innerHTML = "";
@@ -1073,7 +1092,7 @@ function renderQuestion(){
     const b = document.createElement("button");
     b.className = "ans";
     b.type = "button";
-    b.textContent = a.t;
+    b.textContent = named(a.t);
     b.addEventListener("click", ()=>choose(a.s));
     li.appendChild(b);
     list.appendChild(li);
