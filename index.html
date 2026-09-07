@@ -181,9 +181,12 @@ button{font:inherit;color:inherit;cursor:pointer}
   -webkit-mask-image:linear-gradient(transparent 16%,#000 60%);
   mask-image:linear-gradient(transparent 16%,#000 60%);
 }
+/* The chamber's floor mark carries a Triforce of its own. Now that the
+   intro has a real one at the centre of the medallions, this drops back
+   and sits lower, so the two do not read as one badly aligned shape. */
 .bg-mark{
-  position:absolute;left:50%;top:42%;width:min(76vmin,640px);height:auto;
-  transform:translate(-50%,-50%);color:var(--gold);opacity:calc(var(--mark-op) * .82);
+  position:absolute;left:50%;top:52%;width:min(76vmin,640px);height:auto;
+  transform:translate(-50%,-50%);color:var(--gold);opacity:calc(var(--mark-op) * .5);
 }
 .bg-mark .turn{transform-origin:200px 200px;animation:spin 420s linear infinite}
 .bg-trim{
@@ -229,9 +232,20 @@ button{font:inherit;color:inherit;cursor:pointer}
 
 /* ---------- intro ---------- */
 .intro{flex-direction:column;align-items:center;gap:clamp(1.4rem,4vw,2.2rem);text-align:center}
-.ring{
+/* The seven medallions orbit; the Triforce they orbit sits still in the
+   middle of them, outside the rotating element so it never turns. */
+.ringwrap{
   position:relative;width:min(var(--ring),78vw);aspect-ratio:1;flex:none;
+  display:grid;place-items:center;
+}
+.ring{
+  position:absolute;inset:0;
   animation:spin 150s linear infinite;
+}
+.ring-tri{
+  position:relative;width:33%;height:auto;
+  color:var(--gold);
+  filter:drop-shadow(0 0 14px color-mix(in srgb,var(--gold) 34%,transparent));
 }
 @keyframes spin{to{transform:rotate(360deg)}}
 .ring-med{
@@ -240,8 +254,8 @@ button{font:inherit;color:inherit;cursor:pointer}
   animation:spin 150s linear infinite reverse;
 }
 .ring-med svg{width:100%;height:auto;display:block;opacity:.92}
-.ring::after{
-  content:"";position:absolute;inset:22%;border-radius:50%;
+.ringwrap::after{
+  content:"";position:absolute;inset:20%;border-radius:50%;
   background:radial-gradient(circle,var(--shade),transparent 70%);
 }
 .title{font-size:clamp(2.3rem,9vw,3.9rem);letter-spacing:.02em}
@@ -530,7 +544,16 @@ button{font:inherit;color:inherit;cursor:pointer}
   <main id="app">
     <!-- intro -->
     <section class="view on intro" id="v-intro">
-      <div class="ring" id="ring" aria-hidden="true"></div>
+      <div class="ringwrap">
+        <div class="ring" id="ring" aria-hidden="true"></div>
+        <svg class="ring-tri" viewBox="0 0 100 100" role="img" aria-label="The Triforce, with the seven sage medallions around it">
+          <g fill="currentColor" fill-opacity=".2" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round">
+            <path d="M50 8 L29.2 44 L70.8 44 Z"/>
+            <path d="M27.6 47.5 L6.8 83.5 L48.4 83.5 Z"/>
+            <path d="M72.4 47.5 L51.6 83.5 L93.2 83.5 Z"/>
+          </g>
+        </svg>
+      </div>
       <div class="titleblock">
         <h1 class="title"><span>Ocarina of Time</span>The Sage Trials</h1>
         <p class="byline">by the Skyward Prince</p>
