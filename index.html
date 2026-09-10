@@ -230,6 +230,16 @@ button{font:inherit;color:inherit;cursor:pointer}
   line-height:1.45;color:var(--ink-2);
 }
 
+/* Each tribe carries its crest at the head of its card, drawn as a line
+   glyph in the card's own colour so it warms with the border on hover. */
+.crest{
+  width:1.45em;height:1.45em;vertical-align:-.34em;margin-right:.5em;
+  color:var(--gold-2);transition:color .18s;
+}
+.comp:hover .crest,.comp:focus-visible .crest{color:var(--gold)}
+/* The choosing screens sit centred, so their back link does too. */
+.cfoot{display:flex;justify-content:center;margin-top:.2rem}
+
 /* The six, drawn small, along the foot of the choosing screen. */
 /* Full-body plates need width, so three across rather than six, and two on
    a phone. Each stands on its own ground rule instead of sitting in a badge. */
@@ -572,11 +582,19 @@ button{font:inherit;color:inherit;cursor:pointer}
       </div>
       <div class="titleblock">
         <h1 class="title"><span>Ocarina of Time</span>The Sage Trials</h1>
-        <p class="byline">by the Skyward Prince</p>
+        <p class="byline">by the Skyward Prince and Butterbean</p>
       </div>
       <hr class="rule-gold" style="width:6rem">
       <p class="lede">The Triforce speaks to you once, and what it says is that <em>Vaskaal</em> is coming: grey, faceless, twice the height of a man, and where it walks the colour goes out of the ground and nothing grows for a season. It says you are not ready. Twelve trials stand between you and the thirteenth, and the thirteenth is Vaskaal itself. Choose who walks them with you, and answer as yourself; the element you carry will be plain long before the end.</p>
       <button class="btn" id="begin">Enter the Chamber</button>
+    </section>
+
+    <!-- choosing a tribe -->
+    <section class="view choose" id="v-tribe">
+      <p class="eyebrow">Before anything else</p>
+      <h2 class="ctitle">What blood do you carry?</h2>
+      <p class="clede">Six peoples answer to Hyrule, and a seventh only passes over it. Nothing here is scored &mdash; it decides who the trials are speaking to when they start asking.</p>
+      <ul class="companions" id="t-list"></ul>
     </section>
 
     <!-- choosing a companion -->
@@ -586,6 +604,16 @@ button{font:inherit;color:inherit;cursor:pointer}
       <p class="clede">One of them walks all thirteen at your shoulder. Nothing about this choice is scored &mdash; it only decides who is standing there when the wood makes you wait.</p>
       <ul class="companions" id="c-list"></ul>
       <div class="c-figs" id="c-figs" aria-hidden="true"></div>
+      <div class="cfoot"><button class="btn-quiet" id="c-back">&larr; Choose your blood again</button></div>
+    </section>
+
+    <!-- choosing a weapon -->
+    <section class="view choose" id="v-weapon">
+      <p class="eyebrow">The last thing you pick up</p>
+      <h2 class="ctitle">What would you carry?</h2>
+      <p class="clede">One of them is in your hands for all thirteen. Scored no more than the rest of it &mdash; but the trials do notice what you reached for.</p>
+      <ul class="companions" id="w-list"></ul>
+      <div class="cfoot"><button class="btn-quiet" id="w-back">&larr; Choose your companion again</button></div>
     </section>
 
     <!-- question -->
@@ -869,7 +897,7 @@ function medallion(key){
    away, and is never a character with lines. Each of the six descends
    from a named creature of the game - Navi, Volvagia, Epona, Kaepora
    Gaebora, the Wolfos of the Forest Temple, Cojiro - which is carried
-   in the kind so that the note stays about temperament. Bram descends
+   in the kind so that the note stays about temperament. Archi descends
    from a Wolfos but is an ordinary wolf himself, so none of the six is
    a thing you fight. Each trial also carries
    a `where` - the place in Hyrule it is set - shown under its name. The companions are creatures of
@@ -1045,6 +1073,64 @@ const QUESTIONS = [
   });
 })();
 
+/* ======================= TRIBES =======================
+   Chosen first, ahead of the companion. Like the companion it is pure
+   flavour - it scores nothing and touches no tally - so the seven-way
+   balance of the trials survives it. Six are the peoples the game itself
+   names; the Watarara are the winged tribe Akira Himekawa drew for the
+   bonus chapter of the Ocarina of Time manga, and are marked as such
+   rather than smuggled in beside the other six. */
+const TRIBES = [
+  { id:"hylian", name:"Hylians", one:"a Hylian", where:"of the field, the market and the castle town",
+    note:"The long ears are for hearing what the gods still say, and nobody you know has heard it lately. You begin with no wood to hide you and no mountain to stand on, which is how most of these stories begin." },
+  { id:"kokiri", name:"Kokiri", one:"a Kokiri", where:"of the wood, and never out of it",
+    note:"A child for good, with a fairy at your shoulder and a forest that shuts behind anyone who leaves. Leaving is meant to kill you; it is worth asking who told you that, and what they wanted." },
+  { id:"goron", name:"Gorons", one:"a Goron", where:"of Death Mountain",
+    note:"Built out of the mountain and fed on it, patient with heat and with almost nothing else. Your answer to something standing in the road is to curl up and roll down the road, and you consider that a plan." },
+  { id:"zora", name:"Zoras", one:"a Zora", where:"of the river and the domain",
+    note:"Water is the easier of your two airs, and you take the long view because the river does. Cold, ceremonious, quick to remind a room whose river it is drinking, and the best singer standing in it." },
+  { id:"gerudo", name:"Gerudo", one:"a Gerudo", where:"of the desert and the fortress",
+    note:"One man is born to your people in a century, so the desert raised you to need no one at all. Thief, guard and horsewoman by turns, you cross ground that kills other travellers and you charge them for the crossing." },
+  { id:"sheikah", name:"Sheikah", one:"a Sheikah", where:"of the shadow, sworn to the crown",
+    note:"Sworn to the royal family, and mostly gone now. You were trained out of being noticed, which is a useful thing to be and a lonely thing to have been made into." },
+  { id:"watarara", name:"Watarara", one:"a Watarara", where:"a winged tribe, from Himekawa's manga",
+    note:"Not from the game: the bird people the manga sends across the sky on migration, touching Hyrule only in passing. Hollow-boned and feathered, you are the only one here who has looked down on the Temple of Time, and the only one who may not come this way again." }
+];
+let tribe = TRIBES[0];
+/* Crests drawn as line glyphs on a common 24x24 field, stroked in the
+   card's colour so one rule covers both themes. */
+const CRESTS = {
+  /* The Hylian crest: the triangle above a bird with swept wings and a
+     wedge of tail. Wings are straight-edged rather than curved - curved,
+     at this size, they close up into a mushroom. */
+  hylian:`<path d="M12 1.8 L15.2 7.4 H8.8 Z"/>
+    <path d="M12 7.8 L12 10.2"/>
+    <path d="M11 9.8 L2.2 10.8 L4.4 13.4 L9.8 14.8 Z"/>
+    <path d="M13 9.8 L21.8 10.8 L19.6 13.4 L14.2 14.8 Z"/>
+    <path d="M10.2 14 L12 21.8 L13.8 14 Z"/>`,
+  /* A single leaf with its midrib - the wood's whole heraldry. */
+  kokiri:`<path d="M4.8 19.2 C4.8 10.4 10.4 4.8 19.2 4.8 C19.2 13.6 13.6 19.2 4.8 19.2 Z"/>
+    <path d="M4.8 19.2 L19.2 4.8"/>`,
+  /* A Goron curled to roll. */
+  goron:`<circle cx="12" cy="12" r="8.4"/>
+    <path d="M12 6.2 A5.8 5.8 0 1 1 6.4 13.4 A3.6 3.6 0 1 0 11.4 9.6"/>`,
+  /* Zora's Sapphire: the gem between its two fins. */
+  zora:`<path d="M12 4.4 L16.4 12.4 L12 20.6 L7.6 12.4 Z"/>
+    <path d="M7.6 12.4 C5.4 12.5 3.4 11.7 2.2 10.1 C4.7 10.3 6.6 11 8.1 12.1 Z"/>
+    <path d="M16.4 12.4 C18.6 12.5 20.6 11.7 21.8 10.1 C19.3 10.3 17.4 11 15.9 12.1 Z"/>`,
+  /* The crescent and its small companion, over the desert. */
+  gerudo:`<path d="M15.8 3.7 A9 9 0 1 0 15.8 20.3 A7.1 7.1 0 1 1 15.8 3.7 Z"/>
+    <circle cx="17.6" cy="12" r="1.7" fill="currentColor" stroke="none"/>`,
+  /* The Sheikah eye: three lashes, the wide eye, and the tear. */
+  sheikah:`<path d="M12 7.4 C6.8 7.4 3 10.6 3 12.2 C3 13.8 6.8 17 12 17 C17.2 17 21 13.8 21 12.2 C21 10.6 17.2 7.4 12 7.4 Z"/>
+    <circle cx="12" cy="12.2" r="2.2" fill="currentColor" stroke="none"/>
+    <path d="M5.6 4.6 L8.2 8.4"/><path d="M12 3.2 L12 7"/><path d="M18.4 4.6 L15.8 8.4"/>
+    <path d="M12 17.2 C10.8 19.4 10.3 20.4 10.3 21 A1.7 1.7 0 0 0 13.7 21 C13.7 20.4 13.2 19.4 12 17.2 Z"/>`,
+  /* One outstretched wing, for the tribe that only crosses overhead. */
+  watarara:`<path d="M21.4 3.4 C13.6 4.6 7.4 9.6 3 19 C4.8 18.2 6.6 17.8 8.4 17.8 C7.7 16.6 7.5 15.3 7.7 13.9 C9.1 15.2 10.7 16 12.4 16.2 C11.9 14.9 11.9 13.4 12.4 11.9 C13.7 13.2 15.2 14 16.8 14.3 C17 12.8 17.6 11.3 18.6 9.8 C20.1 7.6 21 5.4 21.4 3.4 Z"/>
+    <path d="M9.6 15.2 C12.4 11.4 16 8 20 5.6"/>`
+};
+
 /* ======================= COMPANIONS =======================
    Chosen once, before the first trial, and standing beside you for all
    thirteen. The choice is pure flavour - it scores nothing and touches no
@@ -1059,7 +1145,7 @@ const COMPANIONS = [
     note:"Will not be ridden by anyone who has not earned it, and there is no shortcut to the earning. After that there is nothing they will not jump, no water they will not cross, and no distance they will admit is too far." },
   { id:"vesper", name:"Vesper", kind:"an owl, of Kaepora Gaebora's line",
     note:"Explains things at enormous length, asks whether you would like to hear it again, and is almost always right. Sees a great deal further than you do in every sense, and has the patience to wait for you to catch up." },
-  { id:"bram",   name:"Bram", kind:"a wolf, of the Forest Temple Wolfos",
+  { id:"archi",  name:"Archi", kind:"a wolf, of the Forest Temple Wolfos",
     note:"Started following three days out of the wood and has never explained it. Goes ahead into anything dark without being asked, will not be thanked for it, and sleeps at the edge of the firelight and never in it." },
   { id:"pim",    name:"Pim", kind:"a cucco, of Cojiro's line",
     note:"Placid, ridiculous, and unbothered by anything that has ever happened. Rides on packs, eats whatever it likes the look of, and is not to be struck under any circumstances by anyone hoping to stay standing." }
@@ -1153,7 +1239,7 @@ const FIGURES = {
   /* A black wolf. The head is carried level with the shoulder on a short
      thick neck, and the body is long and low - held high on a long neck it
      read as a giraffe. */
-  bram:`<ellipse cx="38" cy="57" rx="25" ry="2" fill="#000" opacity=".14"/>
+  archi:`<ellipse cx="38" cy="57" rx="25" ry="2" fill="#000" opacity=".14"/>
     <path d="M14 34 Q26 27 42 30 L50 34 Q54 41 49 47 L20 47 Q10 41 14 34 Z" fill="#33333D" stroke="#17171E" stroke-width="1.3"/>
     <path d="M17 33 Q27 27 40 29 L42 33 Q28 33 21 39 Z" fill="#4A4A57"/>
     <path d="M45 31 Q51 27 58 28 L60 40 Q52 42 47 40 Z" fill="#33333D" stroke="#17171E" stroke-width="1.3"/>
@@ -1187,6 +1273,64 @@ const FIGURES = {
 };
 
 
+/* ======================= WEAPONS =======================
+   Picked last, after the companion, and held for all thirteen. Flavour
+   again - nothing here is scored. Five come off the game's own item
+   screen; the scimitar is the curved blade the fortress guards carry,
+   the dagger is village work rather than a named artefact, and the Bow
+   of Light is marked as the outsider it is. */
+const WEAPONS = [
+  { id:"kokiri", name:"Kokiri Sword", carry:"the Kokiri Sword", kind:"the first blade, cut for a child's hand",
+    note:"Short, light, and yours before anyone gave you permission to have it. It will not cut what the story eventually asks you to cut, and you will keep it anyway, because it was first." },
+  { id:"master", name:"Master Sword", carry:"the Master Sword", kind:"the blade of evil's bane",
+    note:"Seven years long, and it takes them out of you the moment you lift it. Nothing in Hyrule doubts that it works; the only question is who you are by the time you put it down." },
+  { id:"biggoron", name:"Biggoron's Sword", carry:"Biggoron's Sword", kind:"two hands, and no shield ever again",
+    note:"Absurd, magnificent, and it costs you the arm that would have held a shield. You hit the thing once, and mostly the thing does not need hitting twice." },
+  { id:"hammer", name:"Megaton Hammer", carry:"the Megaton Hammer", kind:"the Gorons' answer to a locked door",
+    note:"Less a weapon than a standing argument with the floor. Pillars, rusted switches, and whatever is behind them are all one problem to you, and all one swing." },
+  { id:"bow", name:"Fairy Bow", carry:"the Fairy Bow", kind:"the far answer, and fire or ice on it",
+    note:"You end the fight before it has finished crossing the room, which people call cowardice right up until they need it done. What the arrow is carrying depends on what the room deserves." },
+  { id:"dagger", name:"Kakariko Dagger", carry:"a Kakariko dagger", kind:"village work, bought over a counter",
+    note:"No one has ever written a song about it. It was made in a village of people who are very good at not being seen, it goes where a sword cannot, and it has never once caught the light at the wrong moment." },
+  { id:"scimitar", name:"Gerudo Scimitar", carry:"a Gerudo scimitar", kind:"curved, and off a fortress guard",
+    note:"Made for somebody who was already moving before the fight started. Two of them, if the desert taught you properly, and no part of that lesson involves standing still." },
+  { id:"lightbow", name:"Bow of Light", carry:"the Bow of Light", kind:"not from this game either",
+    note:"The bow that only turns up when something god-shaped needs unmaking, borrowed here from the other end of the legend. It weighs nothing, it asks a great deal, and there is exactly one shot in it that counts." }
+];
+let weapon = WEAPONS[0];
+/* Drawn on the same 24x24 field as the crests, in the same line weight, so
+   a weapon card and a tribe card read as one family. Blades point up. */
+const ARMS = {
+  kokiri:`<path d="M12 4.2 L13.3 6.6 V12.4 H10.7 V6.6 Z"/>
+    <path d="M8.4 12.4 H15.6"/><path d="M12 12.4 V17.6"/><path d="M10.4 18.4 H13.6"/>`,
+  /* The winged crossguard is the whole of the Master Sword's silhouette. */
+  master:`<path d="M12 1.6 L13.5 4.4 V13 H10.5 V4.4 Z"/>
+    <path d="M6.4 11.2 C8 13.8 9.8 14.2 12 14.2 C14.2 14.2 16 13.8 17.6 11.2"/>
+    <path d="M12 14.2 V19"/><circle cx="12" cy="20.5" r="1.4"/>`,
+  /* Narrower in the blade and wider in the guard than the Kokiri sword,
+     with a two-handed grip - squared off, it read as a shovel. */
+  biggoron:`<path d="M12 1.2 L14.6 5.2 V13.6 H9.4 V5.2 Z"/>
+    <path d="M12 5.4 V13.4"/><path d="M7.2 13.6 H16.8"/>
+    <path d="M12 13.6 V20.6"/><path d="M10.2 21.4 H13.8"/>`,
+  hammer:`<path d="M6.2 3.4 H17.8 V9.6 H6.2 Z"/>
+    <path d="M9.4 3.4 V9.6"/><path d="M14.6 3.4 V9.6"/><path d="M12 9.6 V21.2"/>`,
+  bow:`<path d="M8.4 3 C13.6 6.2 13.6 17.8 8.4 21"/>
+    <path d="M8.4 3 L8.4 21"/><path d="M8.4 12 H20.4"/>
+    <path d="M17.8 9.6 L20.8 12 L17.8 14.4"/>`,
+  /* Leaf-bladed and wrapped at the grip - squared off like the Kokiri
+     sword, the two of them were the same glyph twice. */
+  dagger:`<path d="M12 2.8 C13.5 5.6 13.9 8.6 13.9 11.8 H10.1 C10.1 8.6 10.5 5.6 12 2.8 Z"/>
+    <path d="M9 11.8 H15"/><path d="M12 11.8 V17.2"/>
+    <path d="M10.6 13.4 H13.4"/><path d="M10.6 15.2 H13.4"/>
+    <circle cx="12" cy="18.6" r="1.3"/>`,
+  scimitar:`<path d="M20.8 2.6 C13.6 5.2 8.6 10.4 6.2 17.6 C11.4 14.6 16.6 9.6 20.8 2.6 Z"/>
+    <path d="M4.2 15.6 L8.2 19.6"/><path d="M6.2 17.6 L3.6 20.2"/>`,
+  /* The same bow, with the arrow replaced by the thing on the end of it. */
+  lightbow:`<path d="M8.4 3 C13.6 6.2 13.6 17.8 8.4 21"/>
+    <path d="M8.4 3 L8.4 21"/><path d="M8.4 12 H16.2"/>
+    <path d="M19.2 8.4 L20.1 11.1 L22.8 12 L20.1 12.9 L19.2 15.6 L18.3 12.9 L15.6 12 L18.3 11.1 Z"/>`
+};
+
 /* ======================= STATE ======================= */
 const $ = id => document.getElementById(id);
 let idx = 0;
@@ -1212,6 +1356,28 @@ function show(name){
   });
 })();
 
+/* ---------- choosing a tribe ---------- */
+(function buildTribes(){
+  const list = $("t-list");
+  TRIBES.forEach(t=>{
+    const li = document.createElement("li");
+    const b = document.createElement("button");
+    b.className = "comp";
+    b.type = "button";
+    b.innerHTML =
+      `<b><svg class="crest" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor"
+            stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round">${CRESTS[t.id]}</svg>` +
+      `${t.name} <em>&middot; ${t.where}</em></b><span>${t.note}</span>`;
+    b.addEventListener("click", ()=>{
+      tribe = t;
+      show("companion");
+      window.scrollTo({top:0, behavior:"instant"});
+    });
+    li.appendChild(b);
+    list.appendChild(li);
+  });
+})();
+
 /* ---------- choosing a companion ---------- */
 (function buildCompanions(){
   const list = $("c-list");
@@ -1223,9 +1389,8 @@ function show(name){
     b.innerHTML = `<b>${c.name} <em>&middot; ${c.kind}</em></b><span>${c.note}</span>`;
     b.addEventListener("click", ()=>{
       companion = c;
-      idx = 0; picks = [];
-      show("quiz");
-      renderQuestion();
+      show("weapon");
+      window.scrollTo({top:0, behavior:"instant"});
     });
     li.appendChild(b);
     list.appendChild(li);
@@ -1248,6 +1413,29 @@ function show(name){
     d.innerHTML =
       `<svg viewBox="0 0 80 64" aria-hidden="true">${defs}${FIGURES[c.id]}</svg><hr><b>${c.name}</b>`;
     figs.appendChild(d);
+  });
+})();
+
+/* ---------- choosing a weapon ---------- */
+(function buildWeapons(){
+  const list = $("w-list");
+  WEAPONS.forEach(w=>{
+    const li = document.createElement("li");
+    const b = document.createElement("button");
+    b.className = "comp";
+    b.type = "button";
+    b.innerHTML =
+      `<b><svg class="crest" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor"
+            stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round">${ARMS[w.id]}</svg>` +
+      `${w.name} <em>&middot; ${w.kind}</em></b><span>${w.note}</span>`;
+    b.addEventListener("click", ()=>{
+      weapon = w;
+      idx = 0; picks = [];
+      show("quiz");
+      renderQuestion();
+    });
+    li.appendChild(b);
+    list.appendChild(li);
   });
 })();
 
@@ -1354,8 +1542,9 @@ function renderResult(){
     </div>`).join("");
 
   $("r-comp").innerHTML =
-    `Thirteen trials, the last of them Vaskaal, walked at the shoulder of ` +
-    `<b>${companion.name}</b>, ${companion.kind}.`;
+    `Thirteen trials, the last of them Vaskaal, walked as <b>${tribe.one}</b> ` +
+    `at the shoulder of <b>${companion.name}</b>, ${companion.kind}, ` +
+    `with <b>${weapon.carry}</b> to hand.`;
 
   show("result");
   ocarina.play(MOTIF, 0.45);
@@ -1369,8 +1558,10 @@ function renderResult(){
 }
 
 /* ---------- controls ---------- */
-$("begin").addEventListener("click", ()=>{ ocarina.unlock(); idx=0; picks=[]; show("companion"); window.scrollTo({top:0, behavior:"instant"}); });
-$("back").addEventListener("click", ()=>{ if(idx>0){ idx--; renderQuestion(); } else { show("companion"); } });
+$("begin").addEventListener("click", ()=>{ ocarina.unlock(); idx=0; picks=[]; show("tribe"); window.scrollTo({top:0, behavior:"instant"}); });
+$("c-back").addEventListener("click", ()=>{ show("tribe"); window.scrollTo({top:0, behavior:"instant"}); });
+$("back").addEventListener("click", ()=>{ if(idx>0){ idx--; renderQuestion(); } else { show("weapon"); } });
+$("w-back").addEventListener("click", ()=>{ show("companion"); window.scrollTo({top:0, behavior:"instant"}); });
 $("again").addEventListener("click", ()=>{
   ocarina.stop();
   idx=0; picks=[];
@@ -1384,7 +1575,7 @@ $("copy").addEventListener("click", async ()=>{
   const text = (s.heading
     ? `The Sage Trials \u2014 I came out as ${s.heading}. ${s.line} The sage who holds it: ${s.sage} (${s.temple} \u00b7 ${s.song}).`
     : `The Sage Trials \u2014 my element is ${s.element}. ${s.line} Another Sage of ${s.element}: ${s.sage} (${s.temple} \u00b7 ${s.song}).`)
-    + ` Thirteen trials, the last of them Vaskaal, with ${companion.name}.`;
+    + ` Thirteen trials, the last of them Vaskaal, walked as ${tribe.one} with ${companion.name} and ${weapon.carry}.`;
   try{
     await navigator.clipboard.writeText(text);
     $("copy").textContent = "Copied";
