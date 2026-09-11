@@ -256,6 +256,22 @@ button{font:inherit;color:inherit;cursor:pointer}
   font-weight:500;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
   color:var(--ink-3);
 }
+
+/* One plate at the foot of each trial: the item or the person that trial
+   turns on. Line rather than colour - thirteen coloured plates in a row
+   would shout over the answers they are standing under. */
+.scene{
+  display:flex;flex-direction:column;align-items:center;gap:.1rem;
+  width:100%;max-width:15rem;margin:2rem auto 0;padding:0;
+  color:var(--gold-2);
+}
+.scene svg{width:100%;height:auto;display:block;opacity:.92}
+.scene hr{width:56%;height:1px;border:0;margin:.15rem 0 .3rem;background:var(--edge);opacity:.7}
+.scene figcaption{
+  font-family:"Barlow Semi Condensed",system-ui,sans-serif;
+  font-weight:500;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);text-align:center;
+}
 /* ---------- intro ---------- */
 .intro{flex-direction:column;align-items:center;gap:clamp(1.4rem,4vw,2.2rem);text-align:center}
 /* The seven medallions orbit; the Triforce they orbit sits still in the
@@ -263,6 +279,10 @@ button{font:inherit;color:inherit;cursor:pointer}
 .ringwrap{
   position:relative;width:min(var(--ring),78vw);aspect-ratio:1;flex:none;
   display:grid;place-items:center;
+  /* The ring inside is a rotating square: nothing is painted in its
+     corners, but their swept bounding box is enough to give a phone a
+     horizontal scrollbar. Clip it. */
+  overflow:hidden;
 }
 .ring{
   position:absolute;inset:0;
@@ -311,22 +331,6 @@ button{font:inherit;color:inherit;cursor:pointer}
 .btn-quiet:hover{color:var(--gold);border-color:var(--gold)}
 
 /* ---------- ocarina toggle ---------- */
-.sound{
-  position:fixed;right:clamp(.9rem,3vw,1.6rem);bottom:clamp(.9rem,3vw,1.6rem);z-index:9;
-  display:flex;align-items:center;gap:.5em;
-  font-family:"Barlow Semi Condensed",system-ui,sans-serif;
-  font-size:.78rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
-  background:var(--stone-1);border:1px solid var(--edge);
-  padding:.5em .9em;color:var(--ink-3);cursor:pointer;
-  transition:color .2s,border-color .2s,opacity .2s;
-}
-.sound:hover{color:var(--gold);border-color:var(--gold)}
-.sound svg{width:.95em;height:.95em;overflow:visible;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round}
-.sound .wave{transition:opacity .2s}
-.sound[aria-pressed="false"]{opacity:.6}
-.sound[aria-pressed="false"] .wave{opacity:.15}
-.sound[aria-pressed="false"] .slash{opacity:1}
-.sound .slash{opacity:0;transition:opacity .2s}
 
 /* ---------- question ---------- */
 .qhead{
@@ -435,6 +439,30 @@ button{font:inherit;color:inherit;cursor:pointer}
 }
 .res-comp b{font-style:normal;font-weight:500;color:var(--ink-2)}
 .res-actions{display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center;justify-content:center}
+
+/* ---------- phones ----------
+   The layout above is fluid all the way down, so what is left here is
+   the handful of things that are about a small screen rather than a
+   narrow one. */
+@media (max-width:34rem),(max-height:38rem){
+  /* The setup is pinned to the top so it stays readable while you work
+     down the answers - but a thirteen-line setup is 56% of a phone
+     screen and the last trial is 80% of one, which leaves a slot for
+     the answers and nothing else. Below this size it scrolls away. */
+  .qhead{position:static}
+}
+@media (max-width:30rem){
+  /* The quiet links are a 31px target with a mouse; a thumb wants more. */
+  .btn-quiet{padding:.75em 0}
+}
+/* Keep the foot of the page out from under a home bar or a notch. */
+@supports(padding:max(0px)){
+  .wrap{
+    padding-left:max(clamp(1.1rem,4vw,2rem),env(safe-area-inset-left));
+    padding-right:max(clamp(1.1rem,4vw,2rem),env(safe-area-inset-right));
+    padding-bottom:max(4rem,env(safe-area-inset-bottom));
+  }
+}
 
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
@@ -630,6 +658,7 @@ button{font:inherit;color:inherit;cursor:pointer}
         <div class="marks" id="q-marks" aria-hidden="true"></div>
       </div>
       <ul class="answers" id="q-answers"></ul>
+      <figure class="scene" id="q-scene"></figure>
       <div class="qfoot"><button class="btn-quiet" id="back">&larr; Previous trial</button></div>
     </section>
 
@@ -652,14 +681,6 @@ button{font:inherit;color:inherit;cursor:pointer}
   </main>
 </div>
 
-<button class="sound" id="sound" type="button" aria-pressed="true" aria-label="Ocarina sound">
-  <svg viewBox="0 0 16 16" aria-hidden="true">
-    <path d="M2.5 6h2.2L8 3.2v9.6L4.7 10H2.5z" stroke-linejoin="round"/>
-    <path class="wave" d="M10.6 5.9a3 3 0 0 1 0 4.2M12.6 4.2a5.6 5.6 0 0 1 0 7.6"/>
-    <path class="slash" d="M11 5.4l4 5.2"/>
-  </svg>
-  <span id="sound-label">Ocarina</span>
-</button>
 
 <script>
 "use strict";
@@ -670,7 +691,7 @@ const ORDER = ["forest","fire","water","shadow","spirit","light","time"];
 const SAGES = {
   forest:{
     sage:"Saria", element:"Forest", medallion:"Forest",
-    temple:"Forest Temple", song:"Minuet of Forest", instrument:"Ocarina",
+    temple:"Forest Temple", song:"Minuet of Forest", instrument:"Flute",
     line:"You are the one who stays.",
     about:"Forest is the element of what takes root and refuses to be moved. It is the slowest of the six and by far the hardest to remove \u2014 a thing that grows in place, holds its ground, and is still standing long after the storm that was supposed to end it. Green, patient, and quietly immovable.",
     body:[
@@ -871,195 +892,359 @@ function medallion(key){
   </svg>`;
 }
 
-/* ======================= QUESTIONS ======================= */
-/* Thirteen trials. The Triforce tells you that Vaskaal is coming and
-   that you are not ready for it; the first twelve are what make you
-   ready, and the thirteenth is Vaskaal itself, waiting at the treeline
-   where the first one began.
+/* ======================= TRIAL PLATES =======================
+   One drawing to close each trial, of a thing or a person that trial
+   actually turns on - the cart on the wrong road, the shut gate, the
+   old man's boat, Vaskaal with a man beside it for scale. All thirteen
+   share a 120x64 field with the ground at y=56, and all are drawn in
+   line in the page's own gold so they sit under the answers without
+   competing with them. Mass is carried by a .14 fill of the same
+   colour rather than by a second hue. */
+const SCENES = {
+  /* A Kokiri child, hat and all, with a fairy off the shoulder. */
+  kokiri:{ cap:"A Kokiri, who cannot leave", art:`
+    <path d="M28 56 H92" opacity=".3"/>
+    <path d="M52 31 H64 L68 45 H48 Z" fill="currentColor" opacity=".14"/>
+    <path d="M52 31 H64 L68 45 H48 Z"/>
+    <path d="M53 45 V53"/><path d="M63 45 V53"/>
+    <path d="M49.5 53 H56"/><path d="M60 53 H66.5"/>
+    <path d="M52 32 L45 41"/><path d="M64 32 L71 41"/>
+    <circle cx="58" cy="24" r="6.5"/>
+    <path d="M51 21 Q51.5 12 58 12 Q65 12 65.5 20 Q75 23 81 31 Q71 29 63 24 Q57 21 51 21 Z" fill="currentColor" opacity=".14"/>
+    <path d="M51 21 Q51.5 12 58 12 Q65 12 65.5 20 Q75 23 81 31 Q71 29 63 24 Q57 21 51 21 Z"/>
+    <circle cx="88" cy="20" r="2.6"/>
+    <path d="M88 17.5 Q91 13.5 95 14.5 Q92.5 17.5 90 18.5"/>
+    <path d="M88 17.5 Q85 13.5 81 14.5 Q83.5 17.5 86 18.5"/>`},
+  /* A laden cart, pointed the way the rumour sent it. */
+  cart:{ cap:"A cart on the wrong road", art:`
+    <path d="M16 56 H104" opacity=".3"/>
+    <path d="M34 40 H88 L84 28 H38 Z" fill="currentColor" opacity=".14"/>
+    <path d="M34 40 H88 L84 28 H38 Z"/>
+    <path d="M40 28 V21 H58 V28"/>
+    <path d="M46 21 V28"/><path d="M52 21 V28"/>
+    <circle cx="46" cy="48" r="8"/><circle cx="46" cy="48" r="2"/>
+    <circle cx="74" cy="48" r="8"/><circle cx="74" cy="48" r="2"/>
+    <path d="M88 34 L104 30"/>`},
+  /* The town gate, barred, with the towers either side of it. */
+  gate:{ cap:"The gate, counted shut", art:`
+    <path d="M12 56 H108" opacity=".3"/>
+    <path d="M30 56 V20 L40 13 L50 20 V56"/>
+    <path d="M70 56 V20 L80 13 L90 20 V56"/>
+    <path d="M50 56 V32 Q60 22 70 32 V56 Z" fill="currentColor" opacity=".14"/>
+    <path d="M50 56 V32 Q60 22 70 32 V56"/>
+    <path d="M50 40 H70"/><path d="M50 48 H70"/><path d="M60 26 V56"/>
+    <path d="M34 24 H46"/><path d="M74 24 H86"/>`},
+  /* A Goron, arms folded, in front of the doors it wants shut. */
+  goron:{ cap:"A Goron, and the doors", art:`
+    <path d="M20 56 H100" opacity=".3"/>
+    <path d="M42 56 Q38 36 60 34 Q82 36 78 56 Z" fill="currentColor" opacity=".14"/>
+    <path d="M42 56 Q38 36 60 34 Q82 36 78 56"/>
+    <path d="M43 36 l4 -5 4 5"/><path d="M69 36 l4 -5 4 5"/>
+    <path d="M44 40 Q58 48 76 41"/>
+    <path d="M76 45 Q58 52 44 44"/>
+    <circle cx="60" cy="24" r="10"/>
+    <path d="M52 21 q8 -5 16 0"/>
+    <path d="M56 26 h3"/><path d="M61 26 h3"/>`},
+  /* A Zora standing at the mouth of the river. */
+  zora:{ cap:"A Zora at the mouth", art:`
+    <path d="M24 56 H96" opacity=".3"/>
+    <path d="M53 30 Q60 27 67 30 L69 44 Q60 49 51 44 Z" fill="currentColor" opacity=".14"/>
+    <path d="M53 30 Q60 27 67 30 L69 44 Q60 49 51 44 Z"/>
+    <path d="M55 46 V53"/><path d="M65 46 V53"/>
+    <path d="M50 53 H58"/><path d="M62 53 H70"/>
+    <path d="M53 33 L45 44"/><path d="M67 33 L75 44"/>
+    <ellipse cx="60" cy="20" rx="6.5" ry="7"/>
+    <path d="M64 15 Q77 10 85 15 Q75 19 66 21 Z" fill="currentColor" opacity=".14"/>
+    <path d="M64 15 Q77 10 85 15 Q75 19 66 21 Z"/>
+    <path d="M56 20 h2.5"/>`},
+  /* The mare and the foal that decide the order of the day. */
+  herd:{ cap:"The mares, and the day", art:`
+    <path d="M10 56 H110" opacity=".3"/>
+    <g transform="translate(34 0)">
+      <path d="M24 40 Q22 30 36 29 L52 30 Q59 31 60 38 Q61 45 55 46 H30 Q25 46 24 40 Z" fill="currentColor" opacity=".14"/>
+      <path d="M24 40 Q22 30 36 29 L52 30 Q59 31 60 38 Q61 45 55 46 H30 Q25 46 24 40 Z"/>
+      <path d="M50 31 Q53 21 59 16 Q63 11 68 12 Q74 14 74 19 Q74 23 69 25 L62 27 Q58 28 56 31 Z"/>
+      <path d="M60 14 L58.5 8 L64 11.5"/>
+      <circle cx="69" cy="17.5" r="1" fill="currentColor"/>
+      <path d="M30 45 V56"/><path d="M38 45 V56"/><path d="M48 45 V56"/><path d="M55 45 V56"/>
+      <path d="M25 34 Q14 34 10 45 Q9 52 16 56 Q11 50 13 44 Q16 37 25 38 Z" fill="currentColor" opacity=".14"/>
+      <path d="M25 34 Q14 34 10 45 Q9 52 16 56 Q11 50 13 44 Q16 37 25 38 Z"/>
+    </g>
+    <g transform="translate(2 26) scale(.52)" stroke-width="2.9">
+      <path d="M24 40 Q22 30 36 29 L52 30 Q59 31 60 38 Q61 45 55 46 H30 Q25 46 24 40 Z" fill="currentColor" opacity=".14"/>
+      <path d="M24 40 Q22 30 36 29 L52 30 Q59 31 60 38 Q61 45 55 46 H30 Q25 46 24 40 Z"/>
+      <path d="M50 31 Q53 21 59 16 Q63 11 68 12 Q74 14 74 19 Q74 23 69 25 L62 27 Q58 28 56 31 Z"/>
+      <path d="M60 14 L58.5 8 L64 11.5"/>
+      <circle cx="69" cy="17.5" r="1" fill="currentColor"/>
+      <path d="M30 45 V56"/><path d="M38 45 V56"/><path d="M48 45 V56"/><path d="M55 45 V56"/>
+      <path d="M25 34 Q14 34 10 45 Q9 52 16 56 Q11 50 13 44 Q16 37 25 38 Z" fill="currentColor" opacity=".14"/>
+      <path d="M25 34 Q14 34 10 45 Q9 52 16 56 Q11 50 13 44 Q16 37 25 38 Z"/>
+    </g>`},
+  /* Sha, standing in the square with nothing over their face. */
+  sha:{ cap:"Sha, unhooded", art:`
+    <path d="M28 56 H92" opacity=".3"/>
+    <path d="M54 31 H66 L67.5 46 H52.5 Z" fill="currentColor" opacity=".14"/>
+    <path d="M54 31 H66 L67.5 46 H52.5 Z"/>
+    <path d="M57 46 V54"/><path d="M63 46 V54"/>
+    <path d="M53.5 54 H59"/><path d="M61 54 H66.5"/>
+    <path d="M54 33 L47 44"/><path d="M66 33 L73 44"/>
+    <path d="M48 40 H53"/><path d="M67 40 H72"/>
+    <circle cx="60" cy="22" r="6"/>
+    <path d="M54.5 20 Q56 13 60 13 Q64.5 13 65.5 19"/>
+    <path d="M65 21 Q71 24 71 32"/>
+    <path d="M57 37 Q60 35 63 37 Q60 39 57 37 Z"/>
+    <circle cx="60" cy="37" r=".9" fill="currentColor"/>
+    <path d="M60 39.5 V41.5"/>`},
+  /* The shoulder of rock, and the first of it already going. */
+  shoulder:{ cap:"The shoulder of rock", art:`
+    <path d="M12 56 H108" opacity=".3"/>
+    <path d="M22 56 L38 24 L56 15 L72 28 L84 21 L98 56 Z" fill="currentColor" opacity=".14"/>
+    <path d="M22 56 L38 24 L56 15 L72 28 L84 21 L98 56 Z"/>
+    <path d="M56 15 L58 32 L47 44"/><path d="M72 28 L68 42"/><path d="M38 24 L44 34"/>
+    <circle cx="100" cy="38" r="2.6"/><circle cx="94" cy="47" r="1.8"/>`},
+  /* The boat he will not get into. */
+  boat:{ cap:"The old man's boat", art:`
+    <path d="M32 46 Q60 58 94 46 L88 38 H38 Z" fill="currentColor" opacity=".14"/>
+    <path d="M32 46 Q60 58 94 46 L88 38 H38 Z"/>
+    <path d="M38 38 H88"/>
+    <path d="M74 36 L96 27"/><path d="M96 27 l7 -3 -2 7 z"/>
+    <circle cx="54" cy="25" r="5"/>
+    <path d="M48 38 Q49 27 54 27 Q59 27 60 38 Z"/>
+    <path d="M51 28 Q54 34 57 28"/>
+    <path d="M14 53 q6 -3 12 0 t12 0" opacity=".5"/>
+    <path d="M82 53 q6 -3 12 0 t12 0" opacity=".5"/>`},
+  /* The rope, and the planks that hold the number. */
+  rope:{ cap:"The rope, and its number", art:`
+    <path d="M16 14 V52"/><path d="M104 14 V52"/>
+    <path d="M10 52 H24" opacity=".3"/><path d="M96 52 H110" opacity=".3"/>
+    <path d="M16 22 Q60 48 104 22"/>
+    <path d="M16 30 Q60 56 104 30"/>
+    <path d="M28.3 28.3 V36.3"/><path d="M39.8 32.2 V40.2"/><path d="M52.1 34.6 V42.6"/>
+    <path d="M64.4 34.9 V42.9"/><path d="M75.8 33.3 V41.3"/><path d="M88.2 29.7 V37.7"/>`},
+  /* A camp pitched on ground with nothing left in it. */
+  camp:{ cap:"A camp on grey ground", art:`
+    <path d="M12 56 H108" opacity=".3"/>
+    <path d="M30 56 L50 26 L70 56 Z" fill="currentColor" opacity=".14"/>
+    <path d="M30 56 L50 26 L70 56 Z"/>
+    <path d="M50 26 V56"/><path d="M44 56 Q50 44 50 32"/>
+    <path d="M77 53 L95 47"/><path d="M77 47 L95 53"/>
+    <path d="M86 44 Q80 38 85 30 Q86.5 36 90 33 Q93 38 89.5 44 Z" fill="currentColor" opacity=".14"/>
+    <path d="M86 44 Q80 38 85 30 Q86.5 36 90 33 Q93 38 89.5 44 Z"/>`},
+  /* The chamber floor, six marks and the seventh place empty. */
+  chamber:{ cap:"The chamber floor", art:`
+    <ellipse cx="60" cy="42" rx="40" ry="13"/>
+    <ellipse cx="60" cy="42" rx="26" ry="8.5" opacity=".55"/>
+    <path d="M60 12 L68 26 H52 Z"/>
+    <path d="M22 42 l3 -5 3 5 z"/><path d="M36 50 l3 -5 3 5 z"/><path d="M78 50 l3 -5 3 5 z"/>
+    <path d="M92 42 l3 -5 3 5 z"/><path d="M36 34 l3 -5 3 5 z"/><path d="M78 34 l3 -5 3 5 z"/>
+    <path d="M57 42 l3 -5 3 5 z" opacity=".35"/>`},
+  /* Vaskaal, with a man beside it for the height. */
+  vaskaal:{ cap:"Vaskaal, to scale", art:`
+    <path d="M12 56 H108" opacity=".3"/>
+    <path d="M46 56 V24 Q46 8 57 8 Q68 8 68 24 V56 Z" fill="currentColor" opacity=".14"/>
+    <path d="M46 56 V24 Q46 8 57 8 Q68 8 68 24 V56"/>
+    <path d="M46 28 Q39 40 41 52"/><path d="M68 28 Q75 40 73 52"/>
+    <path d="M88 56 V44 Q88 39 91.5 39 Q95 39 95 44 V56"/>
+    <circle cx="91.5" cy="34" r="4"/>
+    <path d="M88 43 L84 50"/><path d="M95 43 L99 50"/>`}
+};
 
-   The twelve are all built in the register of the sixth: a standing
-   condition rather than an emergency, run over a season or a year
-   rather than a moment, and oblique about what is actually being
-   tested. Nothing among them is a rescue. Vaskaal does not fight
-   either - it explains that it can wait - so the last trial stays in
-   the same register as the twelve that earn it.
+/* ======================= QUESTIONS =======================
+   Thirteen trials. Vaskaal is already walking, at the pace of a man, on
+   a line the Triforce can name and nobody can move; the first twelve are
+   the places that line goes through, in the order it reaches them, and
+   the thirteenth is Vaskaal itself on the castle road. Nothing is set by
+   an examiner and nothing is announced as a test - the trial is only ever
+   the decision the place puts in front of you while there is still time
+   to make it. Every setup closes on the question its seven answers are
+   answering, so the ask is always explicit and always the last thing
+   read before the list.
 
-   Each question offers all seven sages exactly once, and answer order
-   is varied per question so position never reveals the mapping. The
-   thirteenth slot order is one of exactly four permutations that can
-   follow the twelve without putting any sage in the same slot a third
-   time, so no sage sits in one slot more than twice across all
-   thirteen. {C} in a trial's setup or in any of its answers is the
-   companion chosen before the first one; the choice scores nothing.
-   Because that companion may be a fairy, a dragon, a horse, an owl, a
-   wolf or a cucco, nothing in the thirteen gives it speech, hands or
-   two legs: it waits, follows, watches, gets cold and can be sent
-   away, and is never a character with lines. Each of the six descends
-   from a named creature of the game - Navi, Volvagia, Epona, Kaepora
-   Gaebora, the Wolfos of the Forest Temple, Cojiro - which is carried
-   in the kind so that the note stays about temperament. Archi descends
-   from a Wolfos but is an ordinary wolf himself, so none of the six is
-   a thing you fight. Each trial also carries
-   a `where` - the place in Hyrule it is set - shown under its name. The companions are creatures of
-   Hyrule rather than its peoples - a fairy, a dragon, a horse, an owl,
-   a wolf and a cucco - so that choosing one is choosing a travelling
-   animal and not a member of somebody's tribe. None of them is a thing
-   you would fight in the game. */
+   So the register is a season of evacuation rather than a season of
+   waiting: real people, a real clock, and a cost that lands on somebody
+   whichever way you answer. Vaskaal still does not fight - it explains
+   that it can wait - so the last one stays a decision like the twelve
+   that earned it.
+
+   Each question offers all seven sages exactly once, and answer order is
+   varied per question so position never reveals the mapping. The orders
+   are two families of rotations over two different base orders, which
+   puts no sage in the same slot more than twice across the thirteen.
+
+   Sha is the one character in the thirteen who is a person. A Sheikah
+   of Kakariko, met at the seventh and walking the last seven trials at
+   your left, they are built as the plain-spoken answer to Sheik: same
+   training, same knowledge of the country, none of the riddling. Sha
+   goes unhooded, says what is under the village in daylight, hands over
+   the number the moment they have it, says outright when they do not
+   know, and does not vanish at the end of a scene. They are not a
+   choice and not scored - everyone who reaches the seventh meets them.
+
+   {C} is the companion, {T} the tribe and {W} the weapon, all chosen
+   before the first trial and none of them scored. Because the companion
+   may be a fairy, a dragon, a horse, an owl, a wolf or a cucco, nothing
+   in the thirteen gives it speech, hands or two legs: it keeps pace,
+   waits, refuses ground, is barred from the chamber, and is never a
+   character with lines. {T} is written to read with an article in front
+   of it ("You are a Kokiri") and {W} as a thing in the hand, so every
+   choice on those two screens reads naturally in every sentence that
+   names it. Each trial also carries a `where` - the place in Hyrule it
+   is set - shown under its name. */
 const QUESTIONS = [
-  { place:"The Threshold", where:"Kokiri Forest",
-    text:"The first is set at the treeline of the Kokiri wood. You may go in when the wood lets you, and nobody will say when. It is plain enough that it has no intention of letting {C} in at all.",
+  { scene:"kokiri", place:"The Warning", where:"Kokiri Forest",
+    text:"The first is the wood, because the wood is first in its path. The children there cannot leave it and do not want to be told, and you have one evening in which to say it. You are {T}, which is the first thing the clearing sees, and {C} will not settle at all. How do you tell them?",
     answers:[
-      {s:"spirit", t:"Go in the first morning I feel like it, and let the wood keep its rule."},
-      {s:"shadow", t:"Go in alone without making anything of it, so {C} is not left feeling left."},
-      {s:"time",   t:"Wait. If the wood has a reason for that, waiting is how I find it out."},
-      {s:"forest", t:"Not without {C}. If the wood wants me it can take the pair of us."},
-      {s:"light",  t:"Wait in the open, where the wood can see exactly who I came here with."},
-      {s:"water",  t:"Say out loud that leaving {C} out here is the part I actually mind."},
-      {s:"fire",   t:"Wait a week. Then walk in with {C} and see who stops us."}
+      {s:"forest", t:"Say it once, then stay in the clearing until somebody believes it."},
+      {s:"fire",   t:"Say it tonight, to the whole clearing at once, and let them be angry with me."},
+      {s:"water",  t:"Tell them I am frightened for them, in those words, and let them see it."},
+      {s:"shadow", t:"Tell the one who will act on it, and let the rest have their evening."},
+      {s:"spirit", t:"Say it and go. What they do with it is theirs and not mine."},
+      {s:"light",  t:"Set it out in order \u2014 what it is, when it comes, what the wood loses."},
+      {s:"time",   t:"Tell the youngest, who will still be saying it here long after I am gone."}
     ]},
 
-  { place:"The Way", where:"Hyrule Field",
-    text:"The second gives you a place beyond the field to reach and forbids you to ask anybody the way to it. {C} sets off confidently in a direction you are fairly sure is the wrong one.",
+  { scene:"cart", place:"The Road", where:"Hyrule Field",
+    text:"The second is the field, where the news got ahead of you and arrived wrong. Half the carts on the road are moving toward the grey, because somebody told them the castle was the danger. {C} keeps pace and is no use for this. How do you turn them?",
     answers:[
-      {s:"forest", t:"Follow {C}. Wrong together is better than right on my own."},
-      {s:"light",  t:"Go my own way, and mark every turning so {C} can find me if I am wrong."},
-      {s:"fire",   t:"My direction, at speed. {C} can catch up when it tires of being right."},
-      {s:"spirit", t:"Mine. I would rather be lost by my own reckoning than by anyone else's."},
-      {s:"time",   t:"Neither today. Watch which way {C} goes for a week and learn from it."},
-      {s:"shadow", t:"Follow {C} quietly, and never mention that I thought it was wrong."},
-      {s:"water",  t:"Say out loud that I have no idea, and go the way {C} went anyway."}
+      {s:"shadow", t:"Find whoever started it and correct it at the source, without naming them."},
+      {s:"spirit", t:"Refuse to herd anybody. Say the true thing once, and let them steer."},
+      {s:"light",  t:"Stand at the crossroads and say the same true thing to every cart until it holds."},
+      {s:"time",   t:"Ride ahead to the next three villages, so the wrong story arrives after mine."},
+      {s:"forest", t:"Plant myself at the turning and be there all day, and the day after."},
+      {s:"fire",   t:"Turn the first cart around myself, and let the rest follow the argument."},
+      {s:"water",  t:"Tell them I am frightened too, which is why I am stood here saying it."}
     ]},
 
-  { place:"The Silence", where:"Hyrule Castle Town",
-    text:"The third is a year in the town in which you may not explain yourself to anybody, about anything. By the second month {C} is the only one still sitting with you, and never asked in the first place.",
+  { scene:"gate", place:"The Gate", where:"Hyrule Castle Town",
+    text:"The third is the town, which has worked out how many it can hold and shut the gate on the rest. The farms outside are still arriving. {C} is on the wrong side of the wall with them. What do you do at the gate?",
     answers:[
-      {s:"time",   t:"Do the year. Being understood was always going to take longer than one."},
-      {s:"forest", t:"Stay where {C} is. One is enough to get a year like this one done."},
-      {s:"light",  t:"Live so plainly that the year explains me, and let the town watch it."},
-      {s:"spirit", t:"Do the year, and let them make of me exactly whatever they like."},
-      {s:"water",  t:"Say nothing to them and everything to {C}, out loud, every night."},
-      {s:"fire",   t:"Do the year loudly. Silence about myself is not silence about all."},
-      {s:"shadow", t:"Do the year, and afterwards still not explain. It was easier so."}
+      {s:"light",  t:"Get the count right in front of them \u2014 room, water, days \u2014 so it can be argued with."},
+      {s:"time",   t:"Get the children through first, and spend the week arguing about the rest."},
+      {s:"forest", t:"Stay outside with the farms. If the gate holds, it holds against me too."},
+      {s:"fire",   t:"Put my shoulder to the gate and open it now."},
+      {s:"water",  t:"Say out loud, in the square, exactly what it is the town is doing."},
+      {s:"shadow", t:"Find the other way in, and use it quietly all night."},
+      {s:"spirit", t:"Refuse the number. Nobody in there decides who is left outside."}
     ]},
 
-  { place:"The Fire", where:"Death Mountain",
-    text:"The fourth gives you a fire on the mountain to keep alight for a season. Nobody comes up, and nobody says what it is for. {C} could go down to the warm valley any day it liked, and does not.",
+  { scene:"goron", place:"The Doors", where:"Goron City",
+    text:"The fourth is Goron City, which has heard you out and decided that stone is enough. They will seal the doors, wait the season through, and they would like you inside when the doors go shut. {C} does not care for the roof. Are you in there when they shut?",
     answers:[
-      {s:"water",  t:"Say out loud that I would not have lasted a week up here on my own."},
-      {s:"fire",   t:"Keep it high enough that {C} and I can be seen from the valley floor."},
-      {s:"time",   t:"Cut a whole season of wood in the first fortnight, then stop fretting."},
-      {s:"shadow", t:"Send {C} down for the worst of the winter and never explain why."},
-      {s:"forest", t:"Keep a second fire going for {C}, and count that as part of the work."},
-      {s:"light",  t:"Keep it exactly as instructed, and write down what the season did."},
-      {s:"spirit", t:"Keep it my own way, and let it go out one night to see what happens."}
+      {s:"fire",   t:"Tell them stone is not enough, in front of everyone, and start moving the young out."},
+      {s:"water",  t:"Say I think they will die in here, and stay the night with them anyway."},
+      {s:"shadow", t:"Say nothing against it, and make sure a way out stays open behind them."},
+      {s:"spirit", t:"Refuse the door. I am not shut into anywhere I did not choose."},
+      {s:"light",  t:"Ask what stone did for the ground outside, and let the answer do the work."},
+      {s:"time",   t:"Go in, learn the tunnels, and be the one who knows the way out in spring."},
+      {s:"forest", t:"Go in with them. If they are wrong, being wrong alone is worse."}
     ]},
 
-  { place:"The Deep", where:"Zora's Domain",
-    text:"The fifth hands you a sealed box to sink in the deepest water of the Domain, unopened, and will not say what is in it. Whatever else is true, {C} cannot come down there with you.",
+  { scene:"zora", place:"The Current", where:"Zora's Domain",
+    text:"The fifth is the Domain, where the river has started coming down grey out of a stretch nobody has walked yet. The Zora can close the mouth of it and keep what they have. Everything in the valley below drinks what they would be closing. What do you do while they decide?",
     answers:[
-      {s:"fire",   t:"Out and down before I have time to mind about going alone."},
-      {s:"time",   t:"Teach {C} where to wait and how long, then take my time down there."},
-      {s:"spirit", t:"Open it in the boat. I am not sinking a thing I have not looked at."},
-      {s:"forest", t:"Ask a Zora to sit with {C} on the bank for as long as I am under."},
-      {s:"shadow", t:"Go at night, so {C} sleeps through the part where I do not surface."},
-      {s:"water",  t:"Say out loud, to {C}, that I am frightened of this, and then go in."},
-      {s:"light",  t:"Sink it unopened, and say publicly afterwards that I never looked."}
+      {s:"time",   t:"Sink a store for the valley first. Then let them close the mouth."},
+      {s:"forest", t:"Stand at the mouth of it and not move while they decide."},
+      {s:"fire",   t:"Go upstream today and find out what is in the water."},
+      {s:"water",  t:"Say what the valley loses, and say it where the valley can hear it too."},
+      {s:"shadow", t:"Open a channel lower down, at night, and never say who did it."},
+      {s:"spirit", t:"Tell them it is theirs to close and mine to refuse to help with."},
+      {s:"light",  t:"Put the whole of it in front of them: who drinks below, and how long a store lasts."}
     ]},
 
-  { place:"The Season", where:"Lon Lon Ranch",
-    text:"The sixth is a year of ordinary work at the ranch. You are told only that the trial is somewhere inside the year, and that nobody will say when it has been. {C} is there for the whole of it.",
+  { scene:"herd", place:"The Herd", where:"Lon Lon Ranch",
+    text:"The sixth is the ranch, with one day of road left before the grey reaches the fences. The herd can be moved or it can be turned loose, and there is no version of the day where it is both. {C} is no help at this and seems to know it. How do you spend the day?",
     answers:[
-      {s:"forest", t:"Do the work and get close to the people. That is a year well spent."},
-      {s:"spirit", t:"Do the work and stop looking for it. A watched year is a wasted one."},
-      {s:"water",  t:"Say at the outset that this frightens me more than any of the rest."},
-      {s:"fire",   t:"Work flat out and treat every single day as though it is the one."},
-      {s:"shadow", t:"Keep a private account of the year and show it to nobody, {C} included."},
-      {s:"time",   t:"Assume it is the last day, and spend the year being worth that day."},
-      {s:"light",  t:"Write down what happens, plainly, so the year can be read after."}
+      {s:"water",  t:"Tell Malon out loud that most of them will not make it, and start anyway."},
+      {s:"shadow", t:"Do the choosing myself, quietly, so that nobody at the ranch has to."},
+      {s:"spirit", t:"Refuse to choose between them. Open the gates and let them choose."},
+      {s:"light",  t:"Sort them by what can walk and how far, and work down the list."},
+      {s:"time",   t:"Move the mares in foal first, and count the rest as next year's loss."},
+      {s:"forest", t:"Stay with the ones that cannot be moved."},
+      {s:"fire",   t:"Open every gate at once and drive the lot of them out."}
     ]},
 
-  { place:"The Watch", where:"Kakariko Village",
-    text:"The seventh is a watch kept over Kakariko, every night, for a year. Nothing comes in the whole of it and nothing was ever going to. {C} sits the year out beside you regardless.",
+  { scene:"sha", place:"The Lid", where:"Kakariko Village",
+    text:"The seventh is Kakariko, which will not empty, because something under the village has to be held shut and holding it needs somebody standing there. A Sheikah called Sha says as much in the square, in daylight, unhooded, with no riddle anywhere in it, and then asks for one volunteer and waits. The square goes quiet, and {W} is no use to anybody in this. What do you do in the quiet?",
     answers:[
-      {s:"time",   t:"Stand it anyway. The year a watch lapses is the year something comes."},
-      {s:"spirit", t:"Stand it because I said I would, not because anything is out there."},
-      {s:"water",  t:"Say out loud, some nights, that this is lonely even with {C} here."},
-      {s:"shadow", t:"Stand it, and let the village sleep on not knowing anyone is out here."},
-      {s:"light",  t:"Keep a record every night, the empty ones included, and sign each one."},
-      {s:"forest", t:"Stand it, and get to know the houses I am standing in front of."},
-      {s:"fire",   t:"Stand it wide awake all year, as though tonight is finally the night."}
+      {s:"spirit", t:"Refuse to let them ask it of anyone. There is another way to shut it."},
+      {s:"light",  t:"Ask out loud what standing on it actually means, before a hand goes up."},
+      {s:"time",   t:"Volunteer, and spend the winter training whoever relieves me."},
+      {s:"forest", t:"Volunteer, and mean it for as long as it takes."},
+      {s:"fire",   t:"Volunteer before the silence gets long enough to shame anybody."},
+      {s:"water",  t:"Say how much I do not want it, and put my hand up while I am saying so."},
+      {s:"shadow", t:"Volunteer, and ask that it not be announced."}
     ]},
 
-  { place:"The Pass", where:"Death Mountain Trail",
-    text:"The eighth sets you at the pass to turn back anybody who cannot say why they are going up, and nobody will say what is up there. {C} lets people through whenever your back is turned.",
+  { scene:"shoulder", place:"The Shoulder", where:"Death Mountain Trail",
+    text:"The eighth is the trail, and Sha came up it with you, having said exactly why they were coming. A shoulder of rock can be brought down to turn the grey aside for a week. It also shuts the mountain in behind it, the Gorons have not been asked, and Sha will say which of those two they think is worse if you ask them. Does the rock come down?",
     answers:[
-      {s:"light",  t:"Ask everyone the same question and give everyone the same answer."},
-      {s:"fire",   t:"Ask it straight, take the first answer, and watch {C} like a hawk."},
-      {s:"shadow", t:"Turn them back myself, quietly, and never let on that {C} did that."},
-      {s:"time",   t:"Write down every reason I am given. In a year that makes a picture."},
-      {s:"water",  t:"Tell them I do not know why either, and turn them back regardless."},
-      {s:"forest", t:"Trust {C} over the rule. It has been right about people before now."},
-      {s:"spirit", t:"Go up myself first. I am not guarding a thing I have not seen."}
+      {s:"shadow", t:"Bring it down, and carry being the one who did it."},
+      {s:"light",  t:"Touch nothing until the mountain has been told and has answered."},
+      {s:"forest", t:"Leave the rock alone. Hold the pass by hand until the last of them is through."},
+      {s:"time",   t:"Bring it down, and spend the week getting the mountain out the long way."},
+      {s:"fire",   t:"Bring it down. A week is a week."},
+      {s:"spirit", t:"Refuse to spend somebody else's door on my week."},
+      {s:"water",  t:"Say plainly that I would rather have the week than their good opinion."}
     ]},
 
-  { place:"The Keeping", where:"Lake Hylia",
-    text:"The ninth gives you something wounded to keep through the winter. It will not tame, it will not thank you, it may well die regardless, and {C} will not go anywhere near it.",
+  { scene:"boat", place:"The Jetty", where:"Lake Hylia",
+    text:"The ninth is the lake, going flat and grey from the south end, and one old man at the water's edge has refused every boat that has come for him. He is not confused. He simply will not go. Sha knows his name, knows the family he stopped speaking to, and says straight out that they have no idea what any of it is worth here. What do you do about him?",
     answers:[
-      {s:"shadow", t:"Keep it out of sight of both of them, so nobody watches it go badly."},
-      {s:"water",  t:"Keep it, and say out loud all winter that I expect to lose it."},
-      {s:"fire",   t:"Keep it hard. Warm, fed and handled daily, and {C} can get used to it."},
-      {s:"time",   t:"Keep it for the spring, not the winter. Feed it for what it will be."},
-      {s:"spirit", t:"Keep it, and let it stay wild. It owes me nothing at the end of this."},
-      {s:"light",  t:"Keep it, and write down honestly whether I am helping or prolonging."},
-      {s:"forest", t:"Keep it where we all sleep, and let {C} come round to it in its own time."}
+      {s:"fire",   t:"Pick him up, put him in the boat, and take whatever he does about it."},
+      {s:"spirit", t:"His life and his lake. I am not carrying him off it."},
+      {s:"water",  t:"Tell him I do not want to find him here afterwards, in exactly those words."},
+      {s:"shadow", t:"Leave the boat tied where he will find it, and stop arguing."},
+      {s:"light",  t:"Lay out what the water does and what the week after looks like, and leave the boat."},
+      {s:"forest", t:"Sit down on the jetty and stay there until one of us moves."},
+      {s:"time",   t:"Stay two days, learn who his people are, and send the one he cannot refuse."}
     ]},
 
-  { place:"The Rope", where:"Gerudo Valley",
-    text:"The tenth is a rope over the valley that may be crossed once, in either direction, in your life. It will take one of you, once. It will not take you and {C} both.",
+  { scene:"rope", place:"The Rope", where:"Gerudo Valley",
+    text:"The tenth is the rope bridge over the canyon, and the planks have a number in them. Sha counted it twice and told you the number the moment they had it, which is more than the rope-keeper was going to do. There are more people on this side than that number, and the grey is a day behind the last of them. How do you work the line?",
     answers:[
-      {s:"fire",   t:"Go now. A crossing saved for the right moment is a crossing wasted."},
-      {s:"light",  t:"Say plainly which of us the far side needs more, and abide by that."},
-      {s:"spirit", t:"Neither of us. I did not come this far to be sorted out by a rope."},
-      {s:"water",  t:"Say out loud that I do not want to be apart, and send {C} over."},
-      {s:"forest", t:"Send {C}. I am not the one who has to get to the other side."},
-      {s:"shadow", t:"Send {C} across, and never once let on that I wanted to go."},
-      {s:"time",   t:"Keep it. There is a day coming, years off, that will want a crossing."}
+      {s:"forest", t:"Stay on this side and keep the line straight until this side is empty."},
+      {s:"time",   t:"Send whoever can build the next bridge over first, and cross last myself."},
+      {s:"fire",   t:"Get them across fast, all of them, and argue with the rope afterwards."},
+      {s:"spirit", t:"Refuse to hold anybody back. Whoever wants the rope can have it."},
+      {s:"water",  t:"Tell them the number the planks have in them before anybody steps on."},
+      {s:"shadow", t:"Say nothing about the number. Keep the line moving and count it myself."},
+      {s:"light",  t:"Count it out loud, weigh them, and send them over in the order the rope will take."}
     ]},
 
-  { place:"The Cup", where:"Gerudo Desert",
-    text:"The eleventh gives you a cup that fills once a day and puts you in a camp where more than one is thirsty. Nobody there knows the cup is yours, and {C} is thirsty as well.",
+  { scene:"camp", place:"The Grey", where:"The Haunted Wasteland",
+    text:"The eleventh is ground it has already crossed: no colour in it, nothing growing, and a family camped in the middle of it who say the place is theirs. Sha has walked ground like this before and puts it plainly \u2014 a year before anything green, and no shorter for being argued with. Whatever {T} is worth out here, {C} will not walk onto it at all. What do you do about the family?",
     answers:[
-      {s:"spirit", t:"Decide it fresh every day, and refuse to make a rule out of it."},
-      {s:"forest", t:"{C} drinks first. That is not a hard question for me to answer."},
-      {s:"shadow", t:"Leave it filled where it will be found, and let nobody know whose."},
-      {s:"light",  t:"Say on the first morning whose cup it is, and share it in the open."},
-      {s:"fire",   t:"Give it away the moment it fills, every day, without thinking."},
-      {s:"time",   t:"Give it to whoever has the most days of walking still ahead of them."},
-      {s:"water",  t:"Say out loud how badly we both want it, and hand it to somebody else."}
+      {s:"water",  t:"Say what the ground is, out loud, standing on it with them."},
+      {s:"shadow", t:"Carry the water in every week, and never say how far I am bringing it."},
+      {s:"light",  t:"Walk them out to the edge of it and show them where the colour starts again."},
+      {s:"forest", t:"Camp with them. A season of that is the only argument I have."},
+      {s:"time",   t:"Find out what they are really staying for, and go and solve that instead."},
+      {s:"fire",   t:"Load their cart myself and start walking. They can follow or they can shout."},
+      {s:"spirit", t:"They are not wrong. It is theirs, and I am not the one to move them."}
     ]},
 
-  { place:"The Account", where:"The Chamber of Sages",
-    text:"The twelfth is the last of the set. Eleven trials are behind you, none of them named, and you are asked what it was that you did. {C} is the only one who saw any of it.",
+  { scene:"chamber", place:"What It Cost", where:"The Chamber of Sages",
+    text:"The twelfth is the chamber, which shows you the eleven places as they stand now, your choices still sitting in them, and asks which one you would take back. Neither Sha nor {C} is allowed in; they wait together out in the light, and Sha has already told you which one they would take back. Which one is it?",
     answers:[
-      {s:"water",  t:"Tell all of it, and let them see which of the eleven still costs me."},
-      {s:"shadow", t:"Give the short account, and carry the rest of it out of here myself."},
-      {s:"forest", t:"Say what I did for the people in them, and for {C}. That is what I have."},
-      {s:"light",  t:"Give it in order, plainly, including the two I would rather not."},
-      {s:"spirit", t:"Say what I would do again, whatever the eleven were meant to teach."},
-      {s:"fire",   t:"Say all of it at once, before I have worked out how it sounds."},
-      {s:"time",   t:"Say little. What the eleven were for is not clear to me yet."}
+      {s:"light",  t:"None back. Set the eleven out in order, so what they cost is on the record."},
+      {s:"forest", t:"None of them. I stood where I stood."},
+      {s:"time",   t:"Take back the first one. Everything after it was built on top of that."},
+      {s:"fire",   t:"Take back the one I was slowest on. Nothing else."},
+      {s:"spirit", t:"None. I am not handing any of it back to be decided again."},
+      {s:"water",  t:"Name the one that still keeps me awake, and say why in front of them."},
+      {s:"shadow", t:"Take one back, and keep to myself which one it was."}
     ]},
 
-  { place:"Vaskaal", where:"Kokiri Forest",
-    text:"The thirteenth was set by nobody. Vaskaal is at the treeline where the first trial began: grey, twice your height, no weapon and no face. It says you are early. {C} is already standing in front of you.",
+  { scene:"vaskaal", place:"Vaskaal", where:"The Castle Road",
+    text:"The thirteenth was set by nobody. Vaskaal is on the castle road a half day short of the town \u2014 grey, twice your height, no face and no weapon \u2014 and everyone you have moved this season is behind you. It says you are early, and that it can wait. You have {W} in your hand and it is plainly not the point. {C} is already standing in front of you, and Sha is on your left with their face uncovered, which they say is the entire point of doing it that way. What do you do?",
     answers:[
-      {s:"shadow", t:"Put {C} behind me, and meet it out of sight of the wood."},
-      {s:"water",  t:"Say out loud that it frightens me, and do not take a step back."},
-      {s:"light",  t:"Say plainly what it is and what it does, so it cannot be mistaken."},
-      {s:"fire",   t:"Go at it now, while it is still explaining how well it can wait."},
-      {s:"time",   t:"Agree that I am early. Then make it wait until I am not."},
-      {s:"spirit", t:"Refuse its terms. It does not get to choose when this happens."},
-      {s:"forest", t:"Stand where {C} is standing, and do not move off that line."}
+      {s:"spirit", t:"Refuse the terms outright. It does not get to set the hour."},
+      {s:"water",  t:"Say out loud that it frightens me, and do not give a step of ground."},
+      {s:"shadow", t:"Put {C}, Sha and the road behind me, and meet it where nobody has to watch."},
+      {s:"light",  t:"Name it, loudly, so everyone behind me knows what is standing in the road."},
+      {s:"forest", t:"Stand in the road. Whatever else happens, it does not get past this line."},
+      {s:"time",   t:"Agree that I am early. Then make it stand there until I am not."},
+      {s:"fire",   t:"Go at it now, before it has finished telling me how patient it is."}
     ]},
 ];
 /* integrity check: 7 answers per question, each sage exactly once */
@@ -1442,8 +1627,10 @@ function show(name){
 /* ---------- question view ---------- */
 function renderQuestion(){
   const q = QUESTIONS[idx];
-  /* {C} is the chosen companion, and it appears in answers as well as setups. */
-  const named = t => t.replace(/\{C\}/g, companion.name);
+  /* The three chosen things appear in answers as well as in setups. */
+  const named = t => t.replace(/\{C\}/g, companion.name)
+                      .replace(/\{T\}/g, tribe.one)
+                      .replace(/\{W\}/g, weapon.carry);
   $("q-place").textContent = q.place;
   $("q-where").textContent = q.where;
   $("q-count").textContent = `Trial ${idx+1} of ${QUESTIONS.length}`;
@@ -1469,6 +1656,12 @@ function renderQuestion(){
     li.appendChild(b);
     list.appendChild(li);
   });
+
+  const sc = SCENES[q.scene];
+  $("q-scene").innerHTML =
+    `<svg viewBox="0 0 120 64" aria-hidden="true" fill="none" stroke="currentColor"
+          stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round">${sc.art}</svg>` +
+    `<hr><figcaption>${sc.cap}</figcaption>`;
 
   $("back").style.visibility = "visible";
   $("back").innerHTML = idx === 0 ? "&larr; Choose again" : "&larr; Previous trial";
@@ -1544,7 +1737,7 @@ function renderResult(){
   $("r-comp").innerHTML =
     `Thirteen trials, the last of them Vaskaal, walked as <b>${tribe.one}</b> ` +
     `at the shoulder of <b>${companion.name}</b>, ${companion.kind}, ` +
-    `with <b>${weapon.carry}</b> to hand.`;
+    `with <b>${weapon.carry}</b> to hand. <b>Sha</b> walked the last seven of them with you.`;
 
   show("result");
   ocarina.play(MOTIF, 0.45);
@@ -1575,7 +1768,7 @@ $("copy").addEventListener("click", async ()=>{
   const text = (s.heading
     ? `The Sage Trials \u2014 I came out as ${s.heading}. ${s.line} The sage who holds it: ${s.sage} (${s.temple} \u00b7 ${s.song}).`
     : `The Sage Trials \u2014 my element is ${s.element}. ${s.line} Another Sage of ${s.element}: ${s.sage} (${s.temple} \u00b7 ${s.song}).`)
-    + ` Thirteen trials, the last of them Vaskaal, walked as ${tribe.one} with ${companion.name} and ${weapon.carry}.`;
+    + ` Thirteen trials, the last of them Vaskaal, walked as ${tribe.one} with ${companion.name}, ${weapon.carry}, and Sha from Kakariko on.`;
   try{
     await navigator.clipboard.writeText(text);
     $("copy").textContent = "Copied";
@@ -1610,8 +1803,11 @@ const ocarina = (function(){
 
   let ctx = null, master = null, noise = null;
   let voices = [];
+  /* No control sets this any more - the toggle it belonged to is gone -
+     but play() and unlock() still honour it, so a future control can be
+     wired straight back onto it. It is deliberately not persisted: a
+     stored mute would have no way left to be undone. */
   let muted = false;
-  try{ muted = localStorage.getItem("sageTrials.muted") === "1"; }catch(e){}
 
   function build(){
     if(ctx) return ctx;
@@ -1729,7 +1925,6 @@ const ocarina = (function(){
     set muted(v){
       muted = !!v;
       if(muted) stop();
-      try{ localStorage.setItem("sageTrials.muted", muted ? "1" : "0"); }catch(e){}
     },
     /* browsers want a gesture before any of this is allowed to sound */
     unlock(){
@@ -1738,21 +1933,6 @@ const ocarina = (function(){
       if(ctx.state === "suspended") ctx.resume();
     }
   };
-})();
-
-(function soundToggle(){
-  const btn = $("sound");
-  const label = $("sound-label");
-  function paint(){
-    btn.setAttribute("aria-pressed", ocarina.muted ? "false" : "true");
-    label.textContent = ocarina.muted ? "Muted" : "Ocarina";
-  }
-  btn.addEventListener("click", ()=>{
-    ocarina.muted = !ocarina.muted;
-    paint();
-    if(!ocarina.muted) ocarina.play(MOTIF);
-  });
-  paint();
 })();
 
 /* ======================= AMBIENT MOTES ======================= */
