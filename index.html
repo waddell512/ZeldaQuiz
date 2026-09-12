@@ -613,7 +613,7 @@ button{font:inherit;color:inherit;cursor:pointer}
         <p class="byline">by the Skyward Prince and Butterbean</p>
       </div>
       <hr class="rule-gold" style="width:6rem">
-      <p class="lede">The Triforce speaks to you once, and what it says is that <em>Vaskaal</em> is coming: grey, faceless, twice the height of a man, and where it walks the colour goes out of the ground and nothing grows for a season. It says you are not ready. Twelve trials stand between you and the thirteenth, and the thirteenth is Vaskaal itself. Choose who walks them with you, and answer as yourself; the element you carry will be plain long before the end.</p>
+      <p class="lede">The Triforce speaks to you once, and what it says is that <em>Senok</em> is awake. An age ago the Fairy Prince of the Kokiri Forest put him under the roots of that wood and spent the whole of his own light doing it, and this season the last of that light ran out. Where Senok goes, light stops holding &mdash; lamps gutter and fairies go dark and fall out of the air &mdash; and he draws the life up out of the ground itself as he walks, so that the grass goes over grey behind him and nothing will take root in it for a year. No sword ends him. Only a sage&rsquo;s light will put him back, and a sage is not appointed &mdash; a sage is made, by helping every part of Hyrule that needs you before he reaches it. Twelve places stand between you and the thirteenth, and the thirteenth is Senok. Choose who walks them with you, and answer as yourself; the element you carry will be plain long before the end.</p>
       <button class="btn" id="begin">Enter the Chamber</button>
     </section>
 
@@ -895,7 +895,7 @@ function medallion(key){
 /* ======================= TRIAL PLATES =======================
    One drawing to close each trial, of a thing or a person that trial
    actually turns on - the cart on the wrong road, the shut gate, the
-   old man's boat, Vaskaal with a man beside it for scale. All thirteen
+   old man's boat, Senok with a man beside it for scale. All thirteen
    share a 120x64 field with the ground at y=56, and all are drawn in
    line in the page's own gold so they sit under the answers without
    competing with them. Mass is carried by a .14 fill of the same
@@ -1022,7 +1022,7 @@ const SCENES = {
     <path d="M28.3 28.3 V36.3"/><path d="M39.8 32.2 V40.2"/><path d="M52.1 34.6 V42.6"/>
     <path d="M64.4 34.9 V42.9"/><path d="M75.8 33.3 V41.3"/><path d="M88.2 29.7 V37.7"/>`},
   /* A camp pitched on ground with nothing left in it. */
-  camp:{ cap:"A camp on grey ground", art:`
+  camp:{ cap:"A camp on unlit ground", art:`
     <path d="M12 56 H108" opacity=".3"/>
     <path d="M30 56 L50 26 L70 56 Z" fill="currentColor" opacity=".14"/>
     <path d="M30 56 L50 26 L70 56 Z"/>
@@ -1030,41 +1030,84 @@ const SCENES = {
     <path d="M77 53 L95 47"/><path d="M77 47 L95 53"/>
     <path d="M86 44 Q80 38 85 30 Q86.5 36 90 33 Q93 38 89.5 44 Z" fill="currentColor" opacity=".14"/>
     <path d="M86 44 Q80 38 85 30 Q86.5 36 90 33 Q93 38 89.5 44 Z"/>`},
-  /* The chamber floor, six marks and the seventh place empty. */
-  chamber:{ cap:"The chamber floor", art:`
-    <ellipse cx="60" cy="42" rx="40" ry="13"/>
-    <ellipse cx="60" cy="42" rx="26" ry="8.5" opacity=".55"/>
-    <path d="M60 12 L68 26 H52 Z"/>
-    <path d="M22 42 l3 -5 3 5 z"/><path d="M36 50 l3 -5 3 5 z"/><path d="M78 50 l3 -5 3 5 z"/>
-    <path d="M92 42 l3 -5 3 5 z"/><path d="M36 34 l3 -5 3 5 z"/><path d="M78 34 l3 -5 3 5 z"/>
-    <path d="M57 42 l3 -5 3 5 z" opacity=".35"/>`},
-  /* Vaskaal, with a man beside it for the height. */
-  vaskaal:{ cap:"Vaskaal, to scale", art:`
+  /* The Fairy Prince's cairn in the grove, and what is left of his light:
+     three fairies still burning, two already gone out. */
+  grove:{ cap:"The Fairy Prince's cairn", art:`
+    <path d="M14 56 H106" opacity=".3"/>
+    <path d="M52 56 H68 L66 48 H54 Z" fill="currentColor" opacity=".14"/>
+    <path d="M52 56 H68 L66 48 H54 Z"/>
+    <path d="M55 48 H65 L63.5 41 H56.5 Z" fill="currentColor" opacity=".14"/>
+    <path d="M55 48 H65 L63.5 41 H56.5 Z"/>
+    <path d="M57 41 H63 L60 34 Z" fill="currentColor" opacity=".14"/>
+    <path d="M57 41 H63 L60 34 Z"/>
+    <path d="M52 56 Q45 53.5 40 56"/><path d="M68 56 Q75 53.5 80 56"/>
+    <circle cx="37" cy="26" r="2.5"/>
+    <path d="M37 22 V19"/><path d="M33.4 27 L30.4 26"/><path d="M40.6 27 L43.6 26"/>
+    <circle cx="83" cy="30" r="2.2"/>
+    <path d="M83 26.4 V23.6"/><path d="M79.8 31 L77 30"/><path d="M86.2 31 L89 30"/>
+    <circle cx="60" cy="20" r="1.9"/>
+    <path d="M60 16.6 V14"/>
+    <circle cx="27" cy="41" r="1.5" opacity=".3"/>
+    <circle cx="93" cy="45" r="1.4" opacity=".25"/>`},
+  /* Senok: a Poe grown tall. No legs - the robe ends in rags and he
+     hangs above his own shadow - violet where every other plate is gold,
+     because the robe is the one thing on him anybody agrees they saw. The
+     face is a wooden mask, two slits and a slot, hung in an empty hood.
+     The lantern on his left still has the Fairy Prince's light in it,
+     and the three threads under the hem are the ground going up into him.
+     A man stands at the right for the height. */
+  senok:{ cap:"Senok, in the wooden mask", art:`
     <path d="M12 56 H108" opacity=".3"/>
-    <path d="M46 56 V24 Q46 8 57 8 Q68 8 68 24 V56 Z" fill="currentColor" opacity=".14"/>
-    <path d="M46 56 V24 Q46 8 57 8 Q68 8 68 24 V56"/>
-    <path d="M46 28 Q39 40 41 52"/><path d="M68 28 Q75 40 73 52"/>
-    <path d="M88 56 V44 Q88 39 91.5 39 Q95 39 95 44 V56"/>
-    <circle cx="91.5" cy="34" r="4"/>
-    <path d="M88 43 L84 50"/><path d="M95 43 L99 50"/>`}
+    <ellipse cx="48" cy="56" rx="14" ry="2.4" opacity=".2"/>
+    <path d="M48 3 Q38 6 36.5 22 L34 43 L36.5 50 L38.5 44 L41.5 52.5 L44 45 L47 51 L49.5 44.5 L52.5 52 L55.5 45.5 L58 50.5 L62 43 L59.5 22 Q58 6 48 3 Z" fill="var(--c-shadow)" opacity=".28"/>
+    <path d="M48 3 Q38 6 36.5 22 L34 43 L36.5 50 L38.5 44 L41.5 52.5 L44 45 L47 51 L49.5 44.5 L52.5 52 L55.5 45.5 L58 50.5 L62 43 L59.5 22 Q58 6 48 3 Z" stroke="var(--c-shadow)" stroke-width="2"/>
+    <path d="M39.5 14 Q48 8.5 56.5 14 L54.5 29 Q48 35 41.5 29 Z" fill="#000" opacity=".32"/>
+    <path d="M41 14.5 Q48 10 55 14.5 L53.5 27.5 Q48 33 42.5 27.5 Z" fill="currentColor" opacity=".3"/>
+    <path d="M41 14.5 Q48 10 55 14.5 L53.5 27.5 Q48 33 42.5 27.5 Z"/>
+    <path d="M43 19 L46.8 20.8" stroke-width="1.7"/>
+    <path d="M53 19 L49.2 20.8" stroke-width="1.7"/>
+    <path d="M45.6 26.2 H50.4" stroke-width="1.4"/>
+    <path d="M44.2 13.6 V27" opacity=".22" stroke-width=".8"/>
+    <path d="M51.8 13.6 V27" opacity=".22" stroke-width=".8"/>
+    <path d="M46.4 10.4 L45.1 15.4 L46.2 18.2" opacity=".5" stroke-width="1"/>
+    <path d="M36.8 32 Q27 35.5 24 41.6"/>
+    <path d="M59.2 32 Q68 36 66.5 44"/>
+    <path d="M22 46 Q24 40.4 26 46"/>
+    <path d="M20.3 46 H27.7"/>
+    <path d="M21.1 46 H26.9 L25.9 54 H22.1 Z" fill="currentColor" opacity=".14"/>
+    <path d="M21.1 46 H26.9 L25.9 54 H22.1 Z"/>
+    <circle cx="24" cy="50" r="1.7"/>
+    <circle cx="24" cy="50" r="3.3" opacity=".3"/>
+    <path d="M39 55.4 Q40.8 52.6 39.6 50.2" opacity=".55" stroke-width="1"/>
+    <path d="M47.6 55.6 Q46 53 47.2 50.4" opacity=".55" stroke-width="1"/>
+    <path d="M55.4 55.4 Q54 52.8 55.2 50" opacity=".55" stroke-width="1"/>
+    <path d="M72 56 Q73.2 51.6 70.6 50.2" opacity=".6"/>
+    <path d="M79 56 Q79.8 52.6 77.6 51.6" opacity=".45"/>
+    <path d="M92 56 V45 Q92 40.4 95.5 40.4 Q99 40.4 99 45 V56"/>
+    <circle cx="95.5" cy="35.6" r="3.9"/>
+    <path d="M92 44.4 L88.4 50.4"/><path d="M99 44.4 L102.6 50.4"/>`}
 };
 
 /* ======================= QUESTIONS =======================
-   Thirteen trials. Vaskaal is already walking, at the pace of a man, on
-   a line the Triforce can name and nobody can move; the first twelve are
-   the places that line goes through, in the order it reaches them, and
-   the thirteenth is Vaskaal itself on the castle road. Nothing is set by
-   an examiner and nothing is announced as a test - the trial is only ever
-   the decision the place puts in front of you while there is still time
-   to make it. Every setup closes on the question its seven answers are
-   answering, so the ask is always explicit and always the last thing
-   read before the list.
+   Thirteen trials. Senok is out from under the roots and walking, at the
+   pace of a man, drawing the life up out of every field he crosses, on
+   a line the Triforce can name and nobody can move; the
+   first twelve are the places in Hyrule that line goes through, in the
+   order it reaches them, and the thirteenth is Senok himself on the castle
+   road. The twelve are not tests of him - they are twelve places that need
+   something from you, and helping them is the whole of how a sage is made,
+   which is why the twelfth is the Fairy Prince's grove handing that light
+   over. Nothing is set by an examiner and nothing is announced as a test -
+   the trial is only ever the decision the place puts in front of you while
+   there is still time to make it. Every setup closes on the question its
+   seven answers are answering, so the ask is always explicit and always
+   the last thing read before the list.
 
-   So the register is a season of evacuation rather than a season of
-   waiting: real people, a real clock, and a cost that lands on somebody
-   whichever way you answer. Vaskaal still does not fight - it explains
-   that it can wait - so the last one stays a decision like the twelve
-   that earned it.
+   So the register is a season of helping rather than a season of waiting:
+   real people, a real clock, and a cost that lands on somebody whichever
+   way you answer. Senok himself never argues and never hurries - a Poe
+   has nothing but time - so the thirteenth is a decision about how you
+   end him, made with the light the twelve before it earned.
 
    Each question offers all seven sages exactly once, and answer order is
    varied per question so position never reveals the mapping. The orders
@@ -1092,7 +1135,7 @@ const SCENES = {
    is set - shown under its name. */
 const QUESTIONS = [
   { scene:"kokiri", place:"The Warning", where:"Kokiri Forest",
-    text:"The first is the wood, because the wood is first in its path. The children there cannot leave it and do not want to be told, and you have one evening in which to say it. You are {T}, which is the first thing the clearing sees, and {C} will not settle at all. How do you tell them?",
+    text:"The first is the wood, because the wood is where the Fairy Prince put him and the wood is where the roots finally let go. The children there cannot leave it, have no idea what came up under it, and do not want to be told, and you have one evening in which to say it. You are {T}, which is the first thing the clearing sees, and {C} will not settle at all. How do you tell them?",
     answers:[
       {s:"forest", t:"Say it once, then stay in the clearing until somebody believes it."},
       {s:"fire",   t:"Say it tonight, to the whole clearing at once, and let them be angry with me."},
@@ -1104,7 +1147,7 @@ const QUESTIONS = [
     ]},
 
   { scene:"cart", place:"The Road", where:"Hyrule Field",
-    text:"The second is the field, where the news got ahead of you and arrived wrong. Half the carts on the road are moving toward the grey, because somebody told them the castle was the danger. {C} keeps pace and is no use for this. How do you turn them?",
+    text:"The second is the field, where the news got ahead of you and arrived wrong. Half the carts on the road are moving toward the dark, because somebody told them the wood was the safe place and the castle was the danger. {C} keeps pace and is no use for this. How do you turn them?",
     answers:[
       {s:"shadow", t:"Find whoever started it and correct it at the source, without naming them."},
       {s:"spirit", t:"Refuse to herd anybody. Say the true thing once, and let them steer."},
@@ -1116,7 +1159,7 @@ const QUESTIONS = [
     ]},
 
   { scene:"gate", place:"The Gate", where:"Hyrule Castle Town",
-    text:"The third is the town, which has worked out how many it can hold and shut the gate on the rest. The farms outside are still arriving. {C} is on the wrong side of the wall with them. What do you do at the gate?",
+    text:"The third is the town, which has worked out how many it can hold and shut the gate on the rest. The farms outside are still arriving, some of them carrying lamps that will not take a flame any more. {C} is on the wrong side of the wall with them. What do you do at the gate?",
     answers:[
       {s:"light",  t:"Get the count right in front of them \u2014 room, water, days \u2014 so it can be argued with."},
       {s:"time",   t:"Get the children through first, and spend the week arguing about the rest."},
@@ -1128,7 +1171,7 @@ const QUESTIONS = [
     ]},
 
   { scene:"goron", place:"The Doors", where:"Goron City",
-    text:"The fourth is Goron City, which has heard you out and decided that stone is enough. They will seal the doors, wait the season through, and they would like you inside when the doors go shut. {C} does not care for the roof. Are you in there when they shut?",
+    text:"The fourth is Goron City, which has heard you out and decided that stone is enough \u2014 that a thing which puts lights out can be sat under a mountain until it gets bored. They will seal the doors, wait the season through, and they would like you inside when the doors go shut. {C} does not care for the roof. Are you in there when they shut?",
     answers:[
       {s:"fire",   t:"Tell them stone is not enough, in front of everyone, and start moving the young out."},
       {s:"water",  t:"Say I think they will die in here, and stay the night with them anyway."},
@@ -1140,7 +1183,7 @@ const QUESTIONS = [
     ]},
 
   { scene:"zora", place:"The Current", where:"Zora's Domain",
-    text:"The fifth is the Domain, where the river has started coming down grey out of a stretch nobody has walked yet. The Zora can close the mouth of it and keep what they have. Everything in the valley below drinks what they would be closing. What do you do while they decide?",
+    text:"The fifth is the Domain, where the river has started coming down dead \u2014 no shine on it and nothing living in it \u2014 out of a stretch of upland he went over last week. The Zora can close the mouth of it and keep what they have. Everything in the valley below drinks what they would be closing. What do you do while they decide?",
     answers:[
       {s:"time",   t:"Sink a store for the valley first. Then let them close the mouth."},
       {s:"forest", t:"Stand at the mouth of it and not move while they decide."},
@@ -1152,7 +1195,7 @@ const QUESTIONS = [
     ]},
 
   { scene:"herd", place:"The Herd", where:"Lon Lon Ranch",
-    text:"The sixth is the ranch, with one day of road left before the grey reaches the fences. The herd can be moved or it can be turned loose, and there is no version of the day where it is both. {C} is no help at this and seems to know it. How do you spend the day?",
+    text:"The sixth is the ranch, with one day of road left before he is at the fences and the grass starts going up into him. The herd can be moved or it can be turned loose, and there is no version of the day where it is both. {C} is no help at this and seems to know it. How do you spend the day?",
     answers:[
       {s:"water",  t:"Tell Malon out loud that most of them will not make it, and start anyway."},
       {s:"shadow", t:"Do the choosing myself, quietly, so that nobody at the ranch has to."},
@@ -1164,7 +1207,7 @@ const QUESTIONS = [
     ]},
 
   { scene:"sha", place:"The Lid", where:"Kakariko Village",
-    text:"The seventh is Kakariko, which will not empty, because something under the village has to be held shut and holding it needs somebody standing there. A Sheikah called Sha says as much in the square, in daylight, unhooded, with no riddle anywhere in it, and then asks for one volunteer and waits. The square goes quiet, and {W} is no use to anybody in this. What do you do in the quiet?",
+    text:"The seventh is Kakariko, which will not empty, because something under the village has to be held shut \u2014 an old seal, cut from the same work as the Prince's and going the same way \u2014 and holding it needs somebody standing there. A Sheikah called Sha says as much in the square, in daylight, unhooded, with no riddle anywhere in it, and then asks for one volunteer and waits. The square goes quiet, and {W} is no use to anybody in this. What do you do in the quiet?",
     answers:[
       {s:"spirit", t:"Refuse to let them ask it of anyone. There is another way to shut it."},
       {s:"light",  t:"Ask out loud what standing on it actually means, before a hand goes up."},
@@ -1176,7 +1219,7 @@ const QUESTIONS = [
     ]},
 
   { scene:"shoulder", place:"The Shoulder", where:"Death Mountain Trail",
-    text:"The eighth is the trail, and Sha came up it with you, having said exactly why they were coming. A shoulder of rock can be brought down to turn the grey aside for a week. It also shuts the mountain in behind it, the Gorons have not been asked, and Sha will say which of those two they think is worse if you ask them. Does the rock come down?",
+    text:"The eighth is the trail, and Sha came up it with you, having said exactly why they were coming. A shoulder of rock can be brought down to turn Senok's road aside for a week. It also shuts the mountain in behind it, the Gorons have not been asked, and Sha will say which of those two they think is worse if you ask them. Does the rock come down?",
     answers:[
       {s:"shadow", t:"Bring it down, and carry being the one who did it."},
       {s:"light",  t:"Touch nothing until the mountain has been told and has answered."},
@@ -1188,7 +1231,7 @@ const QUESTIONS = [
     ]},
 
   { scene:"boat", place:"The Jetty", where:"Lake Hylia",
-    text:"The ninth is the lake, going flat and grey from the south end, and one old man at the water's edge has refused every boat that has come for him. He is not confused. He simply will not go. Sha knows his name, knows the family he stopped speaking to, and says straight out that they have no idea what any of it is worth here. What do you do about him?",
+    text:"The ninth is the lake, going flat and lightless from the south end, and one old man at the water's edge has refused every boat that has come for him. He is not confused. He simply will not go. Sha knows his name, knows the family he stopped speaking to, and says straight out that they have no idea what any of it is worth here. What do you do about him?",
     answers:[
       {s:"fire",   t:"Pick him up, put him in the boat, and take whatever he does about it."},
       {s:"spirit", t:"His life and his lake. I am not carrying him off it."},
@@ -1200,7 +1243,7 @@ const QUESTIONS = [
     ]},
 
   { scene:"rope", place:"The Rope", where:"Gerudo Valley",
-    text:"The tenth is the rope bridge over the canyon, and the planks have a number in them. Sha counted it twice and told you the number the moment they had it, which is more than the rope-keeper was going to do. There are more people on this side than that number, and the grey is a day behind the last of them. How do you work the line?",
+    text:"The tenth is the rope bridge over the canyon, and the planks have a number in them. Sha counted it twice and told you the number the moment they had it, which is more than the rope-keeper was going to do. There are more people on this side than that number, and the dark is a day behind the last of them. How do you work the line?",
     answers:[
       {s:"forest", t:"Stay on this side and keep the line straight until this side is empty."},
       {s:"time",   t:"Send whoever can build the next bridge over first, and cross last myself."},
@@ -1211,8 +1254,8 @@ const QUESTIONS = [
       {s:"light",  t:"Count it out loud, weigh them, and send them over in the order the rope will take."}
     ]},
 
-  { scene:"camp", place:"The Grey", where:"The Haunted Wasteland",
-    text:"The eleventh is ground it has already crossed: no colour in it, nothing growing, and a family camped in the middle of it who say the place is theirs. Sha has walked ground like this before and puts it plainly \u2014 a year before anything green, and no shorter for being argued with. Whatever {T} is worth out here, {C} will not walk onto it at all. What do you do about the family?",
+  { scene:"camp", place:"The Unlit", where:"The Haunted Wasteland",
+    text:"The eleventh is ground he has already drunk: he took the life up out of it on his way past, no light holds on it now, nothing grows, and a family camped in the middle of it who say the place is theirs. Sha has walked ground like this before and puts it plainly \u2014 a year before anything green, and no shorter for being argued with. Whatever {T} is worth out here, {C} will not walk onto it at all. What do you do about the family?",
     answers:[
       {s:"water",  t:"Say what the ground is, out loud, standing on it with them."},
       {s:"shadow", t:"Carry the water in every week, and never say how far I am bringing it."},
@@ -1223,8 +1266,8 @@ const QUESTIONS = [
       {s:"spirit", t:"They are not wrong. It is theirs, and I am not the one to move them."}
     ]},
 
-  { scene:"chamber", place:"What It Cost", where:"The Chamber of Sages",
-    text:"The twelfth is the chamber, which shows you the eleven places as they stand now, your choices still sitting in them, and asks which one you would take back. Neither Sha nor {C} is allowed in; they wait together out in the light, and Sha has already told you which one they would take back. Which one is it?",
+  { scene:"grove", place:"What It Cost", where:"The Fairy Prince's Grove",
+    text:"The twelfth is the grove at the far end of the Lost Woods, where the Fairy Prince spent the whole of his light putting Senok under the roots, and where the last of his fairies have been going out one by one ever since. They are what is left of that seal, and they are what makes a sage. They show you the eleven places as they stand now with your choices still sitting in them, they say the light they can hand you is worth exactly what you did there, and then they ask which of the eleven you would take back. Neither Sha nor {C} is allowed past the treeline; they wait together out in the open, and Sha has already told you which one they would take back. Which one is it?",
     answers:[
       {s:"light",  t:"None back. Set the eleven out in order, so what they cost is on the record."},
       {s:"forest", t:"None of them. I stood where I stood."},
@@ -1235,16 +1278,16 @@ const QUESTIONS = [
       {s:"shadow", t:"Take one back, and keep to myself which one it was."}
     ]},
 
-  { scene:"vaskaal", place:"Vaskaal", where:"The Castle Road",
-    text:"The thirteenth was set by nobody. Vaskaal is on the castle road a half day short of the town \u2014 grey, twice your height, no face and no weapon \u2014 and everyone you have moved this season is behind you. It says you are early, and that it can wait. You have {W} in your hand and it is plainly not the point. {C} is already standing in front of you, and Sha is on your left with their face uncovered, which they say is the entire point of doing it that way. What do you do?",
+  { scene:"senok", place:"Senok", where:"The Castle Road",
+    text:"The thirteenth was set by nobody. Senok is on the castle road a half day short of the town: a Poe grown to twice your height, violet robes hanging off nothing and ending in rags a foot above his own shadow, and a wooden mask cut with two slits and a slot where the face should be. The lantern in his left hand still has the Fairy Prince's light in it. Everyone you helped this season is on the road behind you, {W} is in your hand with the grove's light on it, and that light is the only thing here he has ever had to be afraid of. The grass is going grey in a slow ring around him while he stands there, which is the only part of him that ever hurries. He says you are early, and that he can wait; a Poe has nothing else. {C} is already standing in front of you, and Sha is on your left with their face uncovered, which they say is the entire point of doing it that way. How do you end him?",
     answers:[
-      {s:"spirit", t:"Refuse the terms outright. It does not get to set the hour."},
-      {s:"water",  t:"Say out loud that it frightens me, and do not give a step of ground."},
-      {s:"shadow", t:"Put {C}, Sha and the road behind me, and meet it where nobody has to watch."},
-      {s:"light",  t:"Name it, loudly, so everyone behind me knows what is standing in the road."},
-      {s:"forest", t:"Stand in the road. Whatever else happens, it does not get past this line."},
-      {s:"time",   t:"Agree that I am early. Then make it stand there until I am not."},
-      {s:"fire",   t:"Go at it now, before it has finished telling me how patient it is."}
+      {s:"spirit", t:"He gets no terms and no hour. I will not be waited on and I will not be bargained with."},
+      {s:"water",  t:"Say out loud that the mask frightens me, and put the light through him while I am still saying it."},
+      {s:"shadow", t:"Take him from the side nobody is watching, and let the road never learn who did it."},
+      {s:"light",  t:"Break the lantern first, in the open, so everyone behind me sees what he has been carrying."},
+      {s:"forest", t:"Stand in the road and hold the light steady until he is the one that goes out."},
+      {s:"time",   t:"Hold him here until the twelve lights I left behind me are burning at once, and put him back under for good."},
+      {s:"fire",   t:"Go at him now, all of it at once, before the mask has finished turning toward me."}
     ]},
 ];
 /* integrity check: 7 answers per question, each sage exactly once */
@@ -1320,7 +1363,8 @@ const CRESTS = {
    Chosen once, before the first trial, and standing beside you for all
    thirteen. The choice is pure flavour - it scores nothing and touches no
    tally - so that the seven-way balance of the trials is untouched by it.
-   Only the first and the thirteenth name the companion, through {C}. */
+   Eight of the thirteen name the companion, through {C}, the first and
+   the thirteenth among them. */
 const COMPANIONS = [
   { id:"tabe",   name:"Tab\u00e8", kind:"a fairy, of Navi's line",
     note:"Mischief, sarcasm and a great deal of fun; bossy when it suits him; certain to say the one thing that matters at the worst possible moment. Works hard at hiding how much he cares, and only lets it show once he knows you." },
@@ -1735,7 +1779,7 @@ function renderResult(){
     </div>`).join("");
 
   $("r-comp").innerHTML =
-    `Thirteen trials, the last of them Vaskaal, walked as <b>${tribe.one}</b> ` +
+    `Thirteen trials, the last of them Senok, walked as <b>${tribe.one}</b> ` +
     `at the shoulder of <b>${companion.name}</b>, ${companion.kind}, ` +
     `with <b>${weapon.carry}</b> to hand. <b>Sha</b> walked the last seven of them with you.`;
 
@@ -1768,7 +1812,7 @@ $("copy").addEventListener("click", async ()=>{
   const text = (s.heading
     ? `The Sage Trials \u2014 I came out as ${s.heading}. ${s.line} The sage who holds it: ${s.sage} (${s.temple} \u00b7 ${s.song}).`
     : `The Sage Trials \u2014 my element is ${s.element}. ${s.line} Another Sage of ${s.element}: ${s.sage} (${s.temple} \u00b7 ${s.song}).`)
-    + ` Thirteen trials, the last of them Vaskaal, walked as ${tribe.one} with ${companion.name}, ${weapon.carry}, and Sha from Kakariko on.`;
+    + ` Thirteen trials, the last of them Senok, walked as ${tribe.one} with ${companion.name}, ${weapon.carry}, and Sha from Kakariko on.`;
   try{
     await navigator.clipboard.writeText(text);
     $("copy").textContent = "Copied";
