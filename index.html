@@ -440,6 +440,29 @@ button{font:inherit;color:inherit;cursor:pointer}
 .res-comp b{font-style:normal;font-weight:500;color:var(--ink-2)}
 .res-actions{display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center;justify-content:center}
 
+/* The dedication. Last thing on the last screen, set below a rule and a
+   generous run of space so it reads as the page signing off rather than
+   as one more block of result copy. Quiet enough not to compete with the
+   medallion, gold on the name because the name is the whole point. */
+.dedication{
+  display:flex;flex-direction:column;align-items:center;gap:1.1rem;
+  max-width:33rem;margin-top:1.5rem;
+}
+.dedication p.eyebrow{
+  font-family:"Barlow Semi Condensed",system-ui,sans-serif;font-style:normal;font-weight:600;
+  color:var(--ink-3);font-size:.72rem;letter-spacing:.24em;
+}
+.dedication p{
+  font-family:Spectral,serif;font-style:italic;font-weight:300;
+  font-size:.97rem;line-height:1.75;color:var(--ink-3);margin:0;text-wrap:pretty;
+}
+.dedication b{font-style:normal;font-weight:500;color:var(--gold-2)}
+.dedication .ded-sign{font-size:1.02rem;color:var(--ink-2)}
+.dedication .ded-from{
+  font-family:Cinzel,"Times New Roman",serif;font-style:normal;font-weight:500;
+  font-size:.8rem;letter-spacing:.14em;color:var(--gold);margin-top:-.4rem;
+}
+
 /* ---------- phones ----------
    The layout above is fluid all the way down, so what is left here is
    the handful of things that are about a small screen rather than a
@@ -677,6 +700,17 @@ button{font:inherit;color:inherit;cursor:pointer}
         <button class="btn" id="again">Take the trials again</button>
         <button class="btn-quiet" id="copy">Copy result</button>
       </div>
+
+      <hr class="rule-gold" style="width:9rem;margin-top:1.5rem">
+      <section class="dedication">
+        <p class="eyebrow">Dedication</p>
+        <p>The Sage Trials is dedicated to <b>Butterbean</b> &mdash; my dad &mdash; who
+        doesn't even know that I put this here, and was the first person that brought me
+        to the Kingdom of Hyrule for the first time, and made my dreams of an Ocarina of
+        Time Sage quiz become a reality. Without him, this website would have no meaning.</p>
+        <p class="ded-sign">Thank you, Butterbean.</p>
+        <p class="ded-from">from the Skyward Prince</p>
+      </section>
     </section>
   </main>
 </div>
