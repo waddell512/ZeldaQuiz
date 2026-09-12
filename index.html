@@ -124,69 +124,81 @@ button{font:inherit;color:inherit;cursor:pointer}
 @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 
 /* ---------- backdrop: the Chamber of Sages ----------
-   The chamber has no masonry - its walls are the luminous cloud the
-   platform floats inside. So the surround is built as weather, not
-   stone: a turbulence-generated cloud bank carrying the six element
-   hues, banked around the edges of the frame and cleared out of the
-   middle where the text sits, with light falling in from above, the
-   sages' platform laid out below in perspective, and the engraved ring
-   turning overhead. Structural lines are drawn in --gold, which flips
-   with the theme, so the whole stack follows. */
+   Built to the room as the game draws it: a black void with blocky blue
+   stone columns standing in it, and the sages' platform in the middle -
+   a hexagon whose top surface is lit water, caustics crawling over it,
+   the six medallions set around the rim and the Triforce laid in the
+   centre. The platform is a flat drawing tipped away from the reader, so
+   it reads as a floor you are looking down onto rather than a badge
+   behind the text. The chamber keeps its own colours in both themes,
+   because the chamber is the chamber; --mark-op is what drops the whole
+   stack back on the pale page. */
 .bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-/* The six stations throwing their colour onto the cloud around them. */
+/* The void, and the six stations throwing their colour into it. */
 .bg-void{
-  position:absolute;inset:0;opacity:calc(var(--mark-op) * 3.2);
+  position:absolute;inset:0;opacity:calc(var(--mark-op) * 3.4);
   background:
-    radial-gradient(ellipse 46% 38% at 6% 16%,color-mix(in srgb,var(--c-water) 40%,transparent),transparent 72%),
-    radial-gradient(ellipse 44% 36% at 94% 20%,color-mix(in srgb,var(--c-shadow) 38%,transparent),transparent 72%),
-    radial-gradient(ellipse 40% 34% at 2% 62%,color-mix(in srgb,var(--c-forest) 30%,transparent),transparent 72%),
-    radial-gradient(ellipse 40% 34% at 98% 66%,color-mix(in srgb,var(--c-spirit) 30%,transparent),transparent 72%),
-    radial-gradient(ellipse 52% 30% at 26% 100%,color-mix(in srgb,var(--c-fire) 22%,transparent),transparent 74%),
-    radial-gradient(ellipse 62% 36% at 62% 102%,color-mix(in srgb,var(--c-light) 26%,transparent),transparent 74%);
+    radial-gradient(ellipse 60% 44% at 50% 78%,rgba(47,168,216,.42),transparent 70%),
+    radial-gradient(ellipse 46% 38% at 6% 16%,color-mix(in srgb,var(--c-water) 34%,transparent),transparent 72%),
+    radial-gradient(ellipse 44% 36% at 94% 20%,color-mix(in srgb,var(--c-shadow) 32%,transparent),transparent 72%),
+    radial-gradient(ellipse 40% 34% at 2% 62%,color-mix(in srgb,var(--c-forest) 26%,transparent),transparent 72%),
+    radial-gradient(ellipse 40% 34% at 98% 66%,color-mix(in srgb,var(--c-spirit) 26%,transparent),transparent 72%),
+    radial-gradient(ellipse 52% 30% at 26% 100%,color-mix(in srgb,var(--c-fire) 18%,transparent),transparent 74%),
+    radial-gradient(ellipse 62% 36% at 62% 102%,color-mix(in srgb,var(--c-light) 20%,transparent),transparent 74%);
 }
-/* The wall itself: cloud, cut out of noise so it has grain rather than
-   the smooth falloff of another gradient. Drawn small and stretched, so
-   the filter runs over a few hundred user units, not the whole screen. */
-.bg-walls{
-  position:absolute;left:-6%;top:-6%;width:112%;height:112%;
-  opacity:calc(var(--mark-op) * 4.6);
-  animation:drift 190s ease-in-out infinite alternate;
+/* The columns. Flat blue faces with a lit cap, speckled out of noise so
+   the stone has grain instead of the smooth falloff of a gradient, and
+   faded out at the top so they lose themselves in the dark the way the
+   room's do. */
+.bg-pillars{
+  position:absolute;left:0;bottom:0;width:100%;height:82vh;
+  opacity:calc(var(--mark-op) * 3.6);
+  -webkit-mask-image:linear-gradient(to bottom,transparent 2%,#000 34%,#000 58%,transparent 86%);
+  mask-image:linear-gradient(to bottom,transparent 2%,#000 34%,#000 58%,transparent 86%);
 }
-@keyframes drift{
-  from{transform:translate3d(0,0,0) scale(1)}
-  to{transform:translate3d(-2.2%,1.4%,0) scale(1.07)}
-}
-/* Where the cloud wall meets the platform. */
+/* Where the columns and the platform go down into the dark. */
 .bg-horizon{
-  position:absolute;left:0;right:0;bottom:0;height:46vh;
+  position:absolute;left:0;right:0;bottom:0;height:34vh;
   background:linear-gradient(to top,
-    color-mix(in srgb,var(--stone-0) 78%,transparent),
-    transparent 74%);
+    color-mix(in srgb,var(--stone-0) 76%,transparent),
+    transparent 86%);
 }
 .bg-shaft{
   position:absolute;left:50%;top:-22vh;width:min(120vw,1080px);height:104vh;
   transform:translateX(-50%);
   background:radial-gradient(ellipse 34% 58% at 50% 0,
-    color-mix(in srgb,var(--gold) 26%,transparent) 0,
-    color-mix(in srgb,var(--gold) 8%,transparent) 42%,
+    color-mix(in srgb,var(--gold) 24%,transparent) 0,
+    color-mix(in srgb,var(--gold) 7%,transparent) 42%,
     transparent 76%);
 }
-/* The floor is a flat drawing tipped away from the reader, so it reads as
-   something you are standing on rather than a badge behind the text. */
 .bg-dais{
-  position:absolute;left:50%;bottom:-13vh;width:min(150vw,1300px);height:auto;
-  transform:translateX(-50%) perspective(1500px) rotateX(58deg);
+  position:absolute;left:50%;bottom:-13vh;width:min(142vw,1260px);height:auto;
+  transform:translateX(-50%) perspective(1600px) rotateX(60deg);
   transform-origin:50% 100%;
-  color:var(--gold);opacity:calc(var(--mark-op) * 2.4);
-  -webkit-mask-image:linear-gradient(transparent 16%,#000 60%);
-  mask-image:linear-gradient(transparent 16%,#000 60%);
+  opacity:calc(var(--mark-op) * 2.9);
+  -webkit-mask-image:linear-gradient(transparent 4%,#000 40%);
+  mask-image:linear-gradient(transparent 4%,#000 40%);
+}
+/* Two sheets of the same caustic noise crawling across the water at
+   different speeds and scales, which is what stops the surface reading
+   as a single frozen texture. */
+.bg-dais .caustic{transform-box:fill-box;transform-origin:50% 50%}
+.bg-dais .caustic-a{animation:causticA 34s ease-in-out infinite alternate}
+.bg-dais .caustic-b{animation:causticB 47s ease-in-out infinite alternate}
+@keyframes causticA{
+  from{transform:translate(0,0) scale(1)}
+  to{transform:translate(-5%,3.5%) scale(1.14)}
+}
+@keyframes causticB{
+  from{transform:translate(0,0) scale(1.08) rotate(0deg)}
+  to{transform:translate(4%,-3%) scale(1) rotate(4deg)}
 }
 /* The chamber's floor mark carries a Triforce of its own. Now that the
-   intro has a real one at the centre of the medallions, this drops back
-   and sits lower, so the two do not read as one badly aligned shape. */
+   platform below has a real one laid into it, this drops right back and
+   reads as the engraving turning overhead rather than a second badge. */
 .bg-mark{
-  position:absolute;left:50%;top:52%;width:min(76vmin,640px);height:auto;
-  transform:translate(-50%,-50%);color:var(--gold);opacity:calc(var(--mark-op) * .5);
+  position:absolute;left:50%;top:50%;width:min(76vmin,640px);height:auto;
+  transform:translate(-50%,-50%);color:var(--gold);opacity:calc(var(--mark-op) * .26);
 }
 .bg-mark .turn{transform-origin:200px 200px;animation:spin 420s linear infinite}
 .bg-trim{
@@ -196,12 +208,19 @@ button{font:inherit;color:inherit;cursor:pointer}
 .bg-trim.bot{bottom:0;transform:scaleY(-1)}
 .bg-vig{
   position:absolute;inset:0;
-  background:radial-gradient(ellipse 78% 68% at 50% 44%,transparent 54%,var(--stone-0) 100%);
-  opacity:.58;
+  background:radial-gradient(ellipse 82% 72% at 50% 42%,transparent 56%,var(--stone-0) 100%);
+  opacity:.55;
+}
+/* A phone is tall rather than wide, so the columns end up standing right
+   behind the running text instead of off at the sides of it. On narrow
+   screens they drop lower and lighter, and the platform goes with them. */
+@media (max-width:34rem){
+  .bg-pillars{height:54vh;opacity:calc(var(--mark-op) * 2.2)}
+  .bg-dais{bottom:-19vh;opacity:calc(var(--mark-op) * 2.1)}
 }
 @media (prefers-reduced-motion: reduce){
   .bg-mark .turn{animation:none}
-  .bg-walls{animation:none}
+  .bg-dais .caustic-a,.bg-dais .caustic-b{animation:none}
 }
 
 /* ---------- choosing a companion ---------- */
@@ -495,85 +514,135 @@ button{font:inherit;color:inherit;cursor:pointer}
 <div class="bg" aria-hidden="true">
   <div class="bg-void"></div>
 
-  <!-- the chamber wall: cloud, not stone -->
-  <svg class="bg-walls" viewBox="0 0 600 400" preserveAspectRatio="none" aria-hidden="true">
+  <!-- the chamber has no walls, only columns standing in the dark -->
+  <svg class="bg-pillars" viewBox="0 0 600 400" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
     <defs>
-      <filter id="chCloud" x="-4%" y="-4%" width="108%" height="108%">
-        <feTurbulence type="fractalNoise" baseFrequency="0.014 0.024" numOctaves="5" seed="11" result="n"/>
+      <filter id="pilGrain" x="-2%" y="-2%" width="104%" height="104%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.055 0.1" numOctaves="4" seed="7" result="n"/>
         <feColorMatrix in="n" type="matrix" result="a"
-          values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  2.3 1.1 0.3 0 -0.72"/>
+          values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  2.1 1 .3 0 -.62"/>
         <feComposite in="SourceGraphic" in2="a" operator="in"/>
-        <feGaussianBlur stdDeviation="0.45"/>
       </filter>
-      <linearGradient id="chWallHue" x1="0" y1="1" x2="1" y2="0">
-        <stop offset="0"   style="stop-color:var(--c-water)"/>
-        <stop offset=".24" style="stop-color:var(--c-shadow)"/>
-        <stop offset=".48" style="stop-color:var(--c-time)"/>
-        <stop offset=".72" style="stop-color:var(--c-water)"/>
-        <stop offset="1"   style="stop-color:var(--c-light)"/>
-      </linearGradient>
-      <radialGradient id="chWallFade" cx=".5" cy=".46" r=".66">
-        <stop offset="0" stop-color="#000"/>
-        <stop offset=".46" stop-color="#000" stop-opacity=".28"/>
-        <stop offset="1" stop-color="#fff"/>
-      </radialGradient>
-      <mask id="chWallMask"><rect width="600" height="400" fill="url(#chWallFade)"/></mask>
+      <mask id="pilMask">
+        <g fill="#fff">
+        <rect x="-14" y="196" width="86" height="204"/>
+        <rect x="96" y="96" width="58" height="304"/>
+        <rect x="196" y="238" width="44" height="162"/>
+        <rect x="370" y="262" width="50" height="138"/>
+        <rect x="432" y="132" width="74" height="268"/>
+        <rect x="536" y="208" width="80" height="192"/>
+        </g>
+      </mask>
     </defs>
-    <g mask="url(#chWallMask)">
-      <rect width="600" height="400" fill="url(#chWallHue)" filter="url(#chCloud)"/>
+    <g mask="url(#pilMask)">
+      <rect width="600" height="400" fill="#173C60"/>
+      <rect width="600" height="400" fill="#4E9AD0" filter="url(#pilGrain)" opacity=".7"/>
     </g>
+    <polygon points="-14,196 72,196 63,185 -5,185" fill="#3A7FB8" opacity=".5"/>
+    <path d="M70.5 196 V400" stroke="#7EC6EE" stroke-width="2.5" fill="none" opacity=".28"/>
+    <polygon points="96,96 154,96 145,85 105,85" fill="#3A7FB8" opacity=".5"/>
+    <path d="M152.5 96 V400" stroke="#7EC6EE" stroke-width="2.5" fill="none" opacity=".28"/>
+    <polygon points="196,238 240,238 231,227 205,227" fill="#3A7FB8" opacity=".5"/>
+    <path d="M238.5 238 V400" stroke="#7EC6EE" stroke-width="2.5" fill="none" opacity=".28"/>
+    <polygon points="370,262 420,262 411,251 379,251" fill="#3A7FB8" opacity=".5"/>
+    <path d="M418.5 262 V400" stroke="#7EC6EE" stroke-width="2.5" fill="none" opacity=".28"/>
+    <polygon points="432,132 506,132 497,121 441,121" fill="#3A7FB8" opacity=".5"/>
+    <path d="M504.5 132 V400" stroke="#7EC6EE" stroke-width="2.5" fill="none" opacity=".28"/>
+    <polygon points="536,208 616,208 607,197 545,197" fill="#3A7FB8" opacity=".5"/>
+    <path d="M614.5 208 V400" stroke="#7EC6EE" stroke-width="2.5" fill="none" opacity=".28"/>
   </svg>
 
   <div class="bg-shaft"></div>
   <div class="bg-horizon"></div>
 
-  <!-- the sages' platform, lying below in the void -->
+  <!-- the sages' platform: lit water inside a stone rim, the six set
+       round it and the Triforce laid in the middle -->
   <svg class="bg-dais" viewBox="0 0 900 900" aria-hidden="true">
-    <g fill="none" stroke="currentColor" stroke-linejoin="round">
-      <circle cx="450" cy="450" r="438" stroke-width="3"/>
-      <circle cx="450" cy="450" r="416" stroke-width="1.2"/>
-      <circle cx="450" cy="450" r="300" stroke-width="1.2"/>
-      <circle cx="450" cy="450" r="150" stroke-width="1.2"/>
-      <polygon points="280,155.6 620,155.6 790,450 620,744.4 280,744.4 110,450" stroke-width="1.7"/>
+    <defs>
+      <filter id="caustic" x="-6%" y="-6%" width="112%" height="112%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.017 0.016" numOctaves="4" seed="3" result="n"/>
+        <feColorMatrix in="n" type="matrix" result="a"
+          values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  3.6 1.9 .6 0 -3.42"/>
+        <feComposite in="SourceGraphic" in2="a" operator="in"/>
+        <feGaussianBlur stdDeviation="1.1"/>
+      </filter>
+      <filter id="caustic2" x="-6%" y="-6%" width="112%" height="112%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.031 0.027" numOctaves="3" seed="19" result="n"/>
+        <feColorMatrix in="n" type="matrix" result="a"
+          values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  3.2 1.7 .5 0 -3.12"/>
+        <feComposite in="SourceGraphic" in2="a" operator="in"/>
+        <feGaussianBlur stdDeviation=".8"/>
+      </filter>
+      <radialGradient id="water" cx=".5" cy=".44" r=".64">
+        <stop offset="0" stop-color="#2FADDD"/>
+        <stop offset=".55" stop-color="#1785C2"/>
+        <stop offset="1" stop-color="#0E5E96"/>
+      </radialGradient>
+      <clipPath id="hexClip"><polygon points="280,155.6 620,155.6 790,450 620,744.4 280,744.4 110,450"/></clipPath>
+    </defs>
+
+    <polygon points="268,148.7 632,148.7 814,450 632,751.3 268,751.3 86,450" fill="#12314F"/>
+    <polygon points="268,148.7 632,148.7 814,450 632,751.3 268,751.3 86,450" fill="none" stroke="#2F6D9E" stroke-width="6" stroke-linejoin="round" opacity=".8"/>
+
+    <polygon points="280,155.6 620,155.6 790,450 620,744.4 280,744.4 110,450" fill="url(#water)"/>
+    <g clip-path="url(#hexClip)">
+      <g class="caustic caustic-a">
+        <rect x="-120" y="-120" width="1140" height="1140" fill="#BFF2FF" filter="url(#caustic)" opacity=".62"/>
+      </g>
+      <g class="caustic caustic-b">
+        <rect x="-120" y="-120" width="1140" height="1140" fill="#FFFFFF" filter="url(#caustic2)" opacity=".4"/>
+      </g>
     </g>
+    <polygon points="280,155.6 620,155.6 790,450 620,744.4 280,744.4 110,450" fill="none" stroke="#8FDCF5" stroke-width="5" stroke-linejoin="round" opacity=".5"/>
+
     <g style="color:var(--c-forest)">
-      <path d="M390 346.1 L307 202.3" stroke="currentColor" stroke-width="4" opacity=".5"/>
-      <circle cx="280" cy="155.6" r="54" fill="currentColor" opacity=".16"/>
-      <circle cx="280" cy="155.6" r="54" fill="none" stroke="currentColor" stroke-width="4.5" opacity=".75"/>
-      <circle cx="280" cy="155.6" r="40" fill="none" stroke="currentColor" stroke-width="1.6" opacity=".5"/>
+      <circle cx="280" cy="155.6" r="70" fill="currentColor" opacity=".26"/>
+      <circle cx="280" cy="155.6" r="48" fill="currentColor"/>
+      <circle cx="280" cy="155.6" r="48" fill="none" stroke="#08192B" stroke-width="5" opacity=".7"/>
+      <circle cx="280" cy="155.6" r="34" fill="none" stroke="#FFFFFF" stroke-width="3" opacity=".45"/>
+      <circle cx="280" cy="155.6" r="15" fill="#FFFFFF" opacity=".42"/>
     </g>
     <g style="color:var(--c-fire)">
-      <path d="M510 346.1 L593 202.3" stroke="currentColor" stroke-width="4" opacity=".5"/>
-      <circle cx="620" cy="155.6" r="54" fill="currentColor" opacity=".16"/>
-      <circle cx="620" cy="155.6" r="54" fill="none" stroke="currentColor" stroke-width="4.5" opacity=".75"/>
-      <circle cx="620" cy="155.6" r="40" fill="none" stroke="currentColor" stroke-width="1.6" opacity=".5"/>
+      <circle cx="620" cy="155.6" r="70" fill="currentColor" opacity=".26"/>
+      <circle cx="620" cy="155.6" r="48" fill="currentColor"/>
+      <circle cx="620" cy="155.6" r="48" fill="none" stroke="#08192B" stroke-width="5" opacity=".7"/>
+      <circle cx="620" cy="155.6" r="34" fill="none" stroke="#FFFFFF" stroke-width="3" opacity=".45"/>
+      <circle cx="620" cy="155.6" r="15" fill="#FFFFFF" opacity=".42"/>
     </g>
     <g style="color:var(--c-spirit)">
-      <path d="M570 450 L736 450" stroke="currentColor" stroke-width="4" opacity=".5"/>
-      <circle cx="790" cy="450" r="54" fill="currentColor" opacity=".16"/>
-      <circle cx="790" cy="450" r="54" fill="none" stroke="currentColor" stroke-width="4.5" opacity=".75"/>
-      <circle cx="790" cy="450" r="40" fill="none" stroke="currentColor" stroke-width="1.6" opacity=".5"/>
+      <circle cx="790" cy="450" r="70" fill="currentColor" opacity=".26"/>
+      <circle cx="790" cy="450" r="48" fill="currentColor"/>
+      <circle cx="790" cy="450" r="48" fill="none" stroke="#08192B" stroke-width="5" opacity=".7"/>
+      <circle cx="790" cy="450" r="34" fill="none" stroke="#FFFFFF" stroke-width="3" opacity=".45"/>
+      <circle cx="790" cy="450" r="15" fill="#FFFFFF" opacity=".42"/>
     </g>
     <g style="color:var(--c-shadow)">
-      <path d="M510 553.9 L593 697.7" stroke="currentColor" stroke-width="4" opacity=".5"/>
-      <circle cx="620" cy="744.4" r="54" fill="currentColor" opacity=".16"/>
-      <circle cx="620" cy="744.4" r="54" fill="none" stroke="currentColor" stroke-width="4.5" opacity=".75"/>
-      <circle cx="620" cy="744.4" r="40" fill="none" stroke="currentColor" stroke-width="1.6" opacity=".5"/>
+      <circle cx="620" cy="744.4" r="70" fill="currentColor" opacity=".26"/>
+      <circle cx="620" cy="744.4" r="48" fill="currentColor"/>
+      <circle cx="620" cy="744.4" r="48" fill="none" stroke="#08192B" stroke-width="5" opacity=".7"/>
+      <circle cx="620" cy="744.4" r="34" fill="none" stroke="#FFFFFF" stroke-width="3" opacity=".45"/>
+      <circle cx="620" cy="744.4" r="15" fill="#FFFFFF" opacity=".42"/>
     </g>
     <g style="color:var(--c-water)">
-      <path d="M390 553.9 L307 697.7" stroke="currentColor" stroke-width="4" opacity=".5"/>
-      <circle cx="280" cy="744.4" r="54" fill="currentColor" opacity=".16"/>
-      <circle cx="280" cy="744.4" r="54" fill="none" stroke="currentColor" stroke-width="4.5" opacity=".75"/>
-      <circle cx="280" cy="744.4" r="40" fill="none" stroke="currentColor" stroke-width="1.6" opacity=".5"/>
+      <circle cx="280" cy="744.4" r="70" fill="currentColor" opacity=".26"/>
+      <circle cx="280" cy="744.4" r="48" fill="currentColor"/>
+      <circle cx="280" cy="744.4" r="48" fill="none" stroke="#08192B" stroke-width="5" opacity=".7"/>
+      <circle cx="280" cy="744.4" r="34" fill="none" stroke="#FFFFFF" stroke-width="3" opacity=".45"/>
+      <circle cx="280" cy="744.4" r="15" fill="#FFFFFF" opacity=".42"/>
     </g>
     <g style="color:var(--c-light)">
-      <path d="M330 450 L164 450" stroke="currentColor" stroke-width="4" opacity=".5"/>
-      <circle cx="110" cy="450" r="54" fill="currentColor" opacity=".16"/>
-      <circle cx="110" cy="450" r="54" fill="none" stroke="currentColor" stroke-width="4.5" opacity=".75"/>
-      <circle cx="110" cy="450" r="40" fill="none" stroke="currentColor" stroke-width="1.6" opacity=".5"/>
+      <circle cx="110" cy="450" r="70" fill="currentColor" opacity=".26"/>
+      <circle cx="110" cy="450" r="48" fill="currentColor"/>
+      <circle cx="110" cy="450" r="48" fill="none" stroke="#08192B" stroke-width="5" opacity=".7"/>
+      <circle cx="110" cy="450" r="34" fill="none" stroke="#FFFFFF" stroke-width="3" opacity=".45"/>
+      <circle cx="110" cy="450" r="15" fill="#FFFFFF" opacity=".42"/>
     </g>
-    <path d="M450 368 L403 450 L497 450 Z M403 450 L356 532 L450 532 Z M497 450 L450 532 L544 532 Z"
-          fill="none" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round"/>
+
+    <g fill="#F2E2A0" fill-opacity=".62" stroke="#EBCF6A" stroke-width="7" stroke-linejoin="round">
+      <path d="M450 330 L392 430 L508 430 Z"/>
+      <path d="M389 436 L331 536 L447 536 Z"/>
+      <path d="M511 436 L453 536 L569 536 Z"/>
+    </g>
   </svg>
 
   <!-- the mark on the chamber floor -->
@@ -613,7 +682,6 @@ button{font:inherit;color:inherit;cursor:pointer}
   <rect width="100%" height="18" fill="url(#trim-bot)"/>
 </svg>
   <div class="bg-vig"></div>
-</div>
 </div>
 <canvas id="ambient" aria-hidden="true"></canvas>
 
