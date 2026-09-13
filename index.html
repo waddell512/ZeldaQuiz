@@ -599,43 +599,37 @@ button{font:inherit;color:inherit;cursor:pointer}
       <circle cx="280" cy="155.6" r="70" fill="currentColor" opacity=".26"/>
       <circle cx="280" cy="155.6" r="48" fill="currentColor"/>
       <circle cx="280" cy="155.6" r="48" fill="none" stroke="#08192B" stroke-width="5" opacity=".7"/>
-      <circle cx="280" cy="155.6" r="34" fill="none" stroke="#FFFFFF" stroke-width="3" opacity=".45"/>
-      <circle cx="280" cy="155.6" r="15" fill="#FFFFFF" opacity=".42"/>
+      <g class="dais-glyph" data-med="forest" data-cx="280" data-cy="155.6"></g>
     </g>
     <g style="color:var(--c-fire)">
       <circle cx="620" cy="155.6" r="70" fill="currentColor" opacity=".26"/>
       <circle cx="620" cy="155.6" r="48" fill="currentColor"/>
       <circle cx="620" cy="155.6" r="48" fill="none" stroke="#08192B" stroke-width="5" opacity=".7"/>
-      <circle cx="620" cy="155.6" r="34" fill="none" stroke="#FFFFFF" stroke-width="3" opacity=".45"/>
-      <circle cx="620" cy="155.6" r="15" fill="#FFFFFF" opacity=".42"/>
+      <g class="dais-glyph" data-med="fire" data-cx="620" data-cy="155.6"></g>
     </g>
     <g style="color:var(--c-spirit)">
       <circle cx="790" cy="450" r="70" fill="currentColor" opacity=".26"/>
       <circle cx="790" cy="450" r="48" fill="currentColor"/>
       <circle cx="790" cy="450" r="48" fill="none" stroke="#08192B" stroke-width="5" opacity=".7"/>
-      <circle cx="790" cy="450" r="34" fill="none" stroke="#FFFFFF" stroke-width="3" opacity=".45"/>
-      <circle cx="790" cy="450" r="15" fill="#FFFFFF" opacity=".42"/>
+      <g class="dais-glyph" data-med="spirit" data-cx="790" data-cy="450"></g>
     </g>
     <g style="color:var(--c-shadow)">
       <circle cx="620" cy="744.4" r="70" fill="currentColor" opacity=".26"/>
       <circle cx="620" cy="744.4" r="48" fill="currentColor"/>
       <circle cx="620" cy="744.4" r="48" fill="none" stroke="#08192B" stroke-width="5" opacity=".7"/>
-      <circle cx="620" cy="744.4" r="34" fill="none" stroke="#FFFFFF" stroke-width="3" opacity=".45"/>
-      <circle cx="620" cy="744.4" r="15" fill="#FFFFFF" opacity=".42"/>
+      <g class="dais-glyph" data-med="shadow" data-cx="620" data-cy="744.4"></g>
     </g>
     <g style="color:var(--c-water)">
       <circle cx="280" cy="744.4" r="70" fill="currentColor" opacity=".26"/>
       <circle cx="280" cy="744.4" r="48" fill="currentColor"/>
       <circle cx="280" cy="744.4" r="48" fill="none" stroke="#08192B" stroke-width="5" opacity=".7"/>
-      <circle cx="280" cy="744.4" r="34" fill="none" stroke="#FFFFFF" stroke-width="3" opacity=".45"/>
-      <circle cx="280" cy="744.4" r="15" fill="#FFFFFF" opacity=".42"/>
+      <g class="dais-glyph" data-med="water" data-cx="280" data-cy="744.4"></g>
     </g>
     <g style="color:var(--c-light)">
       <circle cx="110" cy="450" r="70" fill="currentColor" opacity=".26"/>
       <circle cx="110" cy="450" r="48" fill="currentColor"/>
       <circle cx="110" cy="450" r="48" fill="none" stroke="#08192B" stroke-width="5" opacity=".7"/>
-      <circle cx="110" cy="450" r="34" fill="none" stroke="#FFFFFF" stroke-width="3" opacity=".45"/>
-      <circle cx="110" cy="450" r="15" fill="#FFFFFF" opacity=".42"/>
+      <g class="dais-glyph" data-med="light" data-cx="110" data-cy="450"></g>
     </g>
 
     <g fill="#F2E2A0" fill-opacity=".62" stroke="#EBCF6A" stroke-width="7" stroke-linejoin="round">
@@ -1020,6 +1014,23 @@ function medallion(key){
     ${bare ? `<polygon points="${DEC}" fill="none" stroke="var(--seventh-ink)" stroke-width="1.2" stroke-linejoin="round" opacity=".6"/>` : ``}
   </svg>`;
 }
+
+/* The six on the platform in the backdrop carry the same marks as the
+   coins, struck from the same GLYPHS rather than a second copy, so the
+   two can never drift apart. Each is scaled about its own centre onto a
+   disc of r=48 and laid straight into the floor drawing, which is under
+   a 3D rotation, so the marks foreshorten with the platform the way an
+   inlay would. */
+(function paintDaisGlyphs(){
+  const RAISED = "rgba(255,255,255,.62)";
+  document.querySelectorAll(".dais-glyph").forEach(g => {
+    const art = GLYPHS[g.dataset.med];
+    if(!art) return;
+    const cx = g.dataset.cx, cy = g.dataset.cy;
+    g.setAttribute("transform", `translate(${cx} ${cy}) scale(1.05) translate(-50 -50)`);
+    g.innerHTML = art.replace(/EMB/g, RAISED).replace(/COIN/g, "currentColor");
+  });
+})();
 
 /* ======================= TRIAL PLATES =======================
    One drawing to close each trial, of a thing or a person that trial
