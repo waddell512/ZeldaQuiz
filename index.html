@@ -349,8 +349,6 @@ button{font:inherit;color:inherit;cursor:pointer}
 }
 .btn-quiet:hover{color:var(--gold);border-color:var(--gold)}
 
-/* ---------- ocarina toggle ---------- */
-
 /* ---------- question ---------- */
 .qhead{
   position:sticky;top:0;z-index:3;
@@ -382,10 +380,6 @@ button{font:inherit;color:inherit;cursor:pointer}
 .qtext{font-family:Spectral,serif;font-weight:400;font-size:clamp(1.2rem,1.02rem + 1.05vw,1.65rem);line-height:1.42;text-wrap:balance;margin:0}
 
 .answers{display:flex;flex-direction:column;gap:2px;margin:0;padding:0;list-style:none}
-/* The ocarina toggle floats over the bottom-right corner. Above ~60rem the
-   centred column ends well clear of it; below that they overlap, so the last
-   answer gets room rather than being read through the button. */
-@media (max-width:60rem){ .answers{padding-bottom:clamp(3.4rem,11vw,4.4rem)} }
 .ans{
   display:block;width:100%;text-align:left;
   background:var(--stone-1);border:0;border-left:2px solid var(--edge-2);
@@ -923,45 +917,44 @@ const GLYPHS = {
   /* Forest: four crescent blades turning out of the hub, cut as one
      scythe and set four times at ninety degrees so they match exactly. */
   forest:`<g fill="EMB">
-            <path d="M52 56 C64.5 50.5 74 34.5 72.5 19.5 C55.5 25.5 46 40.5 52 56 Z"/>
-            <path d="M52 56 C64.5 50.5 74 34.5 72.5 19.5 C55.5 25.5 46 40.5 52 56 Z" transform="rotate(90 50 50)"/>
-            <path d="M52 56 C64.5 50.5 74 34.5 72.5 19.5 C55.5 25.5 46 40.5 52 56 Z" transform="rotate(180 50 50)"/>
-            <path d="M52 56 C64.5 50.5 74 34.5 72.5 19.5 C55.5 25.5 46 40.5 52 56 Z" transform="rotate(270 50 50)"/>
+            <path d="M56.5 38.7 C52 27 44 19.5 35.6 19.2 C27 19 19.5 30 16.5 44.1 C22 36 30 29 39.9 28.3 C46 27.5 53 32 56.5 38.7 Z"/>
+            <path d="M56.5 38.7 C52 27 44 19.5 35.6 19.2 C27 19 19.5 30 16.5 44.1 C22 36 30 29 39.9 28.3 C46 27.5 53 32 56.5 38.7 Z" transform="rotate(90 50 50)"/>
+            <path d="M56.5 38.7 C52 27 44 19.5 35.6 19.2 C27 19 19.5 30 16.5 44.1 C22 36 30 29 39.9 28.3 C46 27.5 53 32 56.5 38.7 Z" transform="rotate(180 50 50)"/>
+            <path d="M56.5 38.7 C52 27 44 19.5 35.6 19.2 C27 19 19.5 30 16.5 44.1 C22 36 30 29 39.9 28.3 C46 27.5 53 32 56.5 38.7 Z" transform="rotate(270 50 50)"/>
           </g>`,
-  /* Fire: the round body with three tongues off it, the outer two
-     hooking back in the way the printed one does. Struck cap up and
-     tongues down, which is how the printed coin reads - the half turn
-     is taken about the flame's own middle (y 41.25, being the midpoint
-     of its 13-to-69.5 reach) rather than the coin's, so it lands back
-     in the same box instead of dropping toward the rim. */
-  fire:`<path d="M50 13 C52 24 55 30.5 57.5 35.5 C60.5 31.5 62 26.5 62.5 20
-                 C68.5 27.5 72 37 72 47.5 A22 22 0 0 1 28 47.5
-                 C28 37 31.5 27.5 37.5 20 C38 26.5 39.5 31.5 42.5 35.5
-                 C45 30.5 48 24 50 13 Z" fill="EMB" transform="rotate(180 50 41.25)"/>`,
+  /* Fire: the round body low and three tongues rising off it, the outer
+     two leaning out, which is how the printed one is cut. The notches
+     bottom out in a small round U rather than a point, so the softening
+     pass cannot close them up. */
+  fire:`<path d="M50 12 C52 23 54.5 29.5 56.5 34 C58.5 36.5 60 36.5 61 33.5
+                 C61.8 28.5 62.2 24 62.5 19 C68.5 27 72 36.5 72 47.5
+                 A22 22 0 0 1 28 47.5 C28 36.5 31.5 27 37.5 19
+                 C37.8 24 38.2 28.5 39 33.5 C40 36.5 41.5 36.5 43.5 34
+                 C45.5 29.5 48 23 50 12 Z" fill="EMB"/>`,
   /* Water: six angular wedges, notched at the inner end, struck from one
      shape at sixty degrees apart. */
   water:`<g fill="EMB">
-           <path d="M50 14 L58.5 24.5 L56.5 38.5 L50 33 L43.5 38.5 L41.5 24.5 Z"/>
-           <path d="M50 14 L58.5 24.5 L56.5 38.5 L50 33 L43.5 38.5 L41.5 24.5 Z" transform="rotate(60 50 50)"/>
-           <path d="M50 14 L58.5 24.5 L56.5 38.5 L50 33 L43.5 38.5 L41.5 24.5 Z" transform="rotate(120 50 50)"/>
-           <path d="M50 14 L58.5 24.5 L56.5 38.5 L50 33 L43.5 38.5 L41.5 24.5 Z" transform="rotate(180 50 50)"/>
-           <path d="M50 14 L58.5 24.5 L56.5 38.5 L50 33 L43.5 38.5 L41.5 24.5 Z" transform="rotate(240 50 50)"/>
-           <path d="M50 14 L58.5 24.5 L56.5 38.5 L50 33 L43.5 38.5 L41.5 24.5 Z" transform="rotate(300 50 50)"/>
+           <path d="M50 14 L58.5 24.5 L56.5 38.5 L50 33 L43.5 38.5 L41.5 24.5 Z" transform="rotate(30 50 50)"/>
+           <path d="M50 14 L58.5 24.5 L56.5 38.5 L50 33 L43.5 38.5 L41.5 24.5 Z" transform="rotate(90 50 50)"/>
+           <path d="M50 14 L58.5 24.5 L56.5 38.5 L50 33 L43.5 38.5 L41.5 24.5 Z" transform="rotate(150 50 50)"/>
+           <path d="M50 14 L58.5 24.5 L56.5 38.5 L50 33 L43.5 38.5 L41.5 24.5 Z" transform="rotate(210 50 50)"/>
+           <path d="M50 14 L58.5 24.5 L56.5 38.5 L50 33 L43.5 38.5 L41.5 24.5 Z" transform="rotate(270 50 50)"/>
+           <path d="M50 14 L58.5 24.5 L56.5 38.5 L50 33 L43.5 38.5 L41.5 24.5 Z" transform="rotate(330 50 50)"/>
          </g>`,
   /* Shadow: the arrowhead with the scooped back, and the three domes
      stood off it at a hundred and twenty degrees. */
-  shadow:`<path d="M78 50 L34 25 Q53 50 34 75 Z" fill="EMB"/>
-          <circle cx="60" cy="20" r="5.8" fill="EMB"/>
-          <circle cx="20" cy="50" r="5.8" fill="EMB"/>
-          <circle cx="60" cy="80" r="5.8" fill="EMB"/>`,
+  shadow:`<path d="M50 78 L75 34 Q50 53 25 34 Z" fill="EMB"/>
+          <circle cx="50" cy="19" r="5.8" fill="EMB"/>
+          <circle cx="19" cy="55" r="5.8" fill="EMB"/>
+          <circle cx="81" cy="55" r="5.8" fill="EMB"/>`,
   /* Spirit: one bold S, both ends hooked past the half-turn, standing on
      a plain field the way the printed one does. */
   spirit:`<path d="M39.7 27.8 A13.5 13.5 0 1 1 50 50 A13.5 13.5 0 1 0 60.3 72.2"
-                fill="none" stroke="EMB" stroke-width="11.5" stroke-linecap="round"/>`,
+                fill="none" stroke="EMB" stroke-width="13" stroke-linecap="round"/>`,
   /* Light: three triangles pointing in toward the middle, with three
      domes set between them - the arrangement the printed coin carries,
      not a sun. */
-  light:`<path d="M37.8 18.3 L50 42.5 L62.2 18.3 Z M83.6 55.3 L56.5 53.8 L71.4 76.4 Z M28.6 76.4 L43.5 53.8 L16.4 55.3 Z" fill="EMB"/>
+  light:`<path d="M37.8 18.3 L50 50 L62.2 18.3 Z M83.6 55.3 L50 50 L71.4 76.4 Z M28.6 76.4 L50 50 L16.4 55.3 Z" fill="EMB"/>
          <circle cx="70.8" cy="38" r="6" fill="EMB"/>
          <circle cx="50" cy="74" r="6" fill="EMB"/>
          <circle cx="29.2" cy="38" r="6" fill="EMB"/>`,
@@ -1008,7 +1001,8 @@ function medallion(key){
        stroke-linecap="round" stroke-linejoin="round" opacity="${bare ? ".5" : "1"}">${RUNES}</g>
     <circle cx="50" cy="50" r="35.5" fill="#000" opacity=".17"/>
     <circle cx="50" cy="50" r="35.5" fill="none" stroke="${raised}" stroke-width="1.6" opacity=".8"/>
-    <g style="${EMBOSS}" transform="translate(50 50) scale(.88) translate(-50 -50)">${glyph}</g>
+    <g style="${EMBOSS}" stroke="${raised}" stroke-width="2.8" stroke-linejoin="round"
+       stroke-linecap="round" transform="translate(50 50) scale(.88) translate(-50 -50)">${glyph}</g>
     <polygon points="${DEC}" fill="url(#${u}f)"/>
     <polygon points="${DEC}" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" opacity=".32"/>
     ${bare ? `<polygon points="${DEC}" fill="none" stroke="var(--seventh-ink)" stroke-width="1.2" stroke-linejoin="round" opacity=".6"/>` : ``}
@@ -1028,6 +1022,10 @@ function medallion(key){
     if(!art) return;
     const cx = g.dataset.cx, cy = g.dataset.cy;
     g.setAttribute("transform", `translate(${cx} ${cy}) scale(1.05) translate(-50 -50)`);
+    g.setAttribute("stroke", RAISED);
+    g.setAttribute("stroke-width", "2.8");
+    g.setAttribute("stroke-linejoin", "round");
+    g.setAttribute("stroke-linecap", "round");
     g.innerHTML = art.replace(/EMB/g, RAISED).replace(/COIN/g, "currentColor");
   });
 })();
@@ -1924,7 +1922,6 @@ function renderResult(){
     `with <b>${weapon.carry}</b> to hand. <b>Sha</b> walked the last seven of them with you.`;
 
   show("result");
-  ocarina.play(MOTIF, 0.45);
   window.scrollTo({top:0, behavior:"instant"});
   requestAnimationFrame(()=>{
     document.querySelectorAll(".aff-fill").forEach(f=>{ f.style.width = f.dataset.pct + "%"; });
@@ -1935,12 +1932,11 @@ function renderResult(){
 }
 
 /* ---------- controls ---------- */
-$("begin").addEventListener("click", ()=>{ ocarina.unlock(); idx=0; picks=[]; show("tribe"); window.scrollTo({top:0, behavior:"instant"}); });
+$("begin").addEventListener("click", ()=>{ idx=0; picks=[]; show("tribe"); window.scrollTo({top:0, behavior:"instant"}); });
 $("c-back").addEventListener("click", ()=>{ show("tribe"); window.scrollTo({top:0, behavior:"instant"}); });
 $("back").addEventListener("click", ()=>{ if(idx>0){ idx--; renderQuestion(); } else { show("weapon"); } });
 $("w-back").addEventListener("click", ()=>{ show("companion"); window.scrollTo({top:0, behavior:"instant"}); });
 $("again").addEventListener("click", ()=>{
-  ocarina.stop();
   idx=0; picks=[];
   ambient.setAccent(null);
   show("intro");
@@ -1960,164 +1956,6 @@ $("copy").addEventListener("click", async ()=>{
     $("copy").textContent = "Copy blocked";
   }
 });
-
-/* ======================= OCARINA ======================= */
-/* A small breath-instrument voice: near-pure sine with a weak second
-   partial, a puff of breath noise on the attack, delayed vibrato, and a
-   short delay line standing in for the stone of the chamber. */
-
-/* Melodies are [note, beats] pairs. A null note is a rest. Note names run
-   C..B with # or b, plus an octave: "F#4", "Bb3", "A5". BEAT is seconds per
-   beat, so lower is faster. Swap MOTIF for any sequence you like. */
-const BEAT = 0.32;
-const MOTIF = [
-  ["D4",1],["F4",1],["A4",2],
-  ["C5",1],["A4",1],["G4",1],["F4",1],
-  ["D4",3.5]
-];
-
-const ocarina = (function(){
-  const SEMI = {c:0,d:2,e:4,f:5,g:7,a:9,b:11};
-  function freq(name){
-    const m = /^([A-Ga-g])([#b]?)(-?\d)$/.exec(name);
-    if(!m) return 0;
-    const n = SEMI[m[1].toLowerCase()] + (m[2] === "#" ? 1 : m[2] === "b" ? -1 : 0);
-    return 440 * Math.pow(2, (n + (+m[3] - 4) * 12 - 9) / 12);
-  }
-
-  let ctx = null, master = null, noise = null;
-  let voices = [];
-  /* No control sets this any more - the toggle it belonged to is gone -
-     but play() and unlock() still honour it, so a future control can be
-     wired straight back onto it. It is deliberately not persisted: a
-     stored mute would have no way left to be undone. */
-  let muted = false;
-
-  function build(){
-    if(ctx) return ctx;
-    const AC = window.AudioContext || window.webkitAudioContext;
-    if(!AC) return null;
-    ctx = new AC();
-
-    master = ctx.createGain();
-    master.gain.value = 0.8;
-
-    /* the chamber: a little air, no reverb impulse to ship */
-    const air = ctx.createBiquadFilter();
-    air.type = "lowpass";
-    air.frequency.value = 3400;
-
-    const delay = ctx.createDelay(1);
-    delay.delayTime.value = 0.19;
-    const fb = ctx.createGain();
-    fb.gain.value = 0.3;
-    const wet = ctx.createGain();
-    wet.gain.value = 0.24;
-    delay.connect(fb); fb.connect(delay);
-    delay.connect(wet); wet.connect(air);
-
-    master.connect(delay);
-    master.connect(air);
-    air.connect(ctx.destination);
-
-    /* one shared buffer of noise for every breath */
-    noise = ctx.createBuffer(1, ctx.sampleRate * 0.4, ctx.sampleRate);
-    const d = noise.getChannelData(0);
-    for(let i=0;i<d.length;i++) d[i] = Math.random()*2 - 1;
-
-    return ctx;
-  }
-
-  function voice(f, at, dur, vel){
-    const g = ctx.createGain();
-    g.connect(master);
-
-    const atk = 0.05;
-    const rel = Math.min(0.3, dur * 0.55);
-    const hold = Math.max(at + atk + 0.02, at + dur - rel);
-    g.gain.setValueAtTime(0.0001, at);
-    g.gain.exponentialRampToValueAtTime(vel, at + atk);
-    g.gain.setValueAtTime(vel, hold);
-    g.gain.exponentialRampToValueAtTime(0.0001, hold + rel);
-
-    const o1 = ctx.createOscillator();
-    o1.type = "sine";
-    o1.frequency.value = f;
-    o1.connect(g);
-
-    const o2 = ctx.createOscillator();
-    o2.type = "triangle";
-    o2.frequency.value = f * 2;
-    const g2 = ctx.createGain();
-    g2.gain.value = 0.055;
-    o2.connect(g2); g2.connect(g);
-
-    /* vibrato leans in only once the note is established */
-    const lfo = ctx.createOscillator();
-    lfo.frequency.value = 5.2;
-    const dep = ctx.createGain();
-    dep.gain.setValueAtTime(0.0001, at);
-    dep.gain.setValueAtTime(0.0001, at + Math.min(0.14, dur*0.4));
-    dep.gain.linearRampToValueAtTime(f * 0.008, at + Math.min(0.42, dur*0.8));
-    lfo.connect(dep); dep.connect(o1.frequency); dep.connect(o2.frequency);
-
-    /* the breath that starts the note */
-    const br = ctx.createBufferSource();
-    br.buffer = noise;
-    const bp = ctx.createBiquadFilter();
-    bp.type = "bandpass";
-    bp.frequency.value = f * 2.2;
-    bp.Q.value = 1.4;
-    const bg = ctx.createGain();
-    bg.gain.setValueAtTime(0.0001, at);
-    bg.gain.exponentialRampToValueAtTime(vel * 0.28, at + 0.022);
-    bg.gain.exponentialRampToValueAtTime(0.0001, at + 0.14);
-    br.connect(bp); bp.connect(bg); bg.connect(master);
-
-    const end = hold + rel + 0.05;
-    [o1,o2,lfo,br].forEach(n=>{ n.start(at); n.stop(end); });
-    voices.push(o1,o2,lfo,br);
-    o1.onended = ()=>{ voices = voices.filter(v => v !== o1 && v !== o2 && v !== lfo && v !== br); };
-  }
-
-  function play(seq, delay){
-    if(muted) return;
-    if(!build()) return;
-    if(ctx.state === "suspended") ctx.resume();
-    stop();
-    let t = ctx.currentTime + (delay || 0.06);
-    seq.forEach(([name, beats])=>{
-      const dur = beats * BEAT;
-      if(name){
-        const f = freq(name);
-        /* the phrase breathes: leading notes a touch softer than the fall */
-        if(f) voice(f, t, dur * 0.96, 0.16 + Math.min(0.06, beats * 0.02));
-      }
-      t += dur;
-    });
-  }
-
-  function stop(){
-    if(!ctx) return;
-    voices.forEach(v=>{ try{ v.stop(); }catch(e){} });
-    voices = [];
-  }
-
-  return {
-    play, stop,
-    get muted(){ return muted; },
-    set muted(v){
-      muted = !!v;
-      if(muted) stop();
-    },
-    /* browsers want a gesture before any of this is allowed to sound */
-    unlock(){
-      if(muted) return;
-      if(!build()) return;
-      if(ctx.state === "suspended") ctx.resume();
-    }
-  };
-})();
 
 /* ======================= AMBIENT MOTES ======================= */
 const ambient = (function(){
