@@ -935,11 +935,15 @@ const GLYPHS = {
             <path d="M52 56 C64.5 50.5 74 34.5 72.5 19.5 C55.5 25.5 46 40.5 52 56 Z" transform="rotate(270 50 50)"/>
           </g>`,
   /* Fire: the round body with three tongues off it, the outer two
-     hooking back in the way the printed one does. */
+     hooking back in the way the printed one does. Struck cap up and
+     tongues down, which is how the printed coin reads - the half turn
+     is taken about the flame's own middle (y 41.25, being the midpoint
+     of its 13-to-69.5 reach) rather than the coin's, so it lands back
+     in the same box instead of dropping toward the rim. */
   fire:`<path d="M50 13 C52 24 55 30.5 57.5 35.5 C60.5 31.5 62 26.5 62.5 20
                  C68.5 27.5 72 37 72 47.5 A22 22 0 0 1 28 47.5
                  C28 37 31.5 27.5 37.5 20 C38 26.5 39.5 31.5 42.5 35.5
-                 C45 30.5 48 24 50 13 Z" fill="EMB"/>`,
+                 C45 30.5 48 24 50 13 Z" fill="EMB" transform="rotate(180 50 41.25)"/>`,
   /* Water: six angular wedges, notched at the inner end, struck from one
      shape at sixty degrees apart. */
   water:`<g fill="EMB">
