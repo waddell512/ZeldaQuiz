@@ -277,7 +277,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 }
 
 /* One plate at the foot of each trial: the item or the person that trial
-   turns on. Line rather than colour - thirteen coloured plates in a row
+   turns on. Line rather than colour - fourteen coloured plates in a row
    would shout over the answers they are standing under. */
 .scene{
   display:flex;flex-direction:column;align-items:center;gap:.1rem;
@@ -689,10 +689,10 @@ button{font:inherit;color:inherit;cursor:pointer}
       </div>
       <div class="titleblock">
         <h1 class="title"><span>Ocarina of Time</span>The Sage Trials</h1>
-        <p class="byline">by the Skyward Prince and Butterbean</p>
+        <p class="byline">by the Skyward Prince and The Baron</p>
       </div>
       <hr class="rule-gold" style="width:6rem">
-      <p class="lede">The Triforce speaks to you once, and what it says is that <em>Senok</em> is awake. An age ago the Fairy Prince of the Kokiri Forest put him under the roots of that wood and spent the whole of his own light doing it, and this season the last of that light ran out. Where Senok goes, light stops holding &mdash; lamps gutter and fairies go dark and fall out of the air &mdash; and he draws the life up out of the ground itself as he walks, so that the grass goes over grey behind him and nothing will take root in it for a year. No sword ends him. Only a sage&rsquo;s light will put him back, and a sage is not appointed &mdash; a sage is made, by helping every part of Hyrule that needs you before he reaches it. Twelve places stand between you and the thirteenth, and the thirteenth is Senok. Choose who walks them with you, and answer as yourself; the element you carry will be plain long before the end.</p>
+      <p class="lede">The Triforce speaks to you once, and what it says is that <em>Senok</em> is awake. An age ago the Fairy Prince of the Kokiri Forest put him under the roots of that wood and spent the whole of his own light doing it, and this season the last of that light ran out. Where Senok goes, light stops holding &mdash; lamps gutter and fairies go dark and fall out of the air &mdash; and he draws the life up out of the ground itself as he walks, so that the grass goes over grey behind him and nothing will take root in it for a year. No sword ends him. Only a sage&rsquo;s light will put him back, and a sage is not appointed &mdash; a sage is made, by helping every part of Hyrule that needs you before he reaches it. Choose who walks them with you, and answer as yourself; the element you carry will be plain long before the end.</p>
       <button class="btn" id="begin">Enter the Chamber</button>
     </section>
 
@@ -708,7 +708,7 @@ button{font:inherit;color:inherit;cursor:pointer}
     <section class="view choose" id="v-companion">
       <p class="eyebrow">Before the first trial</p>
       <h2 class="ctitle">Who goes with you?</h2>
-      <p class="clede">One of them walks all thirteen at your shoulder. Nothing about this choice is scored &mdash; it only decides who is standing there when the wood makes you wait.</p>
+      <p class="clede">One of them walks the thirteen at your shoulder, and waits outside for the fourteenth. Nothing about this choice is scored &mdash; it only decides who is standing there when the wood makes you wait.</p>
       <ul class="companions" id="c-list"></ul>
       <div class="c-figs" id="c-figs" aria-hidden="true"></div>
       <div class="cfoot"><button class="btn-quiet" id="c-back">&larr; Choose your blood again</button></div>
@@ -718,7 +718,7 @@ button{font:inherit;color:inherit;cursor:pointer}
     <section class="view choose" id="v-weapon">
       <p class="eyebrow">The last thing you pick up</p>
       <h2 class="ctitle">What would you carry?</h2>
-      <p class="clede">One of them is in your hands for all thirteen. Scored no more than the rest of it &mdash; but the trials do notice what you reached for.</p>
+      <p class="clede">One of them is in your hands for all fourteen. Scored no more than the rest of it &mdash; but the trials do notice what you reached for.</p>
       <ul class="companions" id="w-list"></ul>
       <div class="cfoot"><button class="btn-quiet" id="w-back">&larr; Choose your companion again</button></div>
     </section>
@@ -731,7 +731,7 @@ button{font:inherit;color:inherit;cursor:pointer}
             <p class="eyebrow" id="q-place">The Threshold</p>
             <p class="qwhere" id="q-where">Kokiri Forest</p>
           </div>
-          <p class="qcount" id="q-count">Trial 1 of 13</p>
+          <p class="qcount" id="q-count">Trial 1 of 14</p>
         </div>
         <h2 class="qtext" id="q-text"></h2>
         <div class="marks" id="q-marks" aria-hidden="true"></div>
@@ -760,11 +760,11 @@ button{font:inherit;color:inherit;cursor:pointer}
       <hr class="rule-gold" style="width:9rem;margin-top:1.5rem">
       <section class="dedication">
         <p class="eyebrow">Dedication</p>
-        <p>The Sage Trials is dedicated to <b>Butterbean</b> &mdash; my dad &mdash; who
-        doesn't even know that I put this here, and was the first person that brought me
+        <p>The Sage Trials is dedicated to <b>The Baron</b> &mdash; my dad &mdash; who
+        doesn't even know that I put this here, and was the one that brought me
         to the Kingdom of Hyrule for the first time, and made my dreams of an Ocarina of
         Time Sage quiz become a reality. Without him, this website would have no meaning.</p>
-        <p class="ded-sign">Thank you, Butterbean.</p>
+        <p class="ded-sign">Thank you, Baron</p>
         <p class="ded-from">from the Skyward Prince</p>
       </section>
     </section>
@@ -883,12 +883,17 @@ const SAGES = {
   }
 };
 /* ======================= MEDALLIONS =======================
-   Struck the way the game strikes them: a ten-sided coin in the
-   element's own colour, a band of Hylian script cut into the rim, and
-   the emblem raised out of the sunken field inside it. One hue per
-   medallion and nothing behind it. The seventh keeps a white coin with
-   nothing struck into it - Zelda's medallion was never made. */
-const DEC = "64.8,4.3 88.8,21.8 98,50 88.8,78.2 64.8,95.7 35.2,95.7 11.2,78.2 2,50 11.2,21.8 35.2,4.3";
+   Struck the way the game strikes them: a round coin in the element's
+   own colour, a band of Hylian script cut into the rim, and the emblem
+   raised out of the sunken field inside it. One hue per medallion and
+   nothing behind it. The seventh keeps a white coin with nothing struck
+   into it - Zelda's medallion was never made.
+
+   The blank was a ten-sided cut once. It is one circle now, named here
+   rather than written out five times, because the coin's edge is drawn
+   five times over - body, bevel, sheen, dark line, and the gold line the
+   seventh gets on top of that - and they must all be the same edge. */
+const COIN = `cx="50" cy="50" r="48"`;
 /* Twenty marks around the rim, cycling seven blocky forms. They are
    texture at this size, not language - the game's are no different. */
 const RUNES = `<path d="M-2.2 -2.6 L-2.2 2.6 L2.2 2.6" transform="translate(50 7.8) rotate(0)"/>
@@ -941,34 +946,53 @@ const GLYPHS = {
            <path d="M50 14 L58.5 24.5 L56.5 38.5 L50 33 L43.5 38.5 L41.5 24.5 Z" transform="rotate(270 50 50)"/>
            <path d="M50 14 L58.5 24.5 L56.5 38.5 L50 33 L43.5 38.5 L41.5 24.5 Z" transform="rotate(330 50 50)"/>
          </g>`,
-  /* Shadow: the arrowhead with the scooped back, and the three domes
-     stood off it at a hundred and twenty degrees. */
-  shadow:`<path d="M50 78 L75 34 Q50 53 25 34 Z" fill="EMB"/>
-          <circle cx="50" cy="19" r="5.8" fill="EMB"/>
-          <circle cx="19" cy="55" r="5.8" fill="EMB"/>
-          <circle cx="81" cy="55" r="5.8" fill="EMB"/>`,
-  /* Spirit: one bold S, both ends hooked past the half-turn, standing on
-     a plain field the way the printed one does. */
-  spirit:`<path d="M39.7 27.8 A13.5 13.5 0 1 1 50 50 A13.5 13.5 0 1 0 60.3 72.2"
-                fill="none" stroke="EMB" stroke-width="13" stroke-linecap="round"/>`,
+  /* Shadow: a plain triangle stood on its point, and three domes. No
+     scoop in the back - the printed coin has none, and the two horns the
+     scoop threw up on either side were never on it. Everything is set off
+     one circle: the three corners sit at r=23 and the three domes at
+     r=24.5, each dome on the bearing halfway between two corners, so the
+     mark turns in thirds and reads the same whichever third you start
+     from. It is laid so a dome stands at zero - straight up - which puts
+     the point of the triangle straight down and the base level across the
+     top. Measured off the print: corners and domes on one radius, and a
+     dome a little over a quarter of that radius across. */
+  shadow:`<path d="M30.1 38.5 H69.9 L50 73 Z" fill="EMB"/>
+          <circle cx="50" cy="25.5" r="6.6" fill="EMB"/>
+          <circle cx="71.2" cy="62.3" r="6.6" fill="EMB"/>
+          <circle cx="28.8" cy="62.3" r="6.6" fill="EMB"/>`,
+  /* Spirit: not a letter at all. The printed coin carries two hooks set
+     half a turn apart, and the S is what the pair of them makes rather
+     than anything either one is on its own. Each hook is a ribbon laid
+     round the middle: it comes in as a thin tail off the shoulder, fills
+     out along the flank, folds back on itself at the far end into a
+     narrow slot, and the returning arm runs back up inside the first and
+     stops in a blunt round end under the tail. Both are struck from one
+     path set twice at a hundred and eighty degrees, so the halves cannot
+     drift. The slot is the whole mark - it is what makes this a hook and
+     not a crescent - so these two carry their own stroke-width of 1
+     against the group's 2.8, which would close the slot up entirely. */
+  spirit:`<g fill="EMB" stroke-width="1">
+           <path d="M66.1 27.1 C60.5 22.7 35.8 26.3 30.9 30.9 A27 27 0 0 0 27.9 65.5 A9.5 9.5 0 0 0 43.4 54.6 A8 8 0 0 1 42.5 47.3 A8 8 0 0 1 47.9 42.3 A3.5 3.5 0 0 0 46.1 35.5 A15 15 0 0 0 35.9 44.9 A15 15 0 0 0 37.7 58.6 A2 2 0 0 0 34.4 60.9 A19 19 0 0 1 36.6 36.6 C39.4 33.7 60.4 27.7 66.1 27.1 Z"/>
+           <path d="M66.1 27.1 C60.5 22.7 35.8 26.3 30.9 30.9 A27 27 0 0 0 27.9 65.5 A9.5 9.5 0 0 0 43.4 54.6 A8 8 0 0 1 42.5 47.3 A8 8 0 0 1 47.9 42.3 A3.5 3.5 0 0 0 46.1 35.5 A15 15 0 0 0 35.9 44.9 A15 15 0 0 0 37.7 58.6 A2 2 0 0 0 34.4 60.9 A19 19 0 0 1 36.6 36.6 C39.4 33.7 60.4 27.7 66.1 27.1 Z" transform="rotate(180 50 50)"/>
+         </g>`,
   /* Light: three triangles pointing in toward the middle, with three
      domes set between them - the arrangement the printed coin carries,
-     not a sun. */
-  light:`<path d="M37.8 18.3 L50 50 L62.2 18.3 Z M83.6 55.3 L50 50 L71.4 76.4 Z M28.6 76.4 L50 50 L16.4 55.3 Z" fill="EMB"/>
-         <circle cx="70.8" cy="38" r="6" fill="EMB"/>
-         <circle cx="50" cy="74" r="6" fill="EMB"/>
-         <circle cx="29.2" cy="38" r="6" fill="EMB"/>`,
-  /* The Seventh Sage's mark: the six-bladed star - three long blades
-     meeting at the hub, and between them three short ones cut from a
-     single shape and set at a hundred and twenty degrees, so all three
-     come out the same length. Zelda is the Seventh Sage; there was never
-     a medallion to stamp, so this mark stands on the blank. */
-  time:`<path d="M48.4 48 L48.4 32.1 L64.5 39.8 Z M48.4 48 L65.4 56 L49.5 68.9 Z M48.4 48 L29.8 59.6 L30.3 39.9 Z" fill="EMB"/>
-        <g fill="EMB">
-          <path d="M54.9 47.9 L72.9 48 L73.6 54 Z"/>
-          <path d="M54.9 47.9 L72.9 48 L73.6 54 Z" transform="rotate(120 50 50)"/>
-          <path d="M54.9 47.9 L72.9 48 L73.6 54 Z" transform="rotate(240 50 50)"/>
-        </g>`
+     not a sun. The whole mark is given a quarter turn to the right, so
+     the blade that stood straight up now points to three o'clock. Three
+     is a factor of neither four nor the quarter turn, so this is a real
+     change of attitude rather than the mark landing back on itself. */
+  light:`<g transform="rotate(90 50 50)">
+           <path d="M37.8 18.3 L50 50 L62.2 18.3 Z M83.6 55.3 L50 50 L71.4 76.4 Z M28.6 76.4 L50 50 L16.4 55.3 Z" fill="EMB"/>
+           <circle cx="70.8" cy="38" r="6" fill="EMB"/>
+           <circle cx="50" cy="74" r="6" fill="EMB"/>
+           <circle cx="29.2" cy="38" r="6" fill="EMB"/>
+         </g>`,
+  /* The Seventh Sage's mark: three blades meeting at the hub. The three
+     short ones that used to sit between them are gone - they read as
+     specks at coin size and did nothing the long three were not already
+     doing. Zelda is the Seventh Sage; there was never a medallion to
+     stamp, so this mark stands on the blank. */
+  time:`<path d="M48.4 48 L48.4 32.1 L64.5 39.8 Z M48.4 48 L65.4 56 L49.5 68.9 Z M48.4 48 L29.8 59.6 L30.3 39.9 Z" fill="EMB"/>`
 };
 
 let medUID = 0;
@@ -982,7 +1006,7 @@ function medallion(key){
   const glyph = GLYPHS[key]
     .replace(/EMB/g, raised)
     .replace(/COIN/g, bare ? "var(--seventh)" : "currentColor");
-  return `<svg viewBox="0 0 100 100" role="img" aria-label="${bare ? "The Seventh Sage's mark: a six-bladed star, on a medallion never struck" : s.element + " Medallion"}" style="color:var(--c-${key})">
+  return `<svg viewBox="0 0 100 100" role="img" aria-label="${bare ? "The Seventh Sage's mark: three blades, on a medallion never struck" : s.element + " Medallion"}" style="color:var(--c-${key})">
     <defs>
       <linearGradient id="${u}b" x1="0" y1="0" x2=".8" y2="1">
         <stop offset="0" style="stop-color:#fff;stop-opacity:.22"/>
@@ -995,17 +1019,17 @@ function medallion(key){
         <stop offset="1" style="stop-color:#000;stop-opacity:.38"/>
       </radialGradient>
     </defs>
-    <polygon points="${DEC}" fill="${bare ? "var(--seventh)" : "currentColor"}"/>
-    <polygon points="${DEC}" fill="url(#${u}b)"/>
+    <circle ${COIN} fill="${bare ? "var(--seventh)" : "currentColor"}"/>
+    <circle ${COIN} fill="url(#${u}b)"/>
     <g fill="none" stroke="${bare ? "var(--seventh-ink)" : "rgba(0,0,0,.34)"}" stroke-width="1.3"
        stroke-linecap="round" stroke-linejoin="round" opacity="${bare ? ".5" : "1"}">${RUNES}</g>
     <circle cx="50" cy="50" r="35.5" fill="#000" opacity=".17"/>
     <circle cx="50" cy="50" r="35.5" fill="none" stroke="${raised}" stroke-width="1.6" opacity=".8"/>
     <g style="${EMBOSS}" stroke="${raised}" stroke-width="2.8" stroke-linejoin="round"
        stroke-linecap="round" transform="translate(50 50) scale(.88) translate(-50 -50)">${glyph}</g>
-    <polygon points="${DEC}" fill="url(#${u}f)"/>
-    <polygon points="${DEC}" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" opacity=".32"/>
-    ${bare ? `<polygon points="${DEC}" fill="none" stroke="var(--seventh-ink)" stroke-width="1.2" stroke-linejoin="round" opacity=".6"/>` : ``}
+    <circle ${COIN} fill="url(#${u}f)"/>
+    <circle ${COIN} fill="none" stroke="#000" stroke-width="1.6" opacity=".32"/>
+    ${bare ? `<circle ${COIN} fill="none" stroke="var(--seventh-ink)" stroke-width="1.2" opacity=".6"/>` : ``}
   </svg>`;
 }
 
@@ -1033,7 +1057,7 @@ function medallion(key){
 /* ======================= TRIAL PLATES =======================
    One drawing to close each trial, of a thing or a person that trial
    actually turns on - the cart on the wrong road, the shut gate, the
-   old man's boat, Senok with a man beside it for scale. All thirteen
+   old man's boat, Senok with a man beside it for scale. All fourteen
    share a 120x64 field with the ground at y=56, and all are drawn in
    line in the page's own gold so they sit under the answers without
    competing with them. Mass is carried by a .14 fill of the same
@@ -1223,16 +1247,51 @@ const SCENES = {
     <path d="M79 56 Q79.8 52.6 77.6 51.6" opacity=".45"/>
     <path d="M92 56 V45 Q92 40.4 95.5 40.4 Q99 40.4 99 45 V56"/>
     <circle cx="95.5" cy="35.6" r="3.9"/>
-    <path d="M92 44.4 L88.4 50.4"/><path d="M99 44.4 L102.6 50.4"/>`}
+    <path d="M92 44.4 L88.4 50.4"/><path d="M99 44.4 L102.6 50.4"/>`},
+  /* The chamber, drawn the way the backdrop draws it: the six round their
+     hexagon, tipped away from the reader, each one keeping the colour it
+     keeps down there - forest and fire at the back, spirit right, shadow
+     and water at the front, light left. The seventh thing is above the
+     middle of it with nothing cut into the face, because nothing on the
+     face can be read yet. */
+  chamber:{ cap:"The medallion, too bright to read", art:`
+    <path d="M16 42 L34 31 H86 L104 42 L86 53 H34 Z" fill="currentColor" opacity=".08"/>
+    <path d="M16 42 L34 31 H86 L104 42 L86 53 H34 Z"/>
+    <path d="M34 31 L86 53" opacity=".14"/><path d="M86 31 L34 53" opacity=".14"/>
+    <path d="M16 42 H104" opacity=".14"/>
+    <circle cx="34" cy="31" r="4.6" fill="var(--c-forest)" opacity=".26"/>
+    <circle cx="34" cy="31" r="2.3" fill="var(--c-forest)"/>
+    <circle cx="86" cy="31" r="4.6" fill="var(--c-fire)" opacity=".26"/>
+    <circle cx="86" cy="31" r="2.3" fill="var(--c-fire)"/>
+    <circle cx="104" cy="42" r="4.6" fill="var(--c-spirit)" opacity=".26"/>
+    <circle cx="104" cy="42" r="2.3" fill="var(--c-spirit)"/>
+    <circle cx="86" cy="53" r="4.6" fill="var(--c-shadow)" opacity=".26"/>
+    <circle cx="86" cy="53" r="2.3" fill="var(--c-shadow)"/>
+    <circle cx="34" cy="53" r="4.6" fill="var(--c-water)" opacity=".26"/>
+    <circle cx="34" cy="53" r="2.3" fill="var(--c-water)"/>
+    <circle cx="16" cy="42" r="4.6" fill="var(--c-light)" opacity=".26"/>
+    <circle cx="16" cy="42" r="2.3" fill="var(--c-light)"/>
+    <circle cx="60" cy="19" r="9.2" fill="currentColor" opacity=".1"/>
+    <circle cx="60" cy="19" r="5.6" fill="currentColor" opacity=".26"/>
+    <circle cx="60" cy="19" r="5.6"/>
+    <circle cx="60" cy="19" r="2.9" opacity=".22" stroke-width="1"/>
+    <path d="M70 19 H73"/><path d="M50 19 H47"/>
+    <path d="M60 29 V32"/><path d="M60 9 V6"/>
+    <path d="M67.1 26.1 L69.2 28.2" opacity=".7"/>
+    <path d="M52.9 26.1 L50.8 28.2" opacity=".7"/>
+    <path d="M67.1 11.9 L69.2 9.8" opacity=".7"/>
+    <path d="M52.9 11.9 L50.8 9.8" opacity=".7"/>
+    <path d="M56 34 Q60 40 64 34" opacity=".35"/>`}
 };
 
 /* ======================= QUESTIONS =======================
-   Thirteen trials. Senok is out from under the roots and walking, at the
+   Fourteen trials. Senok is out from under the roots and walking, at the
    pace of a man, drawing the life up out of every field he crosses, on
    a line the Triforce can name and nobody can move; the
    first twelve are the places in Hyrule that line goes through, in the
-   order it reaches them, and the thirteenth is Senok himself on the castle
-   road. The twelve are not tests of him - they are twelve places that need
+   order it reaches them, the thirteenth is Senok himself on the castle
+   road, and the fourteenth is what the Ancient Sages do about you once he
+   is back under. The twelve are not tests of him - they are twelve places that need
    something from you, and helping them is the whole of how a sage is made,
    which is why the twelfth is the Fairy Prince's grove handing that light
    over. Nothing is set by an examiner and nothing is announced as a test -
@@ -1245,26 +1304,40 @@ const SCENES = {
    real people, a real clock, and a cost that lands on somebody whichever
    way you answer. Senok himself never argues and never hurries - a Poe
    has nothing but time - so the thirteenth is a decision about how you
-   end him, made with the light the twelve before it earned.
+   end him, made with the light the twelve before it earned. The
+   fourteenth is the only one set anywhere but Hyrule: the chamber, the
+   six, and a medallion held out with its face lost in its own light. It
+   is scored like the rest, which is why its seven read as things done
+   with the hands rather than things claimed about yourself - and why the
+   seventh of them leaves the medallion on the stone. There has never
+   been a Time Medallion to hand anybody.
 
    Each question offers all seven sages exactly once, and answer order is
    varied per question so position never reveals the mapping. The orders
    are two families of rotations over two different base orders, which
    puts no sage in the same slot more than twice across the thirteen.
+   Those thirteen leave exactly one unused slot per sage and the seven of
+   them form a permutation, so the fourteenth order is not a free choice:
+   time, fire, spirit, water, shadow, light, forest is the only one that
+   holds the rule, and it closes the square - every sage now stands in
+   every slot exactly twice.
 
-   Sha is the one character in the thirteen who is a person. A Sheikah
-   of Kakariko, met at the seventh and walking the last seven trials at
-   your left, they are built as the plain-spoken answer to Sheik: same
+   Sha is the one character in the fourteen who is a person. A Sheikah
+   of Kakariko, met at the seventh and walking from there to the chamber
+   door at your left, they are built as the plain-spoken answer to Sheik: same
    training, same knowledge of the country, none of the riddling. Sha
    goes unhooded, says what is under the village in daylight, hands over
    the number the moment they have it, says outright when they do not
-   know, and does not vanish at the end of a scene. They are not a
-   choice and not scored - everyone who reaches the seventh meets them.
+   know, and does not vanish at the end of a scene. The fourteenth gives
+   them the last word for the same reason: at the one threshold where a
+   Sheikah is expected to say something cryptic, Sha says they do not
+   know what is on the other side of it. They are not a choice and not
+   scored - everyone who reaches the seventh meets them.
 
    {C} is the companion, {T} the tribe and {W} the weapon, all chosen
    before the first trial and none of them scored. Because the companion
    may be a fairy, a dragon, a horse, an owl, a wolf or a cucco, nothing
-   in the thirteen gives it speech, hands or two legs: it keeps pace,
+   in the fourteen gives it speech, hands or two legs: it keeps pace,
    waits, refuses ground, is barred from the chamber, and is never a
    character with lines. {T} is written to read with an article in front
    of it ("You are a Kokiri") and {W} as a thing in the hand, so every
@@ -1273,7 +1346,7 @@ const SCENES = {
    is set - shown under its name. */
 const QUESTIONS = [
   { scene:"kokiri", place:"The Warning", where:"Kokiri Forest",
-    text:"The first is the wood, because the wood is where the Fairy Prince put him and the wood is where the roots finally let go. The children there cannot leave it, have no idea what came up under it, and do not want to be told, and you have one evening in which to say it. You are {T}, which is the first thing the clearing sees, and {C} will not settle at all. How do you tell them?",
+    text:"Senok came up out of the roots under this wood and walked away west, and the grass where he stood is already grey. The Kokiri children never leave the forest and do not want to hear that anything was ever under it. You have one evening. You are {T}, which is the first thing the clearing sees, and {C} will not settle. How do you tell them?",
     answers:[
       {s:"forest", t:"Say it once, then stay in the clearing until somebody believes it."},
       {s:"fire",   t:"Say it tonight, to the whole clearing at once, and let them be angry with me."},
@@ -1285,7 +1358,7 @@ const QUESTIONS = [
     ]},
 
   { scene:"cart", place:"The Road", where:"Hyrule Field",
-    text:"The second is the field, where the news got ahead of you and arrived wrong. Half the carts on the road are moving toward the dark, because somebody told them the wood was the safe place and the castle was the danger. {C} keeps pace and is no use for this. How do you turn them?",
+    text:"Out on the field the story has got ahead of you and arrived wrong. Half the carts on the road are driving toward the forest, because somebody told them the trees were safe and the castle was the danger. They are heading straight across Senok's path. {C} keeps pace and is no use for this. How do you turn them?",
     answers:[
       {s:"shadow", t:"Find whoever started it and correct it at the source, without naming them."},
       {s:"spirit", t:"Refuse to herd anybody. Say the true thing once, and let them steer."},
@@ -1297,7 +1370,7 @@ const QUESTIONS = [
     ]},
 
   { scene:"gate", place:"The Gate", where:"Hyrule Castle Town",
-    text:"The third is the town, which has worked out how many it can hold and shut the gate on the rest. The farms outside are still arriving, some of them carrying lamps that will not take a flame any more. {C} is on the wrong side of the wall with them. What do you do at the gate?",
+    text:"Castle Town has counted its wells and its grain, worked out how many people it can hold, and shut the gate on the rest. Farm families are still coming up the road, some carrying lamps that will not take a flame any more. {C} is outside the wall with them. What do you do at the gate?",
     answers:[
       {s:"light",  t:"Get the count right in front of them \u2014 room, water, days \u2014 so it can be argued with."},
       {s:"time",   t:"Get the children through first, and spend the week arguing about the rest."},
@@ -1309,7 +1382,7 @@ const QUESTIONS = [
     ]},
 
   { scene:"goron", place:"The Doors", where:"Goron City",
-    text:"The fourth is Goron City, which has heard you out and decided that stone is enough \u2014 that a thing which puts lights out can be sat under a mountain until it gets bored. They will seal the doors, wait the season through, and they would like you inside when the doors go shut. {C} does not care for the roof. Are you in there when they shut?",
+    text:"The Gorons have heard you out and decided stone is enough: they will seal Goron City and wait the season out underground. Nobody knows whether a sealed door stops Senok, and the stores in there will not last a winter. They want you inside when it shuts. {C} does not care for the roof. Are you in there when they close it?",
     answers:[
       {s:"fire",   t:"Tell them stone is not enough, in front of everyone, and start moving the young out."},
       {s:"water",  t:"Say I think they will die in here, and stay the night with them anyway."},
@@ -1321,7 +1394,7 @@ const QUESTIONS = [
     ]},
 
   { scene:"zora", place:"The Current", where:"Zora's Domain",
-    text:"The fifth is the Domain, where the river has started coming down dead \u2014 no shine on it and nothing living in it \u2014 out of a stretch of upland he went over last week. The Zora can close the mouth of it and keep what they have. Everything in the valley below drinks what they would be closing. What do you do while they decide?",
+    text:"The river is coming down dead \u2014 no shine on it, nothing living in it \u2014 out of upland Senok crossed last week. The Zora can dam the mouth of it and keep the water they already have. Every village in the valley below drinks what they would be shutting off. They are still arguing. What do you do while they decide?",
     answers:[
       {s:"time",   t:"Sink a store for the valley first. Then let them close the mouth."},
       {s:"forest", t:"Stand at the mouth of it and not move while they decide."},
@@ -1333,7 +1406,7 @@ const QUESTIONS = [
     ]},
 
   { scene:"herd", place:"The Herd", where:"Lon Lon Ranch",
-    text:"The sixth is the ranch, with one day of road left before he is at the fences and the grass starts going up into him. The herd can be moved or it can be turned loose, and there is no version of the day where it is both. {C} is no help at this and seems to know it. How do you spend the day?",
+    text:"Senok is one day of road from Lon Lon Ranch, and the grass dies where he walks. The herd can be driven out to safe pasture, or the gates can be thrown open and the horses left to run for it. There is no version of the day where you do both. {C} is no help and seems to know it. How do you spend the day?",
     answers:[
       {s:"water",  t:"Tell Malon out loud that most of them will not make it, and start anyway."},
       {s:"shadow", t:"Do the choosing myself, quietly, so that nobody at the ranch has to."},
@@ -1345,7 +1418,7 @@ const QUESTIONS = [
     ]},
 
   { scene:"sha", place:"The Lid", where:"Kakariko Village",
-    text:"The seventh is Kakariko, which will not empty, because something under the village has to be held shut \u2014 an old seal, cut from the same work as the Prince's and going the same way \u2014 and holding it needs somebody standing there. A Sheikah called Sha says as much in the square, in daylight, unhooded, with no riddle anywhere in it, and then asks for one volunteer and waits. The square goes quiet, and {W} is no use to anybody in this. What do you do in the quiet?",
+    text:"Kakariko will not empty. There is an old seal under the village, failing the same way the Fairy Prince's did, and it holds only while somebody is standing on it. A Sheikah called Sha explains this in the square, unhooded and without a riddle in it, then asks for one volunteer and waits. The square goes quiet, and {W} is no use to anybody here. What do you do in the quiet?",
     answers:[
       {s:"spirit", t:"Refuse to let them ask it of anyone. There is another way to shut it."},
       {s:"light",  t:"Ask out loud what standing on it actually means, before a hand goes up."},
@@ -1357,7 +1430,7 @@ const QUESTIONS = [
     ]},
 
   { scene:"shoulder", place:"The Shoulder", where:"Death Mountain Trail",
-    text:"The eighth is the trail, and Sha came up it with you, having said exactly why they were coming. A shoulder of rock can be brought down to turn Senok's road aside for a week. It also shuts the mountain in behind it, the Gorons have not been asked, and Sha will say which of those two they think is worse if you ask them. Does the rock come down?",
+    text:"Sha came up the mountain trail with you and said plainly why. There is a shoulder of rock above the pass that can be brought down to turn Senok's road aside for about a week. It would also seal the Gorons' only way down, and nobody has asked them. Does the rock come down?",
     answers:[
       {s:"shadow", t:"Bring it down, and carry being the one who did it."},
       {s:"light",  t:"Touch nothing until the mountain has been told and has answered."},
@@ -1369,7 +1442,7 @@ const QUESTIONS = [
     ]},
 
   { scene:"boat", place:"The Jetty", where:"Lake Hylia",
-    text:"The ninth is the lake, going flat and lightless from the south end, and one old man at the water's edge has refused every boat that has come for him. He is not confused. He simply will not go. Sha knows his name, knows the family he stopped speaking to, and says straight out that they have no idea what any of it is worth here. What do you do about him?",
+    text:"Lake Hylia is going flat and lightless from the south end, and one old man on the jetty has turned away every boat sent for him. He is not confused. He simply will not go. Sha knows his name, and knows the family he stopped speaking to years ago. The dark water reaches the jetty tonight. What do you do about him?",
     answers:[
       {s:"fire",   t:"Pick him up, put him in the boat, and take whatever he does about it."},
       {s:"spirit", t:"His life and his lake. I am not carrying him off it."},
@@ -1381,7 +1454,7 @@ const QUESTIONS = [
     ]},
 
   { scene:"rope", place:"The Rope", where:"Gerudo Valley",
-    text:"The tenth is the rope bridge over the canyon, and the planks have a number in them. Sha counted it twice and told you the number the moment they had it, which is more than the rope-keeper was going to do. There are more people on this side than that number, and the dark is a day behind the last of them. How do you work the line?",
+    text:"The rope bridge over Gerudo Valley is the only way out, and the planks will carry a set number of people before the ropes give. Sha counted them twice and told you the number the moment they had it. More people are waiting than the number allows, and Senok is a day behind the last of them. How do you work the line?",
     answers:[
       {s:"forest", t:"Stay on this side and keep the line straight until this side is empty."},
       {s:"time",   t:"Send whoever can build the next bridge over first, and cross last myself."},
@@ -1393,7 +1466,7 @@ const QUESTIONS = [
     ]},
 
   { scene:"camp", place:"The Unlit", where:"The Haunted Wasteland",
-    text:"The eleventh is ground he has already drunk: he took the life up out of it on his way past, no light holds on it now, nothing grows, and a family camped in the middle of it who say the place is theirs. Sha has walked ground like this before and puts it plainly \u2014 a year before anything green, and no shorter for being argued with. Whatever {T} is worth out here, {C} will not walk onto it at all. What do you do about the family?",
+    text:"This is ground Senok has already crossed: grey to the horizon, nothing growing, no lamp staying lit on it. A family is camped in the middle of it and says the place is theirs and always was. Sha has seen ground like this before and puts it plainly \u2014 a year before anything grows here. {C} will not set foot on it. What do you do about the family?",
     answers:[
       {s:"water",  t:"Say what the ground is, out loud, standing on it with them."},
       {s:"shadow", t:"Carry the water in every week, and never say how far I am bringing it."},
@@ -1405,7 +1478,7 @@ const QUESTIONS = [
     ]},
 
   { scene:"grove", place:"What It Cost", where:"The Fairy Prince's Grove",
-    text:"The twelfth is the grove at the far end of the Lost Woods, where the Fairy Prince spent the whole of his light putting Senok under the roots, and where the last of his fairies have been going out one by one ever since. They are what is left of that seal, and they are what makes a sage. They show you the eleven places as they stand now with your choices still sitting in them, they say the light they can hand you is worth exactly what you did there, and then they ask which of the eleven you would take back. Neither Sha nor {C} is allowed past the treeline; they wait together out in the open, and Sha has already told you which one they would take back. Which one is it?",
+    text:"The grove at the far end of the Lost Woods is where the Fairy Prince burned the whole of his light putting Senok under the roots. The few fairies left are what remains of that seal, and their light is what makes a sage. They show you the eleven places as they stand now, tell you the light they can give is worth exactly what you did there, and ask which of the eleven you would take back. Sha and {C} wait past the treeline. Which one is it?",
     answers:[
       {s:"light",  t:"None back. Set the eleven out in order, so what they cost is on the record."},
       {s:"forest", t:"None of them. I stood where I stood."},
@@ -1417,7 +1490,7 @@ const QUESTIONS = [
     ]},
 
   { scene:"senok", place:"Senok", where:"The Castle Road",
-    text:"The thirteenth was set by nobody. Senok is on the castle road a half day short of the town: a Poe grown to twice your height, violet robes hanging off nothing and ending in rags a foot above his own shadow, and a wooden mask cut with two slits and a slot where the face should be. The lantern in his left hand still has the Fairy Prince's light in it. Everyone you helped this season is on the road behind you, {W} is in your hand with the grove's light on it, and that light is the only thing here he has ever had to be afraid of. The grass is going grey in a slow ring around him while he stands there, which is the only part of him that ever hurries. He says you are early, and that he can wait; a Poe has nothing else. {C} is already standing in front of you, and Sha is on your left with their face uncovered, which they say is the entire point of doing it that way. How do you end him?",
+    text:"Senok is on the castle road: twice your height, violet robes hanging off nothing, a wooden mask cut with two slits and a slot where a mouth should be. The Fairy Prince's light is still burning in the lantern he carries. {W} is in your hand, lit at the grove \u2014 the only thing here he has ever had to be afraid of. He says you are early, and that he can wait. Everyone you helped is on the road behind you; {C} is in front of you and Sha is at your left. How do you end him?",
     answers:[
       {s:"spirit", t:"He gets no terms and no hour. I will not be waited on and I will not be bargained with."},
       {s:"water",  t:"Say out loud that the mask frightens me, and put the light through him while I am still saying it."},
@@ -1426,6 +1499,18 @@ const QUESTIONS = [
       {s:"forest", t:"Stand in the road and hold the light steady until he is the one that goes out."},
       {s:"time",   t:"Hold him here until the twelve lights I left behind me are burning at once, and put him back under for good."},
       {s:"fire",   t:"Go at him now, all of it at once, before the mask has finished turning toward me."}
+    ]},
+
+  { scene:"chamber", place:"The Medallion", where:"The Chamber of Sages",
+    text:"Senok is back under the roots, and the ground under you is not Hyrule any more. Six lights stand around a round platform in the dark \u2014 the sages who sealed the last thing that needed sealing. One of them holds a medallion out to you. Its face is lost in its own light; you could not say what is cut into it. Sha stopped at the edge and said the plain thing one last time: that they do not know what is on the other side of this, and that they will wait there with {C} until you come out. How do you take it?",
+    answers:[
+      {s:"time",   t:"Leave it on the stone with its face still unread, and ask for the watch instead \u2014 I want to know when the next seal starts to fail."},
+      {s:"fire",   t:"Take it out of their hands before they have finished offering it, and thank them far too loudly."},
+      {s:"spirit", t:"Ask what gives six strangers the right to hand out a place like this, and take nothing until somebody answers."},
+      {s:"water",  t:"Take it, and tell all six exactly what this season cost me, at length, while I am holding it."},
+      {s:"shadow", t:"Take it, and ask that nobody outside this room is ever told it was given to me."},
+      {s:"light",  t:"Ask what is cut into it before I touch it \u2014 what it does, what it asks, who holds it after me."},
+      {s:"forest", t:"Take it, and say I am going back to the places I walked. This does not move me off them."}
     ]},
 ];
 /* integrity check: 7 answers per question, each sage exactly once */
@@ -1498,11 +1583,12 @@ const CRESTS = {
 };
 
 /* ======================= COMPANIONS =======================
-   Chosen once, before the first trial, and standing beside you for all
-   thirteen. The choice is pure flavour - it scores nothing and touches no
-   tally - so that the seven-way balance of the trials is untouched by it.
-   Eight of the thirteen name the companion, through {C}, the first and
-   the thirteenth among them. */
+   Chosen once, before the first trial, and standing beside you for the
+   thirteen that happen in Hyrule. The choice is pure flavour - it scores
+   nothing and touches no tally - so that the seven-way balance of the
+   trials is untouched by it. Nine of the fourteen name the companion,
+   through {C}, the first and the fourteenth among them - the fourteenth
+   only to leave it outside the chamber with Sha. */
 const COMPANIONS = [
   { id:"tabe",   name:"Tab\u00e8", kind:"a fairy, of Navi's line",
     note:"Mischief, sarcasm and a great deal of fun; bossy when it suits him; certain to say the one thing that matters at the worst possible moment. Works hard at hiding how much he cares, and only lets it show once he knows you." },
@@ -1641,7 +1727,7 @@ const FIGURES = {
 
 
 /* ======================= WEAPONS =======================
-   Picked last, after the companion, and held for all thirteen. Flavour
+   Picked last, after the companion, and held for all fourteen. Flavour
    again - nothing here is scored. Five come off the game's own item
    screen; the scimitar is the curved blade the fortress guards carry,
    the dagger is village work rather than a named artefact, and the Bow
@@ -1917,9 +2003,9 @@ function renderResult(){
     </div>`).join("");
 
   $("r-comp").innerHTML =
-    `Thirteen trials, the last of them Senok, walked as <b>${tribe.one}</b> ` +
+    `Fourteen trials, the thirteenth of them Senok, walked as <b>${tribe.one}</b> ` +
     `at the shoulder of <b>${companion.name}</b>, ${companion.kind}, ` +
-    `with <b>${weapon.carry}</b> to hand. <b>Sha</b> walked the last seven of them with you.`;
+    `with <b>${weapon.carry}</b> to hand. <b>Sha</b> walked it with you from Kakariko to the chamber door.`;
 
   show("result");
   window.scrollTo({top:0, behavior:"instant"});
@@ -1948,7 +2034,7 @@ $("copy").addEventListener("click", async ()=>{
   const text = (s.heading
     ? `The Sage Trials \u2014 I came out as ${s.heading}. ${s.line} The sage who holds it: ${s.sage} (${s.temple} \u00b7 ${s.song}).`
     : `The Sage Trials \u2014 my element is ${s.element}. ${s.line} Another Sage of ${s.element}: ${s.sage} (${s.temple} \u00b7 ${s.song}).`)
-    + ` Thirteen trials, the last of them Senok, walked as ${tribe.one} with ${companion.name}, ${weapon.carry}, and Sha from Kakariko on.`;
+    + ` Fourteen trials, the thirteenth of them Senok, walked as ${tribe.one} with ${companion.name}, ${weapon.carry}, and Sha from Kakariko to the chamber door.`;
   try{
     await navigator.clipboard.writeText(text);
     $("copy").textContent = "Copied";
