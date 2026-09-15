@@ -987,12 +987,28 @@ const GLYPHS = {
            <circle cx="50" cy="74" r="6" fill="EMB"/>
            <circle cx="29.2" cy="38" r="6" fill="EMB"/>
          </g>`,
-  /* The Seventh Sage's mark: three blades meeting at the hub. The three
-     short ones that used to sit between them are gone - they read as
-     specks at coin size and did nothing the long three were not already
-     doing. Zelda is the Seventh Sage; there was never a medallion to
-     stamp, so this mark stands on the blank. */
-  time:`<path d="M48.4 48 L48.4 32.1 L64.5 39.8 Z M48.4 48 L65.4 56 L49.5 68.9 Z M48.4 48 L29.8 59.6 L30.3 39.9 Z" fill="EMB"/>`
+  /* The Seventh Sage's mark: three blades meeting at the hub, struck from
+     one shape at a hundred and twenty degrees the way the water and
+     forest crests are, so all three come out identical. They were cut by
+     hand once, to alternate with three short blades since removed, and
+     stood unequal - hub off centre at 48.4,48 and tips out at radii from
+     16.4 to 22.5. Now: hub on the centre, both tips of every blade at
+     r=22, each blade sixty degrees wide with sixty of blank between.
+
+     Mirrored across the x axis, which for a mark that already turns in
+     thirds is the same as turning it - the base blade sat from -95 to
+     -35 degrees and now sits from 35 to 95. Reflecting the base blade and
+     rotating that is sound: a reflection turns a rotation into its
+     inverse, so the three copies land in the same three places either
+     way round.
+
+     Zelda is the Seventh Sage; there was never a medallion to stamp, so
+     this mark stands on the blank. */
+  time:`<g fill="EMB">
+          <path d="M50 50 L48.1 71.9 L68 62.6 Z"/>
+          <path d="M50 50 L48.1 71.9 L68 62.6 Z" transform="rotate(120 50 50)"/>
+          <path d="M50 50 L48.1 71.9 L68 62.6 Z" transform="rotate(240 50 50)"/>
+        </g>`
 };
 
 let medUID = 0;
