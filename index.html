@@ -21,6 +21,12 @@
      Its own ink carries the crest, the rune band and the rim. */
   --seventh:#F1EEE4;
   --seventh-ink:#8A6D1F;
+  /* The stone the plates are cut into: a face, the sunk panel inside it,
+     the shadow in the groove, and the lip the light catches. */
+  --slab:#DEDBE6;
+  --slab-2:#C6C2D3;
+  --cut:rgba(26,24,38,.40);
+  --lip:rgba(255,255,255,.70);
   --edge:rgba(26,24,38,.16);
   --edge-2:rgba(26,24,38,.08);
   --shade:rgba(26,24,38,.05);
@@ -49,6 +55,10 @@
     --gold:#D9B85F;
     --gold-2:#B99542;
     --emb:rgba(255,255,255,.44);
+    --slab:#232840;
+    --slab-2:#171A2E;
+    --cut:rgba(0,0,0,.55);
+    --lip:rgba(233,232,242,.10);
     --edge:rgba(233,232,242,.18);
     --edge-2:rgba(233,232,242,.09);
     --shade:rgba(233,232,242,.045);
@@ -74,6 +84,10 @@
   --gold:#D9B85F;
   --gold-2:#B99542;
   --emb:rgba(255,255,255,.44);
+  --slab:#232840;
+  --slab-2:#171A2E;
+  --cut:rgba(0,0,0,.55);
+  --lip:rgba(233,232,242,.10);
   --edge:rgba(233,232,242,.18);
   --edge-2:rgba(233,232,242,.09);
   --shade:rgba(233,232,242,.045);
@@ -281,10 +295,27 @@ button{font:inherit;color:inherit;cursor:pointer}
    would shout over the answers they are standing under. */
 .scene{
   display:flex;flex-direction:column;align-items:center;gap:.1rem;
-  width:100%;max-width:15rem;margin:2rem auto 0;padding:0;
+  width:100%;max-width:17.5rem;margin:2rem auto 0;padding:0;
   color:var(--gold-2);
 }
 .scene svg{width:100%;height:auto;display:block;opacity:.92}
+/* ---------- stone ---------- */
+.slab-face{fill:var(--slab);stroke:var(--edge);stroke-width:1.1}
+.slab-panel{fill:var(--slab-2);stroke:var(--edge-2);stroke-width:.8}
+.slab-lip{fill:none;stroke:var(--lip);stroke-width:.8}
+.slab-flaw{fill:none;stroke:var(--cut);stroke-width:.6;opacity:.35}
+.slab-speck{fill:var(--cut);opacity:.3}
+.cut{color:var(--cut)}
+.inlay{color:var(--gold-2)}
+/* The fourteen, laid up as one wall on the result. */
+.mural{width:100%;max-width:44rem;margin:1.6rem auto 0;display:flex;
+  flex-direction:column;align-items:center;gap:.4rem}
+.mural svg{width:100%;height:auto;display:block}
+.mural figcaption{
+  font-family:"Barlow Semi Condensed",system-ui,sans-serif;
+  font-weight:500;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);text-align:center;
+}
 .scene hr{width:56%;height:1px;border:0;margin:.15rem 0 .3rem;background:var(--edge);opacity:.7}
 .scene figcaption{
   font-family:"Barlow Semi Condensed",system-ui,sans-serif;
@@ -751,6 +782,7 @@ button{font:inherit;color:inherit;cursor:pointer}
       <div class="res-body" id="r-body"></div>
       <section class="sage-card" id="r-sage"></section>
       <div class="affinity" id="r-aff"></div>
+      <figure class="mural" id="r-mural"></figure>
       <p class="res-comp" id="r-comp"></p>
       <div class="res-actions">
         <button class="btn" id="again">Take the trials again</button>
@@ -1872,6 +1904,77 @@ const ARMS = {
     <path d="M19.2 8.4 L20.1 11.1 L22.8 12 L20.1 12.9 L19.2 15.6 L18.3 12.9 L15.6 12 L18.3 11.1 Z"/>`
 };
 
+/* ======================= STONE =======================
+   Every plate is cut into a slab rather than drawn on the page: a face
+   120 wide and 78 tall, a panel sunk into it, and the drawing cut into
+   the panel - the groove first in the shadow colour, the gold laid into
+   it a hair above, so the line reads as an inlay and not as ink.
+
+   Each slab carries a tenon on its right edge and a mortise on its left,
+   cut to the same rectangle, so slab n keys into slab n+1 exactly and
+   the fourteen lay up as one frieze with no gap and no overlap. That is
+   what the result page does with them: courses of seven, or fewer to a
+   course on a narrow screen, in the order they were walked, tabs and all
+   - including the one on the fourteenth, which keys into nothing,
+   because the wall is a fragment and there was never a fifteenth
+   stone.
+
+   The flaws are cut from the index, not from Math.random, so a slab has
+   the same chips every time it is drawn and the wall does not shimmer
+   when it is redrawn. */
+const SLAB_W = 120, SLAB_H = 78;
+/* face, with the mortise cut out of the left edge and the tenon left
+   standing off the right one */
+const SLAB_FACE = "M0 0 H120 V29 L125 32 V46 L120 49 V78 H0 V49 L5 46 V32 L0 29 Z";
+
+function slabFlaws(i){
+  /* three numbers off the index, spread enough to look unrelated */
+  const a = (i*37 % 61) / 61, b = (i*53 % 47) / 47, c = (i*29 % 43) / 43;
+  const n = (x,y) => `<circle class="slab-speck" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${(.5+c*.5).toFixed(2)}"/>`;
+  return n(4 + a*4, 16 + b*46) + n(114 - b*4, 20 + a*44) +
+         `<path class="slab-flaw" d="M${(3.5+c*2).toFixed(1)} ${(58+a*12).toFixed(1)} l${(2.5+b*3).toFixed(1)} ${(3+c*4).toFixed(1)}"/>`;
+}
+
+/* One slab, keyed into place at column i of a course. */
+function slab(key, i){
+  const art = SCENES[key].art;
+  return `<g transform="translate(${i*SLAB_W} 0)">` +
+    `<path class="slab-face" d="${SLAB_FACE}"/>` +
+    `<path class="slab-lip" d="M2 2 H118"/>` +
+    `<rect class="slab-panel" x="7" y="7" width="106" height="64" rx="1.5"/>` +
+    `<path class="slab-lip" d="M7 71 H113" opacity=".5"/>` +
+    slabFlaws(i) +
+    `<g class="cut" fill="none" stroke="currentColor" stroke-width="1.9"
+        stroke-linejoin="round" stroke-linecap="round" opacity=".8"
+        transform="translate(7.1 9.4) scale(.867)">${art}</g>` +
+    `<g class="inlay" fill="none" stroke="currentColor" stroke-width="1.7"
+        stroke-linejoin="round" stroke-linecap="round"
+        transform="translate(8 10.4) scale(.867)">${art}</g>` +
+  `</g>`;
+}
+
+/* One slab on its own, for the trial it closes. */
+function slabPlate(key){
+  return `<svg viewBox="-2 -2 130 82" aria-hidden="true">${slab(key, 0)}</svg>`;
+}
+
+/* The fourteen laid up: two courses of seven, in the order walked. */
+function mural(){
+  const keys = QUESTIONS.map(q=>q.scene);
+  /* Fewer stones to a course on a narrow screen, so the wall gets taller
+     instead of the engravings getting smaller. */
+  const w = window.innerWidth || 800;
+  const per = w < 480 ? 4 : w < 700 ? 5 : 7;
+  const courses = [];
+  for(let r = 0; r*per < keys.length; r++){
+    const row = keys.slice(r*per, (r+1)*per).map((k,i)=>slab(k, i)).join("");
+    courses.push(`<g transform="translate(0 ${r*SLAB_H})">${row}</g>`);
+  }
+  const ww = Math.min(per, keys.length)*SLAB_W + 5, hh = courses.length*SLAB_H;
+  return `<svg viewBox="-2 -2 ${ww+4} ${hh+4}" aria-hidden="true">${courses.join("")}</svg>` +
+         `<figcaption>Fourteen stones, in the order you walked them</figcaption>`;
+}
+
 /* ======================= STATE ======================= */
 const $ = id => document.getElementById(id);
 let idx = 0;
@@ -2030,11 +2133,8 @@ function renderQuestion(){
     list.appendChild(li);
   });
 
-  const sc = SCENES[q.scene];
   $("q-scene").innerHTML =
-    `<svg viewBox="0 0 120 64" aria-hidden="true" fill="none" stroke="currentColor"
-          stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round">${sc.art}</svg>` +
-    `<hr><figcaption>${sc.cap}</figcaption>`;
+    slabPlate(q.scene) + `<hr><figcaption>${SCENES[q.scene].cap}</figcaption>`;
 
   $("back").style.visibility = "visible";
   $("back").innerHTML = idx === 0 ? "&larr; Choose again" : "&larr; Previous trial";
@@ -2106,6 +2206,8 @@ function renderResult(){
       <div class="aff-track"><div class="aff-fill" data-pct="${(counts[k]/QUESTIONS.length*100).toFixed(1)}" style="--bar:var(--c-${k})"></div></div>
       <div class="aff-num">${counts[k]}</div>
     </div>`).join("");
+
+  $("r-mural").innerHTML = mural();
 
   $("r-comp").innerHTML =
     `Fourteen trials, the thirteenth of them Senok, walked as <b>${tribe.one}</b> ` +
