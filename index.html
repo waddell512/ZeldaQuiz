@@ -1493,7 +1493,7 @@ const QUESTIONS = [
     text:"[Senok] came up out of the roots here and walked west. Every [fairy] on his line went dark and fell out of the air \u2014 hundreds of them in the leaf litter, cooling, not gone yet. Warming one back takes an hour. You are {T}. What do you do with the night?",
     answers:[
       {s:"forest", t:"Stay out in the litter until dawn, one at a time, and let the trail go cold."},
-      {s:"fire",   t:"Wake the whole wood and have every Kokiri out there before midnight."},
+      {s:"fire",   t:"Wake the whole wood and have every [Kokiri] out there before midnight."},
       {s:"water",  t:"Say out loud that most of these will not come back, and kneel down anyway."},
       {s:"shadow", t:"Work the far edge where nobody is looking, and keep the count to myself."},
       {s:"spirit", t:"I will not stand here ranking them. I take them as I find them."},
@@ -1510,7 +1510,7 @@ const QUESTIONS = [
       {s:"shadow", t:"Go out after dark, and let the road think he walked back on his own."},
       {s:"spirit", t:"Their fear is not my rule. I cross, and I ask nobody to come."},
       {s:"light",  t:"Get it straight first \u2014 where he fell, how far, how long a lamp lasts out there."},
-      {s:"time",   t:"Take the six to the castle first, so the next forty are never sent."}
+      {s:"time",   t:"Take [the six] to the castle first, so the next forty are never sent."}
     ]},
 
   { scene:"gate", place:"The Gate", where:"Hyrule Castle Town",
@@ -1651,7 +1651,7 @@ const QUESTIONS = [
       {s:"time",   t:"Take it already counting what it will cost, and keep that number to myself."},
       {s:"fire",   t:"Take it before they have finished offering it, and thank them far too loudly."},
       {s:"spirit", t:"Take it like something I came for, not something I was given, and thank nobody."},
-      {s:"water",  t:"Take it with my eyes stinging, and tell all six what the season cost while I am still holding it."},
+      {s:"water",  t:"Take it with my eyes stinging, and tell [all six] what the season cost while I am still holding it."},
       {s:"shadow", t:"Take it without a word, and ask that nobody outside this room is ever told it was given to me."},
       {s:"light",  t:"Take it steadily, both feet planted, the way you take up a post you do not mean to leave."},
       {s:"forest", t:"Take it in both hands and hold on. I have not let go of anything yet."}
@@ -2133,7 +2133,11 @@ function renderQuestion(){
      box. [Square brackets] in a setup or an answer mark the rest - a
      person, a place, or the one thing that trial turns on. Two or three
      to a screen: the mark stops meaning anything if everything wears
-     it. */
+     it. An answer only ever marks people - Malon, the Kokiri, the six
+     who came back, the six in the chamber - because an answer is your
+     own voice and the red in it should be who you are talking about,
+     not what you are doing. Everything else in an answer stays plain,
+     which is why most of them carry no red at all. */
   const named = t => t.replace(/\{C\}/g, KEY(companion.name))
                       .replace(/\{T\}/g, KEY(tribe.one))
                       .replace(/\{W\}/g, KEY(weapon.carry))
