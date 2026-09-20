@@ -781,7 +781,7 @@ const ORDER = ["forest","fire","water","shadow","spirit","light","time"];
 const SAGES = {
   forest:{
     sage:"Saria", element:"Forest", medallion:"Forest",
-    temple:"Forest Temple", song:"Minuet of Forest", instrument:"Flute",
+    temple:"Forest Temple", song:"Minuet of Forest", instrument:"Kokiri Flute",
     line:"You are the one who stays.",
     about:"Forest is the element of what takes root and refuses to be moved. It is the slowest of the six and by far the hardest to remove \u2014 a thing that grows in place, holds its ground, and is still standing long after the storm that was supposed to end it. Green, patient, and quietly immovable.",
     body:[
@@ -795,7 +795,7 @@ const SAGES = {
   },
   fire:{
     sage:"Darunia", element:"Fire", medallion:"Fire",
-    temple:"Fire Temple", song:"Bolero of Fire", instrument:"Drums",
+    temple:"Fire Temple", song:"Bolero of Fire", instrument:"Goron Drums",
     line:"You are the one who moves first.",
     about:"Fire is the element of immediate commitment. It does not deliberate, hedge, or hold anything back in reserve \u2014 it converts everything it touches all at once, and it either warms a mountain or empties one. The fastest of the six, and the least interested in waiting to be sure.",
     body:[
@@ -809,7 +809,7 @@ const SAGES = {
   },
   water:{
     sage:"Ruto", element:"Water", medallion:"Water",
-    temple:"Water Temple", song:"Serenade of Water", instrument:"Zora guitar",
+    temple:"Water Temple", song:"Serenade of Water", instrument:"Zora Guitar",
     line:"You are the one who feels it out loud.",
     about:"Water is the element of depth and pressure. It takes the shape of whatever holds it and loses nothing at all in the process, and the part of it you can see is never the part that matters. Blue, endlessly adaptive, and a great deal heavier than it looks.",
     body:[
@@ -823,7 +823,7 @@ const SAGES = {
   },
   shadow:{
     sage:"Impa", element:"Shadow", medallion:"Shadow",
-    temple:"Shadow Temple", song:"Nocturne of Shadow", instrument:"Bass drums",
+    temple:"Shadow Temple", song:"Nocturne of Shadow", instrument:"Sheikah Lyre",
     line:"You are the one who carries it silently.",
     about:"Shadow is the element of what is deliberately not shown. It is not evil and it is not absence \u2014 it is concealment in service of something: the information withheld on purpose, the weight carried where nobody has to look at it. The quietest of the six, and the most misread.",
     body:[
@@ -837,7 +837,7 @@ const SAGES = {
   },
   spirit:{
     sage:"Nabooru", element:"Spirit", medallion:"Spirit",
-    temple:"Spirit Temple", song:"Requiem of Spirit", instrument:"Pipes",
+    temple:"Spirit Temple", song:"Requiem of Spirit", instrument:"Gerudo Pipes",
     line:"You are the one who refuses.",
     about:"Spirit is the element of will \u2014 the refusal that survives a desert, the self that does not dissolve into whatever it happens to be surrounded by. It is the only one of the six defined by what it declines to do rather than what it does. Orange, dry, and unowned.",
     body:[
@@ -851,7 +851,7 @@ const SAGES = {
   },
   light:{
     sage:"Rauru", element:"Light", medallion:"Light",
-    temple:"Temple of Time", song:"Prelude of Light", instrument:"Harp",
+    temple:"Temple of Time", song:"Prelude of Light", instrument:"Hylian Harp",
     line:"You are the one who holds the frame.",
     about:"Light is the element of the frame itself. It does not act so much as make action possible \u2014 it reveals what is already there, puts it in order, and holds the structure steady while everything inside it moves. The least dramatic of the six, and the one the other five are standing on.",
     body:[
@@ -868,7 +868,7 @@ const SAGES = {
     /* the seventh outcome is titled, not elemental - see renderResult */
     heading:"The Seventh", headEyebrow:"You are", label:"Seventh",
     sageEyebrow:"The sage who holds it",
-    temple:"Temple of Time", song:"Song of Time", instrument:"Ocarina",
+    temple:"Temple of Time", song:"Song of Time", instrument:"Ocarina of Time",
     line:"You are the one who plays the long game.",
     about:"The seventh place among the sages is the only one with no element attached to it and no medallion to hand you. What it actually is: the distance between a decision and its consequence, and the willingness to spend the first in order to buy the second. Whoever holds it is always some way ahead of the room.",
     body:[
@@ -1072,15 +1072,16 @@ function medallion(key){
 
 /* ======================= TRIAL PLATES =======================
    One drawing to close each trial, of a thing or a person that trial
-   actually turns on - the cart on the wrong road, the shut gate, the
+   actually turns on - the spears going out, the shut gate, the
    old man's boat, Senok with a man beside it for scale. All fourteen
    share a 120x64 field with the ground at y=56, and all are drawn in
    line in the page's own gold so they sit under the answers without
    competing with them. Mass is carried by a .14 fill of the same
    colour rather than by a second hue. */
 const SCENES = {
-  /* A Kokiri child, hat and all, with a fairy off the shoulder. */
-  kokiri:{ cap:"A Kokiri, who cannot leave", art:`
+  /* A Kokiri child, hat and all, with a fairy still lit off the
+     shoulder - one of the few in the wood that did not go out. */
+  kokiri:{ cap:"A Kokiri, and one still lit", art:`
     <path d="M28 56 H92" opacity=".3"/>
     <path d="M52 31 H64 L68 45 H48 Z" fill="currentColor" opacity=".14"/>
     <path d="M52 31 H64 L68 45 H48 Z"/>
@@ -1093,16 +1094,25 @@ const SCENES = {
     <circle cx="88" cy="20" r="2.6"/>
     <path d="M88 17.5 Q91 13.5 95 14.5 Q92.5 17.5 90 18.5"/>
     <path d="M88 17.5 Q85 13.5 81 14.5 Q83.5 17.5 86 18.5"/>`},
-  /* A laden cart, pointed the way the rumour sent it. */
-  cart:{ cap:"A cart on the wrong road", art:`
-    <path d="M16 56 H104" opacity=".3"/>
-    <path d="M34 40 H88 L84 28 H38 Z" fill="currentColor" opacity=".14"/>
-    <path d="M34 40 H88 L84 28 H38 Z"/>
-    <path d="M40 28 V21 H58 V28"/>
-    <path d="M46 21 V28"/><path d="M52 21 V28"/>
-    <circle cx="46" cy="48" r="8"/><circle cx="46" cy="48" r="2"/>
-    <circle cx="74" cy="48" r="8"/><circle cx="74" cy="48" r="2"/>
-    <path d="M88 34 L104 30"/>`},
+  /* The company's spears, up and going out. Five of them, shortening
+     and leaning as they go, so the rank reads as a column on the move
+     rather than a fence; the pennant hangs off the nearest. */
+  column:{ cap:"Spears, and no use for them", art:`
+    <path d="M12 56 H108" opacity=".3"/>
+    <path d="M26 56 L31 17"/>
+    <path d="M28.2 18 L31.4 8 L34.4 18.6 Z" fill="currentColor" opacity=".14"/>
+    <path d="M28.2 18 L31.4 8 L34.4 18.6 Z"/>
+    <path d="M31.8 20 L47 24 L31 30" fill="currentColor" opacity=".14"/>
+    <path d="M31.8 20 L47 24 L31 30"/>
+    <path d="M46 56 L50 21"/>
+    <path d="M47.4 22 L50.3 13 L53 22.5 Z" fill="currentColor" opacity=".14"/>
+    <path d="M47.4 22 L50.3 13 L53 22.5 Z"/>
+    <path d="M64 56 L67.5 26" opacity=".8"/>
+    <path d="M65.3 26.6 L67.8 19 L70.1 27 Z" opacity=".8"/>
+    <path d="M80 56 L83 30" opacity=".6"/>
+    <path d="M81.1 30.4 L83.2 24 L85.2 30.8 Z" opacity=".6"/>
+    <path d="M94 56 L96.5 34" opacity=".45"/>
+    <path d="M95.4 34.4 L97.2 29 L98.9 34.7 Z" opacity=".45"/>`},
   /* The town gate, barred, with the towers either side of it. */
   gate:{ cap:"The gate, counted shut", art:`
     <path d="M12 56 H108" opacity=".3"/>
@@ -1328,15 +1338,14 @@ const SCENES = {
    seventh of them leaves the medallion on the stone. There has never
    been a Time Medallion to hand anybody.
 
-   Each question offers all seven sages exactly once, and answer order is
-   varied per question so position never reveals the mapping. The orders
-   are two families of rotations over two different base orders, which
-   puts no sage in the same slot more than twice across the thirteen.
-   Those thirteen leave exactly one unused slot per sage and the seven of
-   them form a permutation, so the fourteenth order is not a free choice:
-   time, fire, spirit, water, shadow, light, forest is the only one that
-   holds the rule, and it closes the square - every sage now stands in
-   every slot exactly twice.
+   Each question offers all seven sages exactly once, and the order they
+   are read in is not written down here at all: it is shuffled at run
+   time, drawn once per trial at the start of a run, so that position
+   never reveals the mapping and no two people are answering the same
+   list. Stepping back to an earlier trial finds its answers where they
+   were left, because the deal is made once and kept. The order the seven
+   sit in below is therefore only the order somebody typed them in, and
+   means nothing.
 
    Sha is the one character in the fourteen who is a person. A Sheikah
    of Kakariko, met at the seventh and walking from there to the chamber
@@ -1361,28 +1370,28 @@ const SCENES = {
    names it. Each trial also carries a `where` - the place in Hyrule it
    is set - shown under its name. */
 const QUESTIONS = [
-  { scene:"kokiri", place:"The Warning", where:"Kokiri Forest",
-    text:"Senok came up out of the roots under this wood and walked away west, and the grass where he stood is already grey. The Kokiri children never leave the forest and do not want to hear that anything was ever under it. You have one evening. You are {T}, which is the first thing the clearing sees, and {C} will not settle. How do you tell them?",
+  { scene:"kokiri", place:"The Lights", where:"Kokiri Forest",
+    text:"Senok came up out of the roots under this wood and walked away west, and every fairy along the line he took has gone dark and dropped out of the air. They are lying in the leaf litter in their hundreds, cooling, not dead yet \u2014 a fairy warmed in the hands will sometimes come back, one at a time, and it is slow work. You are {T}, the children are already out among the litter on their knees, and the trail west goes cold by morning. What do you do with the night?",
     answers:[
-      {s:"forest", t:"Say it once, then stay in the clearing until somebody believes it."},
-      {s:"fire",   t:"Say it tonight, to the whole clearing at once, and let them be angry with me."},
-      {s:"water",  t:"Tell them I am frightened for them, in those words, and let them see it."},
-      {s:"shadow", t:"Tell the one who will act on it, and let the rest have their evening."},
-      {s:"spirit", t:"Say it and go. What they do with it is theirs and not mine."},
-      {s:"light",  t:"Set it out in order \u2014 what it is, when it comes, what the wood loses."},
-      {s:"time",   t:"Tell the youngest, who will still be saying it here long after I am gone."}
+      {s:"forest", t:"Stay out in the litter until dawn picking them up one at a time, and let the trail go cold."},
+      {s:"fire",   t:"Wake every Kokiri in the wood and have the whole forest out there before midnight."},
+      {s:"water",  t:"Say out loud that most of these will not come back, and kneel down and start anyway."},
+      {s:"shadow", t:"Work the far edge where nobody is looking, and keep the count to myself."},
+      {s:"spirit", t:"I will not stand here ranking them. I take them as I find them and answer to nobody for it."},
+      {s:"light",  t:"Count it first \u2014 how many are down, how long one takes, how many hours there are \u2014 and say the number out loud."},
+      {s:"time",   t:"Carry one dark fairy west with me and find out what put it out, before it reaches the next wood."}
     ]},
 
-  { scene:"cart", place:"The Road", where:"Hyrule Field",
-    text:"Out on the field the story has got ahead of you and arrived wrong. Half the carts on the road are driving toward the forest, because somebody told them the trees were safe and the castle was the danger. They are heading straight across Senok's path. {C} keeps pace and is no use for this. How do you turn them?",
+  { scene:"column", place:"The Column", where:"Hyrule Field",
+    text:"Out on the open field forty of the castle's riders have come up on the grey line with their spears down, sent to meet Senok where it crosses the road at dusk. No blade ends him. The captain has a written order in his hand, has never heard of you, and is not minded to hear of you now. They are mounted and they are going. {C} will not go near the horses. What do you do?",
     answers:[
-      {s:"shadow", t:"Find whoever started it and correct it at the source, without naming them."},
-      {s:"spirit", t:"Refuse to herd anybody. Say the true thing once, and let them steer."},
-      {s:"light",  t:"Stand at the crossroads and say the same true thing to every cart until it holds."},
-      {s:"time",   t:"Ride ahead to the next three villages, so the wrong story arrives after mine."},
-      {s:"forest", t:"Plant myself at the turning and be there all day, and the day after."},
-      {s:"fire",   t:"Turn the first cart around myself, and let the rest follow the argument."},
-      {s:"water",  t:"Tell them I am frightened too, which is why I am stood here saying it."}
+      {s:"forest", t:"Ride out with them. If they are going anyway, nobody out there is going alone."},
+      {s:"fire",   t:"Get in front of the column and stop it, with a hand on the captain's bridle."},
+      {s:"water",  t:"Tell the captain, in front of his riders, that I am frightened for every one of them."},
+      {s:"shadow", t:"See the column delayed \u2014 a gate shut, an order gone astray \u2014 and never say it was me."},
+      {s:"spirit", t:"A paper is not a reason. Tell him so to his face and refuse to stand out of the road."},
+      {s:"light",  t:"Set out what he is and what steel has already failed to do, where the whole company can hear it."},
+      {s:"time",   t:"Get word past them to the castle tonight, so the next company does not ride out the same way."}
     ]},
 
   { scene:"gate", place:"The Gate", where:"Hyrule Castle Town",
@@ -1804,6 +1813,23 @@ const ARMS = {
 const $ = id => document.getElementById(id);
 let idx = 0;
 let picks = [];
+/* The seven answers are dealt in a fresh random order for every trial,
+   drawn once at the start of a run rather than at every render, so that
+   stepping back to a previous trial finds them where you left them. */
+let deals = [];
+
+function startRun(){
+  idx = 0;
+  picks = [];
+  deals = QUESTIONS.map(q=>{
+    const a = q.answers.slice();
+    for(let i=a.length-1; i>0; i--){
+      const j = Math.floor(Math.random()*(i+1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  });
+}
 
 function show(name){
   document.querySelectorAll(".view").forEach(v=>v.classList.remove("on"));
@@ -1899,7 +1925,7 @@ function show(name){
       `${w.name} <em>&middot; ${w.kind}</em></b><span>${w.note}</span>`;
     b.addEventListener("click", ()=>{
       weapon = w;
-      idx = 0; picks = [];
+      startRun();
       show("quiz");
       renderQuestion();
     });
@@ -1930,7 +1956,7 @@ function renderQuestion(){
 
   const list = $("q-answers");
   list.innerHTML = "";
-  q.answers.forEach(a=>{
+  (deals[idx] || q.answers).forEach(a=>{
     const li = document.createElement("li");
     const b = document.createElement("button");
     b.className = "ans";
@@ -2034,12 +2060,12 @@ function renderResult(){
 }
 
 /* ---------- controls ---------- */
-$("begin").addEventListener("click", ()=>{ idx=0; picks=[]; show("tribe"); window.scrollTo({top:0, behavior:"instant"}); });
+$("begin").addEventListener("click", ()=>{ startRun(); show("tribe"); window.scrollTo({top:0, behavior:"instant"}); });
 $("c-back").addEventListener("click", ()=>{ show("tribe"); window.scrollTo({top:0, behavior:"instant"}); });
 $("back").addEventListener("click", ()=>{ if(idx>0){ idx--; renderQuestion(); } else { show("weapon"); } });
 $("w-back").addEventListener("click", ()=>{ show("companion"); window.scrollTo({top:0, behavior:"instant"}); });
 $("again").addEventListener("click", ()=>{
-  idx=0; picks=[];
+  startRun();
   ambient.setAccent(null);
   show("intro");
   window.scrollTo({top:0, behavior:"instant"});
