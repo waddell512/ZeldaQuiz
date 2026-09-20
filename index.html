@@ -143,7 +143,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 
 /* ---------- backdrop: the Chamber of Sages ----------
    Built to the room as the game draws it: a black void with blocky blue
-   stone columns standing in it, and the sages' platform in the middle -
+   stone columns standing in it, and the Sages' platform in the middle -
    a hexagon whose top surface is lit water, caustics crawling over it,
    the six medallions set around the rim and the Triforce laid in the
    centre. The platform is a flat drawing tipped away from the reader, so
@@ -457,7 +457,7 @@ button{font:inherit;color:inherit;cursor:pointer}
   border-left:2px solid var(--elem);padding-left:1.15rem;margin:.2em 0 0;
 }
 
-/* the canonical sage, presented as a peer rather than as your result */
+/* the canonical Sage, presented as a peer rather than as your result */
 .sage-card{
   width:100%;max-width:36rem;text-align:left;
   display:flex;flex-direction:column;align-items:flex-start;gap:.85rem;
@@ -601,7 +601,7 @@ b.key{font-weight:600}
   <div class="bg-shaft"></div>
   <div class="bg-horizon"></div>
 
-  <!-- the sages' platform: lit water inside a stone rim, the six set
+  <!-- the Sages' platform: lit water inside a stone rim, the six set
        round it and the Triforce laid in the middle -->
   <svg class="bg-dais" viewBox="0 0 900 900" aria-hidden="true">
     <defs>
@@ -731,7 +731,7 @@ b.key{font-weight:600}
     <section class="view on intro" id="v-intro">
       <div class="ringwrap">
         <div class="ring" id="ring" aria-hidden="true"></div>
-        <svg class="ring-tri" viewBox="0 0 100 100" role="img" aria-label="The Triforce, with the seven sage medallions around it">
+        <svg class="ring-tri" viewBox="0 0 100 100" role="img" aria-label="The Triforce, with the seven Sage medallions around it">
           <g fill="currentColor" fill-opacity=".2" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round">
             <path d="M50 8 L29.2 44 L70.8 44 Z"/>
             <path d="M27.6 47.5 L6.8 83.5 L48.4 83.5 Z"/>
@@ -744,7 +744,7 @@ b.key{font-weight:600}
         <p class="byline">by the Skyward Prince and The Baron</p>
       </div>
       <hr class="rule-gold" style="width:6rem">
-      <p class="lede">The Triforce speaks to you once, and what it says is that <em class="key">Senok</em> is awake. An age ago the <em class="key">Fairy Prince</em> of <em class="key">Kokiri Forest</em> put him under the roots of that wood and spent the whole of his own light doing it, and this season the last of that light ran out. Where Senok goes, light stops holding &mdash; lamps gutter and fairies go dark and fall out of the air &mdash; and he draws the life up out of the ground itself as he walks, so that the grass goes over grey behind him and nothing will take root in it for a year. No sword ends him. Only a <em class="key">sage&rsquo;s light</em> will put him back, and a sage is not appointed &mdash; a sage is made. The Triforce is plain about the terms: walk in behind him, help what he has left standing, and the light is yours by the end of it. Choose who walks it with you, and answer as yourself; the element you carry will be clear long before the end.</p>
+      <p class="lede">The Triforce speaks to you once, and what it says is that <em class="key">Senok</em> is awake. An age ago the <em class="key">Fairy Prince</em> of <em class="key">Kokiri Forest</em> put him under the roots of that wood and spent the whole of his own light doing it, and this season the last of that light ran out. Where Senok goes, light stops holding &mdash; lamps gutter and fairies go dark and fall out of the air &mdash; and he draws the life up out of the ground itself as he walks, so that the grass goes over grey behind him and nothing will take root in it for a year. No sword ends him. Only a <em class="key">Sage&rsquo;s light</em> will put him back, and a Sage is not appointed &mdash; a Sage is made. The Triforce is plain about the terms: walk in behind him, help what he has left standing, and the light is yours by the end of it. Choose who walks it with you, and answer as yourself; the element you carry will be clear long before the end.</p>
       <button class="btn" id="begin">Enter the Chamber</button>
     </section>
 
@@ -841,7 +841,7 @@ const SAGES = {
     /* what the element actually does in the world - the part a result
        is entitled to say out loud */
     power:[
-      "You make things grow. Ground he drew dry takes seed the same season, a burned hillside is green inside a month, and an orchard that should have wanted ten years to come back fruits in one.",
+      "You have Forest, and things grow where you put your hands. Ground he drew dry takes seed the same season, a burned hillside is green inside a month, and an orchard that should have wanted ten years to come back fruits in one.",
       "And the wood answers you. Trees, birds, the things living down in the roots \u2014 ask them and they tell you what came through, which way it went and what it did on the way. Nothing crosses a forest you are standing in without you knowing it."
     ],
     body:[
@@ -861,7 +861,7 @@ const SAGES = {
     /* what the element actually does in the world - the part a result
        is entitled to say out loud */
     power:[
-      "You have every flame in sight. Move it, shape it, put it out, or pull it back up out of nothing \u2014 it does not need fuel to burn and it does not need a reason to do as it is told.",
+      "You have Fire, and every flame in sight with it. Move it, shape it, put it out, or pull it back up out of nothing \u2014 it does not need fuel to burn and it does not need a reason to do as it is told.",
       "And you can call things out of it. Creatures made of flame: hounds, birds, a thing the size of a <em class=\"key\">Goron</em>, stood where you put them and holding that ground for as long as you keep them lit."
     ],
     body:[
@@ -881,7 +881,7 @@ const SAGES = {
     /* what the element actually does in the world - the part a result
        is entitled to say out loud */
     power:[
-      "You have the water itself. A river's course, a current that has gone dead, rain over a valley that has had none, a flood turned off a village \u2014 it goes where you send it.",
+      "You have Water itself. A river's course, a current that has gone dead, rain over a valley that has had none, a flood turned off a village \u2014 it goes where you send it.",
       "And you see through all of it. Anywhere in <em class=\"key\">Hyrule</em> with water in it is somewhere you can look: a well, a trough, a puddle in a cart rut, the sea. Ask for a place with water in it and you are standing over it."
     ],
     body:[
@@ -901,7 +901,7 @@ const SAGES = {
     /* what the element actually does in the world - the part a result
        is entitled to say out loud */
     power:[
-      "You become shadow. Not hidden \u2014 shadow: flat to a wall, under a door, out through the gap at the hinge, and nothing that is looking for a person finds one.",
+      "You become Shadow. Not hidden \u2014 shadow: flat to a wall, under a door, out through the gap at the hinge, and nothing that is looking for a person finds one.",
       "And you can take somebody's. Hold a person's shadow and they go where you send them and do what needs doing \u2014 the ugliest thing any of the seven can do, which is why <em class=\"key\">Impa</em>'s people keep it for the nights when there is nothing else left to try."
     ],
     body:[
@@ -921,8 +921,8 @@ const SAGES = {
     /* what the element actually does in the world - the part a result
        is entitled to say out loud */
     power:[
-      "You can step out of your own body. The self goes where it likes \u2014 through a wall, down a sealed tunnel, across <em class=\"key\">Hyrule</em> and back \u2014 and what you left behind sits breathing and comes to no harm while you are gone.",
-      "And the good Poes come to you. <em class=\"key\">Poes of Light</em>: the lanterns that never went bad, and they answer a sage of Spirit the way they answer nobody else. They carry, they watch, they light a road all night, and they will stand between a person and anything wearing his colours."
+      "You have Spirit, which is not tied to a body. You can step out of your own \u2014 through a wall, down a sealed tunnel, across <em class=\"key\">Hyrule</em> and back \u2014 and what you leave behind sits breathing and comes to no harm while you are gone.",
+      "And the good Poes come to you. <em class=\"key\">Poes of Light</em>: the lanterns that never went bad, and they answer a Sage of Spirit the way they answer nobody else. They carry, they watch, they light a road all night, and they will stand between a person and anything wearing his colours."
     ],
     body:[
       "You do not take an instruction on the strength of who gave it. Authority has to earn the same hearing as anyone else, and if it fails, you go your own way without much drama about it. You are comfortable being the only one, and you are suspicious of any arrangement that requires you to stop asking questions.",
@@ -941,7 +941,7 @@ const SAGES = {
     /* what the element actually does in the world - the part a result
        is entitled to say out loud */
     power:[
-      "You dispel dark. Not turn a lamp up \u2014 unmake it: the grey goes off ground you light, a room he has been through comes back to its own colour, and nothing he leaves in the air can stay in air you are standing in.",
+      "You have Light, and Light dispels dark. Not turn a lamp up \u2014 unmake it: the grey goes off ground you light, a room he has been through comes back to its own colour, and nothing he leaves in the air can stay in air you are standing in.",
       "And evil will not come at it. Poes, wraiths, the things that follow him down the line \u2014 they break off and go round rather than cross your light, and what you close stays closed long after you have walked away from it."
     ],
     body:[
@@ -957,14 +957,14 @@ const SAGES = {
     sage:"Zelda", element:"Time", medallion:"None", role:"The Seventh Sage",
     /* the seventh outcome is titled, not elemental - see renderResult */
     heading:"The Seventh", headEyebrow:"You are", label:"Seventh",
-    sageEyebrow:"The sage who holds it",
+    sageEyebrow:"The Sage who holds it",
     temple:"Temple of Time", song:"Song of Time", instrument:"Ocarina of Time",
     line:"You are the one who plays the long game.",
-    about:"The seventh place among the sages is the only one with no element attached to it and no medallion to hand you. What it actually is: the distance between a decision and its consequence, and the willingness to spend the first in order to buy the second. Whoever holds it is always some way ahead of the room.",
+    about:"The seventh place among the Sages is the only one with no element attached to it and no medallion to hand you. What it actually is: the distance between a decision and its consequence, and the willingness to spend the first in order to buy the second. Whoever holds it is always some way ahead of the room.",
     /* what the element actually does in the world - the part a result
        is entitled to say out loud */
     power:[
-      "You work in time itself. An hour held open, a day run back to its own morning, a season stepped over \u2014 you can go to when a thing happened, stand there while it happens, and come back with what you learned. The cost is paid in front: every hour you hold open is an hour of your own, spent before anybody knows it was needed.",
+      "You work in Time itself. An hour held open, a day run back to its own morning, a season stepped over \u2014 you can go to when a thing happened, stand there while it happens, and come back with what you learned. The cost is paid in front: every hour you hold open is an hour of your own, spent before anybody knows it was needed.",
       "And the <em class=\"key\">Ocarina of Time</em> makes more of it. The years answer your hands with or without an instrument in them \u2014 but played through the Ocarina the same power reaches further and holds longer: an hour becomes a day, a season you could only step over is a season you can walk back through. There is nothing else in <em class=\"key\">Hyrule</em> built to carry that much."
     ],
     body:[
@@ -973,8 +973,8 @@ const SAGES = {
     ],
     sageBody:[
       "Zelda is never called the Sage of Time. Her title in Ocarina of Time is the Seventh Sage - the one who leads the other six, closes the Sacred Realm, and is the only one who receives no medallion. There is no Time Medallion in the game because there was never a seventh temple to take one out of.",
-      "But the element is hers in everything except the name. She is the sage whose entire power is what she does with years: she reads the danger seven years before anyone acts on it, then spends those seven hidden in plain sight, feeding the plan one song at a time. Every other sage holds a place. She holds a schedule.",
-      "And she is the one who ends it by giving the years back - handing back the seven she spent and the childhood they cost. That is what a Sage of Time would be, if the medallion existed. It does not, which is the point: this element was never a power handed to her, and she is the only sage who pays for it in advance."
+      "But the element is hers in everything except the name. She is the Sage whose entire power is what she does with years: she reads the danger seven years before anyone acts on it, then spends those seven hidden in plain sight, feeding the plan one song at a time. Every other Sage holds a place. She holds a schedule.",
+      "And she is the one who ends it by giving the years back - handing back the seven she spent and the childhood they cost. That is what a Sage of Time would be, if the medallion existed. It does not, which is the point: this element was never a power handed to her, and she is the only Sage who pays for it in advance."
     ]
   }
 };
@@ -1110,7 +1110,7 @@ const GLYPHS = {
 let medUID = 0;
 function medallion(key){
   const s = SAGES[key];
-  const bare = key === "time";           /* the seventh sage carries no medallion */
+  const bare = key === "time";           /* the seventh Sage carries no medallion */
   const u = "md" + (++medUID);
   /* Raised metal is the coin's own colour lifted toward the light, except
      on the white blank, which carries its crest in its own gold ink. */
@@ -1473,7 +1473,7 @@ const SCENES = {
    Ancient Sages do about you once he is back under. So the twelve are
    never a race and never a warning - they are wreckage with people still
    standing in it, asking for something. Helping is the whole of how a
-   sage is made, which is the arrangement the Triforce named on the first
+   Sage is made, which is the arrangement the Triforce named on the first
    screen, and why the twelfth is the Fairy Prince's grove handing the
    light over.
 
@@ -1502,7 +1502,7 @@ const SCENES = {
    reads it, and the one it reads for the seventh is a blank: there has
    never been a Time Medallion to hand anybody.
 
-   Each question offers all seven sages exactly once, and the order they
+   Each question offers all seven Sages exactly once, and the order they
    are read in is not written down here at all: it is shuffled at run
    time, drawn once per trial at the start of a run, so that position
    never reveals the mapping and no two people are answering the same
@@ -1547,7 +1547,7 @@ const QUESTIONS = [
       {s:"shadow", t:"Work the far edge where nobody is looking, and keep the count to myself."},
       {s:"spirit", t:"I will not stand here ranking them. I take them as I find them."},
       {s:"light",  t:"Count it first \u2014 how many are down, how long one takes, how many hours there are."},
-      {s:"time",   t:"Carry one dark fairy west and find what put it out, before it reaches the next wood."}
+      {s:"time",   t:"Let tonight go. Carry one dark fairy west and find what put it out, so there is still a wood here in ten years."}
     ]},
 
   { scene:"column", place:"The Six", where:"Hyrule Field",
@@ -1559,14 +1559,14 @@ const QUESTIONS = [
       {s:"shadow", t:"Go out after dark, and let the road think he walked back on his own."},
       {s:"spirit", t:"Their fear is not my rule. I cross, and I ask nobody to come."},
       {s:"light",  t:"Get it straight first \u2014 where he fell, how far, how long a lamp lasts out there."},
-      {s:"time",   t:"Take [the six] to the castle first, so the next forty are never sent."}
+      {s:"time",   t:"Take [the six] to the castle tonight, so that in a month nobody is sending forty more."}
     ]},
 
   { scene:"gate", place:"The Gate", where:"Hyrule Castle Town",
     text:"The farms east of here are grey to the fence posts, and the families off them have walked up to [Castle Town]. The town counted its wells and its grain and shut the [gate]. {C} is outside the wall with them. What do you do at the gate?",
     answers:[
       {s:"light",  t:"Get the count right in front of them \u2014 room, water, days \u2014 so it can be argued with."},
-      {s:"time",   t:"Get the children through first, and spend the week arguing about the rest."},
+      {s:"time",   t:"Get the children through first \u2014 they are the ones who have to be alive in ten years \u2014 and argue all week about the rest."},
       {s:"forest", t:"Stay outside with the farms. If the gate holds, it holds against me too."},
       {s:"fire",   t:"Put my shoulder to the gate and open it now."},
       {s:"water",  t:"Say out loud, in the square, exactly what it is the town is doing."},
@@ -1582,14 +1582,14 @@ const QUESTIONS = [
       {s:"shadow", t:"Let them muster, and quietly see to it the west road is not passable."},
       {s:"spirit", t:"They are not mine to stop. I say it once and stand out of the road."},
       {s:"light",  t:"Set out what he is and what stone has already failed to do, in front of all of them."},
-      {s:"time",   t:"Give them work that will matter in a month, and let the muster cool."},
+      {s:"time",   t:"Give them work that will still matter in a month, and let the muster cool while they do it."},
       {s:"forest", t:"If they go, I go with them, and I come back with whoever comes back."}
     ]},
 
   { scene:"zora", place:"The Current", where:"Zora's Domain",
     text:"The [river] is coming down dead out of the upland he crossed \u2014 no shine on it, nothing living in it. The [Zora] can dam the [mouth] and keep the clean water they still have. Every village in the valley below drinks what they would be shutting off. What do you do?",
     answers:[
-      {s:"time",   t:"Sink a store for the valley first. Then let them close the mouth."},
+      {s:"time",   t:"Sink the valley a store deep enough to last it a year, and then let them close the mouth."},
       {s:"forest", t:"Stand at the mouth of it and not move while they decide."},
       {s:"fire",   t:"Go upstream today and find out what is in the water."},
       {s:"water",  t:"Say what the valley loses, and say it where the valley can hear it too."},
@@ -1643,7 +1643,7 @@ const QUESTIONS = [
       {s:"shadow", t:"Leave the boat tied where he will find it, and stop arguing."},
       {s:"light",  t:"Lay out what the water does and what the week after looks like, and leave the boat."},
       {s:"forest", t:"Sit down on the jetty and stay there until one of us moves."},
-      {s:"time",   t:"Stay two days, learn who his people are, and send the one he cannot refuse."}
+      {s:"time",   t:"Give it two days, learn who his people are, and send the one he cannot refuse."}
     ]},
 
   { scene:"rope", place:"The Rope", where:"Gerudo Valley",
@@ -1665,13 +1665,13 @@ const QUESTIONS = [
       {s:"shadow", t:"Carry the water in every week, and never say how far I am bringing it."},
       {s:"light",  t:"Walk them out to the edge of it and show them where the colour starts again."},
       {s:"forest", t:"Camp with them. A season of that is the only argument I have."},
-      {s:"time",   t:"Find out what they are really staying for, and go and solve that instead."},
+      {s:"time",   t:"Find out what they are really staying for and solve that instead, so they are off this ground by spring."},
       {s:"fire",   t:"Load their cart myself and start walking. They can follow or they can shout."},
       {s:"spirit", t:"They are not wrong. It is theirs, and I am not the one to move them."}
     ]},
 
   { scene:"grove", place:"What It Cost", where:"The Fairy Prince's Grove",
-    text:"The few fairies left in this grove are what remains of the [Fairy Prince]'s light \u2014 the [light that makes a sage]. They say it is worth exactly what you did in the eleven places behind you, and ask which of the eleven you would take back. Which is it?",
+    text:"The few fairies left in this grove are what remains of the [Fairy Prince]'s light \u2014 the [light that makes a Sage]. They say it is worth exactly what you did in the eleven places behind you, and ask which of the eleven you would take back. Which is it?",
     answers:[
       {s:"light",  t:"None back. Set the eleven out in order, so what they cost is on the record."},
       {s:"forest", t:"None of them. I stood where I stood."},
@@ -1697,7 +1697,7 @@ const QUESTIONS = [
   { scene:"chamber", place:"The Medallion", where:"The Chamber of Sages",
     text:"Senok is back under the roots, and the ground under you is not [Hyrule] any more. Six lights stand around a platform in the dark, and one of them holds a [medallion] out to you \u2014 its face lost in its own light. [Sha] stopped at the edge with {C}, and said plainly that they do not know what is past it. How do you take it?",
     answers:[
-      {s:"time",   t:"Take it already counting what it will cost, and keep that number to myself."},
+      {s:"time",   t:"Take it already counting the years it will cost, and keep that number to myself."},
       {s:"fire",   t:"Take it before they have finished offering it, and thank them far too loudly."},
       {s:"spirit", t:"Take it like something I came for, not something I was given, and thank nobody."},
       {s:"water",  t:"Take it with my eyes stinging, and tell [all six] what the season cost while I am still holding it."},
@@ -1706,7 +1706,7 @@ const QUESTIONS = [
       {s:"forest", t:"Take it in both hands and hold on. I have not let go of anything yet."}
     ]},
 ];
-/* integrity check: 7 answers per question, each sage exactly once */
+/* integrity check: 7 answers per question, each Sage exactly once */
 (function verify(){
   QUESTIONS.forEach((q,i)=>{
     const seen = q.answers.map(a=>a.s).sort().join(",");
@@ -2051,13 +2051,13 @@ function mural(){
 /* ======================= STATE ======================= */
 const $ = id => document.getElementById(id);
 const KEY = t => `<em class="key">${t}</em>`;
-/* Seven elements, one closing line: no sage's light runs at full strength
+/* Seven elements, one closing line: no Sage's light runs at full strength
    on its own, and the page says so in the same words whichever one you
    came out as. */
 const TOGETHER =
-  "None of it runs at full strength on its own. A sage&rsquo;s light answers to " +
+  "None of it runs at full strength on its own. A Sage&rsquo;s light answers to " +
   "company \u2014 it burns highest with <em class=\"key\">Sha</em> at your left and " +
-  "the other sages stood around you, and no seal in <em class=\"key\">Hyrule</em> " +
+  "the other Sages stood around you, and no seal in <em class=\"key\">Hyrule</em> " +
   "that ever held was held by one pair of hands.";
 let idx = 0;
 let picks = [];
@@ -2260,7 +2260,7 @@ function winner(counts){
   const max = Math.max(...ORDER.map(k=>counts[k]));
   const tied = ORDER.filter(k => counts[k] === max);
   if(tied.length === 1) return tied[0];
-  // tie-break: whichever tied sage the player chose earliest
+  // tie-break: whichever tied Sage the player chose earliest
   for(const s of picks){ if(tied.includes(s)) return s; }
   return tied[0];
 }
@@ -2296,7 +2296,7 @@ function renderResult(){
   ].map(([k,v])=>`<div class="fact"><dt>${k}</dt><dd>${v}</dd></div>`).join("");
 
   $("r-sage").innerHTML =
-    `<p class="eyebrow eyebrow-elem">${s.sageEyebrow || "Another sage of your element"}</p>
+    `<p class="eyebrow eyebrow-elem">${s.sageEyebrow || "Another Sage of your element"}</p>
      <h3 class="sage-name">${s.sage}</h3>
      <p class="sage-role">${s.role || "Sage of " + s.element} &middot; ${s.temple}</p>
      <div class="sage-text">${s.sageBody.map(p=>`<p>${p}</p>`).join("")}</div>
@@ -2343,7 +2343,7 @@ $("copy").addEventListener("click", async ()=>{
   const counts = tally();
   const s = SAGES[winner(counts)];
   const text = (s.heading
-    ? `The Sage Trials \u2014 I came out as ${s.heading}. ${s.line} The sage who holds it: ${s.sage} (${s.temple} \u00b7 ${s.song}).`
+    ? `The Sage Trials \u2014 I came out as ${s.heading}. ${s.line} The Sage who holds it: ${s.sage} (${s.temple} \u00b7 ${s.song}).`
     : `The Sage Trials \u2014 my element is ${s.element}. ${s.line} Another Sage of ${s.element}: ${s.sage} (${s.temple} \u00b7 ${s.song}).`)
     + ` Fourteen trials, the thirteenth of them Senok, walked as ${tribe.one} with ${companion.name}, ${weapon.carry}, and Sha from Kakariko to the chamber door.`;
   try{
