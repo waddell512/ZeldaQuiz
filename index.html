@@ -450,6 +450,12 @@ button{font:inherit;color:inherit;cursor:pointer}
 }
 .eyebrow-elem{color:var(--elem)}
 .res-body .eyebrow-elem{margin-bottom:-.2em}
+/* what the light does, and the line all seven of them end on */
+.res-power{border-top:1px solid var(--edge);padding-top:1.7rem}
+.res-together{
+  font-family:Spectral,serif;font-style:italic;color:var(--ink);
+  border-left:2px solid var(--elem);padding-left:1.15rem;margin:.2em 0 0;
+}
 
 /* the canonical sage, presented as a peer rather than as your result */
 .sage-card{
@@ -738,7 +744,7 @@ b.key{font-weight:600}
         <p class="byline">by the Skyward Prince and The Baron</p>
       </div>
       <hr class="rule-gold" style="width:6rem">
-      <p class="lede">The Triforce speaks to you once, and what it says is that <em class="key">Senok</em> is awake. An age ago the <em class="key">Fairy Prince</em> of the Kokiri Forest put him under the roots of that wood and spent the whole of his own light doing it, and this season the last of that light ran out. Where Senok goes, light stops holding &mdash; lamps gutter and fairies go dark and fall out of the air &mdash; and he draws the life up out of the ground itself as he walks, so that the grass goes over grey behind him and nothing will take root in it for a year. No sword ends him. Only a <em class="key">sage&rsquo;s light</em> will put him back, and a sage is not appointed &mdash; a sage is made. The Triforce is plain about the terms: walk in behind him, help what he has left standing, and the light is yours by the end of it. Choose who walks it with you, and answer as yourself; the element you carry will be clear long before the end.</p>
+      <p class="lede">The Triforce speaks to you once, and what it says is that <em class="key">Senok</em> is awake. An age ago the <em class="key">Fairy Prince</em> of <em class="key">Kokiri Forest</em> put him under the roots of that wood and spent the whole of his own light doing it, and this season the last of that light ran out. Where Senok goes, light stops holding &mdash; lamps gutter and fairies go dark and fall out of the air &mdash; and he draws the life up out of the ground itself as he walks, so that the grass goes over grey behind him and nothing will take root in it for a year. No sword ends him. Only a <em class="key">sage&rsquo;s light</em> will put him back, and a sage is not appointed &mdash; a sage is made. The Triforce is plain about the terms: walk in behind him, help what he has left standing, and the light is yours by the end of it. Choose who walks it with you, and answer as yourself; the element you carry will be clear long before the end.</p>
       <button class="btn" id="begin">Enter the Chamber</button>
     </section>
 
@@ -746,7 +752,7 @@ b.key{font-weight:600}
     <section class="view choose" id="v-tribe">
       <p class="eyebrow">Before anything else</p>
       <h2 class="ctitle">What blood do you carry?</h2>
-      <p class="clede">Six peoples answer to Hyrule, and a seventh only passes over it. Nothing here is scored &mdash; it decides who the trials are speaking to when they start asking.</p>
+      <p class="clede">Six peoples answer to <em class="key">Hyrule</em>, and a seventh only passes over it. Nothing here is scored &mdash; it decides who the trials are speaking to when they start asking.</p>
       <ul class="companions" id="t-list"></ul>
     </section>
 
@@ -795,6 +801,7 @@ b.key{font-weight:600}
       <p class="res-line" id="r-line"></p>
       <p class="res-about" id="r-about"></p>
       <div class="res-body" id="r-body"></div>
+      <div class="res-body res-power" id="r-power"></div>
       <section class="sage-card" id="r-sage"></section>
       <div class="affinity" id="r-aff"></div>
       <figure class="mural" id="r-mural"></figure>
@@ -831,6 +838,12 @@ const SAGES = {
     temple:"Forest Temple", song:"Minuet of Forest", instrument:"Kokiri Flute",
     line:"You are the one who stays.",
     about:"Forest is the element of what takes root and refuses to be moved. It is the slowest of the six and by far the hardest to remove \u2014 a thing that grows in place, holds its ground, and is still standing long after the storm that was supposed to end it. Green, patient, and quietly immovable.",
+    /* what the element actually does in the world - the part a result
+       is entitled to say out loud */
+    power:[
+      "You make things grow. Ground he drew dry takes seed the same season, a burned hillside is green inside a month, and an orchard that should have wanted ten years to come back fruits in one.",
+      "And the wood answers you. Trees, birds, the things living down in the roots \u2014 ask them and they tell you what came through, which way it went and what it did on the way. Nothing crosses a forest you are standing in without you knowing it."
+    ],
     body:[
       "You measure a decision by who it costs. Grand causes interest you far less than the specific person in front of you, and you will quietly reorganize your own plans around them without ever presenting it as a sacrifice. People come back to you years later because you are still there.",
       "The risk is that staying can become hiding. Roots hold you up right until the day they hold you back \u2014 and the hardest thing you will ever do is walk across your own bridge."
@@ -845,6 +858,12 @@ const SAGES = {
     temple:"Fire Temple", song:"Bolero of Fire", instrument:"Goron Drums",
     line:"You are the one who moves first.",
     about:"Fire is the element of immediate commitment. It does not deliberate, hedge, or hold anything back in reserve \u2014 it converts everything it touches all at once, and it either warms a mountain or empties one. The fastest of the six, and the least interested in waiting to be sure.",
+    /* what the element actually does in the world - the part a result
+       is entitled to say out loud */
+    power:[
+      "You have every flame in sight. Move it, shape it, put it out, or pull it back up out of nothing \u2014 it does not need fuel to burn and it does not need a reason to do as it is told.",
+      "And you can call things out of it. Creatures made of flame: hounds, birds, a thing the size of a <em class=\"key\">Goron</em>, stood where you put them and holding that ground for as long as you keep them lit."
+    ],
     body:[
       "You would rather act and be wrong than deliberate and be late. Warmth is your default setting; you let people in fast and defend them loudly. In a room where everyone is being careful, you are the one who finally says the obvious thing out loud, and the room is usually relieved.",
       "The risk is momentum. Not everything wants to be charged at, and some doors only open to patience \u2014 the fire that warms a mountain is the same fire that empties it."
@@ -859,6 +878,12 @@ const SAGES = {
     temple:"Water Temple", song:"Serenade of Water", instrument:"Zora Guitar",
     line:"You are the one who feels it out loud.",
     about:"Water is the element of depth and pressure. It takes the shape of whatever holds it and loses nothing at all in the process, and the part of it you can see is never the part that matters. Blue, endlessly adaptive, and a great deal heavier than it looks.",
+    /* what the element actually does in the world - the part a result
+       is entitled to say out loud */
+    power:[
+      "You have the water itself. A river's course, a current that has gone dead, rain over a valley that has had none, a flood turned off a village \u2014 it goes where you send it.",
+      "And you see through all of it. Anywhere in <em class=\"key\">Hyrule</em> with water in it is somewhere you can look: a well, a trough, a puddle in a cart rut, the sea. Ask for a place with water in it and you are standing over it."
+    ],
     body:[
       "You do not do quiet dignity. You will tell someone precisely how they made you feel, at length, and you will still be the first to change shape when the situation demands it. Pride and adaptability sit side by side in you; you bend constantly without ever once conceding.",
       "The risk is the size of the waves. What feels proportionate from inside can land as a flood on everyone else, and your pride will occasionally defend a position you stopped believing an hour ago."
@@ -873,6 +898,12 @@ const SAGES = {
     temple:"Shadow Temple", song:"Nocturne of Shadow", instrument:"Sheikah Lyre",
     line:"You are the one who carries it silently.",
     about:"Shadow is the element of what is deliberately not shown. It is not evil and it is not absence \u2014 it is concealment in service of something: the information withheld on purpose, the weight carried where nobody has to look at it. The quietest of the six, and the most misread.",
+    /* what the element actually does in the world - the part a result
+       is entitled to say out loud */
+    power:[
+      "You become shadow. Not hidden \u2014 shadow: flat to a wall, under a door, out through the gap at the hinge, and nothing that is looking for a person finds one.",
+      "And you can take somebody's. Hold a person's shadow and they go where you send them and do what needs doing \u2014 the ugliest thing any of the seven can do, which is why <em class=\"key\">Impa</em>'s people keep it for the nights when there is nothing else left to try."
+    ],
     body:[
       "You absorb. When something goes wrong you calculate who does not need to know, and then you handle it. You are the person others end up trusting with the thing they cannot say aloud, and you have never once repeated any of it. In a crisis you get quieter, not louder.",
       "The risk is that nobody is standing between you and anything. Carrying it alone is a decision you keep making automatically, and the people who love you would carry some of it if you ever let the silence break."
@@ -887,6 +918,12 @@ const SAGES = {
     temple:"Spirit Temple", song:"Requiem of Spirit", instrument:"Gerudo Pipes",
     line:"You are the one who refuses.",
     about:"Spirit is the element of will \u2014 the refusal that survives a desert, the self that does not dissolve into whatever it happens to be surrounded by. It is the only one of the six defined by what it declines to do rather than what it does. Orange, dry, and unowned.",
+    /* what the element actually does in the world - the part a result
+       is entitled to say out loud */
+    power:[
+      "You can step out of your own body. The self goes where it likes \u2014 through a wall, down a sealed tunnel, across <em class=\"key\">Hyrule</em> and back \u2014 and what you left behind sits breathing and comes to no harm while you are gone.",
+      "And the good Poes come to you. <em class=\"key\">Poes of Light</em>: the lanterns that never went bad, and they answer a sage of Spirit the way they answer nobody else. They carry, they watch, they light a road all night, and they will stand between a person and anything wearing his colours."
+    ],
     body:[
       "You do not take an instruction on the strength of who gave it. Authority has to earn the same hearing as anyone else, and if it fails, you go your own way without much drama about it. You are comfortable being the only one, and you are suspicious of any arrangement that requires you to stop asking questions.",
       "The risk is that refusal becomes a reflex. Nabooru gets caught precisely because she went in alone \u2014 and the people who would have gone with her never got asked."
@@ -901,6 +938,12 @@ const SAGES = {
     temple:"Temple of Time", song:"Prelude of Light", instrument:"Hylian Harp",
     line:"You are the one who holds the frame.",
     about:"Light is the element of the frame itself. It does not act so much as make action possible \u2014 it reveals what is already there, puts it in order, and holds the structure steady while everything inside it moves. The least dramatic of the six, and the one the other five are standing on.",
+    /* what the element actually does in the world - the part a result
+       is entitled to say out loud */
+    power:[
+      "You dispel dark. Not turn a lamp up \u2014 unmake it: the grey goes off ground you light, a room he has been through comes back to its own colour, and nothing he leaves in the air can stay in air you are standing in.",
+      "And evil will not come at it. Poes, wraiths, the things that follow him down the line \u2014 they break off and go round rather than cross your light, and what you close stays closed long after you have walked away from it."
+    ],
     body:[
       "You take the long view by temperament, not by effort. Things that panic other people register with you as stages in a process that was always going to have stages. You are the steady one, the one who keeps the structure intact while everyone else is reacting, and you rarely need credit for it.",
       "The risk is acceptance arriving too early. Not everything is a phase to be waited out, and patience that never converts into action is indistinguishable, from the outside, from not caring."
@@ -918,6 +961,12 @@ const SAGES = {
     temple:"Temple of Time", song:"Song of Time", instrument:"Ocarina of Time",
     line:"You are the one who plays the long game.",
     about:"The seventh place among the sages is the only one with no element attached to it and no medallion to hand you. What it actually is: the distance between a decision and its consequence, and the willingness to spend the first in order to buy the second. Whoever holds it is always some way ahead of the room.",
+    /* what the element actually does in the world - the part a result
+       is entitled to say out loud */
+    power:[
+      "You work in time itself. An hour held open, a day run back to its own morning, a season stepped over \u2014 you can go to when a thing happened, stand there while it happens, and come back with what you learned. The cost is paid in front: every hour you hold open is an hour of your own, spent before anybody knows it was needed.",
+      "And the <em class=\"key\">Ocarina of Time</em> makes more of it. The years answer your hands with or without an instrument in them \u2014 but played through the Ocarina the same power reaches further and holds longer: an hour becomes a day, a season you could only step over is a season you can walk back through. There is nothing else in <em class=\"key\">Hyrule</em> built to carry that much."
+    ],
     body:[
       "You are always some distance ahead of the current conversation. You think in consequences and second moves, you hold information until releasing it will actually do something, and you are willing to lose the present round if it sets up the next one. People often realize much later that you had already accounted for it.",
       "The risk is living in a future nobody else can see yet. Strategy can quietly become distance \u2014 and the years you spend arranging things are years you also have to live in."
@@ -1646,7 +1695,7 @@ const QUESTIONS = [
     ]},
 
   { scene:"chamber", place:"The Medallion", where:"The Chamber of Sages",
-    text:"Senok is back under the roots, and the ground under you is not Hyrule any more. Six lights stand around a platform in the dark, and one of them holds a [medallion] out to you \u2014 its face lost in its own light. [Sha] stopped at the edge with {C}, and said plainly that they do not know what is past it. How do you take it?",
+    text:"Senok is back under the roots, and the ground under you is not [Hyrule] any more. Six lights stand around a platform in the dark, and one of them holds a [medallion] out to you \u2014 its face lost in its own light. [Sha] stopped at the edge with {C}, and said plainly that they do not know what is past it. How do you take it?",
     answers:[
       {s:"time",   t:"Take it already counting what it will cost, and keep that number to myself."},
       {s:"fire",   t:"Take it before they have finished offering it, and thank them far too loudly."},
@@ -2002,6 +2051,14 @@ function mural(){
 /* ======================= STATE ======================= */
 const $ = id => document.getElementById(id);
 const KEY = t => `<em class="key">${t}</em>`;
+/* Seven elements, one closing line: no sage's light runs at full strength
+   on its own, and the page says so in the same words whichever one you
+   came out as. */
+const TOGETHER =
+  "None of it runs at full strength on its own. A sage&rsquo;s light answers to " +
+  "company \u2014 it burns highest with <em class=\"key\">Sha</em> at your left and " +
+  "the other sages stood around you, and no seal in <em class=\"key\">Hyrule</em> " +
+  "that ever held was held by one pair of hands.";
 let idx = 0;
 let picks = [];
 /* The seven answers are dealt in a fresh random order for every trial,
@@ -2137,7 +2194,13 @@ function renderQuestion(){
      who came back, the six in the chamber - because an answer is your
      own voice and the red in it should be who you are talking about,
      not what you are doing. Everything else in an answer stays plain,
-     which is why most of them carry no red at all. */
+     which is why most of them carry no red at all.
+
+     A place wears the mark only when it is called by its own name:
+     Castle Town, Kakariko, Lake Hylia, Hyrule. "The wood", "the valley",
+     "the ranch" are not names and stay plain - which is most of them,
+     because the `where` under the trial's name has already said where
+     you are, and saying it twice in red would be the page shouting. */
   const named = t => t.replace(/\{C\}/g, KEY(companion.name))
                       .replace(/\{T\}/g, KEY(tribe.one))
                       .replace(/\{W\}/g, KEY(weapon.carry))
@@ -2220,6 +2283,11 @@ function renderResult(){
     `<p class="eyebrow eyebrow-elem">What that makes you</p>` +
     s.body.map(p=>`<p>${p}</p>`).join("");
 
+  $("r-power").innerHTML =
+    `<p class="eyebrow eyebrow-elem">What the light does</p>` +
+    s.power.map(p=>`<p>${p}</p>`).join("") +
+    `<p class="res-together">${TOGETHER}</p>`;
+
   const facts = [
     ["Medallion", s.medallion],
     ["Temple", s.temple],
@@ -2248,7 +2316,7 @@ function renderResult(){
     `Fourteen trials, the thirteenth of them <b class="key">Senok</b>, walked as ` +
     `<b class="key">${tribe.one}</b> at the shoulder of <b class="key">${companion.name}</b>, ` +
     `${companion.kind}, with <b class="key">${weapon.carry}</b> to hand. ` +
-    `<b class="key">Sha</b> walked it with you from Kakariko to the chamber door.`;
+    `<b class="key">Sha</b> walked it with you from <b class="key">Kakariko</b> to the chamber door.`;
 
   show("result");
   window.scrollTo({top:0, behavior:"instant"});
