@@ -23,6 +23,8 @@
   --seventh-ink:#8A6D1F;
   /* The stone the plates are cut into: a face, the sunk panel inside it,
      the shadow in the groove, and the lip the light catches. */
+  /* The colour a text box in the game puts a name in. */
+  --key:#A6301D;
   --slab:#DEDBE6;
   --slab-2:#C6C2D3;
   --cut:rgba(26,24,38,.40);
@@ -55,6 +57,7 @@
     --gold:#D9B85F;
     --gold-2:#B99542;
     --emb:rgba(255,255,255,.44);
+    --key:#F0715A;
     --slab:#232840;
     --slab-2:#171A2E;
     --cut:rgba(0,0,0,.55);
@@ -84,6 +87,7 @@
   --gold:#D9B85F;
   --gold-2:#B99542;
   --emb:rgba(255,255,255,.44);
+  --key:#F0715A;
   --slab:#232840;
   --slab-2:#171A2E;
   --cut:rgba(0,0,0,.55);
@@ -531,6 +535,17 @@ button{font:inherit;color:inherit;cursor:pointer}
   }
 }
 
+/* ---------- the red words ----------
+   A name, a place, or the one thing a trial turns on, coloured the way a
+   text box in the game colours it. Never italic and never bold for its
+   own sake - the colour is the whole mark. It is spelled em.key and
+   b.key as well as .key, and sits last in the sheet, so that it outranks
+   the italics .lede em and .res-comp b put on the same elements: those
+   selectors weigh a class and an element, and a bare .key would lose to
+   them however late it came. */
+.key,em.key,b.key{font-style:normal;color:var(--key)}
+b.key{font-weight:600}
+
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
 }
@@ -723,7 +738,7 @@ button{font:inherit;color:inherit;cursor:pointer}
         <p class="byline">by the Skyward Prince and The Baron</p>
       </div>
       <hr class="rule-gold" style="width:6rem">
-      <p class="lede">The Triforce speaks to you once, and what it says is that <em>Senok</em> is awake. An age ago the Fairy Prince of the Kokiri Forest put him under the roots of that wood and spent the whole of his own light doing it, and this season the last of that light ran out. Where Senok goes, light stops holding &mdash; lamps gutter and fairies go dark and fall out of the air &mdash; and he draws the life up out of the ground itself as he walks, so that the grass goes over grey behind him and nothing will take root in it for a year. No sword ends him. Only a sage&rsquo;s light will put him back, and a sage is not appointed &mdash; a sage is made. The Triforce is plain about the terms: walk in behind him, help what he has left standing, and the light is yours by the end of it. Choose who walks it with you, and answer as yourself; the element you carry will be clear long before the end.</p>
+      <p class="lede">The Triforce speaks to you once, and what it says is that <em class="key">Senok</em> is awake. An age ago the <em class="key">Fairy Prince</em> of the Kokiri Forest put him under the roots of that wood and spent the whole of his own light doing it, and this season the last of that light ran out. Where Senok goes, light stops holding &mdash; lamps gutter and fairies go dark and fall out of the air &mdash; and he draws the life up out of the ground itself as he walks, so that the grass goes over grey behind him and nothing will take root in it for a year. No sword ends him. Only a <em class="key">sage&rsquo;s light</em> will put him back, and a sage is not appointed &mdash; a sage is made. The Triforce is plain about the terms: walk in behind him, help what he has left standing, and the light is yours by the end of it. Choose who walks it with you, and answer as yourself; the element you carry will be clear long before the end.</p>
       <button class="btn" id="begin">Enter the Chamber</button>
     </section>
 
@@ -1475,7 +1490,7 @@ const SCENES = {
    is set - shown under its name. */
 const QUESTIONS = [
   { scene:"kokiri", place:"The Lights", where:"Kokiri Forest",
-    text:"Senok came up out of the roots here and walked west. Every fairy on his line went dark and fell out of the air \u2014 hundreds of them in the leaf litter, cooling, not gone yet. Warming one back takes an hour. You are {T}. What do you do with the night?",
+    text:"[Senok] came up out of the roots here and walked west. Every [fairy] on his line went dark and fell out of the air \u2014 hundreds of them in the leaf litter, cooling, not gone yet. Warming one back takes an hour. You are {T}. What do you do with the night?",
     answers:[
       {s:"forest", t:"Stay out in the litter until dawn, one at a time, and let the trail go cold."},
       {s:"fire",   t:"Wake the whole wood and have every Kokiri out there before midnight."},
@@ -1487,7 +1502,7 @@ const QUESTIONS = [
     ]},
 
   { scene:"column", place:"The Six", where:"Hyrule Field",
-    text:"Forty of the castle's riders went out to meet him on the field. Six came back, and not one of their lamps will light. Their captain is still out on the grey, and nobody will cross it to fetch him. What do you do?",
+    text:"Forty of the [castle's riders] went out to meet him on the field. Six came back, and not one of their lamps will light. Their [captain] is still out on the [grey], and nobody will cross it to fetch him. What do you do?",
     answers:[
       {s:"forest", t:"Walk out there myself and not come back without him."},
       {s:"fire",   t:"Go now, at a run, before anybody talks me out of it."},
@@ -1499,7 +1514,7 @@ const QUESTIONS = [
     ]},
 
   { scene:"gate", place:"The Gate", where:"Hyrule Castle Town",
-    text:"The farms east of here are grey to the fence posts, and the families off them have walked up to Castle Town. The town counted its wells and its grain and shut the gate. {C} is outside the wall with them. What do you do at the gate?",
+    text:"The farms east of here are grey to the fence posts, and the families off them have walked up to [Castle Town]. The town counted its wells and its grain and shut the [gate]. {C} is outside the wall with them. What do you do at the gate?",
     answers:[
       {s:"light",  t:"Get the count right in front of them \u2014 room, water, days \u2014 so it can be argued with."},
       {s:"time",   t:"Get the children through first, and spend the week arguing about the rest."},
@@ -1511,7 +1526,7 @@ const QUESTIONS = [
     ]},
 
   { scene:"goron", place:"The Muster", where:"Goron City",
-    text:"The Gorons have buried nine of their own and dug out the rest, and now they are arming to roll west after him. Nothing they have will touch him, and you are the only one here who knows it. What do you do?",
+    text:"The [Gorons] have buried [nine of their own] and dug out the rest, and now they are arming to roll west after him. Nothing they have will touch him, and you are the only one here who knows it. What do you do?",
     answers:[
       {s:"fire",   t:"Tell them to their faces it is nine dead for nothing, and take the shouting."},
       {s:"water",  t:"Say I am frightened of what comes back, and say it to the whole city."},
@@ -1523,7 +1538,7 @@ const QUESTIONS = [
     ]},
 
   { scene:"zora", place:"The Current", where:"Zora's Domain",
-    text:"The river is coming down dead out of the upland he crossed \u2014 no shine on it, nothing living in it. The Zora can dam the mouth and keep the clean water they still have. Every village in the valley below drinks what they would be shutting off. What do you do?",
+    text:"The [river] is coming down dead out of the upland he crossed \u2014 no shine on it, nothing living in it. The [Zora] can dam the [mouth] and keep the clean water they still have. Every village in the valley below drinks what they would be shutting off. What do you do?",
     answers:[
       {s:"time",   t:"Sink a store for the valley first. Then let them close the mouth."},
       {s:"forest", t:"Stand at the mouth of it and not move while they decide."},
@@ -1535,9 +1550,9 @@ const QUESTIONS = [
     ]},
 
   { scene:"herd", place:"The Herd", where:"Lon Lon Ranch",
-    text:"He crossed the ranch two nights ago. The grass is grey to the fence line and there is nothing left in it for the horses. Malon can walk them to pasture two days north. About half the herd will not make that walk. What do you do?",
+    text:"He crossed the ranch two nights ago. The [grass] is grey to the fence line and there is nothing left in it for the horses. [Malon] can walk them to pasture two days north. About half the herd will not make that walk. What do you do?",
     answers:[
-      {s:"water",  t:"Tell Malon out loud that half of them will not make it, and start anyway."},
+      {s:"water",  t:"Tell [Malon] out loud that half of them will not make it, and start anyway."},
       {s:"shadow", t:"Do the choosing myself, quietly, so nobody at the ranch has to."},
       {s:"spirit", t:"I am not sorting horses into lists. Open the gates and let them walk."},
       {s:"light",  t:"Sort them by what can walk and how far, and work down the list."},
@@ -1547,7 +1562,7 @@ const QUESTIONS = [
     ]},
 
   { scene:"sha", place:"The Lid", where:"Kakariko Village",
-    text:"He came through Kakariko and left the old seal under the well cracked. A Sheikah called Sha says so in the square, unhooded and without a riddle in it: it holds while somebody stands on it, and not otherwise. Then they ask for one volunteer and wait.",
+    text:"He came through [Kakariko] and left the old [seal] under the well cracked. A Sheikah called [Sha] says so in the square, unhooded and without a riddle in it: it holds while somebody stands on it, and not otherwise. Then they ask for one volunteer and wait.",
     answers:[
       {s:"spirit", t:"Refuse to let them ask it of anyone. There is another way to shut it."},
       {s:"light",  t:"Ask out loud what standing on it actually means, before a hand goes up."},
@@ -1559,7 +1574,7 @@ const QUESTIONS = [
     ]},
 
   { scene:"shoulder", place:"The Shoulder", where:"Death Mountain Trail",
-    text:"Where his line crossed the trail the rock went dead and came down, and the gate crew is under it. Sha is already digging at the far end. The shoulder still hanging over the dig is the same dead stone. What do you do?",
+    text:"Where his line crossed the trail the rock went dead and came down, and the [gate crew] is under it. [Sha] is already digging at the far end. The [shoulder] still hanging over the dig is the same dead stone. What do you do?",
     answers:[
       {s:"shadow", t:"Take the end under the overhang, and say nothing about which end that is."},
       {s:"light",  t:"Read the rock first \u2014 what is holding and what is not \u2014 and dig where it will stand."},
@@ -1571,7 +1586,7 @@ const QUESTIONS = [
     ]},
 
   { scene:"boat", place:"The Jetty", where:"Lake Hylia",
-    text:"Lake Hylia has gone flat and lightless from the south end, and the dark water reaches the jetty tonight. One old man has turned away every boat sent for him. He is not confused. He will not go. Sha knows his name. What do you do about him?",
+    text:"[Lake Hylia] has gone flat and lightless from the south end, and the dark water reaches the jetty tonight. One [old man] has turned away every boat sent for him. He is not confused. He will not go. [Sha] knows his name. What do you do about him?",
     answers:[
       {s:"fire",   t:"Pick him up, put him in the boat, and take whatever he does about it."},
       {s:"spirit", t:"His life and his lake. I am not carrying him off it."},
@@ -1583,7 +1598,7 @@ const QUESTIONS = [
     ]},
 
   { scene:"rope", place:"The Rope", where:"Gerudo Valley",
-    text:"The grey went through the valley and took the bridge ropes with it \u2014 dry as sticks now. They will carry a set number of crossings before they give, and Sha counted twice and gave you the number. More people are waiting than the number allows. How do you work the line?",
+    text:"The grey went through the valley and took the [bridge ropes] with it \u2014 dry as sticks now. They will carry a set number of crossings before they give, and [Sha] counted twice and gave you the [number]. More people are waiting than the number allows. How do you work the line?",
     answers:[
       {s:"forest", t:"Stay on this side and keep the line straight until this side is empty."},
       {s:"time",   t:"Send whoever can build the next bridge over first, and cross last myself."},
@@ -1595,7 +1610,7 @@ const QUESTIONS = [
     ]},
 
   { scene:"camp", place:"The Unlit", where:"The Haunted Wasteland",
-    text:"Ground he has already crossed: grey to the horizon, nothing growing, no lamp staying lit on it. A family is camped in the middle of it and says the place is theirs and always was. Sha says a year before anything grows here. {C} will not set foot on it.",
+    text:"Ground he has already crossed: grey to the horizon, nothing growing, no lamp staying lit on it. A [family] is camped in the middle of it and says the place is theirs and always was. [Sha] says a year before anything grows here. {C} will not set foot on it.",
     answers:[
       {s:"water",  t:"Say what the ground is, out loud, standing on it with them."},
       {s:"shadow", t:"Carry the water in every week, and never say how far I am bringing it."},
@@ -1607,7 +1622,7 @@ const QUESTIONS = [
     ]},
 
   { scene:"grove", place:"What It Cost", where:"The Fairy Prince's Grove",
-    text:"The few fairies left in this grove are what remains of the Fairy Prince's light \u2014 the light that makes a sage. They say it is worth exactly what you did in the eleven places behind you, and ask which of the eleven you would take back. Which is it?",
+    text:"The few fairies left in this grove are what remains of the [Fairy Prince]'s light \u2014 the [light that makes a sage]. They say it is worth exactly what you did in the eleven places behind you, and ask which of the eleven you would take back. Which is it?",
     answers:[
       {s:"light",  t:"None back. Set the eleven out in order, so what they cost is on the record."},
       {s:"forest", t:"None of them. I stood where I stood."},
@@ -1619,7 +1634,7 @@ const QUESTIONS = [
     ]},
 
   { scene:"senok", place:"Senok", where:"The Castle Road",
-    text:"Senok is on the castle road: twice your height, violet robes hanging off nothing, a wooden mask with two slits and a slot. The Fairy Prince's light still burns in the lantern he carries. You have {W} in your hand, lit at the grove. He says you are early, and that he can wait. How do you end him?",
+    text:"[Senok] is on the castle road: twice your height, violet robes hanging off nothing, a wooden mask with two slits and a slot. The [Fairy Prince]'s light still burns in the [lantern] he carries. You have {W} in your hand, lit at the grove. He says you are early, and that he can wait. How do you end him?",
     answers:[
       {s:"spirit", t:"Go at him on my own hour and not the one he is offering, and take no terms with it."},
       {s:"water",  t:"Go at him saying out loud that the mask frightens me, and put the light through it anyway."},
@@ -1631,7 +1646,7 @@ const QUESTIONS = [
     ]},
 
   { scene:"chamber", place:"The Medallion", where:"The Chamber of Sages",
-    text:"Senok is back under the roots, and the ground under you is not Hyrule any more. Six lights stand around a platform in the dark, and one of them holds a medallion out to you \u2014 its face lost in its own light. Sha stopped at the edge with {C}, and said plainly that they do not know what is past it. How do you take it?",
+    text:"Senok is back under the roots, and the ground under you is not Hyrule any more. Six lights stand around a platform in the dark, and one of them holds a [medallion] out to you \u2014 its face lost in its own light. [Sha] stopped at the edge with {C}, and said plainly that they do not know what is past it. How do you take it?",
     answers:[
       {s:"time",   t:"Take it already counting what it will cost, and keep that number to myself."},
       {s:"fire",   t:"Take it before they have finished offering it, and thank them far too loudly."},
@@ -1986,6 +2001,7 @@ function mural(){
 
 /* ======================= STATE ======================= */
 const $ = id => document.getElementById(id);
+const KEY = t => `<em class="key">${t}</em>`;
 let idx = 0;
 let picks = [];
 /* The seven answers are dealt in a fresh random order for every trial,
@@ -2112,14 +2128,20 @@ function show(name){
 /* ---------- question view ---------- */
 function renderQuestion(){
   const q = QUESTIONS[idx];
-  /* The three chosen things appear in answers as well as in setups. */
-  const named = t => t.replace(/\{C\}/g, companion.name)
-                      .replace(/\{T\}/g, tribe.one)
-                      .replace(/\{W\}/g, weapon.carry);
+  /* The three chosen things appear in answers as well as in setups, and
+     each of them lands coloured, the way an item name does in a text
+     box. [Square brackets] in a setup or an answer mark the rest - a
+     person, a place, or the one thing that trial turns on. Two or three
+     to a screen: the mark stops meaning anything if everything wears
+     it. */
+  const named = t => t.replace(/\{C\}/g, KEY(companion.name))
+                      .replace(/\{T\}/g, KEY(tribe.one))
+                      .replace(/\{W\}/g, KEY(weapon.carry))
+                      .replace(/\[([^\]]+)\]/g, (_, w) => KEY(w));
   $("q-place").textContent = q.place;
   $("q-where").textContent = q.where;
   $("q-count").textContent = `Trial ${idx+1} of ${QUESTIONS.length}`;
-  $("q-text").textContent = named(q.text);
+  $("q-text").innerHTML = named(q.text);
 
   const marks = $("q-marks");
   marks.innerHTML = "";
@@ -2136,7 +2158,7 @@ function renderQuestion(){
     const b = document.createElement("button");
     b.className = "ans";
     b.type = "button";
-    b.textContent = named(a.t);
+    b.innerHTML = named(a.t);
     b.addEventListener("click", ()=>choose(a.s));
     li.appendChild(b);
     list.appendChild(li);
@@ -2219,9 +2241,10 @@ function renderResult(){
   $("r-mural").innerHTML = mural();
 
   $("r-comp").innerHTML =
-    `Fourteen trials, the thirteenth of them Senok, walked as <b>${tribe.one}</b> ` +
-    `at the shoulder of <b>${companion.name}</b>, ${companion.kind}, ` +
-    `with <b>${weapon.carry}</b> to hand. <b>Sha</b> walked it with you from Kakariko to the chamber door.`;
+    `Fourteen trials, the thirteenth of them <b class="key">Senok</b>, walked as ` +
+    `<b class="key">${tribe.one}</b> at the shoulder of <b class="key">${companion.name}</b>, ` +
+    `${companion.kind}, with <b class="key">${weapon.carry}</b> to hand. ` +
+    `<b class="key">Sha</b> walked it with you from Kakariko to the chamber door.`;
 
   show("result");
   window.scrollTo({top:0, behavior:"instant"});
