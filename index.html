@@ -1733,9 +1733,10 @@ const QUESTIONS = [
    Chosen first, ahead of the companion. Like the companion it is pure
    flavour - it scores nothing and touches no tally - so the seven-way
    balance of the trials survives it. Six are the peoples the game itself
-   names; the Watarara are the winged tribe Akira Himekawa drew for the
-   bonus chapter of the Ocarina of Time manga, and are marked as such
-   rather than smuggled in beside the other six. */
+   names; the Watarara are the winged tribe out of the manga, and their
+   card says so in its own paragraph - which leaves the line under the
+   name free to say what they are, the way the other six do, instead of
+   where they were drawn. */
 const TRIBES = [
   { id:"hylian", name:"Hylians", one:"a Hylian", where:"of the field, the market and the castle town",
     note:"The long ears are for hearing what the gods still say, and nobody you know has heard it lately. You begin with no wood to hide you and no mountain to stand on, which is how most of these stories begin." },
@@ -1749,7 +1750,7 @@ const TRIBES = [
     note:"One man is born to your people in a century, so the desert raised you to need no one at all. Thief, guard and horsewoman by turns, you cross ground that kills other travellers and you charge them for the crossing." },
   { id:"sheikah", name:"Sheikah", one:"a Sheikah", where:"of the shadow, sworn to the crown",
     note:"Sworn to the royal family, and mostly gone now. You were trained out of being noticed, which is a useful thing to be and a lonely thing to have been made into." },
-  { id:"watarara", name:"Watarara", one:"a Watarara", where:"a winged tribe, from Himekawa's manga",
+  { id:"watarara", name:"Watarara", one:"a Watarara", where:"of the high air, and only ever passing through",
     note:"Not from the game: the bird people the manga sends across the sky on migration, touching Hyrule only in passing. Hollow-boned and feathered, you are the only one here who has looked down on the Temple of Time, and the only one who may not come this way again." }
 ];
 let tribe = TRIBES[0];
@@ -1936,7 +1937,9 @@ const FIGURES = {
    again - nothing here is scored. Five come off the game's own item
    screen; the scimitar is the curved blade the fortress guards carry,
    the dagger is village work rather than a named artefact, and the Bow
-   of Light is marked as the outsider it is. */
+   of Light comes from the other end of the legend - its note says so,
+   so the line under its name is free to say what the thing is instead
+   of where it came from. */
 const WEAPONS = [
   { id:"kokiri", name:"Kokiri Sword", carry:"the Kokiri Sword", kind:"the first blade, cut for a child's hand",
     note:"Short, light, and yours before anyone gave you permission to have it. It will not cut what the story eventually asks you to cut, and you will keep it anyway, because it was first." },
@@ -1952,7 +1955,7 @@ const WEAPONS = [
     note:"No one has ever written a song about it. It was made in a village of people who are very good at not being seen, it goes where a sword cannot, and it has never once caught the light at the wrong moment." },
   { id:"scimitar", name:"Gerudo Scimitar", carry:"a Gerudo scimitar", kind:"curved, and off a fortress guard",
     note:"Made for somebody who was already moving before the fight started. Two of them, if the desert taught you properly, and no part of that lesson involves standing still." },
-  { id:"lightbow", name:"Bow of Light", carry:"the Bow of Light", kind:"not from this game either",
+  { id:"lightbow", name:"Bow of Light", carry:"the Bow of Light", kind:"drawn out of pure light, and nothing else",
     note:"The bow that only turns up when something god-shaped needs unmaking, borrowed here from the other end of the legend. It weighs nothing, it asks a great deal, and there is exactly one shot in it that counts." }
 ];
 let weapon = WEAPONS[0];
