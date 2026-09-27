@@ -21,6 +21,14 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-NWEBK01NVN');
+
+  /* Every send in the quiz goes through here. A blocked tag is the normal
+     case, not the broken one - plenty of readers arrive with gtag stripped
+     out - so this swallows that quietly and the run carries on unmeasured. */
+  window.track = function(name, params){
+    try{ if(typeof gtag === 'function') gtag('event', name, params || {}); }
+    catch(e){}
+  };
 </script>
 
 <style>
@@ -2208,6 +2216,14 @@ function show(name){
     b.addEventListener("click", ()=>{
       weapon = w;
       startRun();
+      /* The run begins here, not at Begin: this is the click that deals the
+         first trial, and it is the first moment all three choices are known. */
+      track("quiz_start", {
+        tribe: tribe.id,
+        companion: companion.id,
+        weapon: weapon.id,
+        trial_total: QUESTIONS.length
+      });
       show("quiz");
       renderQuestion();
     });
@@ -2276,6 +2292,15 @@ function renderQuestion(){
 }
 
 function choose(sage){
+  /* Stepping back and answering again re-fires this for the same trial, so
+     the send says whether the slot was already filled. Counting answers is
+     then still possible: the first pass is the one with revisit false. */
+  track("quiz_answer", {
+    trial_number: idx + 1,
+    trial_place: QUESTIONS[idx].place,
+    sage_chosen: sage,
+    revisit: !!picks[idx]
+  });
   picks[idx] = sage;
   idx++;
   if(idx >= QUESTIONS.length){ renderResult(); }
@@ -2304,6 +2329,18 @@ function renderResult(){
   const counts = tally();
   const key = winner(counts);
   const s = SAGES[key];
+
+  /* The finish. sage_score is how many of the fourteen went to the winner -
+     a run of 5 and a run of 12 are both this element, and they are not the
+     same result, so the margin travels with it. */
+  track("quiz_complete", {
+    sage_result: key,
+    sage_score: counts[key],
+    trial_total: QUESTIONS.length,
+    tribe: tribe.id,
+    companion: companion.id,
+    weapon: weapon.id
+  });
 
   const view = $("v-result");
   view.style.setProperty("--elem", `var(--c-${key})`);
