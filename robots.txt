@@ -1,0 +1,12 @@
+# The Sage Trials - https://www.the-sage-trials.com/
+# One page, nothing to keep out. The sitemap is named absolutely because
+# that is the only form a crawler that found this file out of context can use.
+
+User-agent: *
+Allow: /
+
+# the 1200x630 card is rendered from this file with headless Chrome;
+# it is a build input, not a page of the site
+Disallow: /og-source.html
+
+Sitemap: https://www.the-sage-trials.com/sitemap.xml
