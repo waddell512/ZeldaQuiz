@@ -688,40 +688,6 @@ b.key{font-weight:600}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
 }
-
-/* ---------- the about block on the intro ----------
-   Set quieter than everything above it: the reader who came to take the
-   trials has already pressed the button, and this is here for the one who
-   wants to know what they are about to do - and for the crawler, which
-   reads text and not medallions. Left-aligned inside a centred flex
-   column, so the heading and the paragraph share one edge. */
-.about{
-  width:100%;max-width:38rem;margin:clamp(1.6rem,5vw,2.6rem) 0 0;
-  display:flex;flex-direction:column;align-items:flex-start;
-  gap:.85rem;text-align:left;
-}
-.about .rule-gold{align-self:center;margin-bottom:.6rem}
-.about h2{
-  font-size:1.06rem;letter-spacing:.02em;color:var(--ink);
-  margin-top:.5rem;
-}
-.about h2:first-of-type{margin-top:0}
-.about p{margin:0;color:var(--ink-2);font-size:.95rem;line-height:1.62}
-.about b{color:var(--ink);font-weight:500}
-.about-list{
-  margin:0;padding:0 0 0 1.1rem;list-style:none;
-  display:flex;flex-direction:column;gap:.55rem;
-  color:var(--ink-2);font-size:.95rem;line-height:1.55;
-}
-/* a small gold triangle for a bullet - the mark the rest of the page uses */
-.about-list li{position:relative}
-.about-list li::before{
-  content:"";position:absolute;left:-1.1rem;top:.52em;
-  width:0;height:0;border-left:5px solid var(--gold-2);
-  border-top:3.5px solid transparent;border-bottom:3.5px solid transparent;
-  opacity:.85;
-}
-.about-free{font-size:.86rem!important;color:var(--ink-3)!important;margin-top:.4rem!important}
 </style>
 </head>
 
@@ -916,67 +882,6 @@ b.key{font-weight:600}
       <hr class="rule-gold" style="width:6rem">
       <p class="lede">The Triforce speaks to you once, and what it says is that <em class="key">Senok</em> is awake. An age ago the <em class="key">Fairy Prince</em> of <em class="key">Kokiri Forest</em> put him under the roots of that wood and spent the whole of his own light doing it, and this season the last of that light ran out. Where Senok goes, light stops holding &mdash; lamps gutter and fairies go dark and fall out of the air &mdash; and he draws the life up out of the ground itself as he walks, so that the grass goes over grey behind him and nothing will take root in it for a year. No sword ends him. Only a <em class="key">Sage&rsquo;s light</em> will put him back, and a Sage is not appointed &mdash; a Sage is made. The Triforce is plain about the terms: walk in behind him, help what he has left standing, and the light is yours by the end of it. Choose who walks it with you, and answer as yourself; the element you carry will be clear long before the end.</p>
       <button class="btn" id="begin">Enter the Chamber</button>
-
-      <!-- ===================== the part a crawler reads =====================
-           Above this line the page is one h1, one paragraph and a button, and
-           the fourteen trials and the seven results only exist inside the
-           script - a search engine indexing this URL would find almost none of
-           the words somebody searching for it would type. This block is the
-           page saying plainly, in text that is on screen and not hidden, what
-           it is and who is in it. It is below the fold on purpose: the reader
-           who already knows what they came for never scrolls to it.
-           ================================================================= -->
-      <section class="about" id="about">
-        <hr class="rule-gold" style="width:9rem">
-
-        <h2>Which Ocarina of Time Sage are you?</h2>
-        <p>The Sage Trials is a fourteen-question <b>Ocarina of Time</b> quiz. Before
-        the first trial you choose three things about yourself &mdash; the blood you
-        carry, the companion who walks with you, and the weapon in your hands &mdash;
-        and then you walk Hyrule behind Senok as the light goes out of it. None of the
-        answers are right or wrong. What the trials are measuring is which of the
-        seven Sages you already are, and the result names your Sage, your element,
-        your medallion, your temple and the song that calls it.</p>
-
-        <h2>The seven Sages</h2>
-        <ul class="about-list">
-          <li><b>Saria</b> &mdash; Sage of <b>Forest</b>, of the Forest Temple and the
-          Minuet of Forest. The element of what takes root and refuses to be moved.</li>
-          <li><b>Darunia</b> &mdash; Sage of <b>Fire</b>, of the Fire Temple and the
-          Bolero of Fire. The element that will not be banked or waited out.</li>
-          <li><b>Ruto</b> &mdash; Sage of <b>Water</b>, of the Water Temple and the
-          Serenade of Water. The element that goes around what it cannot go through.</li>
-          <li><b>Impa</b> &mdash; Sage of <b>Shadow</b>, of the Shadow Temple and the
-          Nocturne of Shadow. The element that stands where it is not seen standing.</li>
-          <li><b>Nabooru</b> &mdash; Sage of <b>Spirit</b>, of the Spirit Temple and the
-          Requiem of Spirit. The element that answers to nobody's permission.</li>
-          <li><b>Rauru</b> &mdash; Sage of <b>Light</b>, of the Temple of Light and the
-          Prelude of Light. The element that shows a thing as it actually is.</li>
-          <li><b>Zelda</b> &mdash; the Seventh Sage, of <b>Time</b>, and of the Temple
-          of Time itself. The element that carries what everyone else put down.</li>
-        </ul>
-
-        <h2>What you choose before the trials</h2>
-        <p>Seven peoples of Hyrule are open to you &mdash; <b>Hylian</b>, <b>Kokiri</b>,
-        <b>Goron</b>, <b>Zora</b>, <b>Gerudo</b>, <b>Sheikah</b>, and the Watarara who
-        only ever pass overhead. Six companions will walk the fourteen at your shoulder,
-        of the lines of Navi, Volvagia, Epona, Kaepora Gaebora, the Forest Temple Wolfos
-        and Cojiro. And there are eight things to carry, from the Kokiri Sword through
-        the Megaton Hammer and the Fairy Bow to the Master Sword and the Bow of Light.
-        Nothing in those three choices is scored. They decide who the trials are
-        speaking to, and who is standing there when the wood makes you wait.</p>
-
-        <p class="about-free">The Sage Trials is free, needs no account, runs in the
-        browser on a phone or a desktop, and takes about five minutes. It is an
-        unofficial work made by fans of <i>The Legend of Zelda: Ocarina of Time</i>,
-        and is not affiliated with or endorsed by Nintendo.</p>
-
-        <noscript>
-          <p class="about-free"><b>The trials need JavaScript.</b> The questions,
-          the seven Sages and your result are all built in the browser, so please
-          enable JavaScript to walk them.</p>
-        </noscript>
-      </section>
     </section>
 
     <!-- choosing a tribe -->
