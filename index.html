@@ -11,6 +11,18 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;500;600&family=Cinzel:wght@400;500;600;700&family=Spectral:ital,wght@0,300;0,400;0,500;1,400&display=swap">
 
+<!-- Google Analytics 4. The page is one file served straight from the host,
+     so the tag lives here rather than in a build step. The measurement ID is
+     named twice - once in the loader URL, once in the config call - and gtag
+     is loaded async so it never blocks paint. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NWEBK01NVN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NWEBK01NVN');
+</script>
+
 <style>
 /* ---------- tokens: light = Temple of Time stone ---------- */
 :root{
