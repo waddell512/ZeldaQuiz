@@ -1322,9 +1322,11 @@ function medallion(key){
    competing with them. Mass is carried by a .14 fill of the same
    colour rather than by a second hue.
 
-   Four plates here - goron, rope, grove and senok - belong to trials
+   Four plates here - goron, rope, grove and camp - belong to trials
    that are no longer in the run, and nothing reaches them. They are kept cut and
-   ready against the day one of those trials comes back. */
+   ready against the day one of those trials comes back; the senok plate
+   was one of them until the ninth trial went down into the cavern and
+   wanted it again. */
 const SCENES = {
   /* The wood after the mist: four trunks with nothing on them, one of
      them snapped off, a stump, and a fallen one lying where it came
@@ -1775,19 +1777,21 @@ const SCENES = {
 };
 
 /* ======================= QUESTIONS =======================
-   Ten trials, and you are always walking in behind him. Senok is out
-   from under the roots and ahead of you, drawing the life up out of every
-   field he crosses; the first ten are places he has already been
-   through, taken in the order his line reaches them, and the tenth is
-   what the Ancient Sages do about you once he is back under. So the nine
-   are never a race and never a warning - they are wreckage with people
-   still standing in it, asking for something. Helping is the whole of how
-   a Sage is made, which is the arrangement the Triforce named on the
-   first screen.
+   Ten trials, and for eight of them you are walking in behind him.
+   Senok is out from under the roots and ahead of you, drawing the life
+   up out of every field he crosses; the first eight are places he has
+   already been through, taken in the order his line reaches them, the
+   ninth is Senok himself, down in Mist Cavern with the mist already up,
+   and the tenth is what the Ancient Sages do about you once he is
+   sealed. So the eight are never a race and never a warning - they are
+   wreckage with people still standing in it, asking for something.
+   Helping is the whole of how a Sage is made, which is the arrangement
+   the Triforce named on the first screen.
 
-   He is never met. The nine are his wreckage and the tenth is after he
-   is back under the roots; what put him there happens between the ninth
-   and the tenth, off the page.
+   The ninth is the only trial whose seven all go at the same thing.
+   Nobody who has walked the eight behind it goes down that stair and
+   leaves him the cavern, so it is not a decision about whether - only
+   about how, and with what said out loud on the way down.
 
    Nothing is set by an examiner and nothing is announced as a test. Every
    setup is short on purpose - what he did here, who is still standing in
@@ -1948,20 +1952,20 @@ const QUESTIONS = [
       {s:"time",   t:"Go up the inlets with [Sha] and stop what is feeding it, or we dredge this lake every season."}
     ]},
 
-  { scene:"camp", place:"The Unlit", where:"The Haunted Wasteland",
-    text:"Ground he has already crossed: grey to the horizon, nothing growing, no lamp staying lit on it. A [family] is camped in the middle of it and says the place is theirs and always was. [Sha] says a year before anything grows here. {C} will not set foot on it.",
+  { scene:"senok", place:"The Cavern", where:"The Haunted Wasteland",
+    text:"[Senok] tore the sand open and went down into [Mist Cavern], the base he kept before the roots. He is waiting at the bottom of it with his [mist] already up. How do you seal him?",
     answers:[
-      {s:"water",  t:"Say what the ground is, out loud, standing on it with them."},
-      {s:"shadow", t:"Carry the water in every week, and never say how far I am bringing it."},
-      {s:"light",  t:"Walk them out to the edge of it and show them where the colour starts again."},
-      {s:"forest", t:"Camp with them. A season of that is the only argument I have."},
-      {s:"time",   t:"Find out what they are really staying for and solve that instead, so they are off this ground by spring."},
-      {s:"fire",   t:"Load their cart myself and start walking. They can follow or they can shout."},
-      {s:"spirit", t:"They are not wrong. It is theirs, and I am not the one to move them."}
+      {s:"water",  t:"Tell him out loud that he frightens me, and close it on him anyway."},
+      {s:"shadow", t:"Take him from the dark side of the cavern, and let nobody above ever learn how it was done."},
+      {s:"light",  t:"Light the whole cavern first. Nothing he does works in a room with no dark left in it."},
+      {s:"forest", t:"Stand in the gap he has to come through, and not move until he is under again."},
+      {s:"time",   t:"Hold him here as long as it takes, and pay the years the seal wants up front."},
+      {s:"fire",   t:"Go at him off the last step, before the mist is all the way up."},
+      {s:"spirit", t:"Send [Sha] back up the sand. Whatever this costs, it costs me."}
     ]},
 
   { scene:"chamber", place:"The Medallion", where:"The Chamber of Sages",
-    text:"Senok is back under the roots, and the ground under you is not [Hyrule] any more. Six lights stand around a platform in the dark, and one of them holds a [medallion] out to you \u2014 its face lost in its own light. [Sha] stopped at the edge with {C}, and said plainly that he does not know what is past it. How do you take it?",
+    text:"Senok is sealed under the sand, and the ground under you is not [Hyrule] any more. Six lights stand around a platform in the dark, and one of them holds a [medallion] out to you \u2014 its face lost in its own light. [Sha] stopped at the edge with {C}, and said plainly that he does not know what is past it. How do you take it?",
     answers:[
       {s:"time",   t:"Take it already counting the years it will cost, and keep that number to myself."},
       {s:"fire",   t:"Take it before they have finished offering it, and thank them far too loudly."},
