@@ -1355,27 +1355,45 @@ const SCENES = {
     <path d="M104 56 q2 -3 4.4 -1.4" opacity=".24"/>
     <path d="M10 47 q16 -3.5 30 0 t30 0 t32 0" opacity=".22"/>
     <path d="M12 51 q18 -3 32 0 t30 0 t28 0" opacity=".16"/>`},
-  /* What came back off the field: a lantern with nothing in it, two
-     spears trailing point-up behind it, and a third snapped in the grass. */
-  column:{ cap:"The lamp that will not light", art:`
-    <path d="M12 56 H108" opacity=".3"/>
-    <path d="M16 54 L40 31"/>
-    <path d="M38.4 32.6 L43.4 26 L42.6 34.4 Z" fill="currentColor" opacity=".14"/>
-    <path d="M38.4 32.6 L43.4 26 L42.6 34.4 Z"/>
-    <path d="M104 54 L80 33" opacity=".75"/>
-    <path d="M81.6 34.4 L76.8 27.6 L77.2 36 Z" opacity=".75"/>
-    <path d="M74 55 L88 52.6" opacity=".5"/>
-    <path d="M91.5 52 L102 50.2" opacity=".5"/>
-    <circle cx="60" cy="24" r="2.6"/>
-    <path d="M60 26.6 V29.2"/>
-    <path d="M52 33 L56 29 H64 L68 33 Z" fill="currentColor" opacity=".14"/>
-    <path d="M52 33 L56 29 H64 L68 33 Z"/>
-    <path d="M53 33 H67 L65 52 H55 Z" fill="currentColor" opacity=".14"/>
-    <path d="M53 33 H67 L65 52 H55 Z"/>
-    <path d="M57.4 33 V52" opacity=".3"/>
-    <path d="M62.6 33 V52" opacity=".3"/>
-    <path d="M53.6 52 H66.4"/>
-    <circle cx="60" cy="43" r="2.4" opacity=".3"/>`},
+  /* The crater, cut through rather than looked into: a hole drawn
+     face-on at this size reads as a dish or a cartwheel, so the ground
+     line breaks at the rim and the pit is shown in profile. Talon is on
+     the floor of it with both arms up, the two of you are on the left
+     rim, and the rope is already over the edge. The ground sits higher
+     on this plate than on the others because the subject is a hole. */
+  column:{ cap:"Talon, at the bottom of it", art:`
+    <path d="M4 40 H34" opacity=".3"/><path d="M90 40 H116" opacity=".3"/>
+    <path d="M34 40 L47 58 H77 L90 40 Z" fill="currentColor" opacity=".2"/>
+    <path d="M34 40 L47 58"/><path d="M90 40 L77 58"/>
+    <path d="M47 58 H77" opacity=".8"/>
+    <path d="M38 47 L44 49" opacity=".35"/><path d="M86 47 L80 49" opacity=".3"/>
+    <path d="M41 52.5 L46 54" opacity=".28"/>
+    <path d="M28 40 q4.4 -3.4 8 -1.4" opacity=".26"/>
+    <path d="M94 40 q4.4 -3.4 8 -1.4" opacity=".24"/>
+    <path d="M96 38 l5 -2.4 1.8 3.2 -5.4 1.2 Z" fill="currentColor" opacity=".14"/>
+    <path d="M96 38 l5 -2.4 1.8 3.2 -5.4 1.2 Z"/>
+    <path d="M55 55.5 l4.6 -2.2 1.6 2.8 -5 1 Z" fill="currentColor" opacity=".14"/>
+    <path d="M55 55.5 l4.6 -2.2 1.6 2.8 -5 1 Z"/>
+    <circle cx="68" cy="47.4" r="3.4" fill="currentColor" opacity=".14"/>
+    <circle cx="68" cy="47.4" r="3.4"/>
+    <path d="M65.4 46.4 H70.6" opacity=".45"/>
+    <path d="M64.6 58 L66.2 51 H69.8 L71.4 58 Z" fill="currentColor" opacity=".14"/>
+    <path d="M64.6 58 L66.2 51 H69.8 L71.4 58 Z"/>
+    <path d="M66.4 51.6 L62.4 45"/><path d="M69.6 51.6 L73.6 45"/>
+    <path d="M24 26 Q42 23 56 36 Q61 40.5 63 44" opacity=".85"/>
+    <circle cx="14" cy="20" r="3.8" fill="currentColor" opacity=".14"/>
+    <circle cx="14" cy="20" r="3.8"/>
+    <path d="M10.6 34 L12.2 24 H15.8 L17.4 34 Z" fill="currentColor" opacity=".14"/>
+    <path d="M10.6 34 L12.2 24 H15.8 L17.4 34 Z"/>
+    <path d="M12 34.5 L10.8 40"/><path d="M16 34.5 L17.2 40"/>
+    <path d="M15.6 26.4 L23.4 26.2"/>
+    <circle cx="27" cy="22" r="3.4" fill="currentColor" opacity=".14"/>
+    <circle cx="27" cy="22" r="3.4"/>
+    <path d="M24.6 20.8 H29.4" opacity=".5"/>
+    <path d="M24 34.5 L25.4 25.6 H28.6 L30 34.5 Z" fill="currentColor" opacity=".14"/>
+    <path d="M24 34.5 L25.4 25.6 H28.6 L30 34.5 Z"/>
+    <path d="M25.2 35 L24.2 40"/><path d="M28.8 35 L29.8 40"/>
+    <path d="M25.8 27.4 L23.8 26.4"/>`},
   /* Castle Town alight: three roofs, the tower behind them, and a knight
      stood in the foreground with a bucket he has already found out is no
      use. The flames are violet rather than gold - the one thing everybody
@@ -1873,16 +1891,16 @@ const QUESTIONS = [
       {s:"light",  t:"Read the ice with [Sha] first \u2014 what is thin, who is nearest the surface, and where the [Freezards] stand."}
     ]},
 
-  { scene:"column", place:"The Six", where:"Hyrule Field",
-    text:"Forty of the [castle's riders] went out to meet him on the field. Six came back, and not one of their lamps will light. Their [captain] is still out on the [grey], and nobody will cross it to fetch him. What do you do?",
+  { scene:"column", place:"The Crater", where:"Hyrule Field",
+    text:"[Talon], off the ranch you helped, is down in a crater [Senok] tore out of the field, and the sides are too loose to climb. {C} will not go near the edge. How do you and [Sha] get him out?",
     answers:[
-      {s:"forest", t:"Walk out there myself and not come back without him."},
-      {s:"fire",   t:"Go now, at a run, before anybody talks me out of it."},
-      {s:"water",  t:"Say plainly that the ground frightens me, and walk onto it saying so."},
-      {s:"shadow", t:"Go out after dark, and let the road think he walked back on his own."},
-      {s:"spirit", t:"Their fear is not my rule. I cross, and I ask nobody to come."},
-      {s:"light",  t:"Get it straight first \u2014 where he fell, how far, how long a lamp lasts out there."},
-      {s:"time",   t:"Take [the six] to the castle tonight, so that in a month nobody is sending forty more."}
+      {s:"forest", t:"Go down to [Talon] and stay with him while [Sha] works the rope."},
+      {s:"fire",   t:"Over the side now, with [Sha] paying out behind me."},
+      {s:"water",  t:"Tell [Sha] and [Talon] both that the drop frightens me, and start down saying it."},
+      {s:"shadow", t:"Send [Sha] round to the firm lip, and take the bad side myself without mentioning which it is."},
+      {s:"spirit", t:"[Sha] stays up top. Nobody else goes down a hole [Senok] dug."},
+      {s:"light",  t:"Walk the rim with [Sha] first \u2014 what is firm, what is not, and how far down he actually is."},
+      {s:"time",   t:"Cut steps with [Sha] rather than haul him. Slower today, and the next one who falls in walks out."}
     ]},
 
   { scene:"boat", place:"The Jetty", where:"Lake Hylia",
