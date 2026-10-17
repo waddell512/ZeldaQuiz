@@ -1618,17 +1618,50 @@ const SCENES = {
     <circle cx="103" cy="37" r="4.8"/>
     <path d="M99.4 35.4 q3.6 -2.2 7.2 0"/>
     <path d="M101 38.4 h1.6"/><path d="M103.6 38.4 h1.6"/>`},
-  /* The boat he will not get into. */
-  boat:{ cap:"The old man's boat", art:`
-    <path d="M32 46 Q60 58 94 46 L88 38 H38 Z" fill="currentColor" opacity=".14"/>
-    <path d="M32 46 Q60 58 94 46 L88 38 H38 Z"/>
-    <path d="M38 38 H88"/>
-    <path d="M74 36 L96 27"/><path d="M96 27 l7 -3 -2 7 z"/>
-    <circle cx="54" cy="25" r="5"/>
-    <path d="M48 38 Q49 27 54 27 Q59 27 60 38 Z"/>
-    <path d="M51 28 Q54 34 57 28"/>
-    <path d="M14 53 q6 -3 12 0 t12 0" opacity=".5"/>
-    <path d="M82 53 q6 -3 12 0 t12 0" opacity=".5"/>`},
+  /* The lake gone to sludge: the surface risen thick to the shore, two
+     fish turned over in it, and Doctor Mizumi on the bank with a jar of
+     the stuff he has already drawn off. The sludge is the only part of
+     the plate that is not gold - it takes the forest colour, which is
+     the one hue on the page that reads as something growing where it
+     should not be. */
+  boat:{ cap:"The lake, and what is floating in it", art:`
+    <path d="M4 56 H34" opacity=".3"/>
+    <path d="M34 56 H116 V45 H34 Z" fill="var(--c-forest)" fill-opacity=".22" stroke="none"/>
+    <path d="M34 45 q6 -3.2 12 0 t12 0 t12 0 t12 0 t12 0 t12 0" fill="none" stroke="var(--c-forest)" stroke-width="1.6"/>
+    <path d="M106 45 q5 -2.6 10 0" fill="none" stroke="var(--c-forest)" stroke-width="1.6"/>
+    <path d="M40 50.5 q7 -2.4 14 0" stroke="var(--c-forest)" stroke-width="1" opacity=".5"/>
+    <path d="M74 53 q7 -2.4 14 0" stroke="var(--c-forest)" stroke-width="1" opacity=".4"/>
+    <circle cx="52" cy="42.6" r="1.6" fill="none" stroke="var(--c-forest)" stroke-width="1.1" opacity=".7"/>
+    <circle cx="70" cy="41.4" r="1.1" fill="none" stroke="var(--c-forest)" stroke-width="1" opacity=".55"/>
+    <circle cx="98" cy="42.4" r="1.9" fill="none" stroke="var(--c-forest)" stroke-width="1.1" opacity=".6"/>
+    <g transform="rotate(-9 62 47)">
+      <ellipse cx="62" cy="47" rx="6.4" ry="2.8" fill="currentColor" opacity=".14"/>
+      <ellipse cx="62" cy="47" rx="6.4" ry="2.8"/>
+      <path d="M68.4 47 L73 44.4 L73 49.6 Z" fill="currentColor" opacity=".14"/>
+      <path d="M68.4 47 L73 44.4 L73 49.6 Z"/>
+      <path d="M57.6 45.8 L59.2 44.4" opacity=".5"/>
+      <path d="M58.4 46.6 L59.6 47.8" stroke-width="1.4"/>
+      <path d="M59.6 46.6 L58.4 47.8" stroke-width="1.4"/>
+    </g>
+    <g transform="rotate(7 90 51)">
+      <ellipse cx="90" cy="51" rx="5" ry="2.2" fill="currentColor" opacity=".14"/>
+      <ellipse cx="90" cy="51" rx="5" ry="2.2"/>
+      <path d="M95 51 L98.6 49 L98.6 53 Z" fill="currentColor" opacity=".14"/>
+      <path d="M95 51 L98.6 49 L98.6 53 Z"/>
+      <path d="M86.6 50.2 L87.6 51.4" stroke-width="1.2"/>
+      <path d="M87.6 50.2 L86.6 51.4" stroke-width="1.2"/>
+    </g>
+    <circle cx="16" cy="34" r="3.8" fill="currentColor" opacity=".14"/>
+    <circle cx="16" cy="34" r="3.8"/>
+    <path d="M13.2 32 q2.8 -1.6 5.6 0" opacity=".5"/>
+    <path d="M11.2 54 L12.8 38 H19.2 L20.8 54 Z" fill="currentColor" opacity=".14"/>
+    <path d="M11.2 54 L12.8 38 H19.2 L20.8 54 Z"/>
+    <path d="M16 38.6 V54" opacity=".3"/>
+    <path d="M13 54.4 L12.2 56"/><path d="M19 54.4 L19.8 56"/>
+    <path d="M19 41 L24.6 43.4"/>
+    <path d="M24 43 H29 L30.2 49.6 H22.8 Z" fill="var(--c-forest)" fill-opacity=".3" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M23.6 46.4 H29.6" opacity=".5"/>
+    <path d="M13 41 L8.4 44.2"/>`},
   /* The rope the grey dried out, and the planks that hold the number. */
   rope:{ cap:"The dry rope, and its number", art:`
     <path d="M16 14 V52"/><path d="M104 14 V52"/>
@@ -1903,16 +1936,16 @@ const QUESTIONS = [
       {s:"time",   t:"Cut steps with [Sha] rather than haul him. Slower today, and the next one who falls in walks out."}
     ]},
 
-  { scene:"boat", place:"The Jetty", where:"Lake Hylia",
-    text:"[Lake Hylia] has gone flat and lightless from the south end, and the dark water reaches the jetty tonight. One [old man] has turned away every boat sent for him. He is not confused. He will not go. [Sha] knows his name. What do you do about him?",
+  { scene:"boat", place:"The Sludge", where:"Lake Hylia",
+    text:"[Senok] left [Lake Hylia] thick as sludge, and nothing in it can breathe. [Doctor Mizumi] has asked for you and [Sha] by name. How do you clear it?",
     answers:[
-      {s:"fire",   t:"Pick him up, put him in the boat, and take whatever he does about it."},
-      {s:"spirit", t:"His life and his lake. I am not carrying him off it."},
-      {s:"water",  t:"Tell him I do not want to find him here afterwards, in those words."},
-      {s:"shadow", t:"Leave the boat tied where he will find it, and stop arguing."},
-      {s:"light",  t:"Lay out what the water does and what the week after looks like, and leave the boat."},
-      {s:"forest", t:"Sit down on the jetty and stay there until one of us moves."},
-      {s:"time",   t:"Give it two days, learn who his people are, and send the one he cannot refuse."}
+      {s:"fire",   t:"Into the water today, before [Doctor Mizumi] has finished explaining it."},
+      {s:"spirit", t:"The lake was never his to end. I stay in it until it runs clear."},
+      {s:"water",  t:"Say out loud that the lake may be gone for good, and wade in anyway."},
+      {s:"shadow", t:"Take the far shore with [Sha], and keep the count of what we pull out dead to myself."},
+      {s:"light",  t:"Get it straight from [Doctor Mizumi] first — what the sludge is, how deep, and what is still alive under it."},
+      {s:"forest", t:"Work the shallows with [Sha], one bay at a time, for as long as it takes."},
+      {s:"time",   t:"Go up the inlets with [Sha] and stop what is feeding it, or we dredge this lake every season."}
     ]},
 
   { scene:"camp", place:"The Unlit", where:"The Haunted Wasteland",
