@@ -1376,15 +1376,45 @@ const SCENES = {
     <path d="M62.6 33 V52" opacity=".3"/>
     <path d="M53.6 52 H66.4"/>
     <circle cx="60" cy="43" r="2.4" opacity=".3"/>`},
-  /* The town gate, barred, with the towers either side of it. */
-  gate:{ cap:"The gate, counted shut", art:`
-    <path d="M12 56 H108" opacity=".3"/>
-    <path d="M30 56 V20 L40 13 L50 20 V56"/>
-    <path d="M70 56 V20 L80 13 L90 20 V56"/>
-    <path d="M50 56 V32 Q60 22 70 32 V56 Z" fill="currentColor" opacity=".14"/>
-    <path d="M50 56 V32 Q60 22 70 32 V56"/>
-    <path d="M50 40 H70"/><path d="M50 48 H70"/><path d="M60 26 V56"/>
-    <path d="M34 24 H46"/><path d="M74 24 H86"/>`},
+  /* Castle Town alight: three roofs, the tower behind them, and a knight
+     stood in the foreground with a bucket he has already found out is no
+     use. The flames are violet rather than gold - the one thing everybody
+     who saw it agrees on - so they carry the shadow colour, the way the
+     blood moon carries the fire one. */
+  gate:{ cap:"Violet fire, and a bucket", art:`
+    <path d="M6 56 H114" opacity=".3"/>
+    <path d="M66 56 V26 H84 V56 Z" fill="currentColor" opacity=".14"/>
+    <path d="M66 56 V26 H84 V56"/>
+    <path d="M63 26 L75 15 L87 26 Z" fill="currentColor" opacity=".14"/>
+    <path d="M63 26 L75 15 L87 26"/>
+    <path d="M72 34 H78 V40 H72 Z"/>
+    <path d="M16 56 V36 H36 V56 Z" fill="currentColor" opacity=".14"/>
+    <path d="M16 56 V36 H36 V56"/>
+    <path d="M13 36 L26 26 L39 36 Z" fill="currentColor" opacity=".14"/>
+    <path d="M13 36 L26 26 L39 36"/>
+    <path d="M22 56 V47 H30 V56"/>
+    <path d="M40 56 V40 H60 V56 Z" fill="currentColor" opacity=".14"/>
+    <path d="M40 56 V40 H60 V56"/>
+    <path d="M37 40 L50 31 L63 40 Z" fill="currentColor" opacity=".14"/>
+    <path d="M37 40 L50 31 L63 40"/>
+    <path d="M44 45 H50 V51 H44 Z"/>
+    <g fill="var(--c-shadow)" fill-opacity=".26" stroke="var(--c-shadow)" stroke-width="1.6">
+      <path d="M26 25 q-4.5 -6 -1 -12 q.5 5 3 3 q3 4.5 -.5 9 Z"/>
+      <path d="M50 30 q-5.5 -7 -1.5 -14 q.5 5.5 3.5 3.5 q3.5 5.5 -.5 10.5 Z"/>
+      <path d="M75 14 q-4 -5.5 -1 -11 q.5 4.5 3 2.5 q2.5 4 -.5 8.5 Z"/>
+      <path d="M60.5 39 q-3 -4 -.5 -8 q.5 3.5 2.5 2 q2 3 -.5 6 Z"/>
+      <path d="M36 35 q-2.5 -3.5 -.5 -7 q.5 3 2 1.5 q1.5 2.5 -.5 5.5 Z"/>
+    </g>
+    <circle cx="99" cy="37.5" r="4" fill="currentColor" opacity=".14"/>
+    <circle cx="99" cy="37.5" r="4"/>
+    <path d="M96.4 36.6 H101.6" opacity=".5"/>
+    <path d="M95.6 50.5 L97.2 41.5 H100.8 L102.4 50.5 Z" fill="currentColor" opacity=".14"/>
+    <path d="M95.6 50.5 L97.2 41.5 H100.8 L102.4 50.5 Z"/>
+    <path d="M97.2 51 L96 56"/><path d="M100.8 51 L102 56"/>
+    <path d="M100.6 43.5 L105 45.6"/>
+    <path d="M103.8 45.4 H110 L108.8 51 H105 Z" fill="currentColor" opacity=".14"/>
+    <path d="M103.8 45.4 H110 L108.8 51 H105 Z"/>
+    <path d="M104.4 47.4 q2.5 1.2 5 0" opacity=".45"/>`},
   /* Nine stones for the nine they buried - five in front and four set
      back - and a Goron stood past them with its arms already folded on
      the question. */
@@ -1701,9 +1731,9 @@ const SCENES = {
    may be a fairy, a dragon, a horse, an owl, a wolf or a cucco, nothing
    in the eleven gives it speech, hands or two legs: it keeps pace,
    waits, refuses ground, is barred from the chamber, and is never a
-   character with lines. {C} stands in three of them - the third, the
-   tenth and the eleventh, that last only to leave it outside the chamber
-   door with Sha.
+   character with lines. {C} stands in two of them - the tenth and the
+   eleventh, that last only to leave it outside the chamber door with
+   Sha.
 
    {T} and {W} are in none. Both are still chosen, still drawn with their
    own glyph, and still named in the line under the result; no setup
@@ -1731,25 +1761,25 @@ const QUESTIONS = [
   { scene:"herd", place:"The Long Night", where:"Lon Lon Ranch",
     text:"[Senok] left the ranch with an [Eternal Blood Moon] hanging over it. The sun has not come up since, and [Stalfos] climb out of the ground every night. How do you help?",
     answers:[
-      {s:"water",  t:"Say out loud how much they frighten me, and take the gate anyway."},
-      {s:"shadow", t:"Work the dark side of the barn, and let the ranch think the nights are quieting on their own."},
-      {s:"spirit", t:"Refuse them the ranch. It was never his moon to hang."},
-      {s:"light",  t:"Get the lamps up first — where they come out of the ground, how many, and how long the night runs."},
-      {s:"time",   t:"Go after the moon itself. Put the sun back, or we are doing this again tomorrow."},
-      {s:"forest", t:"Stand in the yard every night and give them no ground at all."},
-      {s:"fire",   t:"Go at them tonight, before anybody has to ask me twice."}
+      {s:"water",  t:"Say out loud that it may be past me, and go at the moon anyway."},
+      {s:"shadow", t:"Take it down from the dark side, and let the ranch wake to a sunrise nobody can account for."},
+      {s:"spirit", t:"Pull it down myself. It was never his moon to hang."},
+      {s:"light",  t:"Read it first — what is holding it up there, and what has to give before the sun comes back."},
+      {s:"time",   t:"Give the ranch its mornings back, however many nights that costs me."},
+      {s:"forest", t:"Stand under it and not move until it comes down."},
+      {s:"fire",   t:"Go at it tonight, all at once, before another night runs."}
     ]},
 
-  { scene:"gate", place:"The Gate", where:"Hyrule Castle Town",
-    text:"The farms east of here are grey to the fence posts, and the families off them have walked up to [Castle Town]. The town counted its wells and its grain and shut the [gate]. {C} is outside the wall with them. What do you do at the gate?",
+  { scene:"gate", place:"The Violet Fire", where:"Hyrule Castle Town",
+    text:"Violet [fire] is running through [Castle Town], and nothing the [Knights of Hyrule] throw at it puts it out. How do you fix it?",
     answers:[
-      {s:"light",  t:"Get the count right in front of them \u2014 room, water, days \u2014 so it can be argued with."},
-      {s:"time",   t:"Get the children through first \u2014 they are the ones who have to be alive in ten years \u2014 and argue all week about the rest."},
-      {s:"forest", t:"Stay outside with the farms. If the gate holds, it holds against me too."},
-      {s:"fire",   t:"Put my shoulder to the gate and open it now."},
-      {s:"water",  t:"Say out loud, in the square, exactly what it is the town is doing."},
-      {s:"shadow", t:"Find the other way in, and use it quietly all night."},
-      {s:"spirit", t:"Refuse the number. Nobody in there decides who is left outside."}
+      {s:"light",  t:"Find out what it is burning on first. It is not wood, or it would be out by now."},
+      {s:"time",   t:"Pull down the row ahead of it, so there is a town left to come back to."},
+      {s:"forest", t:"Hold the last street that is not alight, and give it nothing past me."},
+      {s:"fire",   t:"Go into it now, before the next row goes up."},
+      {s:"water",  t:"Say out loud that water is not going to do this, and go in anyway."},
+      {s:"shadow", t:"Work the back lanes nobody is watching, and get people out without a word about who did it."},
+      {s:"spirit", t:"Refuse it the town. It goes through me first."}
     ]},
 
   { scene:"sha", place:"The Lid", where:"Kakariko Village",
@@ -1922,7 +1952,7 @@ const CRESTS = {
    Chosen once, before the first trial, and standing beside you for the
    ten that happen in Hyrule. The choice is pure flavour - it scores
    nothing and touches no tally - so that the seven-way balance of the
-   trials is untouched by it. Three of the eleven name the companion,
+   trials is untouched by it. Two of the eleven name the companion,
    through {C}, the eleventh among them - and that one only to leave it
    outside the chamber with Sha. */
 const COMPANIONS = [
