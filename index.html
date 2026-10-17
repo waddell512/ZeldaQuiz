@@ -1448,18 +1448,39 @@ const SCENES = {
       <path d="M52 21 q8 -5 16 0"/>
       <path d="M56 26 h3"/><path d="M61 26 h3"/>
     </g>`},
-  /* A Zora standing at the mouth of the river. */
-  zora:{ cap:"A Zora at the mouth", art:`
-    <path d="M24 56 H96" opacity=".3"/>
-    <path d="M53 30 Q60 27 67 30 L69 44 Q60 49 51 44 Z" fill="currentColor" opacity=".14"/>
-    <path d="M53 30 Q60 27 67 30 L69 44 Q60 49 51 44 Z"/>
-    <path d="M55 46 V53"/><path d="M65 46 V53"/>
-    <path d="M50 53 H58"/><path d="M62 53 H70"/>
-    <path d="M53 33 L45 44"/><path d="M67 33 L75 44"/>
-    <ellipse cx="60" cy="20" rx="6.5" ry="7"/>
-    <path d="M64 15 Q77 10 85 15 Q75 19 66 21 Z" fill="currentColor" opacity=".14"/>
-    <path d="M64 15 Q77 10 85 15 Q75 19 66 21 Z"/>
-    <path d="M56 20 h2.5"/>`},
+  /* The domain frozen: the fall stopped where it was coming down, a Zora
+     caught in the block under it, and a Freezard stood off to the side
+     with its breath going. The ice carries the water colour and the Zora
+     inside it stays gold, so the one warm thing on the plate is the
+     person nobody has cut out yet. */
+  zora:{ cap:"A Zora under the ice", art:`
+    <path d="M4 56 H116" opacity=".3"/>
+    <path d="M8 4 H30 L32 46 L28 54 H10 L6 46 Z" fill="var(--c-water)" fill-opacity=".18" stroke="var(--c-water)" stroke-width="1.6"/>
+    <path d="M13 6 V48" stroke="var(--c-water)" stroke-width="1" opacity=".45"/>
+    <path d="M19 5 V50" stroke="var(--c-water)" stroke-width="1" opacity=".45"/>
+    <path d="M25 6 V48" stroke="var(--c-water)" stroke-width="1" opacity=".45"/>
+    <path d="M31.4 30 L33.4 35" stroke="var(--c-water)" stroke-width="1.2" opacity=".5"/>
+    <path d="M31.8 39 L30 43.6" stroke="var(--c-water)" stroke-width="1.2" opacity=".4"/>
+    <path d="M46 56 L44 26 L58 17 L72 26 L70 56 Z" fill="var(--c-water)" fill-opacity=".16" stroke="var(--c-water)" stroke-width="1.6"/>
+    <path d="M44 26 L58 33 L72 26" stroke="var(--c-water)" stroke-width="1" opacity=".4"/>
+    <path d="M58 33 V56" stroke="var(--c-water)" stroke-width="1" opacity=".3"/>
+    <g opacity=".8">
+      <path d="M53 34 Q58 32 63 34 L64.4 44 Q58 47.5 51.6 44 Z" fill="currentColor" opacity=".14"/>
+      <path d="M53 34 Q58 32 63 34 L64.4 44 Q58 47.5 51.6 44 Z"/>
+      <path d="M54.6 45.6 V51"/><path d="M61.4 45.6 V51"/>
+      <path d="M52 51 H57"/><path d="M59 51 H64"/>
+      <path d="M53 36 L47.4 44"/><path d="M63 36 L68.6 44"/>
+      <ellipse cx="58" cy="26.6" rx="4.6" ry="5"/>
+      <path d="M61 23 Q68 20 71.4 23 Q66 26 61.6 27.4 Z" fill="currentColor" opacity=".14"/>
+      <path d="M61 23 Q68 20 71.4 23 Q66 26 61.6 27.4 Z"/>
+      <path d="M55.2 26.6 h1.8"/>
+    </g>
+    <path d="M83 56 L84.6 45 L88 38.5 L90.6 43 L94 32 L97.4 41.5 L101 36.5 L104 45 L106.4 56 Z" fill="var(--c-water)" fill-opacity=".2" stroke="var(--c-water)" stroke-width="1.6"/>
+    <path d="M88.8 45.6 L92 47.2" stroke-width="1.5"/><path d="M98.4 45.6 L95.2 47.2" stroke-width="1.5"/>
+    <path d="M88.6 51 L91.2 53.2 L93.8 51 L96.4 53.2 L99 51"/>
+    <path d="M82 48 L77 46.6" stroke="var(--c-water)" stroke-width="1.2" opacity=".55"/>
+    <path d="M81.6 51.4 L76.4 51.4" stroke="var(--c-water)" stroke-width="1.2" opacity=".4"/>
+    <path d="M82.4 54 L78 55.6" stroke="var(--c-water)" stroke-width="1.2" opacity=".3"/>`},
   /* The ranch under the blood moon: the barn, the fence, and two Stalfos
      stood up out of the ground in front of it. The moon is the one thing
      on the plate that is not gold - it carries the fire colour, the way
@@ -1840,16 +1861,16 @@ const QUESTIONS = [
       {s:"water",  t:"Tell [Sha] out loud how much this frightens me, and climb with him anyway."}
     ]},
 
-  { scene:"zora", place:"The Current", where:"Zora's Domain",
-    text:"The [river] is coming down dead out of the upland he crossed \u2014 no shine on it, nothing living in it. The [Zora] can dam the [mouth] and keep the clean water they still have. Every village in the valley below drinks what they would be shutting off. What do you do?",
+  { scene:"zora", place:"The Ice", where:"Zora's Domain",
+    text:"[Senok] left the domain frozen to the floor, and the ice will not melt. [Freezards] stand in it now, and the [Zoras] are still under it. How do you help?",
     answers:[
-      {s:"time",   t:"Sink the valley a store deep enough to last it a year, and then let them close the mouth."},
-      {s:"forest", t:"Stand at the mouth of it and not move while they decide."},
-      {s:"fire",   t:"Go upstream today and find out what is in the water."},
-      {s:"water",  t:"Say what the valley loses, and say it where the valley can hear it too."},
-      {s:"shadow", t:"Open a channel lower down, at night, and never say who did it."},
-      {s:"spirit", t:"Tell them it is theirs to close and mine to refuse to help with."},
-      {s:"light",  t:"Put the whole of it in front of them: who drinks below, and how long a store lasts."}
+      {s:"time",   t:"Go up to the source with [Sha] and stop it freezing, or we cut this river out again next week."},
+      {s:"forest", t:"Stay on the ice and cut until the last one is out, however many days that takes."},
+      {s:"fire",   t:"Start breaking ice now, at the nearest one, before anybody agrees on a plan."},
+      {s:"water",  t:"Say out loud that some of them are already gone, and cut anyway."},
+      {s:"shadow", t:"Work the far pools with [Sha], and keep the count of who we did not reach to myself."},
+      {s:"spirit", t:"Nobody gets left in it. I do not care how deep they are."},
+      {s:"light",  t:"Read the ice with [Sha] first \u2014 what is thin, who is nearest the surface, and where the [Freezards] stand."}
     ]},
 
   { scene:"column", place:"The Six", where:"Hyrule Field",
