@@ -15,7 +15,7 @@
      matching CNAME, so the apex redirect never splits the ranking.
      ================================================================== -->
 <title>The Sage Trials - Which Ocarina of Time Sage Are You? | Zelda Quiz</title>
-<meta name="description" content="Which Ocarina of Time Sage are you? Walk the eleven trials of Hyrule and find out whether you carry Forest, Fire, Water, Shadow, Spirit, Light or Time.">
+<meta name="description" content="Which Ocarina of Time Sage are you? Walk the ten trials of Hyrule and find out whether you carry Forest, Fire, Water, Shadow, Spirit, Light or Time.">
 <link rel="canonical" href="https://www.the-sage-trials.com/">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="author" content="the Skyward Prince">
@@ -32,7 +32,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:url" content="https://www.the-sage-trials.com/">
 <meta property="og:title" content="The Sage Trials - Which Ocarina of Time Sage Are You?">
-<meta property="og:description" content="Eleven trials of Hyrule. Choose your blood, your companion and your blade, then find out which Sage's light you carry.">
+<meta property="og:description" content="Ten trials of Hyrule. Choose your blood, your companion and your blade, then find out which Sage's light you carry.">
 <meta property="og:image" content="https://www.the-sage-trials.com/og.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
@@ -40,7 +40,7 @@
 <meta property="og:image:alt" content="The Sage Trials - an Ocarina of Time Sage quiz. The Triforce ringed by the seven Sage medallions.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="The Sage Trials - Which Ocarina of Time Sage Are You?">
-<meta name="twitter:description" content="Eleven trials of Hyrule. Choose your blood, your companion and your blade, then find out which Sage's light you carry.">
+<meta name="twitter:description" content="Ten trials of Hyrule. Choose your blood, your companion and your blade, then find out which Sage's light you carry.">
 <meta name="twitter:image" content="https://www.the-sage-trials.com/og.png">
 <meta name="twitter:image:alt" content="The Sage Trials - an Ocarina of Time Sage quiz.">
 
@@ -59,7 +59,7 @@
       "url": "https://www.the-sage-trials.com/",
       "name": "The Sage Trials",
       "alternateName": ["Sage Trials", "Ocarina of Time Sage Quiz", "Zelda Sage Quiz"],
-      "description": "An eleven-question Ocarina of Time quiz that decides which of the seven Sages' light you carry.",
+      "description": "A ten-question Ocarina of Time quiz that decides which of the seven Sages' light you carry.",
       "inLanguage": "en"
     },
     {
@@ -69,7 +69,7 @@
       "name": "The Sage Trials - Which Ocarina of Time Sage Are You?",
       "isPartOf": { "@id": "https://www.the-sage-trials.com/#website" },
       "primaryImageOfPage": { "@id": "https://www.the-sage-trials.com/#ogimage" },
-      "description": "Which Ocarina of Time Sage are you? Walk the eleven trials of Hyrule and find out whether you carry Forest, Fire, Water, Shadow, Spirit, Light or Time.",
+      "description": "Which Ocarina of Time Sage are you? Walk the ten trials of Hyrule and find out whether you carry Forest, Fire, Water, Shadow, Spirit, Light or Time.",
       "inLanguage": "en"
     },
     {
@@ -92,7 +92,7 @@
       "browserRequirements": "Requires JavaScript",
       "inLanguage": "en",
       "isAccessibleForFree": true,
-      "description": "An eleven-question Ocarina of Time personality quiz. Choose your tribe, your companion and the weapon you carry, walk the trials of Hyrule, and be told which of the seven Sages - Saria, Darunia, Ruto, Impa, Nabooru, Rauru or Zelda - shares your element.",
+      "description": "A ten-question Ocarina of Time personality quiz. Choose your tribe, your companion and the weapon you carry, walk the trials of Hyrule, and be told which of the seven Sages - Saria, Darunia, Ruto, Impa, Nabooru, Rauru or Zelda - shares your element.",
       "author": { "@type": "Person", "name": "the Skyward Prince" },
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
       "about": {
@@ -427,7 +427,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 }
 
 /* One plate at the foot of each trial: the item or the person that trial
-   turns on. Line rather than colour - eleven coloured plates in a row
+   turns on. Line rather than colour - ten coloured plates in a row
    would shout over the answers they are standing under. */
 .scene{
   display:flex;flex-direction:column;align-items:center;gap:.1rem;
@@ -443,7 +443,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .slab-speck{fill:var(--cut);opacity:.3}
 .cut{color:var(--cut)}
 .inlay{color:var(--gold-2)}
-/* The eleven, laid up as one wall on the result. */
+/* The ten, laid up as one wall on the result. */
 .mural{width:100%;max-width:44rem;margin:1.6rem auto 0;display:flex;
   flex-direction:column;align-items:center;gap:.4rem}
 .mural svg{width:100%;height:auto;display:block}
@@ -895,7 +895,7 @@ b.key{font-weight:600}
     <section class="view choose" id="v-companion">
       <p class="eyebrow">Before the first trial</p>
       <h2 class="ctitle">Who goes with you?</h2>
-      <p class="clede">One of them walks the ten at your shoulder, and waits outside for the eleventh. Nothing about this choice is scored &mdash; it only decides who is standing there when the wood makes you wait.</p>
+      <p class="clede">One of them walks the nine at your shoulder, and waits outside for the tenth. Nothing about this choice is scored &mdash; it only decides who is standing there when the wood makes you wait.</p>
       <ul class="companions" id="c-list"></ul>
       <div class="c-figs" id="c-figs" aria-hidden="true"></div>
       <div class="cfoot"><button class="btn-quiet" id="c-back">&larr; Choose your blood again</button></div>
@@ -905,7 +905,7 @@ b.key{font-weight:600}
     <section class="view choose" id="v-weapon">
       <p class="eyebrow">The last thing you pick up</p>
       <h2 class="ctitle">What would you carry?</h2>
-      <p class="clede">One of them is in your hands for all eleven. Scored no more than the rest of it &mdash; it is simply what you walked in carrying.</p>
+      <p class="clede">One of them is in your hands for all ten. Scored no more than the rest of it &mdash; it is simply what you walked in carrying.</p>
       <ul class="companions" id="w-list"></ul>
       <div class="cfoot"><button class="btn-quiet" id="w-back">&larr; Choose your companion again</button></div>
     </section>
@@ -1322,8 +1322,8 @@ function medallion(key){
    competing with them. Mass is carried by a .14 fill of the same
    colour rather than by a second hue.
 
-   Three plates here - goron, grove and senok - belong to trials that are
-   no longer in the run, and nothing reaches them. They are kept cut and
+   Four plates here - goron, rope, grove and senok - belong to trials
+   that are no longer in the run, and nothing reaches them. They are kept cut and
    ready against the day one of those trials comes back. */
 const SCENES = {
   /* The wood after the mist: four trunks with nothing on them, one of
@@ -1742,19 +1742,19 @@ const SCENES = {
 };
 
 /* ======================= QUESTIONS =======================
-   Eleven trials, and you are always walking in behind him. Senok is out
+   Ten trials, and you are always walking in behind him. Senok is out
    from under the roots and ahead of you, drawing the life up out of every
    field he crosses; the first ten are places he has already been
-   through, taken in the order his line reaches them, and the eleventh is
-   what the Ancient Sages do about you once he is back under. So the ten
+   through, taken in the order his line reaches them, and the tenth is
+   what the Ancient Sages do about you once he is back under. So the nine
    are never a race and never a warning - they are wreckage with people
    still standing in it, asking for something. Helping is the whole of how
    a Sage is made, which is the arrangement the Triforce named on the
    first screen.
 
-   He is never met. The ten are his wreckage and the eleventh is after he
-   is back under the roots; what put him there happens between the tenth
-   and the eleventh, off the page.
+   He is never met. The nine are his wreckage and the tenth is after he
+   is back under the roots; what put him there happens between the ninth
+   and the tenth, off the page.
 
    Nothing is set by an examiner and nothing is announced as a test. Every
    setup is short on purpose - what he did here, who is still standing in
@@ -1765,11 +1765,11 @@ const SCENES = {
 
    The register is a season of helping: real people, a real cost, and
    somebody worse off whichever way you answer. The
-   eleventh is the only one set anywhere but Hyrule: the chamber, the
+   tenth is the only one set anywhere but Hyrule: the chamber, the
    six, and a medallion held out with its face lost in its own light. It
    is scored like the rest, which is why its seven read as things done
    with the hands rather than things claimed about yourself. All seven
-   take it - nobody who has walked the ten leaves it on the stone,
+   take it - nobody who has walked the nine leaves it on the stone,
    and the trial is only which feeling your hands close on it with:
    counting the cost, shouting, taking it as owed, weeping, hiding it,
    standing to it, holding on. The face stays unread until the result
@@ -1785,7 +1785,7 @@ const SCENES = {
    sit in below is therefore only the order somebody typed them in, and
    means nothing.
 
-   Sha is the one character in the eleven who is a person. A Sheikah boy
+   Sha is the one character in the ten who is a person. A Sheikah boy
    of Kakariko, met at the fourth and walking from there to the chamber
    door at your left, he is built as the plain-spoken answer to Sheik: same
    training, same knowledge of the country, none of the riddling. Sha
@@ -1793,7 +1793,7 @@ const SCENES = {
    the number the moment he has it, says outright when he does not
    know, and does not vanish at the end of a scene. He is met at the
    fourth and is in the trials after it that have work for him. The
-   eleventh gives
+   tenth gives
    him the last word for the same reason: at the one threshold where a
    Sheikah is expected to say something cryptic, Sha says he does not
    know what is on the other side of it. He is not a choice and not
@@ -1802,11 +1802,11 @@ const SCENES = {
    {C} is the companion, {T} the tribe and {W} the weapon, all chosen
    before the first trial and none of them scored. Because the companion
    may be a fairy, a dragon, a horse, an owl, a wolf or a cucco, nothing
-   in the eleven gives it speech, hands or two legs: it keeps pace,
+   in the ten gives it speech, hands or two legs: it keeps pace,
    waits, refuses ground, is barred from the chamber, and is never a
-   character with lines. {C} stands in two of them - the tenth and the
-   eleventh, that last only to leave it outside the chamber door with
-   Sha.
+   character with lines. {C} stands in three of them - the seventh, the
+   ninth and the tenth, that last only to leave it outside the chamber
+   door with Sha.
 
    {T} and {W} are in none. Both are still chosen, still drawn with their
    own glyph, and still named in the line under the result; no setup
@@ -1915,18 +1915,6 @@ const QUESTIONS = [
       {s:"time",   t:"Give it two days, learn who his people are, and send the one he cannot refuse."}
     ]},
 
-  { scene:"rope", place:"The Rope", where:"Gerudo Valley",
-    text:"The grey went through the valley and took the [bridge ropes] with it \u2014 dry as sticks now. They will carry a set number of crossings before they give, and [Sha] counted twice and gave you the [number]. More people are waiting than the number allows. How do you work the line?",
-    answers:[
-      {s:"forest", t:"Stay on this side and keep the line straight until this side is empty."},
-      {s:"time",   t:"Send whoever can build the next bridge over first, and cross last myself."},
-      {s:"fire",   t:"Get them across fast, all of them, and argue with the rope afterwards."},
-      {s:"spirit", t:"Refuse to hold anybody back. Whoever wants the rope can have it."},
-      {s:"water",  t:"Tell them the number before anybody steps on."},
-      {s:"shadow", t:"Say nothing about the number. Keep the line moving and count it myself."},
-      {s:"light",  t:"Count it out loud, weigh them, and send them over in the order the rope will take."}
-    ]},
-
   { scene:"camp", place:"The Unlit", where:"The Haunted Wasteland",
     text:"Ground he has already crossed: grey to the horizon, nothing growing, no lamp staying lit on it. A [family] is camped in the middle of it and says the place is theirs and always was. [Sha] says a year before anything grows here. {C} will not set foot on it.",
     answers:[
@@ -2023,10 +2011,10 @@ const CRESTS = {
 
 /* ======================= COMPANIONS =======================
    Chosen once, before the first trial, and standing beside you for the
-   ten that happen in Hyrule. The choice is pure flavour - it scores
+   nine that happen in Hyrule. The choice is pure flavour - it scores
    nothing and touches no tally - so that the seven-way balance of the
-   trials is untouched by it. Two of the eleven name the companion,
-   through {C}, the eleventh among them - and that one only to leave it
+   trials is untouched by it. Three of the ten name the companion,
+   through {C}, the tenth among them - and that one only to leave it
    outside the chamber with Sha. */
 const COMPANIONS = [
   { id:"tabe",   name:"Tab\u00e8", kind:"a fairy, of Navi's line",
@@ -2166,7 +2154,7 @@ const FIGURES = {
 
 
 /* ======================= WEAPONS =======================
-   Picked last, after the companion, and held for all eleven. Flavour
+   Picked last, after the companion, and held for all ten. Flavour
    again - nothing here is scored, and no trial names it. Five come off the game's own item
    screen; the scimitar is the curved blade the fortress guards carry,
    the dagger is village work rather than a named artefact, and the Bow
@@ -2233,11 +2221,11 @@ const ARMS = {
 
    Each slab carries a tenon on its right edge and a mortise on its left,
    cut to the same rectangle, so slab n keys into slab n+1 exactly and
-   the eleven lay up as one frieze with no gap and no overlap. That is
+   the ten lay up as one frieze with no gap and no overlap. That is
    what the result page does with them: courses of seven, or fewer to a
    course on a narrow screen, in the order they were walked, tabs and all
-   - including the one on the eleventh, which keys into nothing,
-   because the wall is a fragment and there was never a twelfth
+   - including the one on the tenth, which keys into nothing,
+   because the wall is a fragment and there was never an eleventh
    stone.
 
    The flaws are cut from the index, not from Math.random, so a slab has
@@ -2279,7 +2267,7 @@ function slabPlate(key){
   return `<svg viewBox="-2 -2 130 82" aria-hidden="true">${slab(key, 0)}</svg>`;
 }
 
-/* The eleven laid up: courses of seven, in the order walked. */
+/* The ten laid up: courses of seven, in the order walked. */
 function mural(){
   const keys = QUESTIONS.map(q=>q.scene);
   /* Fewer stones to a course on a narrow screen, so the wall gets taller
@@ -2293,7 +2281,7 @@ function mural(){
   }
   const ww = Math.min(per, keys.length)*SLAB_W + 5, hh = courses.length*SLAB_H;
   return `<svg viewBox="-2 -2 ${ww+4} ${hh+4}" aria-hidden="true">${courses.join("")}</svg>` +
-         `<figcaption>Eleven stones, in the order you walked them</figcaption>`;
+         `<figcaption>Ten stones, in the order you walked them</figcaption>`;
 }
 
 /* ======================= STATE ======================= */
@@ -2536,7 +2524,7 @@ function renderResult(){
   const key = winner(counts);
   const s = SAGES[key];
 
-  /* The finish. sage_score is how many of the eleven went to the winner -
+  /* The finish. sage_score is how many of the ten went to the winner -
      a run of 5 and a run of 12 are both this element, and they are not the
      same result, so the margin travels with it. */
   track("quiz_complete", {
@@ -2590,7 +2578,7 @@ function renderResult(){
   $("r-mural").innerHTML = mural();
 
   $("r-comp").innerHTML =
-    `Eleven trials, walked as ` +
+    `Ten trials, walked as ` +
     `<b class="key">${tribe.one}</b> at the shoulder of <b class="key">${companion.name}</b>, ` +
     `${companion.kind}, with <b class="key">${weapon.carry}</b> to hand. ` +
     `<b class="key">Sha</b> walked it with you from <b class="key">Kakariko</b> to the chamber door.`;
@@ -2622,7 +2610,7 @@ $("copy").addEventListener("click", async ()=>{
   const text = (s.heading
     ? `The Sage Trials \u2014 I came out as ${s.heading}. ${s.line} The Sage who holds it: ${s.sage} (${s.temple} \u00b7 ${s.song}).`
     : `The Sage Trials \u2014 my element is ${s.element}. ${s.line} Another Sage of ${s.element}: ${s.sage} (${s.temple} \u00b7 ${s.song}).`)
-    + ` Eleven trials, walked as ${tribe.one} with ${companion.name}, ${weapon.carry}, and Sha from Kakariko to the chamber door.`;
+    + ` Ten trials, walked as ${tribe.one} with ${companion.name}, ${weapon.carry}, and Sha from Kakariko to the chamber door.`;
   try{
     await navigator.clipboard.writeText(text);
     $("copy").textContent = "Copied";
