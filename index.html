@@ -15,7 +15,7 @@
      matching CNAME, so the apex redirect never splits the ranking.
      ================================================================== -->
 <title>The Sage Trials - Which Ocarina of Time Sage Are You? | Zelda Quiz</title>
-<meta name="description" content="Which Ocarina of Time Sage are you? Walk the fourteen trials of Hyrule and find out whether you carry Forest, Fire, Water, Shadow, Spirit, Light or Time.">
+<meta name="description" content="Which Ocarina of Time Sage are you? Walk the eleven trials of Hyrule and find out whether you carry Forest, Fire, Water, Shadow, Spirit, Light or Time.">
 <link rel="canonical" href="https://www.the-sage-trials.com/">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="author" content="the Skyward Prince">
@@ -32,7 +32,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:url" content="https://www.the-sage-trials.com/">
 <meta property="og:title" content="The Sage Trials - Which Ocarina of Time Sage Are You?">
-<meta property="og:description" content="Fourteen trials of Hyrule. Choose your blood, your companion and your blade, then find out which Sage's light you carry.">
+<meta property="og:description" content="Eleven trials of Hyrule. Choose your blood, your companion and your blade, then find out which Sage's light you carry.">
 <meta property="og:image" content="https://www.the-sage-trials.com/og.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
@@ -40,7 +40,7 @@
 <meta property="og:image:alt" content="The Sage Trials - an Ocarina of Time Sage quiz. The Triforce ringed by the seven Sage medallions.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="The Sage Trials - Which Ocarina of Time Sage Are You?">
-<meta name="twitter:description" content="Fourteen trials of Hyrule. Choose your blood, your companion and your blade, then find out which Sage's light you carry.">
+<meta name="twitter:description" content="Eleven trials of Hyrule. Choose your blood, your companion and your blade, then find out which Sage's light you carry.">
 <meta name="twitter:image" content="https://www.the-sage-trials.com/og.png">
 <meta name="twitter:image:alt" content="The Sage Trials - an Ocarina of Time Sage quiz.">
 
@@ -59,7 +59,7 @@
       "url": "https://www.the-sage-trials.com/",
       "name": "The Sage Trials",
       "alternateName": ["Sage Trials", "Ocarina of Time Sage Quiz", "Zelda Sage Quiz"],
-      "description": "A fourteen-question Ocarina of Time quiz that decides which of the seven Sages' light you carry.",
+      "description": "An eleven-question Ocarina of Time quiz that decides which of the seven Sages' light you carry.",
       "inLanguage": "en"
     },
     {
@@ -69,7 +69,7 @@
       "name": "The Sage Trials - Which Ocarina of Time Sage Are You?",
       "isPartOf": { "@id": "https://www.the-sage-trials.com/#website" },
       "primaryImageOfPage": { "@id": "https://www.the-sage-trials.com/#ogimage" },
-      "description": "Which Ocarina of Time Sage are you? Walk the fourteen trials of Hyrule and find out whether you carry Forest, Fire, Water, Shadow, Spirit, Light or Time.",
+      "description": "Which Ocarina of Time Sage are you? Walk the eleven trials of Hyrule and find out whether you carry Forest, Fire, Water, Shadow, Spirit, Light or Time.",
       "inLanguage": "en"
     },
     {
@@ -92,7 +92,7 @@
       "browserRequirements": "Requires JavaScript",
       "inLanguage": "en",
       "isAccessibleForFree": true,
-      "description": "A fourteen-question Ocarina of Time personality quiz. Choose your tribe, your companion and the weapon you carry, walk the trials of Hyrule, and be told which of the seven Sages - Saria, Darunia, Ruto, Impa, Nabooru, Rauru or Zelda - shares your element.",
+      "description": "An eleven-question Ocarina of Time personality quiz. Choose your tribe, your companion and the weapon you carry, walk the trials of Hyrule, and be told which of the seven Sages - Saria, Darunia, Ruto, Impa, Nabooru, Rauru or Zelda - shares your element.",
       "author": { "@type": "Person", "name": "the Skyward Prince" },
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
       "about": {
@@ -427,7 +427,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 }
 
 /* One plate at the foot of each trial: the item or the person that trial
-   turns on. Line rather than colour - fourteen coloured plates in a row
+   turns on. Line rather than colour - eleven coloured plates in a row
    would shout over the answers they are standing under. */
 .scene{
   display:flex;flex-direction:column;align-items:center;gap:.1rem;
@@ -443,7 +443,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .slab-speck{fill:var(--cut);opacity:.3}
 .cut{color:var(--cut)}
 .inlay{color:var(--gold-2)}
-/* The fourteen, laid up as one wall on the result. */
+/* The eleven, laid up as one wall on the result. */
 .mural{width:100%;max-width:44rem;margin:1.6rem auto 0;display:flex;
   flex-direction:column;align-items:center;gap:.4rem}
 .mural svg{width:100%;height:auto;display:block}
@@ -895,7 +895,7 @@ b.key{font-weight:600}
     <section class="view choose" id="v-companion">
       <p class="eyebrow">Before the first trial</p>
       <h2 class="ctitle">Who goes with you?</h2>
-      <p class="clede">One of them walks the thirteen at your shoulder, and waits outside for the fourteenth. Nothing about this choice is scored &mdash; it only decides who is standing there when the wood makes you wait.</p>
+      <p class="clede">One of them walks the ten at your shoulder, and waits outside for the eleventh. Nothing about this choice is scored &mdash; it only decides who is standing there when the wood makes you wait.</p>
       <ul class="companions" id="c-list"></ul>
       <div class="c-figs" id="c-figs" aria-hidden="true"></div>
       <div class="cfoot"><button class="btn-quiet" id="c-back">&larr; Choose your blood again</button></div>
@@ -905,7 +905,7 @@ b.key{font-weight:600}
     <section class="view choose" id="v-weapon">
       <p class="eyebrow">The last thing you pick up</p>
       <h2 class="ctitle">What would you carry?</h2>
-      <p class="clede">One of them is in your hands for all fourteen. Scored no more than the rest of it &mdash; but the trials do notice what you reached for.</p>
+      <p class="clede">One of them is in your hands for all eleven. Scored no more than the rest of it &mdash; it is simply what you walked in carrying.</p>
       <ul class="companions" id="w-list"></ul>
       <div class="cfoot"><button class="btn-quiet" id="w-back">&larr; Choose your companion again</button></div>
     </section>
@@ -1316,11 +1316,15 @@ function medallion(key){
 /* ======================= TRIAL PLATES =======================
    One drawing to close each trial, of a thing or a person that trial
    actually turns on - the spears going out, the shut gate, the
-   old man's boat, Senok with a man beside it for scale. All fourteen
-   share a 120x64 field with the ground at y=56, and all are drawn in
+   old man's boat, the camp on ground that will not take a lamp. Every
+   plate shares a 120x64 field with the ground at y=56, and all are drawn in
    line in the page's own gold so they sit under the answers without
    competing with them. Mass is carried by a .14 fill of the same
-   colour rather than by a second hue. */
+   colour rather than by a second hue.
+
+   Three plates here - goron, grove and senok - belong to trials that are
+   no longer in the run, and nothing reaches them. They are kept cut and
+   ready against the day one of those trials comes back. */
 const SCENES = {
   /* The wood after the mist: four trunks with nothing on them, one of
      them snapped off, a stump, and a fallen one lying where it came
@@ -1619,17 +1623,19 @@ const SCENES = {
 };
 
 /* ======================= QUESTIONS =======================
-   Fourteen trials, and you are always walking in behind him. Senok is out
+   Eleven trials, and you are always walking in behind him. Senok is out
    from under the roots and ahead of you, drawing the life up out of every
-   field he crosses; the first twelve are places he has already been
-   through, taken in the order his line reaches them, the thirteenth is
-   Senok himself on the castle road, and the fourteenth is what the
-   Ancient Sages do about you once he is back under. So the twelve are
-   never a race and never a warning - they are wreckage with people still
-   standing in it, asking for something. Helping is the whole of how a
-   Sage is made, which is the arrangement the Triforce named on the first
-   screen, and why the twelfth is the Fairy Prince's grove handing the
-   light over.
+   field he crosses; the first ten are places he has already been
+   through, taken in the order his line reaches them, and the eleventh is
+   what the Ancient Sages do about you once he is back under. So the ten
+   are never a race and never a warning - they are wreckage with people
+   still standing in it, asking for something. Helping is the whole of how
+   a Sage is made, which is the arrangement the Triforce named on the
+   first screen.
+
+   He is never met. The ten are his wreckage and the eleventh is after he
+   is back under the roots; what put him there happens between the tenth
+   and the eleventh, off the page.
 
    Nothing is set by an examiner and nothing is announced as a test. Every
    setup is short on purpose - what he did here, who is still standing in
@@ -1639,17 +1645,12 @@ const SCENES = {
    decide, so it is cut.
 
    The register is a season of helping: real people, a real cost, and
-   somebody worse off whichever way you answer. Senok himself never argues
-   and never hurries - a Poe has nothing but time - so the thirteenth is a
-   decision about how you end him, made with the light the twelve before
-   it earned - and its seven all go at him, the way the fourteenth's
-   seven all take the medallion, because nobody who has walked the twelve
-   stands there and lets him keep the road. The
-   fourteenth is the only one set anywhere but Hyrule: the chamber, the
+   somebody worse off whichever way you answer. The
+   eleventh is the only one set anywhere but Hyrule: the chamber, the
    six, and a medallion held out with its face lost in its own light. It
    is scored like the rest, which is why its seven read as things done
    with the hands rather than things claimed about yourself. All seven
-   take it - nobody who has walked the thirteen leaves it on the stone,
+   take it - nobody who has walked the ten leaves it on the stone,
    and the trial is only which feeling your hands close on it with:
    counting the cost, shouting, taking it as owed, weeping, hiding it,
    standing to it, holding on. The face stays unread until the result
@@ -1665,32 +1666,39 @@ const SCENES = {
    sit in below is therefore only the order somebody typed them in, and
    means nothing.
 
-   Sha is the one character in the fourteen who is a person. A Sheikah
-   of Kakariko, met at the seventh and walking from there to the chamber
+   Sha is the one character in the eleven who is a person. A Sheikah
+   of Kakariko, met at the fourth and walking from there to the chamber
    door at your left, they are built as the plain-spoken answer to Sheik: same
    training, same knowledge of the country, none of the riddling. Sha
    goes unhooded, says what is under the village in daylight, hands over
    the number the moment they have it, says outright when they do not
    know, and does not vanish at the end of a scene. They are met at the
-   seventh and are in every trial after it. The fourteenth gives
+   fourth and are in the trials after it that have work for them. The
+   eleventh gives
    them the last word for the same reason: at the one threshold where a
    Sheikah is expected to say something cryptic, Sha says they do not
    know what is on the other side of it. They are not a choice and not
-   scored - everyone who reaches the seventh meets them.
+   scored - everyone who reaches the fourth meets them.
 
    {C} is the companion, {T} the tribe and {W} the weapon, all chosen
    before the first trial and none of them scored. Because the companion
    may be a fairy, a dragon, a horse, an owl, a wolf or a cucco, nothing
-   in the fourteen gives it speech, hands or two legs: it keeps pace,
+   in the eleven gives it speech, hands or two legs: it keeps pace,
    waits, refuses ground, is barred from the chamber, and is never a
-   character with lines. {T} is written to read with an article in front
-   of it ("You are a Kokiri") and {W} as a thing in the hand, never at
-   the head of a sentence - five of the eight read "the Kokiri Sword",
-   "a Gerudo scimitar" and so on, and would start one in lower case - so
-   every
-   choice on those two screens reads naturally in every sentence that
-   names it. Each trial also carries a `where` - the place in Hyrule it
-   is set - shown under its name. */
+   character with lines. {C} stands in three of them - the third, the
+   tenth and the eleventh, that last only to leave it outside the chamber
+   door with Sha.
+
+   {T} and {W} are in none. Both are still chosen, still drawn with their
+   own glyph, and still named in the line under the result; no setup
+   stops to introduce the reader to themselves or to what they are
+   holding. The substitution and the conventions behind it stay here
+   because they cost nothing and the next trial written may want them:
+   {T} reads with an article in front of it ("You are a Kokiri") and {W}
+   as a thing in the hand, never at the head of a sentence - five of the
+   eight read "the Kokiri Sword", "a Gerudo scimitar" and so on, and
+   would start one in lower case. Each trial also carries a `where` - the
+   place in Hyrule it is set - shown under its name. */
 const QUESTIONS = [
   { scene:"kokiri", place:"The Mist", where:"Kokiri Forest",
     text:"The seal under the roots broke, and [Senok] walked out of the wood. He left his [mist] behind him, and every plant in the forest is dead. How do you fix it?",
@@ -1704,16 +1712,16 @@ const QUESTIONS = [
       {s:"time",   t:"Go after the mist instead. Kill the cause, or I am planting this wood again every spring."}
     ]},
 
-  { scene:"column", place:"The Six", where:"Hyrule Field",
-    text:"Forty of the [castle's riders] went out to meet him on the field. Six came back, and not one of their lamps will light. Their [captain] is still out on the [grey], and nobody will cross it to fetch him. What do you do?",
+  { scene:"herd", place:"The Herd", where:"Lon Lon Ranch",
+    text:"He crossed the ranch two nights ago. The [grass] is grey to the fence line and there is nothing left in it for the horses. [Malon] can walk them to pasture two days north. About half the herd will not make that walk. What do you do?",
     answers:[
-      {s:"forest", t:"Walk out there myself and not come back without him."},
-      {s:"fire",   t:"Go now, at a run, before anybody talks me out of it."},
-      {s:"water",  t:"Say plainly that the ground frightens me, and walk onto it saying so."},
-      {s:"shadow", t:"Go out after dark, and let the road think he walked back on his own."},
-      {s:"spirit", t:"Their fear is not my rule. I cross, and I ask nobody to come."},
-      {s:"light",  t:"Get it straight first \u2014 where he fell, how far, how long a lamp lasts out there."},
-      {s:"time",   t:"Take [the six] to the castle tonight, so that in a month nobody is sending forty more."}
+      {s:"water",  t:"Tell [Malon] out loud that half of them will not make it, and start anyway."},
+      {s:"shadow", t:"Do the choosing myself, quietly, so nobody at the ranch has to."},
+      {s:"spirit", t:"I am not sorting horses into lists. Open the gates and let them walk."},
+      {s:"light",  t:"Sort them by what can walk and how far, and work down the list."},
+      {s:"time",   t:"Move the mares in foal first, and count the rest as next year's loss."},
+      {s:"forest", t:"Stay behind with the ones that cannot go."},
+      {s:"fire",   t:"Take the whole herd north at once and lose what I lose."}
     ]},
 
   { scene:"gate", place:"The Gate", where:"Hyrule Castle Town",
@@ -1726,42 +1734,6 @@ const QUESTIONS = [
       {s:"water",  t:"Say out loud, in the square, exactly what it is the town is doing."},
       {s:"shadow", t:"Find the other way in, and use it quietly all night."},
       {s:"spirit", t:"Refuse the number. Nobody in there decides who is left outside."}
-    ]},
-
-  { scene:"goron", place:"The Muster", where:"Goron City",
-    text:"The [Gorons] have buried [nine of their own] and dug out the rest, and now they are arming to roll west after him. Nothing they have will touch him, and you are the only one here who knows it. What do you do?",
-    answers:[
-      {s:"fire",   t:"Tell them to their faces it is nine dead for nothing, and take the shouting."},
-      {s:"water",  t:"Say I am frightened of what comes back, and say it to the whole city."},
-      {s:"shadow", t:"Let them muster, and quietly see to it the west road is not passable."},
-      {s:"spirit", t:"They are not mine to stop. I say it once and stand out of the road."},
-      {s:"light",  t:"Set out what he is and what stone has already failed to do, in front of all of them."},
-      {s:"time",   t:"Give them work that will still matter in a month, and let the muster cool while they do it."},
-      {s:"forest", t:"If they go, I go with them, and I come back with whoever comes back."}
-    ]},
-
-  { scene:"zora", place:"The Current", where:"Zora's Domain",
-    text:"The [river] is coming down dead out of the upland he crossed \u2014 no shine on it, nothing living in it. The [Zora] can dam the [mouth] and keep the clean water they still have. Every village in the valley below drinks what they would be shutting off. What do you do?",
-    answers:[
-      {s:"time",   t:"Sink the valley a store deep enough to last it a year, and then let them close the mouth."},
-      {s:"forest", t:"Stand at the mouth of it and not move while they decide."},
-      {s:"fire",   t:"Go upstream today and find out what is in the water."},
-      {s:"water",  t:"Say what the valley loses, and say it where the valley can hear it too."},
-      {s:"shadow", t:"Open a channel lower down, at night, and never say who did it."},
-      {s:"spirit", t:"Tell them it is theirs to close and mine to refuse to help with."},
-      {s:"light",  t:"Put the whole of it in front of them: who drinks below, and how long a store lasts."}
-    ]},
-
-  { scene:"herd", place:"The Herd", where:"Lon Lon Ranch",
-    text:"He crossed the ranch two nights ago. The [grass] is grey to the fence line and there is nothing left in it for the horses. [Malon] can walk them to pasture two days north. About half the herd will not make that walk. What do you do?",
-    answers:[
-      {s:"water",  t:"Tell [Malon] out loud that half of them will not make it, and start anyway."},
-      {s:"shadow", t:"Do the choosing myself, quietly, so nobody at the ranch has to."},
-      {s:"spirit", t:"I am not sorting horses into lists. Open the gates and let them walk."},
-      {s:"light",  t:"Sort them by what can walk and how far, and work down the list."},
-      {s:"time",   t:"Move the mares in foal first, and count the rest as next year's loss."},
-      {s:"forest", t:"Stay behind with the ones that cannot go."},
-      {s:"fire",   t:"Take the whole herd north at once and lose what I lose."}
     ]},
 
   { scene:"sha", place:"The Lid", where:"Kakariko Village",
@@ -1786,6 +1758,30 @@ const QUESTIONS = [
       {s:"fire",   t:"Dig at the face now and let the shoulder do what it does."},
       {s:"spirit", t:"Nobody gets sent under that. Whoever is going under it, it is me."},
       {s:"water",  t:"Say out loud that this could come down on us, and pick up a stone anyway."}
+    ]},
+
+  { scene:"zora", place:"The Current", where:"Zora's Domain",
+    text:"The [river] is coming down dead out of the upland he crossed \u2014 no shine on it, nothing living in it. The [Zora] can dam the [mouth] and keep the clean water they still have. Every village in the valley below drinks what they would be shutting off. What do you do?",
+    answers:[
+      {s:"time",   t:"Sink the valley a store deep enough to last it a year, and then let them close the mouth."},
+      {s:"forest", t:"Stand at the mouth of it and not move while they decide."},
+      {s:"fire",   t:"Go upstream today and find out what is in the water."},
+      {s:"water",  t:"Say what the valley loses, and say it where the valley can hear it too."},
+      {s:"shadow", t:"Open a channel lower down, at night, and never say who did it."},
+      {s:"spirit", t:"Tell them it is theirs to close and mine to refuse to help with."},
+      {s:"light",  t:"Put the whole of it in front of them: who drinks below, and how long a store lasts."}
+    ]},
+
+  { scene:"column", place:"The Six", where:"Hyrule Field",
+    text:"Forty of the [castle's riders] went out to meet him on the field. Six came back, and not one of their lamps will light. Their [captain] is still out on the [grey], and nobody will cross it to fetch him. What do you do?",
+    answers:[
+      {s:"forest", t:"Walk out there myself and not come back without him."},
+      {s:"fire",   t:"Go now, at a run, before anybody talks me out of it."},
+      {s:"water",  t:"Say plainly that the ground frightens me, and walk onto it saying so."},
+      {s:"shadow", t:"Go out after dark, and let the road think he walked back on his own."},
+      {s:"spirit", t:"Their fear is not my rule. I cross, and I ask nobody to come."},
+      {s:"light",  t:"Get it straight first \u2014 where he fell, how far, how long a lamp lasts out there."},
+      {s:"time",   t:"Take [the six] to the castle tonight, so that in a month nobody is sending forty more."}
     ]},
 
   { scene:"boat", place:"The Jetty", where:"Lake Hylia",
@@ -1822,30 +1818,6 @@ const QUESTIONS = [
       {s:"time",   t:"Find out what they are really staying for and solve that instead, so they are off this ground by spring."},
       {s:"fire",   t:"Load their cart myself and start walking. They can follow or they can shout."},
       {s:"spirit", t:"They are not wrong. It is theirs, and I am not the one to move them."}
-    ]},
-
-  { scene:"grove", place:"What It Cost", where:"The Fairy Prince's Grove",
-    text:"The few fairies left in this grove are what remains of the [Fairy Prince]'s light \u2014 the [light that makes a Sage]. They say it is worth exactly what you did in the eleven places behind you, and ask which of the eleven you would take back. Which is it?",
-    answers:[
-      {s:"light",  t:"None back. Set the eleven out in order, so what they cost is on the record."},
-      {s:"forest", t:"None of them. I stood where I stood."},
-      {s:"time",   t:"Take back the first one. Everything after it was built on top of that."},
-      {s:"fire",   t:"Take back the one I was slowest on. Nothing else."},
-      {s:"spirit", t:"None. I am not handing any of it back to be decided again."},
-      {s:"water",  t:"Name the one that still keeps me awake, and say why in front of them."},
-      {s:"shadow", t:"Take one back, and keep to myself which one it was."}
-    ]},
-
-  { scene:"senok", place:"Senok", where:"The Castle Road",
-    text:"[Senok] is on the castle road: twice your height, violet robes hanging off nothing, a wooden mask with two slits and a slot. The [Fairy Prince]'s light still burns in the [lantern] he carries. You have {W} in your hand, lit at the grove. He says you are early, and that he can wait. How do you end him?",
-    answers:[
-      {s:"spirit", t:"Go at him on my own hour and not the one he is offering, and take no terms with it."},
-      {s:"water",  t:"Go at him saying out loud that the mask frightens me, and put the light through it anyway."},
-      {s:"shadow", t:"Go at him from the side nobody is watching, and let the road never learn who did it."},
-      {s:"light",  t:"Go at the lantern first, in the open, so everyone behind me sees what he has been carrying."},
-      {s:"forest", t:"Go at him and not give a step, and hold the light steady until he is the one that goes out."},
-      {s:"time",   t:"Go at him slowly, and hold him here until the twelve lights behind me are burning at once."},
-      {s:"fire",   t:"Go at him now, all of it at once, before the mask has finished turning toward me."}
     ]},
 
   { scene:"chamber", place:"The Medallion", where:"The Chamber of Sages",
@@ -1932,11 +1904,11 @@ const CRESTS = {
 
 /* ======================= COMPANIONS =======================
    Chosen once, before the first trial, and standing beside you for the
-   thirteen that happen in Hyrule. The choice is pure flavour - it scores
+   ten that happen in Hyrule. The choice is pure flavour - it scores
    nothing and touches no tally - so that the seven-way balance of the
-   trials is untouched by it. Nine of the fourteen name the companion,
-   through {C}, the first and the fourteenth among them - the fourteenth
-   only to leave it outside the chamber with Sha. */
+   trials is untouched by it. Three of the eleven name the companion,
+   through {C}, the eleventh among them - and that one only to leave it
+   outside the chamber with Sha. */
 const COMPANIONS = [
   { id:"tabe",   name:"Tab\u00e8", kind:"a fairy, of Navi's line",
     note:"Mischief, sarcasm, and the one thing that matters said at the worst possible moment. Works hard at hiding how much he cares." },
@@ -2075,8 +2047,8 @@ const FIGURES = {
 
 
 /* ======================= WEAPONS =======================
-   Picked last, after the companion, and held for all fourteen. Flavour
-   again - nothing here is scored. Five come off the game's own item
+   Picked last, after the companion, and held for all eleven. Flavour
+   again - nothing here is scored, and no trial names it. Five come off the game's own item
    screen; the scimitar is the curved blade the fortress guards carry,
    the dagger is village work rather than a named artefact, and the Bow
    of Light comes from the other end of the legend - its note says so,
@@ -2142,11 +2114,11 @@ const ARMS = {
 
    Each slab carries a tenon on its right edge and a mortise on its left,
    cut to the same rectangle, so slab n keys into slab n+1 exactly and
-   the fourteen lay up as one frieze with no gap and no overlap. That is
+   the eleven lay up as one frieze with no gap and no overlap. That is
    what the result page does with them: courses of seven, or fewer to a
    course on a narrow screen, in the order they were walked, tabs and all
-   - including the one on the fourteenth, which keys into nothing,
-   because the wall is a fragment and there was never a fifteenth
+   - including the one on the eleventh, which keys into nothing,
+   because the wall is a fragment and there was never a twelfth
    stone.
 
    The flaws are cut from the index, not from Math.random, so a slab has
@@ -2188,7 +2160,7 @@ function slabPlate(key){
   return `<svg viewBox="-2 -2 130 82" aria-hidden="true">${slab(key, 0)}</svg>`;
 }
 
-/* The fourteen laid up: two courses of seven, in the order walked. */
+/* The eleven laid up: courses of seven, in the order walked. */
 function mural(){
   const keys = QUESTIONS.map(q=>q.scene);
   /* Fewer stones to a course on a narrow screen, so the wall gets taller
@@ -2202,7 +2174,7 @@ function mural(){
   }
   const ww = Math.min(per, keys.length)*SLAB_W + 5, hh = courses.length*SLAB_H;
   return `<svg viewBox="-2 -2 ${ww+4} ${hh+4}" aria-hidden="true">${courses.join("")}</svg>` +
-         `<figcaption>Fourteen stones, in the order you walked them</figcaption>`;
+         `<figcaption>Eleven stones, in the order you walked them</figcaption>`;
 }
 
 /* ======================= STATE ======================= */
@@ -2445,7 +2417,7 @@ function renderResult(){
   const key = winner(counts);
   const s = SAGES[key];
 
-  /* The finish. sage_score is how many of the fourteen went to the winner -
+  /* The finish. sage_score is how many of the eleven went to the winner -
      a run of 5 and a run of 12 are both this element, and they are not the
      same result, so the margin travels with it. */
   track("quiz_complete", {
@@ -2499,7 +2471,7 @@ function renderResult(){
   $("r-mural").innerHTML = mural();
 
   $("r-comp").innerHTML =
-    `Fourteen trials, the thirteenth of them <b class="key">Senok</b>, walked as ` +
+    `Eleven trials, walked as ` +
     `<b class="key">${tribe.one}</b> at the shoulder of <b class="key">${companion.name}</b>, ` +
     `${companion.kind}, with <b class="key">${weapon.carry}</b> to hand. ` +
     `<b class="key">Sha</b> walked it with you from <b class="key">Kakariko</b> to the chamber door.`;
@@ -2531,7 +2503,7 @@ $("copy").addEventListener("click", async ()=>{
   const text = (s.heading
     ? `The Sage Trials \u2014 I came out as ${s.heading}. ${s.line} The Sage who holds it: ${s.sage} (${s.temple} \u00b7 ${s.song}).`
     : `The Sage Trials \u2014 my element is ${s.element}. ${s.line} Another Sage of ${s.element}: ${s.sage} (${s.temple} \u00b7 ${s.song}).`)
-    + ` Fourteen trials, the thirteenth of them Senok, walked as ${tribe.one} with ${companion.name}, ${weapon.carry}, and Sha from Kakariko to the chamber door.`;
+    + ` Eleven trials, walked as ${tribe.one} with ${companion.name}, ${weapon.carry}, and Sha from Kakariko to the chamber door.`;
   try{
     await navigator.clipboard.writeText(text);
     $("copy").textContent = "Copied";
