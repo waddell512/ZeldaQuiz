@@ -1430,35 +1430,51 @@ const SCENES = {
     <path d="M64 15 Q77 10 85 15 Q75 19 66 21 Z" fill="currentColor" opacity=".14"/>
     <path d="M64 15 Q77 10 85 15 Q75 19 66 21 Z"/>
     <path d="M56 20 h2.5"/>`},
-  /* The mare and the foal that decide the order of the day, and the
-     grass that has nothing left in it for either of them. */
-  herd:{ cap:"The mares, and nothing in the grass", art:`
-    <path d="M10 56 H110" opacity=".3"/>
-    <path d="M14 56 q1.5 -3.5 4 -1.5" opacity=".3"/>
-    <path d="M22 56 q1 -3 3.5 -2" opacity=".28"/>
-    <path d="M98 56 q1.5 -3.5 4 -1.5" opacity=".3"/>
-    <path d="M106 56 q1 -3 3.5 -2" opacity=".26"/>
-    <path d="M88 56 q1.2 -3 3.4 -1.6" opacity=".24"/>
-    <g transform="translate(34 0)">
-      <path d="M24 40 Q22 30 36 29 L52 30 Q59 31 60 38 Q61 45 55 46 H30 Q25 46 24 40 Z" fill="currentColor" opacity=".14"/>
-      <path d="M24 40 Q22 30 36 29 L52 30 Q59 31 60 38 Q61 45 55 46 H30 Q25 46 24 40 Z"/>
-      <path d="M50 31 Q53 21 59 16 Q63 11 68 12 Q74 14 74 19 Q74 23 69 25 L62 27 Q58 28 56 31 Z"/>
-      <path d="M60 14 L58.5 8 L64 11.5"/>
-      <circle cx="69" cy="17.5" r="1" fill="currentColor"/>
-      <path d="M30 45 V56"/><path d="M38 45 V56"/><path d="M48 45 V56"/><path d="M55 45 V56"/>
-      <path d="M25 34 Q14 34 10 45 Q9 52 16 56 Q11 50 13 44 Q16 37 25 38 Z" fill="currentColor" opacity=".14"/>
-      <path d="M25 34 Q14 34 10 45 Q9 52 16 56 Q11 50 13 44 Q16 37 25 38 Z"/>
+  /* The ranch under the blood moon: the barn, the fence, and two Stalfos
+     stood up out of the ground in front of it. The moon is the one thing
+     on the plate that is not gold - it carries the fire colour, the way
+     Senok's robe carries the shadow one, because the moon is the whole
+     reason the rest of it is happening. */
+  herd:{ cap:"Stalfos, and a moon that will not set", art:`
+    <path d="M6 56 H114" opacity=".3"/>
+    <circle cx="22" cy="17" r="13" fill="var(--c-fire)" opacity=".2"/>
+    <circle cx="22" cy="17" r="13" fill="none" stroke="var(--c-fire)" stroke-width="2"/>
+    <circle cx="22" cy="17" r="17.5" fill="none" stroke="var(--c-fire)" stroke-width="1" opacity=".3"/>
+    <circle cx="17.5" cy="13" r="2.6" fill="none" stroke="var(--c-fire)" stroke-width="1" opacity=".5"/>
+    <circle cx="26" cy="21.5" r="3.4" fill="none" stroke="var(--c-fire)" stroke-width="1" opacity=".4"/>
+    <circle cx="25.5" cy="11.5" r="1.5" fill="none" stroke="var(--c-fire)" stroke-width="1" opacity=".35"/>
+    <path d="M84 56 V40 H110 V56 Z" fill="currentColor" opacity=".14"/>
+    <path d="M84 56 V40 H110 V56"/>
+    <path d="M82 40 L97 30 L112 40 Z" fill="currentColor" opacity=".14"/>
+    <path d="M82 40 L97 30 L112 40"/>
+    <path d="M92 56 V46 H102 V56"/>
+    <path d="M97 46 V56" opacity=".4"/>
+    <path d="M94.6 35 H99.4 V38.6 H94.6 Z"/>
+    <path d="M10 56 V47"/><path d="M22 56 V47"/><path d="M34 56 V47"/>
+    <path d="M7 49.6 H37" opacity=".8"/><path d="M7 53 H37" opacity=".8"/>
+    <path d="M42 56 q1.6 -3 3.6 -1.4" opacity=".26"/>
+    <path d="M78 56 q1.6 -3 3.6 -1.4" opacity=".24"/>
+    <g transform="translate(36 15.7) scale(.72)">
+      <circle cx="50" cy="31" r="3.8" fill="currentColor" opacity=".14"/>
+      <circle cx="50" cy="31" r="3.8"/>
+      <path d="M48.3 30.3 h1.3" stroke-width="2"/><path d="M50.9 30.3 h1.3" stroke-width="2"/>
+      <path d="M50 34.8 V45.4"/>
+      <path d="M46.6 37 H53.4"/><path d="M47.2 40.4 H52.8"/>
+      <path d="M50 36 L44.8 40.6"/><path d="M50 36 L55.6 40"/>
+      <path d="M47.6 45.8 H52.4"/>
+      <path d="M48.6 46.4 L47 56"/><path d="M51.4 46.4 L53 56"/>
     </g>
-    <g transform="translate(2 26) scale(.52)" stroke-width="2.9">
-      <path d="M24 40 Q22 30 36 29 L52 30 Q59 31 60 38 Q61 45 55 46 H30 Q25 46 24 40 Z" fill="currentColor" opacity=".14"/>
-      <path d="M24 40 Q22 30 36 29 L52 30 Q59 31 60 38 Q61 45 55 46 H30 Q25 46 24 40 Z"/>
-      <path d="M50 31 Q53 21 59 16 Q63 11 68 12 Q74 14 74 19 Q74 23 69 25 L62 27 Q58 28 56 31 Z"/>
-      <path d="M60 14 L58.5 8 L64 11.5"/>
-      <circle cx="69" cy="17.5" r="1" fill="currentColor"/>
-      <path d="M30 45 V56"/><path d="M38 45 V56"/><path d="M48 45 V56"/><path d="M55 45 V56"/>
-      <path d="M25 34 Q14 34 10 45 Q9 52 16 56 Q11 50 13 44 Q16 37 25 38 Z" fill="currentColor" opacity=".14"/>
-      <path d="M25 34 Q14 34 10 45 Q9 52 16 56 Q11 50 13 44 Q16 37 25 38 Z"/>
-    </g>`},
+    <circle cx="50" cy="31" r="3.9" fill="currentColor" opacity=".14"/>
+    <circle cx="50" cy="31" r="3.9"/>
+    <path d="M48.3 30.2 h1.3" stroke-width="1.5"/><path d="M50.9 30.2 h1.3" stroke-width="1.5"/>
+    <path d="M48.6 33.8 h2.8" opacity=".5"/>
+    <path d="M50 34.9 V45.4"/>
+    <path d="M46.5 37 H53.5"/><path d="M46.8 40 H53.2"/><path d="M47.4 43 H52.6"/>
+    <path d="M50 36 L44 41.5"/><path d="M44 41.5 L41.6 45"/>
+    <path d="M50 36 L56.2 39.6"/>
+    <path d="M56.2 39.6 L58.6 32"/><path d="M56.8 37.6 L59.8 38.6" opacity=".7"/>
+    <path d="M47.6 45.8 H52.4"/>
+    <path d="M48.6 46.4 L46.8 56"/><path d="M51.4 46.4 L53.2 56"/>`},
   /* Sha, standing in the square with nothing over their face. */
   sha:{ cap:"Sha, unhooded", art:`
     <path d="M28 56 H92" opacity=".3"/>
@@ -1712,16 +1728,16 @@ const QUESTIONS = [
       {s:"time",   t:"Go after the mist instead. Kill the cause, or I am planting this wood again every spring."}
     ]},
 
-  { scene:"herd", place:"The Herd", where:"Lon Lon Ranch",
-    text:"He crossed the ranch two nights ago. The [grass] is grey to the fence line and there is nothing left in it for the horses. [Malon] can walk them to pasture two days north. About half the herd will not make that walk. What do you do?",
+  { scene:"herd", place:"The Long Night", where:"Lon Lon Ranch",
+    text:"[Senok] left the ranch with an [Eternal Blood Moon] hanging over it. The sun has not come up since, and [Stalfos] climb out of the ground every night. How do you help?",
     answers:[
-      {s:"water",  t:"Tell [Malon] out loud that half of them will not make it, and start anyway."},
-      {s:"shadow", t:"Do the choosing myself, quietly, so nobody at the ranch has to."},
-      {s:"spirit", t:"I am not sorting horses into lists. Open the gates and let them walk."},
-      {s:"light",  t:"Sort them by what can walk and how far, and work down the list."},
-      {s:"time",   t:"Move the mares in foal first, and count the rest as next year's loss."},
-      {s:"forest", t:"Stay behind with the ones that cannot go."},
-      {s:"fire",   t:"Take the whole herd north at once and lose what I lose."}
+      {s:"water",  t:"Say out loud how much they frighten me, and take the gate anyway."},
+      {s:"shadow", t:"Work the dark side of the barn, and let the ranch think the nights are quieting on their own."},
+      {s:"spirit", t:"Refuse them the ranch. It was never his moon to hang."},
+      {s:"light",  t:"Get the lamps up first — where they come out of the ground, how many, and how long the night runs."},
+      {s:"time",   t:"Go after the moon itself. Put the sun back, or we are doing this again tomorrow."},
+      {s:"forest", t:"Stand in the yard every night and give them no ground at all."},
+      {s:"fire",   t:"Go at them tonight, before anybody has to ask me twice."}
     ]},
 
   { scene:"gate", place:"The Gate", where:"Hyrule Castle Town",
